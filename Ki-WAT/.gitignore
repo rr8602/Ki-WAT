@@ -1,0 +1,23 @@
+﻿################################################################################
+# 이 .gitignore 파일은 Microsoft(R) Visual Studio에서 자동으로 만들어졌습니다.
+################################################################################
+
+/Frm_Operator.cs
+/Frm_Operator.Designer.cs
+/Frm_Operator.resx
+/Frm_Oper_Rolling.cs
+/Frm_Oper_Rolling.Designer.cs
+/Frm_Oper_Rolling.resx
+/Frm_Oper_Test.cs
+/Frm_Oper_Test.Designer.cs
+/Frm_Oper_Test.resx
+/Frm_Oper_Wait.cs
+/Frm_Oper_Wait.Designer.cs
+/Frm_Oper_Wait.resx
+/Frm_PitInMonitor.cs
+/Frm_PitInMonitor.Designer.cs
+/Frm_PitInMonitor.resx
+/Frm_Rolling.cs
+/Frm_Rolling.Designer.cs
+/Frm_Rolling.resx
+/DG_ComLib.cs

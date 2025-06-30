@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7833B3D1-6362-4C70-99FC-AE258C6E188A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Ki_WAT</RootNamespace>
+    <AssemblyName>Ki-WAT</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Execute\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>K-Logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lib_DBJob, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Execute\Lib_DBJob.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib_tcp_client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Execute\Lib_tcp_client.dll</HintPath>
+    </Reference>
+    <Reference Include="Lib_tcp_server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Execute\Lib_tcp_server.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Database\DB_LocalWat.cs" />
+    <Compile Include="Database\DB_TableDef.cs" />
+    <Compile Include="Define.cs" />
+    <Compile Include="DG_ComLib.cs" />
+    <Compile Include="Frm_Config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Config.Designer.cs">
+      <DependentUpon>Frm_Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Mainfrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Mainfrm.Designer.cs">
+      <DependentUpon>Frm_Mainfrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Main.Designer.cs">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Operator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Operator.Designer.cs">
+      <DependentUpon>Frm_Operator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Oper_Rolling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Oper_Rolling.Designer.cs">
+      <DependentUpon>Frm_Oper_Rolling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Oper_Static.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Oper_Static.Designer.cs">
+      <DependentUpon>Frm_Oper_Static.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Oper_Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Oper_Test.Designer.cs">
+      <DependentUpon>Frm_Oper_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Oper_Wait.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Oper_Wait.Designer.cs">
+      <DependentUpon>Frm_Oper_Wait.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_PitInMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_PitInMonitor.Designer.cs">
+      <DependentUpon>Frm_PitInMonitor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Result.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Result.Designer.cs">
+      <DependentUpon>Frm_Result.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Rolling.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Rolling.Designer.cs">
+      <DependentUpon>Frm_Rolling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_StaticMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_StaticMaster.Designer.cs">
+      <DependentUpon>Frm_StaticMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalVal.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testc.cs" />
+    <EmbeddedResource Include="Frm_Config.resx">
+      <DependentUpon>Frm_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Mainfrm.resx">
+      <DependentUpon>Frm_Mainfrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Main.resx">
+      <DependentUpon>Frm_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Operator.resx">
+      <DependentUpon>Frm_Operator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Oper_Rolling.resx">
+      <DependentUpon>Frm_Oper_Rolling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Oper_Static.resx">
+      <DependentUpon>Frm_Oper_Static.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Oper_Test.resx">
+      <DependentUpon>Frm_Oper_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Oper_Wait.resx">
+      <DependentUpon>Frm_Oper_Wait.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_PitInMonitor.resx">
+      <DependentUpon>Frm_PitInMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Result.resx">
+      <DependentUpon>Frm_Result.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Rolling.resx">
+      <DependentUpon>Frm_Rolling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_StaticMaster.resx">
+      <DependentUpon>Frm_StaticMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="K-Logo.ico" />
+    <None Include="Resources\Res.png" />
+    <None Include="Resources\HighQuality_Resized_Result.jpg" />
+    <None Include="Resources\Result.jpg" />
+    <None Include="Resources\Handle.jpg" />
+    <None Include="Resources\Rolling.jpg" />
+    <None Include="Resources\Gray.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
