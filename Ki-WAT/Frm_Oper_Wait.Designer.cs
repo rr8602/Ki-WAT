@@ -392,6 +392,8 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Frm_Oper_Wait";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Frm_Oper_Wait_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Frm_Oper_Wait_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.pic_lamp_io)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

@@ -18,7 +18,7 @@ namespace Ki_WAT
         public Frm_Oper_Test m_frm_Oper_Test = new Frm_Oper_Test();
         public Frm_Oper_Rolling m_frm_Oper_Roll = new Frm_Oper_Rolling();
         public Frm_Oper_Static m_frm_Oper_Static = new Frm_Oper_Static();
-
+        private Point mousePoint; // 현재 마우스 포인터의 좌표저장 변수 선언
 
         public List<Form> m_FrmList = new List<Form>();
 
@@ -75,9 +75,12 @@ namespace Ki_WAT
             if (m_nCurrentFrmIdx == nIdx && ActiveSubForm != null)
                 return;
 
-            if (ActiveSubForm != null)
-                ActiveSubForm.SendToBack();
+            foreach (Form frm in m_FrmList)
+            {
+                frm.SendToBack();
+            }
             m_nCurrentFrmIdx = nIdx;
+
             Form f = new Form();
             switch (m_nCurrentFrmIdx)
             {
@@ -144,5 +147,18 @@ namespace Ki_WAT
             }
         }
 
+        private void NavTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left) //마우스 왼쪽 클릭 시에만 실행
+            {
+                //폼의 위치를 드래그중인 마우스의 좌표로 이동 
+                Location = new Point(Left - (mousePoint.X - e.X), Top - (mousePoint.Y - e.Y));
+            }
+        }
+
+        private void NavTop_MouseDown(object sender, MouseEventArgs e)
+        {
+            mousePoint = new Point(e.X, e.Y); //현재 마우스 좌표 저장
+        }
     }
 }

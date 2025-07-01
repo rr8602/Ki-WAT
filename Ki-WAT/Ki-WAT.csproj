@@ -36,18 +36,6 @@
     <ApplicationIcon>K-Logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lib_DBJob, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Execute\Lib_DBJob.dll</HintPath>
-    </Reference>
-    <Reference Include="Lib_tcp_client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Execute\Lib_tcp_client.dll</HintPath>
-    </Reference>
-    <Reference Include="Lib_tcp_server, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Execute\Lib_tcp_server.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CGuage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Database\DB_LocalWat.cs" />
     <Compile Include="Database\DB_TableDef.cs" />
     <Compile Include="Define.cs" />
@@ -138,8 +132,14 @@
       <DependentUpon>Frm_StaticMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalVal.cs" />
+    <Compile Include="LineProgress.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="testc.cs" />
     <EmbeddedResource Include="Frm_Config.resx">
       <DependentUpon>Frm_Config.cs</DependentUpon>
@@ -209,6 +209,23 @@
     <None Include="Resources\Rolling.jpg" />
     <None Include="Resources\Gray.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Lib_DBJob\Lib_DBJob.csproj">
+      <Project>{2a4eb1cc-3b31-4e48-9431-96f1b223e4e7}</Project>
+      <Name>Lib_DBJob</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_Seiral\Lib_Seiral.csproj">
+      <Project>{5f033ce5-2acd-441c-9f78-d3dd5e4ed693}</Project>
+      <Name>Lib_Seiral</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_tcp_client\Lib_tcp_client.csproj">
+      <Project>{38109433-7eab-423a-a050-7dc0e64f354c}</Project>
+      <Name>Lib_tcp_client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib_tcp_server\Lib_tcp_server.csproj">
+      <Project>{764fd384-0269-4367-975b-54759af7a3d0}</Project>
+      <Name>Lib_tcp_server</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

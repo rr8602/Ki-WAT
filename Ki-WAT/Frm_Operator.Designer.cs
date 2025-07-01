@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Operator));
             this.NavTop = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.NavBottom = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
             this.NavTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +49,20 @@
             this.NavTop.Name = "NavTop";
             this.NavTop.Size = new System.Drawing.Size(1920, 159);
             this.NavTop.TabIndex = 7;
+            this.NavTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseDown);
+            this.NavTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseMove);
+            // 
+            // label9
+            // 
+            this.label9.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label9.Font = new System.Drawing.Font("Arial", 30F);
+            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label9.Location = new System.Drawing.Point(177, 50);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(1157, 53);
+            this.label9.TabIndex = 550;
+            this.label9.Text = "-";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // picLogo
             // 
@@ -72,18 +86,6 @@
             this.NavBottom.Size = new System.Drawing.Size(1920, 104);
             this.NavBottom.TabIndex = 8;
             // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.MidnightBlue;
-            this.label9.Font = new System.Drawing.Font("Arial", 30F);
-            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label9.Location = new System.Drawing.Point(177, 50);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(1157, 53);
-            this.label9.TabIndex = 550;
-            this.label9.Text = "-";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Frm_Operator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -98,6 +100,7 @@
             this.Name = "Frm_Operator";
             this.Text = "Frm_Operator";
             this.Load += new System.EventHandler(this.Frm_Operator_Load);
+            
             this.NavTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);

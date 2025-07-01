@@ -16,5 +16,11 @@ namespace Ki_WAT
         {
             InitializeComponent();
         }
+
+        private void Frm_Result_Load(object sender, EventArgs e)
+        {
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd";
+        }
     }
 }

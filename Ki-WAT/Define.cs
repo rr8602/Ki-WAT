@@ -14,6 +14,7 @@ namespace Ki_WAT
         public const int FOM_IDX_ROLLING = 2;
         public const int FOM_IDX_STATIC = 3;
         public const int FOM_IDX_TEST = 4;
+        public const int FOM_IDX_RESULT = 5;
 
 
 

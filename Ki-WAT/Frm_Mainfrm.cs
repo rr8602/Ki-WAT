@@ -29,6 +29,7 @@ namespace Ki_WAT
         public Frm_PitInMonitor Pit_Monitor = null;
         public Frm_Rolling m_frmRoll = new Frm_Rolling();
         public Frm_StaticMaster m_frmStatic = new Frm_StaticMaster();
+        public Frm_Result m_frmResult = new Frm_Result();
 
         private List<Button> m_NavButtons = new List<Button>();
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
@@ -72,9 +73,6 @@ namespace Ki_WAT
 
         }
 
-
-
-
         [StructLayout(LayoutKind.Sequential)]
         public struct COPYDATASTRUCT
         {
@@ -96,6 +94,7 @@ namespace Ki_WAT
             InitializeSubForm(m_frmConfig);
             InitializeSubForm(m_frmRoll);
             InitializeSubForm(m_frmStatic);
+            InitializeSubForm(m_frmResult);
 
             m_tcp_Server.Start("127.0.0.1", 8511);
 
@@ -110,7 +109,9 @@ namespace Ki_WAT
             m_NavButtons.Add(BtnConfig);
             m_NavButtons.Add(Btn_Rolling);
             m_NavButtons.Add(Btn_StaticMaster);
-            
+            m_NavButtons.Add(Btn_Result);
+
+
 
             if (!this.DesignMode)
             {
@@ -208,6 +209,10 @@ namespace Ki_WAT
                 case Def.FOM_IDX_STATIC:
                     f = m_frmStatic;
                     break;
+                case Def.FOM_IDX_RESULT:
+                    f = m_frmResult;
+                    break;
+
                     
             }
 
@@ -217,8 +222,19 @@ namespace Ki_WAT
             ActiveSubForm = f;
 
             if (User_Monitor != null)
-                User_Monitor.ShowFrm(m_nCurrentFrmIdx);
+            {
+                
+                if ( m_nCurrentFrmIdx == Def.FOM_IDX_MAIN || m_nCurrentFrmIdx == Def.FOM_IDX_CONFIG|| 
+                     m_nCurrentFrmIdx == Def.FOM_IDX_RESULT )
+                {
+                    User_Monitor.ShowFrm(Def.FOM_IDX_MAIN);
+                }
+                else
+                {
+                    User_Monitor.ShowFrm(m_nCurrentFrmIdx);
+                }
 
+            }
         }
 
         private void BtnConfig_Click(object sender, EventArgs e)
@@ -337,6 +353,12 @@ namespace Ki_WAT
                 MessageBox.Show($"데이터 처리 오류: {ex.Message}");
                 m.Result = IntPtr.Zero; // 실패 반환
             }
+        }
+
+        private void Btn_Result_Click(object sender, EventArgs e)
+        {
+            ChangeButtonColor((Button)sender);
+            ShowFrm(Def.FOM_IDX_RESULT);
         }
     }
 }
