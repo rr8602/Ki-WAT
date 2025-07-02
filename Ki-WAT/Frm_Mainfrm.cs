@@ -135,6 +135,7 @@ namespace Ki_WAT
 
             //var MeasureData = GlobalVal.Instance;
             //MeasureData.g_DppData.dToeFL = 10.5;
+            asdf
 
         }
         private void ChangeButtonColor(Button pButton)
