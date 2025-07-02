@@ -79,6 +79,8 @@ namespace Ki_WAT
             public IntPtr dwData;
             public int cbData;
             public IntPtr lpData;
+
+
         }
 
         public Frm_Mainfrm()
