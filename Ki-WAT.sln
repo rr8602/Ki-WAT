@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ki-WAT", "Ki-WAT\Ki-WAT.csproj", "{7833B3D1-6362-4C70-99FC-AE258C6E188A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KI_Library", "C:\Users\user\source\repos\pospaker\KI_Library\KI_Library\KI_Library.csproj", "{DE27FD5C-1908-415F-86F5-8A502139AE71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7833B3D1-6362-4C70-99FC-AE258C6E188A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7833B3D1-6362-4C70-99FC-AE258C6E188A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7833B3D1-6362-4C70-99FC-AE258C6E188A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE27FD5C-1908-415F-86F5-8A502139AE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE27FD5C-1908-415F-86F5-8A502139AE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE27FD5C-1908-415F-86F5-8A502139AE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE27FD5C-1908-415F-86F5-8A502139AE71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,8 +10,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
 using KINT_Lib;
+using static KINT_Lib.Lib_TcpClient;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using static KINT_Lib.KI_TcpClient;
 
 namespace Ki_WAT
 {
@@ -35,8 +35,8 @@ namespace Ki_WAT
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
         private Form m_ActiveSubForm;
         
-        private KI_TcpClient m_tcpBoardSpeed = new KI_TcpClient();
-        private KI_Tcp_Server m_tcp_Server = new KI_Tcp_Server();
+        private Lib_TcpClient m_tcpBoardSpeed = new Lib_TcpClient();
+        private Lib_Tcp_Server m_tcp_Server = new Lib_Tcp_Server();
         
         private DB_LocalWat m_dbJob;
 

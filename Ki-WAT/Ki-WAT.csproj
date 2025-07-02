@@ -209,5 +209,11 @@
     <None Include="Resources\Rolling.jpg" />
     <None Include="Resources\Gray.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\user\source\repos\pospaker\KI_Library\KI_Library\KI_Library.csproj">
+      <Project>{de27fd5c-1908-415f-86f5-8a502139ae71}</Project>
+      <Name>KI_Library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
