@@ -132,11 +132,11 @@ namespace Ki_WAT
 
             ChangeButtonColor(BtnMain);
             ShowFrm(Def.FOM_IDX_MAIN);
+            asdfasdf
 
             //var MeasureData = GlobalVal.Instance;
             //MeasureData.g_DppData.dToeFL = 10.5;
-            asdf
-
+                
         }
         private void ChangeButtonColor(Button pButton)
         {
