@@ -209,23 +209,5 @@
     <None Include="Resources\Rolling.jpg" />
     <None Include="Resources\Gray.png" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lib_DBJob\Lib_DBJob.csproj">
-      <Project>{2a4eb1cc-3b31-4e48-9431-96f1b223e4e7}</Project>
-      <Name>Lib_DBJob</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lib_Seiral\Lib_Seiral.csproj">
-      <Project>{5f033ce5-2acd-441c-9f78-d3dd5e4ed693}</Project>
-      <Name>Lib_Seiral</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lib_tcp_client\Lib_tcp_client.csproj">
-      <Project>{38109433-7eab-423a-a050-7dc0e64f354c}</Project>
-      <Name>Lib_tcp_client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lib_tcp_server\Lib_tcp_server.csproj">
-      <Project>{764fd384-0269-4367-975b-54759af7a3d0}</Project>
-      <Name>Lib_tcp_server</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
