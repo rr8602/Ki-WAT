@@ -31,6 +31,19 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label57 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -94,19 +107,6 @@
             this.modelList = new System.Windows.Forms.ListView();
             this.txtModel = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -212,7 +212,178 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1215, 834);
             this.panel1.TabIndex = 158;
-            this.panel1.Visible = false;
+            // 
+            // label65
+            // 
+            this.label65.BackColor = System.Drawing.Color.Black;
+            this.label65.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label65.ForeColor = System.Drawing.Color.Yellow;
+            this.label65.Location = new System.Drawing.Point(686, 39);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(266, 41);
+            this.label65.TabIndex = 223;
+            this.label65.Text = "9999";
+            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label66
+            // 
+            this.label66.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label66.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.ForeColor = System.Drawing.Color.Aqua;
+            this.label66.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label66.Location = new System.Drawing.Point(511, 39);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(167, 41);
+            this.label66.TabIndex = 222;
+            this.label66.Text = "SWARatio";
+            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label64
+            // 
+            this.label64.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label64.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label64.ForeColor = System.Drawing.Color.Aqua;
+            this.label64.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label64.Location = new System.Drawing.Point(28, 375);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(1098, 68);
+            this.label64.TabIndex = 221;
+            this.label64.Text = "TOE, CAMBER";
+            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label60
+            // 
+            this.label60.BackColor = System.Drawing.Color.Black;
+            this.label60.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.ForeColor = System.Drawing.Color.Yellow;
+            this.label60.Location = new System.Drawing.Point(348, 197);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(123, 41);
+            this.label60.TabIndex = 220;
+            this.label60.Text = "0.00";
+            this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label61
+            // 
+            this.label61.BackColor = System.Drawing.Color.Transparent;
+            this.label61.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label61.ForeColor = System.Drawing.Color.White;
+            this.label61.Location = new System.Drawing.Point(315, 197);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(41, 41);
+            this.label61.TabIndex = 219;
+            this.label61.Text = "±";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label62
+            // 
+            this.label62.BackColor = System.Drawing.Color.Black;
+            this.label62.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.ForeColor = System.Drawing.Color.Yellow;
+            this.label62.Location = new System.Drawing.Point(203, 197);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(123, 41);
+            this.label62.TabIndex = 218;
+            this.label62.Text = "0.00";
+            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label63
+            // 
+            this.label63.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label63.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.ForeColor = System.Drawing.Color.Aqua;
+            this.label63.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label63.Location = new System.Drawing.Point(30, 197);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(167, 41);
+            this.label63.TabIndex = 217;
+            this.label63.Text = "Dogrun";
+            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label15.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Aqua;
+            this.label15.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label15.Location = new System.Drawing.Point(111, 720);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(86, 41);
+            this.label15.TabIndex = 216;
+            this.label15.Text = "Camber";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label16.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Aqua;
+            this.label16.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label16.Location = new System.Drawing.Point(111, 668);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(86, 41);
+            this.label16.TabIndex = 215;
+            this.label16.Text = "Toe";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label59
+            // 
+            this.label59.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label59.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.ForeColor = System.Drawing.Color.Aqua;
+            this.label59.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label59.Location = new System.Drawing.Point(30, 668);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(74, 95);
+            this.label59.TabIndex = 214;
+            this.label59.Text = "Rear";
+            this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label58
+            // 
+            this.label58.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label58.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.ForeColor = System.Drawing.Color.Aqua;
+            this.label58.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label58.Location = new System.Drawing.Point(30, 564);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(74, 93);
+            this.label58.TabIndex = 213;
+            this.label58.Text = "Front";
+            this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.comboBox2.Location = new System.Drawing.Point(692, 146);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(264, 32);
+            this.comboBox2.TabIndex = 212;
+            // 
+            // label57
+            // 
+            this.label57.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label57.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.ForeColor = System.Drawing.Color.Aqua;
+            this.label57.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label57.Location = new System.Drawing.Point(515, 146);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(167, 41);
+            this.label57.TabIndex = 211;
+            this.label57.Text = "Screwdriver";
+            this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBox1
             // 
@@ -976,182 +1147,10 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 36);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1829, 876);
+            this.tabPage2.Size = new System.Drawing.Size(1760, 876);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Language";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.comboBox2.Location = new System.Drawing.Point(692, 146);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(264, 32);
-            this.comboBox2.TabIndex = 212;
-            // 
-            // label57
-            // 
-            this.label57.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label57.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label57.ForeColor = System.Drawing.Color.Aqua;
-            this.label57.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label57.Location = new System.Drawing.Point(515, 146);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(167, 41);
-            this.label57.TabIndex = 211;
-            this.label57.Text = "Screwdriver";
-            this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label58
-            // 
-            this.label58.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label58.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label58.ForeColor = System.Drawing.Color.Aqua;
-            this.label58.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label58.Location = new System.Drawing.Point(30, 564);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(74, 93);
-            this.label58.TabIndex = 213;
-            this.label58.Text = "Front";
-            this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label59
-            // 
-            this.label59.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label59.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label59.ForeColor = System.Drawing.Color.Aqua;
-            this.label59.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label59.Location = new System.Drawing.Point(30, 668);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(74, 95);
-            this.label59.TabIndex = 214;
-            this.label59.Text = "Rear";
-            this.label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label15
-            // 
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label15.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Aqua;
-            this.label15.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label15.Location = new System.Drawing.Point(111, 720);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(86, 41);
-            this.label15.TabIndex = 216;
-            this.label15.Text = "Camber";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label16
-            // 
-            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label16.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.Aqua;
-            this.label16.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label16.Location = new System.Drawing.Point(111, 668);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(86, 41);
-            this.label16.TabIndex = 215;
-            this.label16.Text = "Toe";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label60
-            // 
-            this.label60.BackColor = System.Drawing.Color.Black;
-            this.label60.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.ForeColor = System.Drawing.Color.Yellow;
-            this.label60.Location = new System.Drawing.Point(348, 197);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(123, 41);
-            this.label60.TabIndex = 220;
-            this.label60.Text = "0.00";
-            this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label61
-            // 
-            this.label61.BackColor = System.Drawing.Color.Transparent;
-            this.label61.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label61.ForeColor = System.Drawing.Color.White;
-            this.label61.Location = new System.Drawing.Point(315, 197);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(41, 41);
-            this.label61.TabIndex = 219;
-            this.label61.Text = "±";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label62
-            // 
-            this.label62.BackColor = System.Drawing.Color.Black;
-            this.label62.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.ForeColor = System.Drawing.Color.Yellow;
-            this.label62.Location = new System.Drawing.Point(203, 197);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(123, 41);
-            this.label62.TabIndex = 218;
-            this.label62.Text = "0.00";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label63
-            // 
-            this.label63.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label63.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label63.ForeColor = System.Drawing.Color.Aqua;
-            this.label63.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label63.Location = new System.Drawing.Point(30, 197);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(167, 41);
-            this.label63.TabIndex = 217;
-            this.label63.Text = "Dogrun";
-            this.label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label64
-            // 
-            this.label64.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label64.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label64.ForeColor = System.Drawing.Color.Aqua;
-            this.label64.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label64.Location = new System.Drawing.Point(28, 375);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(1098, 68);
-            this.label64.TabIndex = 221;
-            this.label64.Text = "TOE, CAMBER";
-            this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label65
-            // 
-            this.label65.BackColor = System.Drawing.Color.Black;
-            this.label65.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label65.ForeColor = System.Drawing.Color.Yellow;
-            this.label65.Location = new System.Drawing.Point(686, 39);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(266, 41);
-            this.label65.TabIndex = 223;
-            this.label65.Text = "9999";
-            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label66
-            // 
-            this.label66.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label66.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label66.ForeColor = System.Drawing.Color.Aqua;
-            this.label66.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label66.Location = new System.Drawing.Point(511, 39);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(167, 41);
-            this.label66.TabIndex = 222;
-            this.label66.Text = "SWARatio";
-            this.label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Frm_Config
             // 
