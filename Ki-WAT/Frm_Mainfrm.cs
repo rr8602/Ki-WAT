@@ -133,6 +133,8 @@ namespace Ki_WAT
             ChangeButtonColor(BtnMain);
             ShowFrm(Def.FOM_IDX_MAIN);
             asdfasdfasdf
+                asdfasdf
+
 
 
             //var MeasureData = GlobalVal.Instance;
