@@ -201,7 +201,7 @@
             this.BtnManual.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnManual.Font = new System.Drawing.Font("Verdana", 12F);
             this.BtnManual.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.BtnManual.Location = new System.Drawing.Point(4, 680);
+            this.BtnManual.Location = new System.Drawing.Point(4, 507);
             this.BtnManual.Margin = new System.Windows.Forms.Padding(4);
             this.BtnManual.Name = "BtnManual";
             this.BtnManual.Size = new System.Drawing.Size(83, 60);

@@ -158,11 +158,8 @@ namespace Ki_WAT
                     ResList.Items.Add(item1);
 
                 }));
-            }
-           
+            }  
         }
-
-
         private void UpdateMsg(string strMsg)
         {
             if (this.InvokeRequired)
@@ -172,10 +169,7 @@ namespace Ki_WAT
                     lblMessage.Text = strMsg;
                 }));
             }
-
         }
-
-
         private Progress<int>  RunProgress()
         {
             Progress<int> runoutProgress = new Progress<int>(ms =>
@@ -272,14 +266,10 @@ namespace Ki_WAT
                 Progress<int> runoutProgress = RunProgress();
                 SleepWithAbortCheck(m_nRunOutTime * 1000, runoutProgress);
                 if (m_bStopRequested) break;
-
-
                 Thread.Sleep(1000);
                 UpdateToeValueOnUI();
 
                 Progress<int> PgrIdle = RunIdle();
-                
-
                 // 모터 OFF
                 // MotorOff();
 
@@ -294,7 +284,5 @@ namespace Ki_WAT
             UpdateMsg(strMsg);
             m_bTestRun = false;
         }
-
-
     }
 }

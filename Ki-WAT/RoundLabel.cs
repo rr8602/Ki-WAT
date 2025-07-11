@@ -16,7 +16,7 @@ namespace KI_Controls
 
 		//Fields
 		private int borderSize = 0;
-		private int borderRadius = 6;
+		private int borderRadius = 20;
 		private Color borderColor = Color.PaleVioletRed;
 
 		//Properties

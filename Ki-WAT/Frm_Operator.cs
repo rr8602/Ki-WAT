@@ -140,6 +140,7 @@ namespace Ki_WAT
                     workingArea.Left + (workingArea.Width - this.Width) / 2,
                     workingArea.Top + (workingArea.Height - this.Height) / 2
                 );
+
             }
             else
             {

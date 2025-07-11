@@ -640,7 +640,7 @@ namespace DG_ComLib
 
                 result = temp.ToString();
             }
-
+            
             return result;
         }
 

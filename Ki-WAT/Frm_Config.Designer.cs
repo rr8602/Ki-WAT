@@ -29,57 +29,106 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.BTN_SAVE = new System.Windows.Forms.Button();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.editBarcodePort = new System.Windows.Forms.TextBox();
+            this.editBarcodeIP = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.editPrintPort = new System.Windows.Forms.TextBox();
+            this.editPrintIP = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.editScrewPort = new System.Windows.Forms.TextBox();
+            this.editScrewIP = new System.Windows.Forms.TextBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.editLETPort = new System.Windows.Forms.TextBox();
+            this.editLetURL = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Btn_ResPath = new KI_Controls.CButton();
+            this.lblResultPath = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.comLang = new System.Windows.Forms.ComboBox();
+            this.label30 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.editWBMax = new System.Windows.Forms.TextBox();
+            this.editWBMin = new System.Windows.Forms.TextBox();
+            this.editWBHome = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.editVEPPort = new System.Windows.Forms.TextBox();
+            this.editVEPIP = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.editPLCPort = new System.Windows.Forms.TextBox();
+            this.editPLCIP = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label65 = new System.Windows.Forms.Label();
+            this.Txt_CamRR_LT = new System.Windows.Forms.TextBox();
+            this.Txt_CamRR_AT = new System.Windows.Forms.TextBox();
+            this.Txt_CamRR_ST = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRR_LT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRR_AT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRR_ST = new System.Windows.Forms.TextBox();
+            this.Txt_CamFR_LT = new System.Windows.Forms.TextBox();
+            this.Txt_CamFR_AT = new System.Windows.Forms.TextBox();
+            this.Txt_CamFR_ST = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFR_LT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFR_AT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFR_ST = new System.Windows.Forms.TextBox();
+            this.Txt_CamRL_LT = new System.Windows.Forms.TextBox();
+            this.Txt_CamRL_AT = new System.Windows.Forms.TextBox();
+            this.Txt_CamRL_ST = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRL_LT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRL_AT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeRL_ST = new System.Windows.Forms.TextBox();
+            this.Txt_CamFL_LT = new System.Windows.Forms.TextBox();
+            this.Txt_CamFL_AT = new System.Windows.Forms.TextBox();
+            this.Txt_CamFL_ST = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFL_LT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFL_AT = new System.Windows.Forms.TextBox();
+            this.Txt_ToeFL_ST = new System.Windows.Forms.TextBox();
+            this.TotToeR_LT = new System.Windows.Forms.TextBox();
+            this.TotToeR_ST = new System.Windows.Forms.TextBox();
+            this.TotToeF_ST = new System.Windows.Forms.TextBox();
+            this.HandleST = new System.Windows.Forms.TextBox();
+            this.Txt_DogRunST = new System.Windows.Forms.TextBox();
+            this.TotToeF_LT = new System.Windows.Forms.TextBox();
+            this.HandleLT = new System.Windows.Forms.TextBox();
+            this.Txt_DogRunLT = new System.Windows.Forms.TextBox();
+            this.Txt_Dpp_Code = new System.Windows.Forms.TextBox();
+            this.Txt_WhelBase = new System.Windows.Forms.TextBox();
+            this.Txt_Bar_Code = new System.Windows.Forms.TextBox();
+            this.Txt_SWARatio = new System.Windows.Forms.TextBox();
             this.label66 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
             this.label63 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.Cbo_Screw = new System.Windows.Forms.ComboBox();
             this.label57 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Cbo_Unit = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label54 = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
             this.label53 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -91,23 +140,31 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.gbxMList = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Refresh = new System.Windows.Forms.Button();
+            this.Btn_Delete = new System.Windows.Forms.Button();
+            this.Btn_Modify = new System.Windows.Forms.Button();
+            this.Btn_Add = new System.Windows.Forms.Button();
             this.modelList = new System.Windows.Forms.ListView();
-            this.txtModel = new System.Windows.Forms.TextBox();
+            this.Txt_Model = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.cButton1 = new KI_Controls.CButton();
             this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gbxMList.SuspendLayout();
@@ -115,14 +172,469 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1768, 916);
             this.tabControl1.TabIndex = 145;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.BTN_SAVE);
+            this.tabPage3.Controls.Add(this.groupBox8);
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Controls.Add(this.groupBox7);
+            this.tabPage3.Controls.Add(this.groupBox6);
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Controls.Add(this.groupBox5);
+            this.tabPage3.Controls.Add(this.groupBox1);
+            this.tabPage3.Controls.Add(this.groupBox2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 36);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1760, 876);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "General";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // BTN_SAVE
+            // 
+            this.BTN_SAVE.Location = new System.Drawing.Point(1519, 7);
+            this.BTN_SAVE.Name = "BTN_SAVE";
+            this.BTN_SAVE.Size = new System.Drawing.Size(175, 36);
+            this.BTN_SAVE.TabIndex = 18;
+            this.BTN_SAVE.Text = "SAVE";
+            this.BTN_SAVE.UseVisualStyleBackColor = true;
+            this.BTN_SAVE.Click += new System.EventHandler(this.BTN_SAVE_Click);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.label11);
+            this.groupBox8.Controls.Add(this.label26);
+            this.groupBox8.Controls.Add(this.editBarcodePort);
+            this.groupBox8.Controls.Add(this.editBarcodeIP);
+            this.groupBox8.Location = new System.Drawing.Point(348, 349);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(303, 121);
+            this.groupBox8.TabIndex = 5;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Barcode";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(24, 78);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 27);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "Port :";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(24, 34);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(48, 27);
+            this.label26.TabIndex = 2;
+            this.label26.Text = "IP :";
+            // 
+            // editBarcodePort
+            // 
+            this.editBarcodePort.Location = new System.Drawing.Point(88, 69);
+            this.editBarcodePort.Name = "editBarcodePort";
+            this.editBarcodePort.Size = new System.Drawing.Size(200, 35);
+            this.editBarcodePort.TabIndex = 1;
+            this.editBarcodePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editBarcodeIP
+            // 
+            this.editBarcodeIP.Location = new System.Drawing.Point(88, 31);
+            this.editBarcodeIP.Name = "editBarcodeIP";
+            this.editBarcodeIP.Size = new System.Drawing.Size(200, 35);
+            this.editBarcodeIP.TabIndex = 0;
+            this.editBarcodeIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.editPrintPort);
+            this.groupBox3.Controls.Add(this.editPrintIP);
+            this.groupBox3.Location = new System.Drawing.Point(33, 349);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(303, 121);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Printer";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(24, 78);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 27);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Port :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(24, 34);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 27);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "IP :";
+            // 
+            // editPrintPort
+            // 
+            this.editPrintPort.Location = new System.Drawing.Point(88, 69);
+            this.editPrintPort.Name = "editPrintPort";
+            this.editPrintPort.Size = new System.Drawing.Size(200, 35);
+            this.editPrintPort.TabIndex = 1;
+            this.editPrintPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editPrintIP
+            // 
+            this.editPrintIP.Location = new System.Drawing.Point(88, 31);
+            this.editPrintIP.Name = "editPrintIP";
+            this.editPrintIP.Size = new System.Drawing.Size(200, 35);
+            this.editPrintIP.TabIndex = 0;
+            this.editPrintIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label33);
+            this.groupBox7.Controls.Add(this.label34);
+            this.groupBox7.Controls.Add(this.editScrewPort);
+            this.groupBox7.Controls.Add(this.editScrewIP);
+            this.groupBox7.Location = new System.Drawing.Point(348, 49);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(303, 121);
+            this.groupBox7.TabIndex = 4;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "ScrewDriver";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(24, 78);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(70, 27);
+            this.label33.TabIndex = 2;
+            this.label33.Text = "Port :";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(24, 34);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(48, 27);
+            this.label34.TabIndex = 2;
+            this.label34.Text = "IP :";
+            // 
+            // editScrewPort
+            // 
+            this.editScrewPort.Location = new System.Drawing.Point(88, 69);
+            this.editScrewPort.Name = "editScrewPort";
+            this.editScrewPort.Size = new System.Drawing.Size(200, 35);
+            this.editScrewPort.TabIndex = 1;
+            this.editScrewPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editScrewIP
+            // 
+            this.editScrewIP.Location = new System.Drawing.Point(88, 31);
+            this.editScrewIP.Name = "editScrewIP";
+            this.editScrewIP.Size = new System.Drawing.Size(200, 35);
+            this.editScrewIP.TabIndex = 0;
+            this.editScrewIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label31);
+            this.groupBox6.Controls.Add(this.label32);
+            this.groupBox6.Controls.Add(this.editLETPort);
+            this.groupBox6.Controls.Add(this.editLetURL);
+            this.groupBox6.Location = new System.Drawing.Point(33, 493);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(618, 121);
+            this.groupBox6.TabIndex = 17;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "LET";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(24, 78);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(70, 27);
+            this.label31.TabIndex = 2;
+            this.label31.Text = "Port :";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(24, 34);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(72, 27);
+            this.label32.TabIndex = 2;
+            this.label32.Text = "URL :";
+            // 
+            // editLETPort
+            // 
+            this.editLETPort.Location = new System.Drawing.Point(88, 69);
+            this.editLETPort.Name = "editLETPort";
+            this.editLETPort.Size = new System.Drawing.Size(162, 35);
+            this.editLETPort.TabIndex = 1;
+            this.editLETPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editLetURL
+            // 
+            this.editLetURL.Location = new System.Drawing.Point(88, 31);
+            this.editLetURL.Name = "editLetURL";
+            this.editLetURL.Size = new System.Drawing.Size(515, 35);
+            this.editLetURL.TabIndex = 0;
+            this.editLetURL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.Btn_ResPath);
+            this.groupBox4.Controls.Add(this.lblResultPath);
+            this.groupBox4.Controls.Add(this.label35);
+            this.groupBox4.Controls.Add(this.comLang);
+            this.groupBox4.Controls.Add(this.label30);
+            this.groupBox4.Location = new System.Drawing.Point(678, 49);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(575, 565);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Program Setting";
+            // 
+            // Btn_ResPath
+            // 
+            this.Btn_ResPath.BackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.bNormalButton = false;
+            this.Btn_ResPath.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.BorderSize = ((uint)(1u));
+            this.Btn_ResPath.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_ResPath.ForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.IsToggled = false;
+            this.Btn_ResPath.Location = new System.Drawing.Point(510, 55);
+            this.Btn_ResPath.Name = "Btn_ResPath";
+            this.Btn_ResPath.NormalBackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.NormalForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.Size = new System.Drawing.Size(59, 36);
+            this.Btn_ResPath.TabIndex = 6;
+            this.Btn_ResPath.Text = "...";
+            this.Btn_ResPath.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
+            this.Btn_ResPath.ToggleForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.UseVisualStyleBackColor = false;
+            this.Btn_ResPath.Click += new System.EventHandler(this.Btn_ResPath_Click);
+            // 
+            // lblResultPath
+            // 
+            this.lblResultPath.BackColor = System.Drawing.Color.White;
+            this.lblResultPath.Location = new System.Drawing.Point(213, 53);
+            this.lblResultPath.Name = "lblResultPath";
+            this.lblResultPath.Size = new System.Drawing.Size(297, 27);
+            this.lblResultPath.TabIndex = 5;
+            this.lblResultPath.Text = "c:\\abc";
+            this.lblResultPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(6, 53);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(174, 27);
+            this.label35.TabIndex = 2;
+            this.label35.Text = "RESULT Path :";
+            // 
+            // comLang
+            // 
+            this.comLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comLang.FormattingEnabled = true;
+            this.comLang.Items.AddRange(new object[] {
+            "English",
+            "Português",
+            "Korea",
+            "Other"});
+            this.comLang.Location = new System.Drawing.Point(211, 97);
+            this.comLang.Name = "comLang";
+            this.comLang.Size = new System.Drawing.Size(299, 35);
+            this.comLang.TabIndex = 1;
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(43, 101);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(154, 27);
+            this.label30.TabIndex = 0;
+            this.label30.Text = "Lanaguage : ";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.editWBMax);
+            this.groupBox5.Controls.Add(this.editWBMin);
+            this.groupBox5.Controls.Add(this.editWBHome);
+            this.groupBox5.Controls.Add(this.label27);
+            this.groupBox5.Controls.Add(this.label28);
+            this.groupBox5.Controls.Add(this.label29);
+            this.groupBox5.Location = new System.Drawing.Point(1269, 49);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(425, 565);
+            this.groupBox5.TabIndex = 15;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Wheel Base";
+            // 
+            // editWBMax
+            // 
+            this.editWBMax.Location = new System.Drawing.Point(227, 119);
+            this.editWBMax.Name = "editWBMax";
+            this.editWBMax.Size = new System.Drawing.Size(171, 35);
+            this.editWBMax.TabIndex = 3;
+            // 
+            // editWBMin
+            // 
+            this.editWBMin.Location = new System.Drawing.Point(227, 76);
+            this.editWBMin.Name = "editWBMin";
+            this.editWBMin.Size = new System.Drawing.Size(171, 35);
+            this.editWBMin.TabIndex = 2;
+            // 
+            // editWBHome
+            // 
+            this.editWBHome.Location = new System.Drawing.Point(227, 34);
+            this.editWBHome.Name = "editWBHome";
+            this.editWBHome.Size = new System.Drawing.Size(171, 35);
+            this.editWBHome.TabIndex = 1;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(53, 128);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(168, 27);
+            this.label27.TabIndex = 0;
+            this.label27.Text = "Max Position : ";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(58, 86);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(163, 27);
+            this.label28.TabIndex = 0;
+            this.label28.Text = "Min Position : ";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(33, 40);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(188, 27);
+            this.label29.TabIndex = 0;
+            this.label29.Text = "Home Position : ";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.editVEPPort);
+            this.groupBox1.Controls.Add(this.editVEPIP);
+            this.groupBox1.Location = new System.Drawing.Point(33, 198);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(303, 121);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "VEP Setting";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 78);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 27);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Port :";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 27);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "IP :";
+            // 
+            // editVEPPort
+            // 
+            this.editVEPPort.Location = new System.Drawing.Point(88, 69);
+            this.editVEPPort.Name = "editVEPPort";
+            this.editVEPPort.Size = new System.Drawing.Size(200, 35);
+            this.editVEPPort.TabIndex = 1;
+            this.editVEPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editVEPIP
+            // 
+            this.editVEPIP.Location = new System.Drawing.Point(88, 31);
+            this.editVEPIP.Name = "editVEPIP";
+            this.editVEPIP.Size = new System.Drawing.Size(200, 35);
+            this.editVEPIP.TabIndex = 0;
+            this.editVEPIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.editPLCPort);
+            this.groupBox2.Controls.Add(this.editPLCIP);
+            this.groupBox2.Location = new System.Drawing.Point(33, 49);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(303, 121);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "PLC Setting";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 27);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Port :";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(48, 27);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "IP :";
+            // 
+            // editPLCPort
+            // 
+            this.editPLCPort.Location = new System.Drawing.Point(88, 69);
+            this.editPLCPort.Name = "editPLCPort";
+            this.editPLCPort.Size = new System.Drawing.Size(200, 35);
+            this.editPLCPort.TabIndex = 1;
+            this.editPLCPort.Text = "4600";
+            this.editPLCPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editPLCIP
+            // 
+            this.editPLCIP.Location = new System.Drawing.Point(88, 31);
+            this.editPLCIP.Name = "editPLCIP";
+            this.editPLCIP.Size = new System.Drawing.Size(200, 35);
+            this.editPLCIP.TabIndex = 0;
+            this.editPLCIP.Text = "192.168.10.10";
+            this.editPLCIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // tabPage1
             // 
@@ -140,55 +652,59 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.label65);
+            this.panel1.Controls.Add(this.Txt_CamRR_LT);
+            this.panel1.Controls.Add(this.Txt_CamRR_AT);
+            this.panel1.Controls.Add(this.Txt_CamRR_ST);
+            this.panel1.Controls.Add(this.Txt_ToeRR_LT);
+            this.panel1.Controls.Add(this.Txt_ToeRR_AT);
+            this.panel1.Controls.Add(this.Txt_ToeRR_ST);
+            this.panel1.Controls.Add(this.Txt_CamFR_LT);
+            this.panel1.Controls.Add(this.Txt_CamFR_AT);
+            this.panel1.Controls.Add(this.Txt_CamFR_ST);
+            this.panel1.Controls.Add(this.Txt_ToeFR_LT);
+            this.panel1.Controls.Add(this.Txt_ToeFR_AT);
+            this.panel1.Controls.Add(this.Txt_ToeFR_ST);
+            this.panel1.Controls.Add(this.Txt_CamRL_LT);
+            this.panel1.Controls.Add(this.Txt_CamRL_AT);
+            this.panel1.Controls.Add(this.Txt_CamRL_ST);
+            this.panel1.Controls.Add(this.Txt_ToeRL_LT);
+            this.panel1.Controls.Add(this.Txt_ToeRL_AT);
+            this.panel1.Controls.Add(this.Txt_ToeRL_ST);
+            this.panel1.Controls.Add(this.Txt_CamFL_LT);
+            this.panel1.Controls.Add(this.Txt_CamFL_AT);
+            this.panel1.Controls.Add(this.Txt_CamFL_ST);
+            this.panel1.Controls.Add(this.Txt_ToeFL_LT);
+            this.panel1.Controls.Add(this.Txt_ToeFL_AT);
+            this.panel1.Controls.Add(this.Txt_ToeFL_ST);
+            this.panel1.Controls.Add(this.TotToeR_LT);
+            this.panel1.Controls.Add(this.TotToeR_ST);
+            this.panel1.Controls.Add(this.TotToeF_ST);
+            this.panel1.Controls.Add(this.HandleST);
+            this.panel1.Controls.Add(this.Txt_DogRunST);
+            this.panel1.Controls.Add(this.TotToeF_LT);
+            this.panel1.Controls.Add(this.HandleLT);
+            this.panel1.Controls.Add(this.Txt_DogRunLT);
+            this.panel1.Controls.Add(this.Txt_Dpp_Code);
+            this.panel1.Controls.Add(this.Txt_WhelBase);
+            this.panel1.Controls.Add(this.Txt_Bar_Code);
+            this.panel1.Controls.Add(this.Txt_SWARatio);
             this.panel1.Controls.Add(this.label66);
             this.panel1.Controls.Add(this.label64);
-            this.panel1.Controls.Add(this.label60);
             this.panel1.Controls.Add(this.label61);
-            this.panel1.Controls.Add(this.label62);
             this.panel1.Controls.Add(this.label63);
             this.panel1.Controls.Add(this.label15);
             this.panel1.Controls.Add(this.label16);
             this.panel1.Controls.Add(this.label59);
             this.panel1.Controls.Add(this.label58);
-            this.panel1.Controls.Add(this.comboBox2);
+            this.panel1.Controls.Add(this.Cbo_Screw);
             this.panel1.Controls.Add(this.label57);
-            this.panel1.Controls.Add(this.comboBox1);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.Cbo_Unit);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label54);
             this.panel1.Controls.Add(this.label55);
-            this.panel1.Controls.Add(this.label56);
             this.panel1.Controls.Add(this.label53);
             this.panel1.Controls.Add(this.label52);
             this.panel1.Controls.Add(this.label51);
             this.panel1.Controls.Add(this.label50);
-            this.panel1.Controls.Add(this.label44);
-            this.panel1.Controls.Add(this.label45);
-            this.panel1.Controls.Add(this.label46);
-            this.panel1.Controls.Add(this.label47);
-            this.panel1.Controls.Add(this.label48);
-            this.panel1.Controls.Add(this.label49);
-            this.panel1.Controls.Add(this.label38);
-            this.panel1.Controls.Add(this.label39);
-            this.panel1.Controls.Add(this.label40);
-            this.panel1.Controls.Add(this.label41);
-            this.panel1.Controls.Add(this.label42);
-            this.panel1.Controls.Add(this.label43);
-            this.panel1.Controls.Add(this.label32);
-            this.panel1.Controls.Add(this.label33);
-            this.panel1.Controls.Add(this.label34);
-            this.panel1.Controls.Add(this.label35);
-            this.panel1.Controls.Add(this.label36);
-            this.panel1.Controls.Add(this.label37);
-            this.panel1.Controls.Add(this.label29);
-            this.panel1.Controls.Add(this.label30);
-            this.panel1.Controls.Add(this.label31);
-            this.panel1.Controls.Add(this.label28);
-            this.panel1.Controls.Add(this.label27);
-            this.panel1.Controls.Add(this.label26);
             this.panel1.Controls.Add(this.label25);
             this.panel1.Controls.Add(this.label18);
             this.panel1.Controls.Add(this.label22);
@@ -200,30 +716,446 @@
             this.panel1.Controls.Add(this.label17);
             this.panel1.Controls.Add(this.label14);
             this.panel1.Controls.Add(this.label13);
-            this.panel1.Controls.Add(this.label9);
             this.panel1.Controls.Add(this.label10);
-            this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(534, 36);
+            this.panel1.Location = new System.Drawing.Point(493, 19);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1215, 834);
             this.panel1.TabIndex = 158;
             // 
-            // label65
+            // Txt_CamRR_LT
             // 
-            this.label65.BackColor = System.Drawing.Color.Black;
-            this.label65.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label65.ForeColor = System.Drawing.Color.Yellow;
-            this.label65.Location = new System.Drawing.Point(686, 39);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(266, 41);
-            this.label65.TabIndex = 223;
-            this.label65.Text = "9999";
-            this.label65.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Txt_CamRR_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRR_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRR_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRR_LT.Location = new System.Drawing.Point(980, 718);
+            this.Txt_CamRR_LT.Name = "Txt_CamRR_LT";
+            this.Txt_CamRR_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRR_LT.TabIndex = 259;
+            this.Txt_CamRR_LT.Text = "9999";
+            this.Txt_CamRR_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamRR_AT
+            // 
+            this.Txt_CamRR_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRR_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRR_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRR_AT.Location = new System.Drawing.Point(827, 718);
+            this.Txt_CamRR_AT.Name = "Txt_CamRR_AT";
+            this.Txt_CamRR_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRR_AT.TabIndex = 258;
+            this.Txt_CamRR_AT.Text = "9999";
+            this.Txt_CamRR_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamRR_ST
+            // 
+            this.Txt_CamRR_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRR_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRR_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRR_ST.Location = new System.Drawing.Point(674, 718);
+            this.Txt_CamRR_ST.Name = "Txt_CamRR_ST";
+            this.Txt_CamRR_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRR_ST.TabIndex = 257;
+            this.Txt_CamRR_ST.Text = "9999";
+            this.Txt_CamRR_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRR_LT
+            // 
+            this.Txt_ToeRR_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRR_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRR_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRR_LT.Location = new System.Drawing.Point(980, 668);
+            this.Txt_ToeRR_LT.Name = "Txt_ToeRR_LT";
+            this.Txt_ToeRR_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRR_LT.TabIndex = 256;
+            this.Txt_ToeRR_LT.Text = "9999";
+            this.Txt_ToeRR_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRR_AT
+            // 
+            this.Txt_ToeRR_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRR_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRR_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRR_AT.Location = new System.Drawing.Point(827, 668);
+            this.Txt_ToeRR_AT.Name = "Txt_ToeRR_AT";
+            this.Txt_ToeRR_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRR_AT.TabIndex = 255;
+            this.Txt_ToeRR_AT.Text = "9999";
+            this.Txt_ToeRR_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRR_ST
+            // 
+            this.Txt_ToeRR_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRR_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRR_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRR_ST.Location = new System.Drawing.Point(674, 668);
+            this.Txt_ToeRR_ST.Name = "Txt_ToeRR_ST";
+            this.Txt_ToeRR_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRR_ST.TabIndex = 254;
+            this.Txt_ToeRR_ST.Text = "9999";
+            this.Txt_ToeRR_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFR_LT
+            // 
+            this.Txt_CamFR_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFR_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFR_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFR_LT.Location = new System.Drawing.Point(980, 616);
+            this.Txt_CamFR_LT.Name = "Txt_CamFR_LT";
+            this.Txt_CamFR_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFR_LT.TabIndex = 253;
+            this.Txt_CamFR_LT.Text = "9999";
+            this.Txt_CamFR_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFR_AT
+            // 
+            this.Txt_CamFR_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFR_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFR_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFR_AT.Location = new System.Drawing.Point(827, 616);
+            this.Txt_CamFR_AT.Name = "Txt_CamFR_AT";
+            this.Txt_CamFR_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFR_AT.TabIndex = 252;
+            this.Txt_CamFR_AT.Text = "9999";
+            this.Txt_CamFR_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFR_ST
+            // 
+            this.Txt_CamFR_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFR_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFR_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFR_ST.Location = new System.Drawing.Point(674, 616);
+            this.Txt_CamFR_ST.Name = "Txt_CamFR_ST";
+            this.Txt_CamFR_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFR_ST.TabIndex = 251;
+            this.Txt_CamFR_ST.Text = "9999";
+            this.Txt_CamFR_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFR_LT
+            // 
+            this.Txt_ToeFR_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFR_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFR_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFR_LT.Location = new System.Drawing.Point(979, 564);
+            this.Txt_ToeFR_LT.Name = "Txt_ToeFR_LT";
+            this.Txt_ToeFR_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFR_LT.TabIndex = 250;
+            this.Txt_ToeFR_LT.Text = "9999";
+            this.Txt_ToeFR_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFR_AT
+            // 
+            this.Txt_ToeFR_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFR_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFR_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFR_AT.Location = new System.Drawing.Point(826, 564);
+            this.Txt_ToeFR_AT.Name = "Txt_ToeFR_AT";
+            this.Txt_ToeFR_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFR_AT.TabIndex = 249;
+            this.Txt_ToeFR_AT.Text = "9999";
+            this.Txt_ToeFR_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFR_ST
+            // 
+            this.Txt_ToeFR_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFR_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFR_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFR_ST.Location = new System.Drawing.Point(673, 564);
+            this.Txt_ToeFR_ST.Name = "Txt_ToeFR_ST";
+            this.Txt_ToeFR_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFR_ST.TabIndex = 248;
+            this.Txt_ToeFR_ST.Text = "9999";
+            this.Txt_ToeFR_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamRL_LT
+            // 
+            this.Txt_CamRL_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRL_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRL_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRL_LT.Location = new System.Drawing.Point(510, 718);
+            this.Txt_CamRL_LT.Name = "Txt_CamRL_LT";
+            this.Txt_CamRL_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRL_LT.TabIndex = 247;
+            this.Txt_CamRL_LT.Text = "9999";
+            this.Txt_CamRL_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamRL_AT
+            // 
+            this.Txt_CamRL_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRL_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRL_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRL_AT.Location = new System.Drawing.Point(357, 718);
+            this.Txt_CamRL_AT.Name = "Txt_CamRL_AT";
+            this.Txt_CamRL_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRL_AT.TabIndex = 246;
+            this.Txt_CamRL_AT.Text = "9999";
+            this.Txt_CamRL_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamRL_ST
+            // 
+            this.Txt_CamRL_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamRL_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamRL_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamRL_ST.Location = new System.Drawing.Point(204, 718);
+            this.Txt_CamRL_ST.Name = "Txt_CamRL_ST";
+            this.Txt_CamRL_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamRL_ST.TabIndex = 245;
+            this.Txt_CamRL_ST.Text = "9999";
+            this.Txt_CamRL_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRL_LT
+            // 
+            this.Txt_ToeRL_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRL_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRL_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRL_LT.Location = new System.Drawing.Point(510, 668);
+            this.Txt_ToeRL_LT.Name = "Txt_ToeRL_LT";
+            this.Txt_ToeRL_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRL_LT.TabIndex = 244;
+            this.Txt_ToeRL_LT.Text = "9999";
+            this.Txt_ToeRL_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRL_AT
+            // 
+            this.Txt_ToeRL_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRL_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRL_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRL_AT.Location = new System.Drawing.Point(357, 668);
+            this.Txt_ToeRL_AT.Name = "Txt_ToeRL_AT";
+            this.Txt_ToeRL_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRL_AT.TabIndex = 243;
+            this.Txt_ToeRL_AT.Text = "9999";
+            this.Txt_ToeRL_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeRL_ST
+            // 
+            this.Txt_ToeRL_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeRL_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeRL_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeRL_ST.Location = new System.Drawing.Point(204, 668);
+            this.Txt_ToeRL_ST.Name = "Txt_ToeRL_ST";
+            this.Txt_ToeRL_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeRL_ST.TabIndex = 242;
+            this.Txt_ToeRL_ST.Text = "9999";
+            this.Txt_ToeRL_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFL_LT
+            // 
+            this.Txt_CamFL_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFL_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFL_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFL_LT.Location = new System.Drawing.Point(510, 616);
+            this.Txt_CamFL_LT.Name = "Txt_CamFL_LT";
+            this.Txt_CamFL_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFL_LT.TabIndex = 241;
+            this.Txt_CamFL_LT.Text = "9999";
+            this.Txt_CamFL_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFL_AT
+            // 
+            this.Txt_CamFL_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFL_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFL_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFL_AT.Location = new System.Drawing.Point(357, 616);
+            this.Txt_CamFL_AT.Name = "Txt_CamFL_AT";
+            this.Txt_CamFL_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFL_AT.TabIndex = 240;
+            this.Txt_CamFL_AT.Text = "9999";
+            this.Txt_CamFL_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_CamFL_ST
+            // 
+            this.Txt_CamFL_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_CamFL_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_CamFL_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_CamFL_ST.Location = new System.Drawing.Point(204, 616);
+            this.Txt_CamFL_ST.Name = "Txt_CamFL_ST";
+            this.Txt_CamFL_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_CamFL_ST.TabIndex = 239;
+            this.Txt_CamFL_ST.Text = "9999";
+            this.Txt_CamFL_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFL_LT
+            // 
+            this.Txt_ToeFL_LT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFL_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFL_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFL_LT.Location = new System.Drawing.Point(509, 564);
+            this.Txt_ToeFL_LT.Name = "Txt_ToeFL_LT";
+            this.Txt_ToeFL_LT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFL_LT.TabIndex = 238;
+            this.Txt_ToeFL_LT.Text = "9999";
+            this.Txt_ToeFL_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFL_AT
+            // 
+            this.Txt_ToeFL_AT.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFL_AT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFL_AT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFL_AT.Location = new System.Drawing.Point(356, 564);
+            this.Txt_ToeFL_AT.Name = "Txt_ToeFL_AT";
+            this.Txt_ToeFL_AT.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFL_AT.TabIndex = 237;
+            this.Txt_ToeFL_AT.Text = "9999";
+            this.Txt_ToeFL_AT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_ToeFL_ST
+            // 
+            this.Txt_ToeFL_ST.BackColor = System.Drawing.Color.Black;
+            this.Txt_ToeFL_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_ToeFL_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_ToeFL_ST.Location = new System.Drawing.Point(203, 564);
+            this.Txt_ToeFL_ST.Name = "Txt_ToeFL_ST";
+            this.Txt_ToeFL_ST.Size = new System.Drawing.Size(147, 43);
+            this.Txt_ToeFL_ST.TabIndex = 236;
+            this.Txt_ToeFL_ST.Text = "9999";
+            this.Txt_ToeFL_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TotToeR_LT
+            // 
+            this.TotToeR_LT.BackColor = System.Drawing.Color.Black;
+            this.TotToeR_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.TotToeR_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.TotToeR_LT.Location = new System.Drawing.Point(844, 301);
+            this.TotToeR_LT.Name = "TotToeR_LT";
+            this.TotToeR_LT.Size = new System.Drawing.Size(117, 43);
+            this.TotToeR_LT.TabIndex = 235;
+            this.TotToeR_LT.Text = "9999";
+            this.TotToeR_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TotToeR_ST
+            // 
+            this.TotToeR_ST.BackColor = System.Drawing.Color.Black;
+            this.TotToeR_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.TotToeR_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.TotToeR_ST.Location = new System.Drawing.Point(692, 302);
+            this.TotToeR_ST.Name = "TotToeR_ST";
+            this.TotToeR_ST.Size = new System.Drawing.Size(117, 43);
+            this.TotToeR_ST.TabIndex = 234;
+            this.TotToeR_ST.Text = "9999";
+            this.TotToeR_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TotToeF_ST
+            // 
+            this.TotToeF_ST.BackColor = System.Drawing.Color.Black;
+            this.TotToeF_ST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.TotToeF_ST.ForeColor = System.Drawing.Color.Yellow;
+            this.TotToeF_ST.Location = new System.Drawing.Point(209, 301);
+            this.TotToeF_ST.Name = "TotToeF_ST";
+            this.TotToeF_ST.Size = new System.Drawing.Size(106, 43);
+            this.TotToeF_ST.TabIndex = 233;
+            this.TotToeF_ST.Text = "9999";
+            this.TotToeF_ST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // HandleST
+            // 
+            this.HandleST.BackColor = System.Drawing.Color.Black;
+            this.HandleST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.HandleST.ForeColor = System.Drawing.Color.Yellow;
+            this.HandleST.Location = new System.Drawing.Point(209, 250);
+            this.HandleST.Name = "HandleST";
+            this.HandleST.Size = new System.Drawing.Size(106, 43);
+            this.HandleST.TabIndex = 232;
+            this.HandleST.Text = "9999";
+            this.HandleST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_DogRunST
+            // 
+            this.Txt_DogRunST.BackColor = System.Drawing.Color.Black;
+            this.Txt_DogRunST.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_DogRunST.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_DogRunST.Location = new System.Drawing.Point(208, 198);
+            this.Txt_DogRunST.Name = "Txt_DogRunST";
+            this.Txt_DogRunST.Size = new System.Drawing.Size(106, 43);
+            this.Txt_DogRunST.TabIndex = 231;
+            this.Txt_DogRunST.Text = "9999";
+            this.Txt_DogRunST.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TotToeF_LT
+            // 
+            this.TotToeF_LT.BackColor = System.Drawing.Color.Black;
+            this.TotToeF_LT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.TotToeF_LT.ForeColor = System.Drawing.Color.Yellow;
+            this.TotToeF_LT.Location = new System.Drawing.Point(356, 301);
+            this.TotToeF_LT.Name = "TotToeF_LT";
+            this.TotToeF_LT.Size = new System.Drawing.Size(117, 43);
+            this.TotToeF_LT.TabIndex = 230;
+            this.TotToeF_LT.Text = "9999";
+            this.TotToeF_LT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // HandleLT
+            // 
+            this.HandleLT.BackColor = System.Drawing.Color.Black;
+            this.HandleLT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.HandleLT.ForeColor = System.Drawing.Color.Yellow;
+            this.HandleLT.Location = new System.Drawing.Point(356, 250);
+            this.HandleLT.Name = "HandleLT";
+            this.HandleLT.Size = new System.Drawing.Size(117, 43);
+            this.HandleLT.TabIndex = 229;
+            this.HandleLT.Text = "9999";
+            this.HandleLT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_DogRunLT
+            // 
+            this.Txt_DogRunLT.BackColor = System.Drawing.Color.Black;
+            this.Txt_DogRunLT.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_DogRunLT.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_DogRunLT.Location = new System.Drawing.Point(356, 198);
+            this.Txt_DogRunLT.Name = "Txt_DogRunLT";
+            this.Txt_DogRunLT.Size = new System.Drawing.Size(117, 43);
+            this.Txt_DogRunLT.TabIndex = 228;
+            this.Txt_DogRunLT.Text = "9999";
+            this.Txt_DogRunLT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_Dpp_Code
+            // 
+            this.Txt_Dpp_Code.BackColor = System.Drawing.Color.Black;
+            this.Txt_Dpp_Code.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_Dpp_Code.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_Dpp_Code.Location = new System.Drawing.Point(209, 146);
+            this.Txt_Dpp_Code.Name = "Txt_Dpp_Code";
+            this.Txt_Dpp_Code.Size = new System.Drawing.Size(264, 43);
+            this.Txt_Dpp_Code.TabIndex = 227;
+            this.Txt_Dpp_Code.Text = "9999";
+            this.Txt_Dpp_Code.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_WhelBase
+            // 
+            this.Txt_WhelBase.BackColor = System.Drawing.Color.Black;
+            this.Txt_WhelBase.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_WhelBase.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_WhelBase.Location = new System.Drawing.Point(209, 91);
+            this.Txt_WhelBase.Name = "Txt_WhelBase";
+            this.Txt_WhelBase.Size = new System.Drawing.Size(264, 43);
+            this.Txt_WhelBase.TabIndex = 226;
+            this.Txt_WhelBase.Text = "9999";
+            this.Txt_WhelBase.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_Bar_Code
+            // 
+            this.Txt_Bar_Code.BackColor = System.Drawing.Color.Black;
+            this.Txt_Bar_Code.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_Bar_Code.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_Bar_Code.Location = new System.Drawing.Point(207, 39);
+            this.Txt_Bar_Code.Name = "Txt_Bar_Code";
+            this.Txt_Bar_Code.Size = new System.Drawing.Size(264, 43);
+            this.Txt_Bar_Code.TabIndex = 225;
+            this.Txt_Bar_Code.Text = "9999";
+            this.Txt_Bar_Code.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // Txt_SWARatio
+            // 
+            this.Txt_SWARatio.BackColor = System.Drawing.Color.Black;
+            this.Txt_SWARatio.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_SWARatio.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_SWARatio.Location = new System.Drawing.Point(692, 39);
+            this.Txt_SWARatio.Name = "Txt_SWARatio";
+            this.Txt_SWARatio.Size = new System.Drawing.Size(264, 43);
+            this.Txt_SWARatio.TabIndex = 224;
+            this.Txt_SWARatio.Text = "9999";
+            this.Txt_SWARatio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label66
             // 
@@ -251,18 +1183,6 @@
             this.label64.Text = "TOE, CAMBER";
             this.label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label60
-            // 
-            this.label60.BackColor = System.Drawing.Color.Black;
-            this.label60.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label60.ForeColor = System.Drawing.Color.Yellow;
-            this.label60.Location = new System.Drawing.Point(348, 197);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(123, 41);
-            this.label60.TabIndex = 220;
-            this.label60.Text = "0.00";
-            this.label60.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label61
             // 
             this.label61.BackColor = System.Drawing.Color.Transparent;
@@ -274,18 +1194,6 @@
             this.label61.TabIndex = 219;
             this.label61.Text = "±";
             this.label61.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label62
-            // 
-            this.label62.BackColor = System.Drawing.Color.Black;
-            this.label62.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label62.ForeColor = System.Drawing.Color.Yellow;
-            this.label62.Location = new System.Drawing.Point(203, 197);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(123, 41);
-            this.label62.TabIndex = 218;
-            this.label62.Text = "0.00";
-            this.label62.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label63
             // 
@@ -352,11 +1260,12 @@
             this.label58.Text = "Front";
             this.label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox2
+            // Cbo_Screw
             // 
-            this.comboBox2.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.Cbo_Screw.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Cbo_Screw.FormattingEnabled = true;
+            this.Cbo_Screw.Items.AddRange(new object[] {
+            "0",
             "1",
             "2",
             "3",
@@ -367,10 +1276,10 @@
             "8",
             "9",
             "10"});
-            this.comboBox2.Location = new System.Drawing.Point(692, 146);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(264, 32);
-            this.comboBox2.TabIndex = 212;
+            this.Cbo_Screw.Location = new System.Drawing.Point(688, 96);
+            this.Cbo_Screw.Name = "Cbo_Screw";
+            this.Cbo_Screw.Size = new System.Drawing.Size(264, 32);
+            this.Cbo_Screw.TabIndex = 212;
             // 
             // label57
             // 
@@ -378,61 +1287,24 @@
             this.label57.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label57.ForeColor = System.Drawing.Color.Aqua;
             this.label57.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label57.Location = new System.Drawing.Point(515, 146);
+            this.label57.Location = new System.Drawing.Point(511, 96);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(167, 41);
             this.label57.TabIndex = 211;
             this.label57.Text = "Screwdriver";
             this.label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // comboBox1
+            // Cbo_Unit
             // 
-            this.comboBox1.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Degree",
-            "Minute"});
-            this.comboBox1.Location = new System.Drawing.Point(692, 198);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(264, 32);
-            this.comboBox1.TabIndex = 210;
-            this.comboBox1.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Black;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Yellow;
-            this.label4.Location = new System.Drawing.Point(205, 39);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(266, 41);
-            this.label4.TabIndex = 209;
-            this.label4.Text = "-";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Black;
-            this.label3.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Yellow;
-            this.label3.Location = new System.Drawing.Point(205, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(266, 41);
-            this.label3.TabIndex = 208;
-            this.label3.Text = "9999";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Yellow;
-            this.label2.Location = new System.Drawing.Point(205, 146);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(268, 41);
-            this.label2.TabIndex = 207;
-            this.label2.Text = "1";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Cbo_Unit.Font = new System.Drawing.Font("굴림", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Cbo_Unit.FormattingEnabled = true;
+            this.Cbo_Unit.Items.AddRange(new object[] {
+            "Minute",
+            "Degree"});
+            this.Cbo_Unit.Location = new System.Drawing.Point(688, 148);
+            this.Cbo_Unit.Name = "Cbo_Unit";
+            this.Cbo_Unit.Size = new System.Drawing.Size(264, 32);
+            this.Cbo_Unit.TabIndex = 210;
             // 
             // label1
             // 
@@ -440,25 +1312,12 @@
             this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Aqua;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label1.Location = new System.Drawing.Point(515, 198);
+            this.label1.Location = new System.Drawing.Point(511, 148);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(167, 41);
             this.label1.TabIndex = 206;
             this.label1.Text = "Unit";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Visible = false;
-            // 
-            // label54
-            // 
-            this.label54.BackColor = System.Drawing.Color.Black;
-            this.label54.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label54.ForeColor = System.Drawing.Color.Yellow;
-            this.label54.Location = new System.Drawing.Point(348, 250);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(123, 41);
-            this.label54.TabIndex = 205;
-            this.label54.Text = "0.00";
-            this.label54.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label55
             // 
@@ -471,18 +1330,6 @@
             this.label55.TabIndex = 204;
             this.label55.Text = "±";
             this.label55.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label56
-            // 
-            this.label56.BackColor = System.Drawing.Color.Black;
-            this.label56.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label56.ForeColor = System.Drawing.Color.Yellow;
-            this.label56.Location = new System.Drawing.Point(203, 250);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(123, 41);
-            this.label56.TabIndex = 203;
-            this.label56.Text = "0.00";
-            this.label56.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label53
             // 
@@ -535,294 +1382,6 @@
             this.label50.TabIndex = 199;
             this.label50.Text = "Barcode";
             this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label44
-            // 
-            this.label44.BackColor = System.Drawing.Color.Black;
-            this.label44.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.Yellow;
-            this.label44.Location = new System.Drawing.Point(979, 717);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(147, 41);
-            this.label44.TabIndex = 198;
-            this.label44.Text = "0.00";
-            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label45
-            // 
-            this.label45.BackColor = System.Drawing.Color.Black;
-            this.label45.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.ForeColor = System.Drawing.Color.Yellow;
-            this.label45.Location = new System.Drawing.Point(826, 717);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(147, 41);
-            this.label45.TabIndex = 197;
-            this.label45.Text = "0.00";
-            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label46
-            // 
-            this.label46.BackColor = System.Drawing.Color.Black;
-            this.label46.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label46.ForeColor = System.Drawing.Color.Yellow;
-            this.label46.Location = new System.Drawing.Point(673, 717);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(147, 41);
-            this.label46.TabIndex = 196;
-            this.label46.Text = "0.00";
-            this.label46.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label47
-            // 
-            this.label47.BackColor = System.Drawing.Color.Black;
-            this.label47.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label47.ForeColor = System.Drawing.Color.Yellow;
-            this.label47.Location = new System.Drawing.Point(509, 722);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(147, 41);
-            this.label47.TabIndex = 195;
-            this.label47.Text = "0.00";
-            this.label47.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label48
-            // 
-            this.label48.BackColor = System.Drawing.Color.Black;
-            this.label48.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.ForeColor = System.Drawing.Color.Yellow;
-            this.label48.Location = new System.Drawing.Point(356, 722);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(147, 41);
-            this.label48.TabIndex = 194;
-            this.label48.Text = "0.00";
-            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label49
-            // 
-            this.label49.BackColor = System.Drawing.Color.Black;
-            this.label49.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.Color.Yellow;
-            this.label49.Location = new System.Drawing.Point(203, 722);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(147, 41);
-            this.label49.TabIndex = 193;
-            this.label49.Text = "0.00";
-            this.label49.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label38
-            // 
-            this.label38.BackColor = System.Drawing.Color.Black;
-            this.label38.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.ForeColor = System.Drawing.Color.Yellow;
-            this.label38.Location = new System.Drawing.Point(979, 663);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(147, 41);
-            this.label38.TabIndex = 192;
-            this.label38.Text = "0.00";
-            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label39
-            // 
-            this.label39.BackColor = System.Drawing.Color.Black;
-            this.label39.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.ForeColor = System.Drawing.Color.Yellow;
-            this.label39.Location = new System.Drawing.Point(826, 663);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(147, 41);
-            this.label39.TabIndex = 191;
-            this.label39.Text = "0.00";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label40
-            // 
-            this.label40.BackColor = System.Drawing.Color.Black;
-            this.label40.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.ForeColor = System.Drawing.Color.Yellow;
-            this.label40.Location = new System.Drawing.Point(673, 663);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(147, 41);
-            this.label40.TabIndex = 190;
-            this.label40.Text = "0.00";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label41
-            // 
-            this.label41.BackColor = System.Drawing.Color.Black;
-            this.label41.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.ForeColor = System.Drawing.Color.Yellow;
-            this.label41.Location = new System.Drawing.Point(509, 668);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(147, 41);
-            this.label41.TabIndex = 189;
-            this.label41.Text = "0.00";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label42
-            // 
-            this.label42.BackColor = System.Drawing.Color.Black;
-            this.label42.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.ForeColor = System.Drawing.Color.Yellow;
-            this.label42.Location = new System.Drawing.Point(356, 668);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(147, 41);
-            this.label42.TabIndex = 188;
-            this.label42.Text = "0.00";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label43
-            // 
-            this.label43.BackColor = System.Drawing.Color.Black;
-            this.label43.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.ForeColor = System.Drawing.Color.Yellow;
-            this.label43.Location = new System.Drawing.Point(203, 668);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(147, 41);
-            this.label43.TabIndex = 187;
-            this.label43.Text = "0.00";
-            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label32
-            // 
-            this.label32.BackColor = System.Drawing.Color.Black;
-            this.label32.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.Yellow;
-            this.label32.Location = new System.Drawing.Point(979, 611);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(147, 41);
-            this.label32.TabIndex = 186;
-            this.label32.Text = "0.00";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label33
-            // 
-            this.label33.BackColor = System.Drawing.Color.Black;
-            this.label33.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.Yellow;
-            this.label33.Location = new System.Drawing.Point(826, 611);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(147, 41);
-            this.label33.TabIndex = 185;
-            this.label33.Text = "0.00";
-            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label34
-            // 
-            this.label34.BackColor = System.Drawing.Color.Black;
-            this.label34.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.ForeColor = System.Drawing.Color.Yellow;
-            this.label34.Location = new System.Drawing.Point(673, 611);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(147, 41);
-            this.label34.TabIndex = 184;
-            this.label34.Text = "0.00";
-            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label35
-            // 
-            this.label35.BackColor = System.Drawing.Color.Black;
-            this.label35.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.ForeColor = System.Drawing.Color.Yellow;
-            this.label35.Location = new System.Drawing.Point(509, 616);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(147, 41);
-            this.label35.TabIndex = 183;
-            this.label35.Text = "0.00";
-            this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label36
-            // 
-            this.label36.BackColor = System.Drawing.Color.Black;
-            this.label36.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.ForeColor = System.Drawing.Color.Yellow;
-            this.label36.Location = new System.Drawing.Point(356, 616);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(147, 41);
-            this.label36.TabIndex = 182;
-            this.label36.Text = "0.00";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label37
-            // 
-            this.label37.BackColor = System.Drawing.Color.Black;
-            this.label37.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.Color.Yellow;
-            this.label37.Location = new System.Drawing.Point(203, 616);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(147, 41);
-            this.label37.TabIndex = 181;
-            this.label37.Text = "0.00";
-            this.label37.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label29
-            // 
-            this.label29.BackColor = System.Drawing.Color.Black;
-            this.label29.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.ForeColor = System.Drawing.Color.Yellow;
-            this.label29.Location = new System.Drawing.Point(979, 559);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(147, 41);
-            this.label29.TabIndex = 180;
-            this.label29.Text = "0.00";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label30
-            // 
-            this.label30.BackColor = System.Drawing.Color.Black;
-            this.label30.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.Color.Yellow;
-            this.label30.Location = new System.Drawing.Point(826, 559);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(147, 41);
-            this.label30.TabIndex = 179;
-            this.label30.Text = "0.00";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label31
-            // 
-            this.label31.BackColor = System.Drawing.Color.Black;
-            this.label31.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.ForeColor = System.Drawing.Color.Yellow;
-            this.label31.Location = new System.Drawing.Point(673, 559);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(147, 41);
-            this.label31.TabIndex = 178;
-            this.label31.Text = "0.00";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label28
-            // 
-            this.label28.BackColor = System.Drawing.Color.Black;
-            this.label28.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.Yellow;
-            this.label28.Location = new System.Drawing.Point(509, 564);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(147, 41);
-            this.label28.TabIndex = 177;
-            this.label28.Text = "0.00";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label27
-            // 
-            this.label27.BackColor = System.Drawing.Color.Black;
-            this.label27.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.ForeColor = System.Drawing.Color.Yellow;
-            this.label27.Location = new System.Drawing.Point(356, 564);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(147, 41);
-            this.label27.TabIndex = 176;
-            this.label27.Text = "0.00";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label26
-            // 
-            this.label26.BackColor = System.Drawing.Color.Black;
-            this.label26.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.ForeColor = System.Drawing.Color.Yellow;
-            this.label26.Location = new System.Drawing.Point(203, 564);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(147, 41);
-            this.label26.TabIndex = 175;
-            this.label26.Text = "0.00";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label25
             // 
@@ -965,18 +1524,6 @@
             this.label13.Text = "Toe";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label9
-            // 
-            this.label9.BackColor = System.Drawing.Color.Black;
-            this.label9.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Yellow;
-            this.label9.Location = new System.Drawing.Point(843, 303);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(123, 41);
-            this.label9.TabIndex = 160;
-            this.label9.Text = "0.00";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.Transparent;
@@ -988,18 +1535,6 @@
             this.label10.TabIndex = 159;
             this.label10.Text = "±";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.Color.Black;
-            this.label11.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Yellow;
-            this.label11.Location = new System.Drawing.Point(694, 303);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(123, 41);
-            this.label11.TabIndex = 158;
-            this.label11.Text = "0.00";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label12
             // 
@@ -1013,18 +1548,6 @@
             this.label12.Text = "Rear Total Para.";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
-            // 
-            this.label8.BackColor = System.Drawing.Color.Black;
-            this.label8.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Yellow;
-            this.label8.Location = new System.Drawing.Point(346, 302);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(123, 41);
-            this.label8.TabIndex = 156;
-            this.label8.Text = "0.00";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // label7
             // 
             this.label7.BackColor = System.Drawing.Color.Transparent;
@@ -1036,18 +1559,6 @@
             this.label7.TabIndex = 155;
             this.label7.Text = "±";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Black;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Yellow;
-            this.label6.Location = new System.Drawing.Point(201, 302);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 41);
-            this.label6.TabIndex = 154;
-            this.label6.Text = "0.00";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // label5
             // 
@@ -1073,49 +1584,65 @@
             // 
             // gbxMList
             // 
-            this.gbxMList.Controls.Add(this.button4);
-            this.gbxMList.Controls.Add(this.button3);
-            this.gbxMList.Controls.Add(this.button1);
+            this.gbxMList.Controls.Add(this.Btn_Refresh);
+            this.gbxMList.Controls.Add(this.Btn_Delete);
+            this.gbxMList.Controls.Add(this.Btn_Modify);
+            this.gbxMList.Controls.Add(this.Btn_Add);
             this.gbxMList.Controls.Add(this.modelList);
-            this.gbxMList.Controls.Add(this.txtModel);
-            this.gbxMList.Location = new System.Drawing.Point(42, 23);
+            this.gbxMList.Controls.Add(this.Txt_Model);
+            this.gbxMList.Location = new System.Drawing.Point(18, 6);
             this.gbxMList.Name = "gbxMList";
             this.gbxMList.Size = new System.Drawing.Size(458, 847);
             this.gbxMList.TabIndex = 145;
             this.gbxMList.TabStop = false;
             // 
-            // button4
+            // Btn_Refresh
             // 
-            this.button4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Teal;
-            this.button4.Location = new System.Drawing.Point(193, 40);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(85, 44);
-            this.button4.TabIndex = 162;
-            this.button4.Text = "DELETE";
-            this.button4.UseVisualStyleBackColor = true;
+            this.Btn_Refresh.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Refresh.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Refresh.Location = new System.Drawing.Point(336, 40);
+            this.Btn_Refresh.Name = "Btn_Refresh";
+            this.Btn_Refresh.Size = new System.Drawing.Size(101, 44);
+            this.Btn_Refresh.TabIndex = 163;
+            this.Btn_Refresh.Text = "REFRESH";
+            this.Btn_Refresh.UseVisualStyleBackColor = true;
+            this.Btn_Refresh.Click += new System.EventHandler(this.Btn_Refresh_Click);
             // 
-            // button3
+            // Btn_Delete
             // 
-            this.button3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.Teal;
-            this.button3.Location = new System.Drawing.Point(102, 40);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(85, 44);
-            this.button3.TabIndex = 161;
-            this.button3.Text = "MODIFY";
-            this.button3.UseVisualStyleBackColor = true;
+            this.Btn_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Delete.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Delete.Location = new System.Drawing.Point(193, 40);
+            this.Btn_Delete.Name = "Btn_Delete";
+            this.Btn_Delete.Size = new System.Drawing.Size(85, 44);
+            this.Btn_Delete.TabIndex = 162;
+            this.Btn_Delete.Text = "DELETE";
+            this.Btn_Delete.UseVisualStyleBackColor = true;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
-            // button1
+            // Btn_Modify
             // 
-            this.button1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.Teal;
-            this.button1.Location = new System.Drawing.Point(15, 40);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 44);
-            this.button1.TabIndex = 160;
-            this.button1.Text = "ADD";
-            this.button1.UseVisualStyleBackColor = true;
+            this.Btn_Modify.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Modify.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Modify.Location = new System.Drawing.Point(102, 40);
+            this.Btn_Modify.Name = "Btn_Modify";
+            this.Btn_Modify.Size = new System.Drawing.Size(85, 44);
+            this.Btn_Modify.TabIndex = 161;
+            this.Btn_Modify.Text = "MODIFY";
+            this.Btn_Modify.UseVisualStyleBackColor = true;
+            this.Btn_Modify.Click += new System.EventHandler(this.Btn_Modify_Click);
+            // 
+            // Btn_Add
+            // 
+            this.Btn_Add.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Add.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Add.Location = new System.Drawing.Point(15, 40);
+            this.Btn_Add.Name = "Btn_Add";
+            this.Btn_Add.Size = new System.Drawing.Size(81, 44);
+            this.Btn_Add.TabIndex = 160;
+            this.Btn_Add.Text = "ADD";
+            this.Btn_Add.UseVisualStyleBackColor = true;
+            this.Btn_Add.Click += new System.EventHandler(this.Btn_Add_Click);
             // 
             // modelList
             // 
@@ -1133,14 +1660,15 @@
             this.modelList.TabIndex = 159;
             this.modelList.UseCompatibleStateImageBehavior = false;
             this.modelList.View = System.Windows.Forms.View.Details;
+            this.modelList.SelectedIndexChanged += new System.EventHandler(this.modelList_SelectedIndexChanged);
             // 
-            // txtModel
+            // Txt_Model
             // 
-            this.txtModel.Location = new System.Drawing.Point(15, 90);
-            this.txtModel.Multiline = true;
-            this.txtModel.Name = "txtModel";
-            this.txtModel.Size = new System.Drawing.Size(422, 42);
-            this.txtModel.TabIndex = 147;
+            this.Txt_Model.Location = new System.Drawing.Point(15, 90);
+            this.Txt_Model.Multiline = true;
+            this.Txt_Model.Name = "Txt_Model";
+            this.Txt_Model.Size = new System.Drawing.Size(422, 42);
+            this.Txt_Model.TabIndex = 147;
             // 
             // tabPage2
             // 
@@ -1152,6 +1680,34 @@
             this.tabPage2.Text = "Language";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 36);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(1760, 876);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // cButton1
+            // 
+            this.cButton1.BackColor = System.Drawing.Color.LightGray;
+            this.cButton1.bNormalButton = false;
+            this.cButton1.BorderColor = System.Drawing.Color.Black;
+            this.cButton1.BorderSize = ((uint)(1u));
+            this.cButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cButton1.ForeColor = System.Drawing.Color.Black;
+            this.cButton1.IsToggled = false;
+            this.cButton1.Location = new System.Drawing.Point(0, 0);
+            this.cButton1.Name = "cButton1";
+            this.cButton1.NormalBackColor = System.Drawing.Color.LightGray;
+            this.cButton1.NormalForeColor = System.Drawing.Color.Black;
+            this.cButton1.Size = new System.Drawing.Size(75, 23);
+            this.cButton1.TabIndex = 0;
+            this.cButton1.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
+            this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
+            this.cButton1.UseVisualStyleBackColor = false;
+            // 
             // Frm_Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1161,11 +1717,28 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_Config";
             this.ShowInTaskbar = false;
-            this.Text = "Form_Main";
             this.Load += new System.EventHandler(this.Frm_Config_Load);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.gbxMList.ResumeLayout(false);
             this.gbxMList.PerformLayout();
             this.ResumeLayout(false);
@@ -1177,20 +1750,16 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox txtModel;
+        private System.Windows.Forms.TextBox Txt_Model;
         private System.Windows.Forms.GroupBox gbxMList;
         private System.Windows.Forms.ListView modelList;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_Delete;
+        private System.Windows.Forms.Button Btn_Modify;
+        private System.Windows.Forms.Button Btn_Add;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -1202,55 +1771,107 @@
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox Cbo_Unit;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox Cbo_Screw;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.Label label65;
         private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox Txt_SWARatio;
+        private System.Windows.Forms.TextBox Txt_ToeFL_ST;
+        private System.Windows.Forms.TextBox TotToeR_LT;
+        private System.Windows.Forms.TextBox TotToeR_ST;
+        private System.Windows.Forms.TextBox TotToeF_ST;
+        private System.Windows.Forms.TextBox HandleST;
+        private System.Windows.Forms.TextBox Txt_DogRunST;
+        private System.Windows.Forms.TextBox TotToeF_LT;
+        private System.Windows.Forms.TextBox HandleLT;
+        private System.Windows.Forms.TextBox Txt_DogRunLT;
+        private System.Windows.Forms.TextBox Txt_Dpp_Code;
+        private System.Windows.Forms.TextBox Txt_WhelBase;
+        private System.Windows.Forms.TextBox Txt_Bar_Code;
+        private System.Windows.Forms.TextBox Txt_CamRR_LT;
+        private System.Windows.Forms.TextBox Txt_CamRR_AT;
+        private System.Windows.Forms.TextBox Txt_CamRR_ST;
+        private System.Windows.Forms.TextBox Txt_ToeRR_LT;
+        private System.Windows.Forms.TextBox Txt_ToeRR_AT;
+        private System.Windows.Forms.TextBox Txt_ToeRR_ST;
+        private System.Windows.Forms.TextBox Txt_CamFR_LT;
+        private System.Windows.Forms.TextBox Txt_CamFR_AT;
+        private System.Windows.Forms.TextBox Txt_CamFR_ST;
+        private System.Windows.Forms.TextBox Txt_ToeFR_LT;
+        private System.Windows.Forms.TextBox Txt_ToeFR_AT;
+        private System.Windows.Forms.TextBox Txt_ToeFR_ST;
+        private System.Windows.Forms.TextBox Txt_CamRL_LT;
+        private System.Windows.Forms.TextBox Txt_CamRL_AT;
+        private System.Windows.Forms.TextBox Txt_CamRL_ST;
+        private System.Windows.Forms.TextBox Txt_ToeRL_LT;
+        private System.Windows.Forms.TextBox Txt_ToeRL_AT;
+        private System.Windows.Forms.TextBox Txt_ToeRL_ST;
+        private System.Windows.Forms.TextBox Txt_CamFL_LT;
+        private System.Windows.Forms.TextBox Txt_CamFL_AT;
+        private System.Windows.Forms.TextBox Txt_CamFL_ST;
+        private System.Windows.Forms.TextBox Txt_ToeFL_LT;
+        private System.Windows.Forms.TextBox Txt_ToeFL_AT;
+        private System.Windows.Forms.Button Btn_Refresh;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox editPLCPort;
+        private System.Windows.Forms.TextBox editPLCIP;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox editScrewPort;
+        private System.Windows.Forms.TextBox editScrewIP;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox editLETPort;
+        private System.Windows.Forms.TextBox editLetURL;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ComboBox comLang;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox editWBMax;
+        private System.Windows.Forms.TextBox editWBMin;
+        private System.Windows.Forms.TextBox editWBHome;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox editVEPPort;
+        private System.Windows.Forms.TextBox editVEPIP;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox editBarcodePort;
+        private System.Windows.Forms.TextBox editBarcodeIP;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox editPrintPort;
+        private System.Windows.Forms.TextBox editPrintIP;
+        private System.Windows.Forms.Label lblResultPath;
+        private KI_Controls.CButton cButton1;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Button BTN_SAVE;
+        private KI_Controls.CButton Btn_ResPath;
     }
 }

@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 
 using KINT_Lib;
 using static KINT_Lib.Lib_TcpClient;
+using LETInterface;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Ki_WAT
@@ -19,7 +20,7 @@ namespace Ki_WAT
     {
 
 
-        GlobalVal globalData1 = GlobalVal.Instance;
+        GlobalVal _GV = GlobalVal.Instance;
         //globalData1.g_DppData.dToeFL = 10.5;
         
 
@@ -30,15 +31,17 @@ namespace Ki_WAT
         public Frm_Rolling m_frmRoll = new Frm_Rolling();
         public Frm_StaticMaster m_frmStatic = new Frm_StaticMaster();
         public Frm_Result m_frmResult = new Frm_Result();
+        public Frm_Manual m_frmManual = new Frm_Manual() ;
 
         private List<Button> m_NavButtons = new List<Button>();
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
         private Form m_ActiveSubForm;
         
+
         private Lib_TcpClient m_tcpBoardSpeed = new Lib_TcpClient();
         private Lib_Tcp_Server m_tcp_Server = new Lib_Tcp_Server();
         
-        private DB_LocalWat m_dbJob;
+        public DB_LocalWat m_dbJob;
 
         private const int WM_COPYDATA = 0x004A;
 
@@ -87,25 +90,34 @@ namespace Ki_WAT
         {
             InitializeComponent();
         }
-        private void Frm_Mainfrm_Load(object sender, EventArgs e)
+
+        public void DeviceOpen()
+        {
+            _GV.LET_Controller = new CycleControl();
+
+            m_tcp_Server.Start("127.0.0.1", 8511);
+            m_tcpBoardSpeed.Connect("127.0.0.1", 8511);
+            m_tcpBoardSpeed.OnDataReceived += new DataReceiveClient(event_GetSpeedData);
+
+
+        }
+
+        private void InitUI()
         {
             m_frmMain.SetParent(this);
             m_frmConfig.SetParent(this);
+            m_frmResult.SetParent(this);
+            m_frmManual.SetParent(this);
 
             InitializeSubForm(m_frmMain);
             InitializeSubForm(m_frmConfig);
             InitializeSubForm(m_frmRoll);
             InitializeSubForm(m_frmStatic);
             InitializeSubForm(m_frmResult);
-
-            m_tcp_Server.Start("127.0.0.1", 8511);
-
-            m_tcpBoardSpeed.Connect("127.0.0.1", 8511);
-            m_tcpBoardSpeed.OnDataReceived += new DataReceiveClient(event_GetSpeedData);
-            m_dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+            InitializeSubForm(m_frmManual);
 
             m_NavButtons.Add(BtnMain);
-            
+
             m_NavButtons.Add(BtnManual);
             m_NavButtons.Add(btnIo);
             m_NavButtons.Add(BtnConfig);
@@ -132,6 +144,17 @@ namespace Ki_WAT
 
             ChangeButtonColor(BtnMain);
             ShowFrm(Def.FOM_IDX_MAIN);
+
+        }
+        private void Frm_Mainfrm_Load(object sender, EventArgs e)
+        {
+
+            DeviceOpen();
+            InitUI();
+         
+            m_dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+
+            
             //var MeasureData = GlobalVal.Instance;
             //MeasureData.g_DppData.dToeFL = 10.5;
                 
@@ -213,8 +236,12 @@ namespace Ki_WAT
                 case Def.FOM_IDX_RESULT:
                     f = m_frmResult;
                     break;
+                case Def.FOM_IDX_MANUAL:
+                    f = m_frmManual;
+                    break;
 
-                    
+
+
             }
 
             
@@ -226,7 +253,7 @@ namespace Ki_WAT
             {
                 
                 if ( m_nCurrentFrmIdx == Def.FOM_IDX_MAIN || m_nCurrentFrmIdx == Def.FOM_IDX_CONFIG|| 
-                     m_nCurrentFrmIdx == Def.FOM_IDX_RESULT )
+                     m_nCurrentFrmIdx == Def.FOM_IDX_RESULT || m_nCurrentFrmIdx == Def.FOM_IDX_MANUAL)
                 {
                     User_Monitor.ShowFrm(Def.FOM_IDX_MAIN);
                 }
@@ -256,30 +283,25 @@ namespace Ki_WAT
             ChangeButtonColor((Button)sender);
             
         }
-
         private void btnManual_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
+            ShowFrm(Def.FOM_IDX_MANUAL);
         }
-
         private void Btn_T_Click(object sender, EventArgs e)
         {
             m_dbJob.SelectCarInfo("2024061100202");
             m_frmMain._Log_ListBox("asdf");
         }
-
         private void btnIo_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
         }
-
         private void BtnCal_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
             ShowFrm(Def.FOM_IDX_ROLLING);
-
         }
-
         private void Btn_StaticMaster_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);

@@ -59,6 +59,7 @@
             this.pgs_Idle = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -66,9 +67,10 @@
             // 
             // lbl_Toe_FL
             // 
-            this.lbl_Toe_FL.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Toe_FL.BackColor = System.Drawing.Color.Black;
             this.lbl_Toe_FL.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Toe_FL.Location = new System.Drawing.Point(40, 170);
+            this.lbl_Toe_FL.ForeColor = System.Drawing.Color.White;
+            this.lbl_Toe_FL.Location = new System.Drawing.Point(40, 247);
             this.lbl_Toe_FL.Name = "lbl_Toe_FL";
             this.lbl_Toe_FL.Size = new System.Drawing.Size(190, 53);
             this.lbl_Toe_FL.TabIndex = 18;
@@ -78,7 +80,7 @@
             // Btn_Start
             // 
             this.Btn_Start.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Start.Location = new System.Drawing.Point(864, 16);
+            this.Btn_Start.Location = new System.Drawing.Point(872, 100);
             this.Btn_Start.Name = "Btn_Start";
             this.Btn_Start.Size = new System.Drawing.Size(126, 46);
             this.Btn_Start.TabIndex = 21;
@@ -88,9 +90,10 @@
             // 
             // lbl_Toe_FR
             // 
-            this.lbl_Toe_FR.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Toe_FR.BackColor = System.Drawing.Color.Black;
             this.lbl_Toe_FR.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Toe_FR.Location = new System.Drawing.Point(779, 172);
+            this.lbl_Toe_FR.ForeColor = System.Drawing.Color.White;
+            this.lbl_Toe_FR.Location = new System.Drawing.Point(779, 249);
             this.lbl_Toe_FR.Name = "lbl_Toe_FR";
             this.lbl_Toe_FR.Size = new System.Drawing.Size(190, 53);
             this.lbl_Toe_FR.TabIndex = 22;
@@ -99,9 +102,10 @@
             // 
             // lbl_Cam_FL
             // 
-            this.lbl_Cam_FL.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Cam_FL.BackColor = System.Drawing.Color.Black;
             this.lbl_Cam_FL.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Cam_FL.Location = new System.Drawing.Point(40, 277);
+            this.lbl_Cam_FL.ForeColor = System.Drawing.Color.White;
+            this.lbl_Cam_FL.Location = new System.Drawing.Point(40, 354);
             this.lbl_Cam_FL.Name = "lbl_Cam_FL";
             this.lbl_Cam_FL.Size = new System.Drawing.Size(190, 53);
             this.lbl_Cam_FL.TabIndex = 23;
@@ -110,9 +114,10 @@
             // 
             // lbl_Toe_RL
             // 
-            this.lbl_Toe_RL.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Toe_RL.BackColor = System.Drawing.Color.Black;
             this.lbl_Toe_RL.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Toe_RL.Location = new System.Drawing.Point(40, 412);
+            this.lbl_Toe_RL.ForeColor = System.Drawing.Color.White;
+            this.lbl_Toe_RL.Location = new System.Drawing.Point(40, 489);
             this.lbl_Toe_RL.Name = "lbl_Toe_RL";
             this.lbl_Toe_RL.Size = new System.Drawing.Size(190, 53);
             this.lbl_Toe_RL.TabIndex = 24;
@@ -121,9 +126,10 @@
             // 
             // lbl_Cam_RL
             // 
-            this.lbl_Cam_RL.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Cam_RL.BackColor = System.Drawing.Color.Black;
             this.lbl_Cam_RL.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Cam_RL.Location = new System.Drawing.Point(40, 519);
+            this.lbl_Cam_RL.ForeColor = System.Drawing.Color.White;
+            this.lbl_Cam_RL.Location = new System.Drawing.Point(40, 596);
             this.lbl_Cam_RL.Name = "lbl_Cam_RL";
             this.lbl_Cam_RL.Size = new System.Drawing.Size(190, 53);
             this.lbl_Cam_RL.TabIndex = 25;
@@ -132,9 +138,10 @@
             // 
             // lbl_Cam_RR
             // 
-            this.lbl_Cam_RR.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Cam_RR.BackColor = System.Drawing.Color.Black;
             this.lbl_Cam_RR.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Cam_RR.Location = new System.Drawing.Point(779, 521);
+            this.lbl_Cam_RR.ForeColor = System.Drawing.Color.White;
+            this.lbl_Cam_RR.Location = new System.Drawing.Point(779, 598);
             this.lbl_Cam_RR.Name = "lbl_Cam_RR";
             this.lbl_Cam_RR.Size = new System.Drawing.Size(190, 53);
             this.lbl_Cam_RR.TabIndex = 28;
@@ -143,9 +150,10 @@
             // 
             // lbl_Toe_RR
             // 
-            this.lbl_Toe_RR.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Toe_RR.BackColor = System.Drawing.Color.Black;
             this.lbl_Toe_RR.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Toe_RR.Location = new System.Drawing.Point(779, 414);
+            this.lbl_Toe_RR.ForeColor = System.Drawing.Color.White;
+            this.lbl_Toe_RR.Location = new System.Drawing.Point(779, 491);
             this.lbl_Toe_RR.Name = "lbl_Toe_RR";
             this.lbl_Toe_RR.Size = new System.Drawing.Size(190, 53);
             this.lbl_Toe_RR.TabIndex = 27;
@@ -154,9 +162,10 @@
             // 
             // lbl_Cam_FR
             // 
-            this.lbl_Cam_FR.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Cam_FR.BackColor = System.Drawing.Color.Black;
             this.lbl_Cam_FR.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_Cam_FR.Location = new System.Drawing.Point(779, 279);
+            this.lbl_Cam_FR.ForeColor = System.Drawing.Color.White;
+            this.lbl_Cam_FR.Location = new System.Drawing.Point(779, 356);
             this.lbl_Cam_FR.Name = "lbl_Cam_FR";
             this.lbl_Cam_FR.Size = new System.Drawing.Size(190, 53);
             this.lbl_Cam_FR.TabIndex = 26;
@@ -172,7 +181,7 @@
             this.ResList.FullRowSelect = true;
             this.ResList.GridLines = true;
             this.ResList.HideSelection = false;
-            this.ResList.Location = new System.Drawing.Point(996, 77);
+            this.ResList.Location = new System.Drawing.Point(1004, 156);
             this.ResList.MultiSelect = false;
             this.ResList.Name = "ResList";
             this.ResList.Size = new System.Drawing.Size(799, 574);
@@ -184,18 +193,18 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = global::Ki_WAT.Properties.Resources.Handle;
-            this.pictureBox2.Location = new System.Drawing.Point(332, 657);
+            this.pictureBox2.Location = new System.Drawing.Point(332, 795);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(227, 218);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.Size = new System.Drawing.Size(209, 91);
             this.pictureBox2.TabIndex = 160;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Visible = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Ki_WAT.Properties.Resources.Rolling;
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(21, 77);
+            this.pictureBox1.Location = new System.Drawing.Point(21, 156);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(969, 574);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -212,42 +221,46 @@
             this.label9.TabIndex = 161;
             this.label9.Text = "asdf";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label9.Visible = false;
             // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(565, 719);
+            this.button3.Location = new System.Drawing.Point(568, 785);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(126, 46);
             this.button3.TabIndex = 162;
             this.button3.Text = "Zero";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Visible = false;
             // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(565, 772);
+            this.button4.Location = new System.Drawing.Point(568, 838);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(126, 46);
             this.button4.TabIndex = 163;
             this.button4.Text = "Sapn";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(697, 772);
+            this.textBox1.Location = new System.Drawing.Point(700, 838);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(142, 46);
             this.textBox1.TabIndex = 164;
+            this.textBox1.Visible = false;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rd_bw);
             this.groupBox1.Controls.Add(this.rd_fw);
             this.groupBox1.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(33, 9);
+            this.groupBox1.Location = new System.Drawing.Point(35, 100);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(289, 50);
             this.groupBox1.TabIndex = 165;
@@ -279,7 +292,7 @@
             // text_time
             // 
             this.text_time.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_time.Location = new System.Drawing.Point(758, 25);
+            this.text_time.Location = new System.Drawing.Point(766, 109);
             this.text_time.Multiline = true;
             this.text_time.Name = "text_time";
             this.text_time.Size = new System.Drawing.Size(100, 34);
@@ -288,7 +301,7 @@
             // text_cnt
             // 
             this.text_cnt.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.text_cnt.Location = new System.Drawing.Point(516, 25);
+            this.text_cnt.Location = new System.Drawing.Point(524, 109);
             this.text_cnt.Multiline = true;
             this.text_cnt.Name = "text_cnt";
             this.text_cnt.Size = new System.Drawing.Size(100, 34);
@@ -298,7 +311,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(354, 28);
+            this.label10.Location = new System.Drawing.Point(362, 112);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(156, 23);
             this.label10.TabIndex = 169;
@@ -309,7 +322,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.label11.Location = new System.Drawing.Point(629, 28);
+            this.label11.Location = new System.Drawing.Point(630, 112);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(131, 23);
             this.label11.TabIndex = 170;
@@ -320,7 +333,7 @@
             this.lblMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblMessage.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(996, 16);
+            this.lblMessage.Location = new System.Drawing.Point(1004, 100);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(341, 50);
             this.lblMessage.TabIndex = 171;
@@ -330,7 +343,7 @@
             // Btn_Init
             // 
             this.Btn_Init.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Init.Location = new System.Drawing.Point(1686, 16);
+            this.Btn_Init.Location = new System.Drawing.Point(1694, 100);
             this.Btn_Init.Name = "Btn_Init";
             this.Btn_Init.Size = new System.Drawing.Size(109, 46);
             this.Btn_Init.TabIndex = 172;
@@ -341,7 +354,7 @@
             // Btn_Save
             // 
             this.Btn_Save.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Save.Location = new System.Drawing.Point(1571, 16);
+            this.Btn_Save.Location = new System.Drawing.Point(1579, 100);
             this.Btn_Save.Name = "Btn_Save";
             this.Btn_Save.Size = new System.Drawing.Size(109, 46);
             this.Btn_Save.TabIndex = 173;
@@ -350,14 +363,14 @@
             // 
             // pgs_runout
             // 
-            this.pgs_runout.Location = new System.Drawing.Point(1343, 39);
+            this.pgs_runout.Location = new System.Drawing.Point(1351, 123);
             this.pgs_runout.Name = "pgs_runout";
             this.pgs_runout.Size = new System.Drawing.Size(137, 27);
             this.pgs_runout.TabIndex = 174;
             // 
             // pgs_Idle
             // 
-            this.pgs_Idle.Location = new System.Drawing.Point(1486, 39);
+            this.pgs_Idle.Location = new System.Drawing.Point(1494, 123);
             this.pgs_Idle.Name = "pgs_Idle";
             this.pgs_Idle.Size = new System.Drawing.Size(79, 26);
             this.pgs_Idle.TabIndex = 175;
@@ -367,7 +380,7 @@
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1344, 16);
+            this.label1.Location = new System.Drawing.Point(1352, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 20);
             this.label1.TabIndex = 176;
@@ -379,18 +392,31 @@
             this.lbl_1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.lbl_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbl_1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_1.Location = new System.Drawing.Point(1485, 16);
+            this.lbl_1.Location = new System.Drawing.Point(1493, 100);
             this.lbl_1.Name = "lbl_1";
             this.lbl_1.Size = new System.Drawing.Size(80, 20);
             this.lbl_1.TabIndex = 177;
             this.lbl_1.Text = "Idle";
             this.lbl_1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label2.Font = new System.Drawing.Font("Arial", 30F);
+            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label2.Location = new System.Drawing.Point(27, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(1776, 53);
+            this.label2.TabIndex = 178;
+            this.label2.Text = "Rolling Master";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_Rolling
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1815, 910);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lbl_1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pgs_Idle);
@@ -463,5 +489,6 @@
         private System.Windows.Forms.ProgressBar pgs_Idle;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_1;
+        private System.Windows.Forms.Label label2;
     }
 }
