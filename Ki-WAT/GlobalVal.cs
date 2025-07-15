@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LETInterface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,9 +67,9 @@ namespace Ki_WAT
 
         public MeasureData g_DppData;
         public SensorState g_DppState;
-        
+
         // LET Controller variable
-        public object LET_Controller;
+        public CycleControl LET_Controller;
         
         // Configuration instance
         public AppConfig Config;

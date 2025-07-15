@@ -32,68 +32,131 @@ namespace LETInterface
 
         }
 
-        public void StartCycle(string uid)
+        public bool StartCycle(string uid)
         {
-            var req = new { context = "System", activity = "start-cycle", uid = uid };
-            TasksProcessTask(req);
+            try
+            {
+                var req = new { context = "System", activity = "start-cycle", uid = uid };
+                (bool success, string message) = TasksProcessTask(req);
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"StartCycle 예외: {ex.Message}");
+                return false;
+            }
         }
 
-        public void VehicleSelection(int? vsn, string vin)
+        public bool VehicleSelection(int? vsn, string vin)
         {
-            var req = new { context = "System", activity = "vehicle-selection", vehicle = vsn, identification = vin };
-            TasksProcessTask(req);
+            try
+            {
+                var req = new { context = "System", activity = "vehicle-selection", vehicle = vsn, identification = vin };
+                (bool success, string message) = TasksProcessTask(req);
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"VehicleSelection 예외: {ex.Message}");
+                return false;
+            }
         }
 
-        public void PerformTests(string line, double? floorpitch)
+        public bool PerformTests(string line, double? floorpitch)
         {
-            var req = new { context = "System", activity = "perform-tests", line = line, floor_pitch = floorpitch };
-            TasksProcessTask(req);
+            try
+            {
+                var req = new { context = "System", activity = "perform-tests", line = line, floor_pitch = floorpitch };
+                (bool success, string message) = TasksProcessTask(req);
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"PerformTests 예외: {ex.Message}");
+
+                return false;
+            }
         }
 
-        public void EndCycle()
+        public bool EndCycle()
         {
-            var req = new { context = "System", activity = "end-cycle" };
-            TasksProcessTask(req);
+            try
+            {
+                var req = new { context = "System", activity = "end-cycle" };
+                (bool success, string message) = TasksProcessTask(req);
+
+                return success;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"EndCycle 예외: {ex.Message}");
+                return false;
+            }
         }
 
         public void DeleteAllTest()
         {
-            _service.TaskDeleteAll();
-        }
-        public void TasksProcessTask(object content)
-        {
-            var response = _service.TaskAddNew();
-
-            if (response.StatusCode != System.Net.HttpStatusCode.Created)
-                throw new Exception("Error: adding new task");
-
-            string location = response.Headers.Location.ToString();
-
-            response = _service.TaskSpecify(location, content);
-
-            if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
-                throw new Exception("Error: specifying task");
-
-            while (true)
+            try
             {
-                response = _service.TaskGet(location);
+                _service.TaskDeleteAll();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"DeleteAllTest 예외: {ex.Message}");
+            }
+        }
+        public (bool Success, string Message) TasksProcessTask(object content, int timeoutMs = 60000)
+        {
+            try
+            {
+                var response = _service.TaskAddNew();
+                if (response.StatusCode != System.Net.HttpStatusCode.Created)
+                    return (false, "Error: adding new task");
 
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                    throw new Exception("Error: inspecting task state");
+                string location = response.Headers.Location.ToString();
+                response = _service.TaskSpecify(location, content);
+                if (response.StatusCode != System.Net.HttpStatusCode.Accepted)
+                    return (false, "Error: specifying task");
 
-                var result = JsonDocument.Parse(response.Content.ReadAsStringAsync().Result);
-                string state = result.RootElement.GetProperty("state").GetString();
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                while (true)
+                {
+                    if (sw.ElapsedMilliseconds > timeoutMs)
+                        return (false, "Timeout: task did not finish in time");
 
-                if (state == "finished") break;
+                    response = _service.TaskGet(location);
+                    if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                        return (false, "Error: inspecting task state");
 
-                Thread.Sleep(500); // 0.5초 마다 state 확인 요청
+                    var result = JsonDocument.Parse(response.Content.ReadAsStringAsync().Result);
+                    string state = result.RootElement.GetProperty("state").GetString();
+
+                    if (state == "finished") break;
+                    Thread.Sleep(500);
+                }
+                return (true, "Success");
+            }
+            catch (Exception ex)
+            {
+                // TODO: 필요시 로그 기록 추가
+                return (false, $"Exception: {ex.Message}");
             }
         }
 
         public string GetLastResult()
         {
-            string strLastRes = _service.GetLastResult();
-            return strLastRes;
+            try
+            {
+                string strLastRes = _service.GetLastResult();
+                return strLastRes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetLastResult 예외: {ex.Message}");
+                return string.Empty;
+            }
         }
 
         public LampInclination ParseInclinationFromXml(string xmlContent)
@@ -143,23 +206,6 @@ namespace LETInterface
         }
 
 
-        public string RunCycle(string uid, int vsn, string vin, string line, double floorpitch)
-        {
-            // 아래 메서드 하나당 TaskService 클래스의 주기를 한 번 돌아야 함
-            _service.TaskDeleteAll();
-            StartCycle(uid);
-            VehicleSelection(vsn, vin);
-            PerformTests(line, floorpitch);
-            EndCycle();
-            _service.TaskDeleteAll();
-
-            string result = !string.IsNullOrEmpty(uid) ?
-                _service.GetResultByUid(uid) :
-                _service.GetLastResult();
-
-            Console.WriteLine(result);
-
-            return result;
-        }
+       
     }
 }

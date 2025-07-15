@@ -184,6 +184,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Btn_Last_Error = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbl_Res_RY = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.lbl_Res_RX = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbl_Res_LY = new System.Windows.Forms.Label();
+            this.lbl_Res_LX = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.Btn_Endcycle = new System.Windows.Forms.Button();
             this.Btn_perfoamTest = new System.Windows.Forms.Button();
@@ -201,28 +212,18 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.textBox32 = new System.Windows.Forms.TextBox();
             this.Btn_Print = new KI_Controls.CButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label87 = new System.Windows.Forms.Label();
-            this.label88 = new System.Windows.Forms.Label();
-            this.Btn_Last_Error = new System.Windows.Forms.Button();
-            this.lbl_Res_LX = new System.Windows.Forms.Label();
-            this.lbl_Res_LY = new System.Windows.Forms.Label();
-            this.lbl_Res_RY = new System.Windows.Forms.Label();
-            this.lbl_Res_RX = new System.Windows.Forms.Label();
+            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -231,6 +232,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
@@ -1881,6 +1883,123 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "RESULT";
             // 
+            // Btn_Last_Error
+            // 
+            this.Btn_Last_Error.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Last_Error.Location = new System.Drawing.Point(29, 418);
+            this.Btn_Last_Error.Name = "Btn_Last_Error";
+            this.Btn_Last_Error.Size = new System.Drawing.Size(161, 61);
+            this.Btn_Last_Error.TabIndex = 12;
+            this.Btn_Last_Error.Text = "GetLastResult";
+            this.Btn_Last_Error.UseVisualStyleBackColor = true;
+            this.Btn_Last_Error.Click += new System.EventHandler(this.Btn_Last_Error_Click_2);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lbl_Res_RY);
+            this.groupBox3.Controls.Add(this.label87);
+            this.groupBox3.Controls.Add(this.lbl_Res_RX);
+            this.groupBox3.Controls.Add(this.label88);
+            this.groupBox3.Location = new System.Drawing.Point(29, 236);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(527, 159);
+            this.groupBox3.TabIndex = 11;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "RIGHT";
+            // 
+            // lbl_Res_RY
+            // 
+            this.lbl_Res_RY.BackColor = System.Drawing.Color.Black;
+            this.lbl_Res_RY.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Res_RY.Location = new System.Drawing.Point(313, 96);
+            this.lbl_Res_RY.Name = "lbl_Res_RY";
+            this.lbl_Res_RY.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Res_RY.TabIndex = 14;
+            this.lbl_Res_RY.Text = "-";
+            this.lbl_Res_RY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label87
+            // 
+            this.label87.Location = new System.Drawing.Point(24, 96);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(283, 39);
+            this.label87.TabIndex = 9;
+            this.label87.Text = "Inclination_Y :";
+            this.label87.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_Res_RX
+            // 
+            this.lbl_Res_RX.BackColor = System.Drawing.Color.Black;
+            this.lbl_Res_RX.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Res_RX.Location = new System.Drawing.Point(313, 41);
+            this.lbl_Res_RX.Name = "lbl_Res_RX";
+            this.lbl_Res_RX.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Res_RX.TabIndex = 13;
+            this.lbl_Res_RX.Text = "-";
+            this.lbl_Res_RX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label88
+            // 
+            this.label88.Location = new System.Drawing.Point(18, 41);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(289, 39);
+            this.label88.TabIndex = 10;
+            this.label88.Text = "Inclination_X :";
+            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lbl_Res_LY);
+            this.groupBox2.Controls.Add(this.lbl_Res_LX);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Location = new System.Drawing.Point(29, 54);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(527, 164);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LEFT";
+            // 
+            // lbl_Res_LY
+            // 
+            this.lbl_Res_LY.BackColor = System.Drawing.Color.Black;
+            this.lbl_Res_LY.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Res_LY.Location = new System.Drawing.Point(313, 96);
+            this.lbl_Res_LY.Name = "lbl_Res_LY";
+            this.lbl_Res_LY.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Res_LY.TabIndex = 12;
+            this.lbl_Res_LY.Text = "-";
+            this.lbl_Res_LY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Res_LX
+            // 
+            this.lbl_Res_LX.BackColor = System.Drawing.Color.Black;
+            this.lbl_Res_LX.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Res_LX.Location = new System.Drawing.Point(313, 41);
+            this.lbl_Res_LX.Name = "lbl_Res_LX";
+            this.lbl_Res_LX.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Res_LX.TabIndex = 11;
+            this.lbl_Res_LX.Text = "-";
+            this.lbl_Res_LX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(6, 96);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(301, 39);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Inclination_Y :";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(12, 41);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(295, 39);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Inclination_X :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.Btn_Endcycle);
@@ -1911,6 +2030,7 @@
             this.Btn_Endcycle.TabIndex = 12;
             this.Btn_Endcycle.Text = "End-cycle";
             this.Btn_Endcycle.UseVisualStyleBackColor = true;
+            this.Btn_Endcycle.Click += new System.EventHandler(this.Btn_Endcycle_Click);
             // 
             // Btn_perfoamTest
             // 
@@ -1921,6 +2041,7 @@
             this.Btn_perfoamTest.TabIndex = 11;
             this.Btn_perfoamTest.Text = "perfoam-Test";
             this.Btn_perfoamTest.UseVisualStyleBackColor = true;
+            this.Btn_perfoamTest.Click += new System.EventHandler(this.Btn_perfoamTest_Click);
             // 
             // Btn_VehicleSel
             // 
@@ -1931,6 +2052,7 @@
             this.Btn_VehicleSel.TabIndex = 10;
             this.Btn_VehicleSel.Text = "Vehicle-Select";
             this.Btn_VehicleSel.UseVisualStyleBackColor = true;
+            this.Btn_VehicleSel.Click += new System.EventHandler(this.Btn_VehicleSel_Click);
             // 
             // Btn_Startcycle
             // 
@@ -1967,6 +2089,7 @@
             this.Txt_FLOR.Name = "Txt_FLOR";
             this.Txt_FLOR.Size = new System.Drawing.Size(200, 39);
             this.Txt_FLOR.TabIndex = 4;
+            this.Txt_FLOR.Text = "5.5";
             this.Txt_FLOR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Txt_VIN
@@ -1975,6 +2098,7 @@
             this.Txt_VIN.Name = "Txt_VIN";
             this.Txt_VIN.Size = new System.Drawing.Size(200, 39);
             this.Txt_VIN.TabIndex = 3;
+            this.Txt_VIN.Text = "123";
             this.Txt_VIN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -2001,6 +2125,7 @@
             this.Txt_VSN.Name = "Txt_VSN";
             this.Txt_VSN.Size = new System.Drawing.Size(200, 39);
             this.Txt_VSN.TabIndex = 1;
+            this.Txt_VSN.Text = "1";
             this.Txt_VSN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Txt_UID
@@ -2009,13 +2134,17 @@
             this.Txt_UID.Name = "Txt_UID";
             this.Txt_UID.Size = new System.Drawing.Size(200, 39);
             this.Txt_UID.TabIndex = 0;
+            this.Txt_UID.Text = "123";
             this.Txt_UID.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Txt_Log
             // 
+            this.Txt_Log.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_Log.ImeMode = System.Windows.Forms.ImeMode.Disable;
             this.Txt_Log.Location = new System.Drawing.Point(1112, 16);
             this.Txt_Log.Multiline = true;
             this.Txt_Log.Name = "Txt_Log";
+            this.Txt_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Txt_Log.Size = new System.Drawing.Size(644, 830);
             this.Txt_Log.TabIndex = 4;
             // 
@@ -2051,14 +2180,6 @@
             this.tabPage3.Text = "Ticket Print";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // textBox32
-            // 
-            this.textBox32.Location = new System.Drawing.Point(50, 32);
-            this.textBox32.Multiline = true;
-            this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(547, 801);
-            this.textBox32.TabIndex = 0;
-            // 
             // Btn_Print
             // 
             this.Btn_Print.BackColor = System.Drawing.Color.LightGray;
@@ -2080,122 +2201,22 @@
             this.Btn_Print.ToggleForeColor = System.Drawing.Color.Black;
             this.Btn_Print.UseVisualStyleBackColor = false;
             // 
-            // groupBox2
+            // textBox32
             // 
-            this.groupBox2.Controls.Add(this.lbl_Res_LY);
-            this.groupBox2.Controls.Add(this.lbl_Res_LX);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(29, 54);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(527, 164);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LEFT";
+            this.textBox32.Location = new System.Drawing.Point(50, 32);
+            this.textBox32.Multiline = true;
+            this.textBox32.Name = "textBox32";
+            this.textBox32.Size = new System.Drawing.Size(547, 801);
+            this.textBox32.TabIndex = 0;
             // 
-            // label5
+            // tabPage5
             // 
-            this.label5.Location = new System.Drawing.Point(6, 96);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(301, 39);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Inclination_Y :";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(12, 41);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(295, 39);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Inclination_X :";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.lbl_Res_RY);
-            this.groupBox3.Controls.Add(this.label87);
-            this.groupBox3.Controls.Add(this.lbl_Res_RX);
-            this.groupBox3.Controls.Add(this.label88);
-            this.groupBox3.Location = new System.Drawing.Point(29, 236);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(527, 159);
-            this.groupBox3.TabIndex = 11;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "RIGHT";
-            // 
-            // label87
-            // 
-            this.label87.Location = new System.Drawing.Point(24, 96);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(283, 39);
-            this.label87.TabIndex = 9;
-            this.label87.Text = "Inclination_Y :";
-            this.label87.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label88
-            // 
-            this.label88.Location = new System.Drawing.Point(18, 41);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(289, 39);
-            this.label88.TabIndex = 10;
-            this.label88.Text = "Inclination_X :";
-            this.label88.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // Btn_Last_Error
-            // 
-            this.Btn_Last_Error.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Last_Error.Location = new System.Drawing.Point(29, 418);
-            this.Btn_Last_Error.Name = "Btn_Last_Error";
-            this.Btn_Last_Error.Size = new System.Drawing.Size(161, 61);
-            this.Btn_Last_Error.TabIndex = 12;
-            this.Btn_Last_Error.Text = "GetLastResult";
-            this.Btn_Last_Error.UseVisualStyleBackColor = true;
-            this.Btn_Last_Error.Click += new System.EventHandler(this.Btn_Last_Error_Click_2);
-            // 
-            // lbl_Res_LX
-            // 
-            this.lbl_Res_LX.BackColor = System.Drawing.Color.Black;
-            this.lbl_Res_LX.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Res_LX.Location = new System.Drawing.Point(313, 41);
-            this.lbl_Res_LX.Name = "lbl_Res_LX";
-            this.lbl_Res_LX.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Res_LX.TabIndex = 11;
-            this.lbl_Res_LX.Text = "-";
-            this.lbl_Res_LX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_Res_LY
-            // 
-            this.lbl_Res_LY.BackColor = System.Drawing.Color.Black;
-            this.lbl_Res_LY.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Res_LY.Location = new System.Drawing.Point(313, 96);
-            this.lbl_Res_LY.Name = "lbl_Res_LY";
-            this.lbl_Res_LY.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Res_LY.TabIndex = 12;
-            this.lbl_Res_LY.Text = "-";
-            this.lbl_Res_LY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_Res_RY
-            // 
-            this.lbl_Res_RY.BackColor = System.Drawing.Color.Black;
-            this.lbl_Res_RY.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Res_RY.Location = new System.Drawing.Point(313, 96);
-            this.lbl_Res_RY.Name = "lbl_Res_RY";
-            this.lbl_Res_RY.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Res_RY.TabIndex = 14;
-            this.lbl_Res_RY.Text = "-";
-            this.lbl_Res_RY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_Res_RX
-            // 
-            this.lbl_Res_RX.BackColor = System.Drawing.Color.Black;
-            this.lbl_Res_RX.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Res_RX.Location = new System.Drawing.Point(313, 41);
-            this.lbl_Res_RX.Name = "lbl_Res_RX";
-            this.lbl_Res_RX.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Res_RX.TabIndex = 13;
-            this.lbl_Res_RX.Text = "-";
-            this.lbl_Res_RX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tabPage5.Location = new System.Drawing.Point(4, 41);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(1762, 864);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "GRET";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // Frm_Manual
             // 
@@ -2213,12 +2234,12 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2411,5 +2432,6 @@
         private System.Windows.Forms.Label lbl_Res_RX;
         private System.Windows.Forms.Label lbl_Res_LY;
         private System.Windows.Forms.Label lbl_Res_LX;
+        private System.Windows.Forms.TabPage tabPage5;
     }
 }

@@ -148,7 +148,7 @@ namespace Ki_WAT
         }
         private void Frm_Mainfrm_Load(object sender, EventArgs e)
         {
-
+            _GV.Config.LoadConfig();
             DeviceOpen();
             InitUI();
          

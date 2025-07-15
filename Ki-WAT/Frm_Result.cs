@@ -142,5 +142,10 @@ namespace Ki_WAT
                 MessageBox.Show($"검색 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void cButton1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
