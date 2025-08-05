@@ -45,46 +45,12 @@ namespace Ki_WAT
 
         private const int WM_COPYDATA = 0x004A;
 
-        [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DppData
-        {
-            public double dToeFL;
-            public double dToeFR;
-            public double dToeRL;
-            public double dToeRR;
 
-            public double dCamFL;
-            public double dCamFR;
-            public double dCamRL;
-            public double dCamRR;
-
-            public double dSymm;
-            public double dTA;
-
-            public double dHeightFL;
-            public double dHeightFR;
-            public double dHeightRL;
-            public double dHeightRR;
-        }
-        [StructLayout(LayoutKind.Sequential, Pack = 8)]
-        public struct DppState
-        {
-            public int nState_FL;
-            public int nState_FR;
-            public int nState_RL;
-            public int nState_RR;
-
-        }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct COPYDATASTRUCT
-        {
-            public IntPtr dwData;
-            public int cbData;
-            public IntPtr lpData;
+        public delegate void DppDataReceive(MeasureData pData);
+        public event DppDataReceive OnDppDataReceived;
 
 
-        }
+
 
         public Frm_Mainfrm()
         {
@@ -99,7 +65,7 @@ namespace Ki_WAT
             m_tcpBoardSpeed.Connect("127.0.0.1", 8511);
             m_tcpBoardSpeed.OnDataReceived += new DataReceiveClient(event_GetSpeedData);
 
-
+            m_dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
         }
 
         private void InitUI()
@@ -108,6 +74,7 @@ namespace Ki_WAT
             m_frmConfig.SetParent(this);
             m_frmResult.SetParent(this);
             m_frmManual.SetParent(this);
+            m_frmStatic.SetParent(this);
 
             InitializeSubForm(m_frmMain);
             InitializeSubForm(m_frmConfig);
@@ -132,6 +99,7 @@ namespace Ki_WAT
                 if (User_Monitor == null || User_Monitor.Text == "")
                 {
                     User_Monitor = new Frm_Operator();
+                    User_Monitor.SetParent(this);
                     User_Monitor.Show();
                 }
                 //if (Pit_Monitor == null || Pit_Monitor.Text == "")
@@ -149,10 +117,11 @@ namespace Ki_WAT
         private void Frm_Mainfrm_Load(object sender, EventArgs e)
         {
             _GV.Config.LoadConfig();
+
             DeviceOpen();
             InitUI();
          
-            m_dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+            
 
             
             //var MeasureData = GlobalVal.Instance;
@@ -240,8 +209,6 @@ namespace Ki_WAT
                     f = m_frmManual;
                     break;
 
-
-
             }
 
             
@@ -290,8 +257,22 @@ namespace Ki_WAT
         }
         private void Btn_T_Click(object sender, EventArgs e)
         {
-            m_dbJob.SelectCarInfo("2024061100202");
-            m_frmMain._Log_ListBox("asdf");
+            TblCarInfo tblCarInfo = new TblCarInfo();
+            
+
+            tblCarInfo.CarPJINo = "adf";
+            tblCarInfo.CarModel = "adf";
+            tblCarInfo.WatCycle = "999";
+            tblCarInfo.LetCycle = "123";
+            tblCarInfo.Car_Step = "0";
+            tblCarInfo.Spare__1 = "0";
+            tblCarInfo.Spare__2 = "0";
+            tblCarInfo.Spare__3 = "0";
+
+
+            m_dbJob.AddNewAcceptNo(ref tblCarInfo);
+            m_frmMain.RefreshCarInfoList();
+            
         }
         private void btnIo_Click(object sender, EventArgs e)
         {
@@ -333,25 +314,27 @@ namespace Ki_WAT
                     // UI 스레드에서 실행
                     this.Invoke(new Action(() => 
                     {
-                        var stSensor = GlobalVal.Instance;
 
-                        stSensor.g_DppData.dCamFL = receivedData.dCamFL;
-                        stSensor.g_DppData.dCamFR = receivedData.dCamFR;
-                        stSensor.g_DppData.dCamRL = receivedData.dCamRL;
-                        stSensor.g_DppData.dCamRR = receivedData.dCamRR;
+                        _GV.g_DppData.dCamFL = receivedData.dCamFL;
+                        _GV.g_DppData.dCamFR = receivedData.dCamFR;
+                        _GV.g_DppData.dCamRL = receivedData.dCamRL;
+                        _GV.g_DppData.dCamRR = receivedData.dCamRR;
+                        
+                        _GV.g_DppData.dToeFL = receivedData.dToeFL;
+                        _GV.g_DppData.dToeFR = receivedData.dToeFR;
+                        _GV.g_DppData.dToeRL = receivedData.dToeRL;
+                        _GV.g_DppData.dToeRR = receivedData.dToeRR;
+                        
+                        _GV.g_DppData.dTA = receivedData.dTA;
+                        _GV.g_DppData.dSymm = receivedData.dSymm;
+                        
+                        _GV.g_DppData.dHeightFL = receivedData.dHeightFL;
+                        _GV.g_DppData.dHeightFR = receivedData.dHeightFR;
+                        _GV.g_DppData.dHeightRL = receivedData.dHeightRL;
+                        _GV.g_DppData.dHeightRR = receivedData.dHeightRR;
 
-                        stSensor.g_DppData.dToeFL = receivedData.dToeFL;
-                        stSensor.g_DppData.dToeFR = receivedData.dToeFR;
-                        stSensor.g_DppData.dToeRL = receivedData.dToeRL;
-                        stSensor.g_DppData.dToeRR = receivedData.dToeRR;
+                        OnDppDataReceived?.Invoke(_GV.g_DppData);
 
-                        stSensor.g_DppData.dTA = receivedData.dTA;
-                        stSensor.g_DppData.dSymm = receivedData.dSymm;
-
-                        stSensor.g_DppData.dHeightFL = receivedData.dHeightFL;
-                        stSensor.g_DppData.dHeightFR = receivedData.dHeightFR;
-                        stSensor.g_DppData.dHeightRL = receivedData.dHeightRL;
-                        stSensor.g_DppData.dHeightRR = receivedData.dHeightRR;
 
                     }));
                 }

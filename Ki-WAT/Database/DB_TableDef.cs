@@ -9,14 +9,14 @@ namespace Ki_WAT
     public struct TblCarInfo
     {
         public string AcceptNo;
-        public string CarVinNo;
-        public string CarHandl;
-        public string Car_Rear;
-        public string TestTime;
-        public string VisiconN;
+        public string CarPJINo;
         public string CarModel;
-        public string Car_Mode;
+        public string WatCycle;
+        public string LetCycle;
         public string Car_Step;
+        public string Spare__1;
+        public string Spare__2;
+        public string Spare__3;
     }
 
     public struct TblResult

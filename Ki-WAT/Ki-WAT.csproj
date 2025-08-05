@@ -80,15 +80,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CButton.cs">
+    <Compile Include="Common\CButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CClock.cs">
+    <Compile Include="Common\CClock.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CGuage.cs">
+    <Compile Include="Common\CGuage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Common\GPLog.cs" />
+    <Compile Include="Frm_PLC_IO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_PLC_IO.Designer.cs">
+      <DependentUpon>Frm_PLC_IO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
     <Compile Include="Database\DB_LocalWat.cs" />
     <Compile Include="Database\DB_TableDef.cs" />
@@ -185,7 +193,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RestApi\TaskService.cs" />
-    <Compile Include="testc.cs" />
+    <Compile Include="TestThread.cs" />
     <EmbeddedResource Include="Frm_Config.resx">
       <DependentUpon>Frm_Config.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_PitInMonitor.resx">
       <DependentUpon>Frm_PitInMonitor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_PLC_IO.resx">
+      <DependentUpon>Frm_PLC_IO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Result.resx">
       <DependentUpon>Frm_Result.cs</DependentUpon>

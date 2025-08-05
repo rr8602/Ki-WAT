@@ -23,6 +23,7 @@ namespace Ki_WAT
         public List<Form> m_FrmList = new List<Form>();
 
         private Form m_ActiveSubForm;
+        Frm_Mainfrm m_MainFrm;
         public Frm_Operator()
         {
             InitializeComponent();
@@ -32,7 +33,24 @@ namespace Ki_WAT
             MoveFormToSecondMonitor();
 
         }
+        public void SetParent(Frm_Mainfrm pParent)
+        {
+            m_MainFrm = pParent;
+            m_frm_Oper_Test.SetMainFrm(m_MainFrm);
+            m_frm_Oper_Test.SetOperator(this);
 
+            m_frm_Oper_Static.SetMainFrm(m_MainFrm);
+            m_frm_Oper_Static.SetOperator(this);
+
+
+
+
+        }
+
+        public void OnReceiveDpp(MeasureData pData)
+        {
+            
+        }
 
         private void Frm_Operator_Load(object sender, EventArgs e)
         {

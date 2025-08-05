@@ -12,14 +12,164 @@ namespace Ki_WAT
 {
     public class DB_LocalWat : DBJob
     {
-        private const string TNAME_INFO = "TableCarInfo";
-
-
+        
         public DB_LocalWat(string strPath) : base(strPath)
         {
 
         }
 
+
+        #region Info Table
+
+
+
+        public TblCarInfo SelectCarInfo(string pAcceptNo)
+        {
+            try
+            {
+                TblCarInfo tblCarInfo = new TblCarInfo();
+                string sSQL;
+                sSQL = string.Format($"SELECT * FROM TableCarInfo WHERE AcceptNo = '{pAcceptNo}'");
+
+                DataTable dt = GetDataSet(sSQL);
+                //CloseConnection();
+                if (dt != null)
+                {
+                    tblCarInfo.AcceptNo = dt.Rows[0]["AcceptNo"].ToString();
+                    tblCarInfo.CarPJINo = dt.Rows[0]["CarPJINo"].ToString();
+                    tblCarInfo.CarModel = dt.Rows[0]["CarModel"].ToString();
+                    tblCarInfo.WatCycle = dt.Rows[0]["WatCycle"].ToString();
+                    tblCarInfo.LetCycle = dt.Rows[0]["LetCycle"].ToString();
+                    tblCarInfo.Car_Step = dt.Rows[0]["Car_Step"].ToString();
+                    tblCarInfo.Spare__1 = dt.Rows[0]["Spare__1"].ToString();
+                    tblCarInfo.Spare__2 = dt.Rows[0]["Spare__2"].ToString();
+                    tblCarInfo.Spare__3 = dt.Rows[0]["Spare__3"].ToString();
+                }
+                return tblCarInfo;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        // 내일 날짜 기준 AcceptNo를 생성하여 TblCarInfo에 할당하고 DB에 insert까지 수행
+        public bool AddNewAcceptNo(ref TblCarInfo pData)
+        {
+            try
+            {
+                // 내일 날짜를 가져옴
+                DateTime todayDate = DateTime.Today;
+                // yyyymmdd 형식으로 날짜 포맷팅
+                string dateStr = todayDate.ToString("yyyyMMdd");
+                // 내일 날짜의 최대 AcceptNo를 찾기 위한 SQL
+                string sSQL = $"SELECT MAX(AcceptNo) as MaxAcceptNo FROM TableCarInfo WHERE AcceptNo LIKE '{dateStr}%'";
+                DataTable dt = GetDataSet(sSQL);
+                int nextNumber = 1;
+                if (dt != null && dt.Rows.Count > 0 && dt.Rows[0]["MaxAcceptNo"] != DBNull.Value)
+                {
+                    string maxAcceptNo = dt.Rows[0]["MaxAcceptNo"].ToString();
+                    if (!string.IsNullOrEmpty(maxAcceptNo) && maxAcceptNo.Length >= 12)
+                    {
+                        // 마지막 4자리 숫자 추출
+                        string lastFourDigits = maxAcceptNo.Substring(8, 4);
+                        if (int.TryParse(lastFourDigits, out int currentNumber))
+                        {
+                            nextNumber = currentNumber + 1;
+                        }
+                    }
+                }
+                // 새로운 AcceptNo 생성 (yyyymmdd + 4자리 순번)
+                pData.AcceptNo = $"{dateStr}{nextNumber:D4}";
+                // DB에 insert까지 수행
+                if (!InsertCarInfo(pData))
+                {
+                    MessageBox.Show($"AcceptNo({pData.AcceptNo}) DB 추가에 실패했습니다.");
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"AcceptNo 생성/추가 중 오류가 발생했습니다: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarInfo INSERT
+        public bool InsertCarInfo(TblCarInfo info)
+        {
+            try
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "AcceptNo", info.AcceptNo },
+                    { "CarPJINo", info.CarPJINo },
+                    { "CarModel", info.CarModel },
+                    { "WatCycle", info.WatCycle },
+                    { "LetCycle", info.LetCycle },
+                    { "Car_Step", info.Car_Step },
+                    { "Spare__1", info.Spare__1 },
+                    { "Spare__2", info.Spare__2 },
+                    { "Spare__3", info.Spare__3 }
+                };
+                return InsertData("TableCarInfo", data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"CarInfo 추가 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarInfo UPDATE
+        public bool UpdateCarInfo(TblCarInfo info)
+        {
+            try
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "CarPJINo", info.CarPJINo },
+                    { "CarModel", info.CarModel },
+                    { "WatCycle", info.WatCycle },
+                    { "LetCycle", info.LetCycle },
+                    { "Car_Step", info.Car_Step },
+                    { "Spare__1", info.Spare__1 },
+                    { "Spare__2", info.Spare__2 },
+                    { "Spare__3", info.Spare__3 }
+                };
+                string whereClause = $"AcceptNo = '{info.AcceptNo}'";
+                return UpdateData("TableCarInfo", data, whereClause);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"CarInfo 수정 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarInfo DELETE
+        public bool DeleteCarInfo(string acceptNo)
+        {
+            try
+            {
+                string sSQL = $"DELETE FROM TableCarInfo WHERE AcceptNo = '{acceptNo}'";
+                return ExecuteNonQuery(sSQL);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"CarInfo 삭제 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+
+        
+
+        #endregion
+
+
+        #region Model
         public List<TblCarModel> SelectAllCarModels()
         {
             List<TblCarModel> list = new List<TblCarModel>();
@@ -168,39 +318,6 @@ namespace Ki_WAT
                 throw;
             }
         }
-        public TblCarInfo SelectCarInfo(string pAcceptNo)
-        {
-            try
-            {
-                TblCarInfo tblCarInfo = new TblCarInfo();
-                string sSQL;
-                sSQL = string.Format($"SELECT * FROM {TNAME_INFO} WHERE AcceptNo = '{pAcceptNo}'");
-
-                DataTable dt = GetDataSet(sSQL);
-                //CloseConnection();
-                if (dt != null)
-                {
-                    tblCarInfo.AcceptNo = dt.Rows[0]["AcceptNo"].ToString();
-                    tblCarInfo.CarVinNo = dt.Rows[0]["CarVinNo"].ToString();
-                    tblCarInfo.CarHandl = dt.Rows[0]["CarHandl"].ToString();
-                    tblCarInfo.Car_Rear = dt.Rows[0]["Car_Rear"].ToString();
-                    tblCarInfo.TestTime = dt.Rows[0]["TestTime"].ToString();
-                    tblCarInfo.VisiconN = dt.Rows[0]["VisiconN"].ToString();
-                    tblCarInfo.CarModel = dt.Rows[0]["CarModel"].ToString();
-                    tblCarInfo.Car_Mode = dt.Rows[0]["Car_Mode"].ToString();
-                    tblCarInfo.Car_Step = dt.Rows[0]["Car_Step"].ToString();
-                }
-                return tblCarInfo;
-
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            
-
-            
-        }
 
         public bool UpdateCarModel(TblCarModel model)
         {
@@ -253,7 +370,7 @@ namespace Ki_WAT
                 string whereClause = $"Model_NM = '{model.Model_NM}'";
                 bool result = UpdateData("TableCarModel", data, whereClause);
                 //CloseConnection();
-                
+
                 return result;
             }
             catch (Exception ex)
@@ -268,10 +385,10 @@ namespace Ki_WAT
             try
             {
                 string sSQL = $"DELETE FROM TableCarModel WHERE Model_NM = '{modelName}'";
-                
+
                 bool result = ExecuteNonQuery(sSQL);
                 //CloseConnection();
-                
+
                 return result;
             }
             catch (Exception ex)
@@ -333,7 +450,7 @@ namespace Ki_WAT
 
                 bool result = InsertData("TableCarModel", data);
                 //CloseConnection();
-                
+
                 return result;
             }
             catch (Exception ex)
@@ -342,6 +459,13 @@ namespace Ki_WAT
                 return false;
             }
         }
+
+
+        #endregion
+
+       
+
+        #region Result table
 
         public TblResult SelectCarResult(string pPJI)
         {
@@ -352,16 +476,16 @@ namespace Ki_WAT
 
                 DataTable dt = GetDataSet(sSQL);
                 //CloseConnection();
-                
+
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     DataRow row = dt.Rows[0];
-                    
+
                     tblResult.AcceptNo = row["AcceptNo"].ToString();
                     tblResult.PJI_Num = row["PJI_Num"].ToString();
                     tblResult.Model_NM = row["Model_NM"].ToString();
                     tblResult.WTstTime = row["WTstTime"].ToString();
-                    tblResult.CarFLToe = row["CarFLToe"].ToString();                    
+                    tblResult.CarFLToe = row["CarFLToe"].ToString();
                     tblResult.CarFRToe = row["CarFRToe"].ToString();
                     tblResult.CarFTToe = row["CarFTToe"].ToString();
                     tblResult.CarRLToe = row["CarRLToe"].ToString();
@@ -379,7 +503,7 @@ namespace Ki_WAT
                     tblResult.WAT___PK = row["WAT___PK"].ToString();
                 }
 
-                
+
                 return tblResult;
             }
             catch (Exception ex)
@@ -489,5 +613,7 @@ namespace Ki_WAT
                 return false;
             }
         }
+        #endregion
+
     }
 }

@@ -29,22 +29,44 @@ namespace Ki_WAT
         {
 
             seqList.Columns.Add("", 0);
-            seqList.Columns.Add("BARCODE", seqList.Width /2 , HorizontalAlignment.Center);
+            seqList.Columns.Add("UID", seqList.Width / 2 , HorizontalAlignment.Center);
             seqList.Columns.Add("PJI", seqList.Width / 2, HorizontalAlignment.Center);
-            
 
+            RefreshCarInfoList();
+        }
 
-            for ( int ni = 0; ni < 4; ni++)
+        public void RefreshCarInfoList()
+        {
+            if (m_frmParent == null || m_frmParent.m_dbJob == null)
+                return;
+
+            try
             {
-                ListViewItem item1 = new ListViewItem(ni.ToString());
+                // 오늘 날짜 yyyyMMdd
+                string today = DateTime.Today.ToString("yyyyMMdd");
+                string sSQL = $"SELECT * FROM TableCarInfo WHERE AcceptNo LIKE '{today}%' ORDER BY AcceptNo DESC";
+                var dt = m_frmParent.m_dbJob.GetDataSet(sSQL);
 
-                item1.SubItems.Add("1");
-                item1.SubItems.Add("2");
+                seqList.Items.Clear();
 
-                seqList.Items.Add(item1);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        string acceptNo = row["AcceptNo"].ToString();
+                        string carPjiNo = row["CarPJINo"].ToString();
+
+                        ListViewItem item = new ListViewItem(acceptNo);
+                        item.SubItems.Add(acceptNo); // UID
+                        item.SubItems.Add(carPjiNo); // PJI
+                        seqList.Items.Add(item);
+                    }
+                }
             }
-            
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show($"CarInfo 리스트 새로고침 중 오류: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void SetParent(Frm_Mainfrm f)
