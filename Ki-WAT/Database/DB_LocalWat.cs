@@ -12,16 +12,10 @@ namespace Ki_WAT
 {
     public class DB_LocalWat : DBJob
     {
-        
         public DB_LocalWat(string strPath) : base(strPath)
         {
-
         }
-
-
         #region Info Table
-
-
 
         public TblCarInfo SelectCarInfo(string pAcceptNo)
         {
@@ -41,7 +35,7 @@ namespace Ki_WAT
                     tblCarInfo.WatCycle = dt.Rows[0]["WatCycle"].ToString();
                     tblCarInfo.LetCycle = dt.Rows[0]["LetCycle"].ToString();
                     tblCarInfo.Car_Step = dt.Rows[0]["Car_Step"].ToString();
-                    tblCarInfo.Spare__1 = dt.Rows[0]["Spare__1"].ToString();
+                    tblCarInfo.TotalBar = dt.Rows[0]["Spare__1"].ToString();
                     tblCarInfo.Spare__2 = dt.Rows[0]["Spare__2"].ToString();
                     tblCarInfo.Spare__3 = dt.Rows[0]["Spare__3"].ToString();
                 }
@@ -49,6 +43,7 @@ namespace Ki_WAT
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 throw;
             }
         }
@@ -109,7 +104,7 @@ namespace Ki_WAT
                     { "WatCycle", info.WatCycle },
                     { "LetCycle", info.LetCycle },
                     { "Car_Step", info.Car_Step },
-                    { "Spare__1", info.Spare__1 },
+                    { "Spare__1", info.TotalBar },
                     { "Spare__2", info.Spare__2 },
                     { "Spare__3", info.Spare__3 }
                 };
@@ -134,7 +129,7 @@ namespace Ki_WAT
                     { "WatCycle", info.WatCycle },
                     { "LetCycle", info.LetCycle },
                     { "Car_Step", info.Car_Step },
-                    { "Spare__1", info.Spare__1 },
+                    { "Spare__1", info.TotalBar },
                     { "Spare__2", info.Spare__2 },
                     { "Spare__3", info.Spare__3 }
                 };
@@ -242,7 +237,80 @@ namespace Ki_WAT
             }
             catch (Exception ex)
             {
-                // 예외 처리 또는 로깅 가능
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
+
+        public TblCarModel SelectCarModelFromBarcode(string pBarcode)
+        {
+            try
+            {
+                TblCarModel carModel = new TblCarModel();
+                string sSQL = $"SELECT * FROM TableCarModel WHERE BAR_CODE = '{pBarcode}'";
+                DataTable dt = GetDataSet(sSQL);
+                //CloseConnection();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+
+                    carModel.Model_NM = row["Model_NM"].ToString();
+                    carModel.Bar_Code = row["Bar_Code"].ToString();
+                    carModel.WhelBase = row["WhelBase"].ToString();
+                    carModel.Dpp_Code = row["Dpp_Code"].ToString();
+                    carModel.SWARatio = row["SWARatio"].ToString();
+
+                    carModel.ScrewDriver = row["ScrewDriver"].ToString();
+                    carModel.Display_Unit = row["Display_Unit"].ToString();
+
+                    carModel.Spare_1 = row["Spare_1"].ToString();
+                    carModel.Spare_2 = row["Spare_2"].ToString();
+
+                    carModel.DogRunST = row["DogRunST"].ToString();
+                    carModel.DogRunLT = row["DogRunLT"].ToString();
+                    carModel.HandleST = row["HandleST"].ToString();
+                    carModel.HandleLT = row["HandleLT"].ToString();
+
+                    carModel.TotToef_ST = row["TotToef_ST"].ToString();
+                    carModel.TotToef_LT = row["TotToef_LT"].ToString();
+                    carModel.TotToer_ST = row["TotToer_ST"].ToString();
+                    carModel.TotToer_LT = row["TotToer_LT"].ToString();
+
+                    carModel.ToeFL_ST = row["ToeFL_ST"].ToString();
+                    carModel.ToeFL_AT = row["ToeFL_AT"].ToString();
+                    carModel.ToeFL_LT = row["ToeFL_LT"].ToString();
+                    carModel.ToeFR_ST = row["ToeFR_ST"].ToString();
+                    carModel.ToeFR_AT = row["ToeFR_AT"].ToString();
+                    carModel.ToeFR_LT = row["ToeFR_LT"].ToString();
+                    carModel.ToeRL_ST = row["ToeRL_ST"].ToString();
+                    carModel.ToeRL_AT = row["ToeRL_AT"].ToString();
+                    carModel.ToeRL_LT = row["ToeRL_LT"].ToString();
+                    carModel.ToeRR_ST = row["ToeRR_ST"].ToString();
+                    carModel.ToeRR_AT = row["ToeRR_AT"].ToString();
+                    carModel.ToeRR_LT = row["ToeRR_LT"].ToString();
+
+                    carModel.CamFL_ST = row["CamFL_ST"].ToString();
+                    carModel.CamFL_AT = row["CamFL_AT"].ToString();
+                    carModel.CamFL_LT = row["CamFL_LT"].ToString();
+                    carModel.CamFR_ST = row["CamFR_ST"].ToString();
+                    carModel.CamFR_AT = row["CamFR_AT"].ToString();
+                    carModel.CamFR_LT = row["CamFR_LT"].ToString();
+                    carModel.CamRL_ST = row["CamRL_ST"].ToString();
+                    carModel.CamRL_AT = row["CamRL_AT"].ToString();
+                    carModel.CamRL_LT = row["CamRL_LT"].ToString();
+                    carModel.CamRR_ST = row["CamRR_ST"].ToString();
+                    carModel.CamRR_AT = row["CamRR_AT"].ToString();
+                    carModel.CamRR_LT = row["CamRR_LT"].ToString();
+                }
+
+                return carModel;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                // 로그 처리 필요 시 여기에 작성
                 throw;
             }
         }

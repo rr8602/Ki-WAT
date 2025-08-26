@@ -41,13 +41,14 @@
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnMain = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbl_Toe_FL = new System.Windows.Forms.Label();
+            this.Status_Screw_R = new System.Windows.Forms.Label();
+            this.Status_Screw_L = new System.Windows.Forms.Label();
+            this.Status_PLC = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.Status_BAR = new System.Windows.Forms.Label();
             this.panelNavBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -232,9 +233,10 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.lbl_Toe_FL);
+            this.panel1.Controls.Add(this.Status_BAR);
+            this.panel1.Controls.Add(this.Status_Screw_R);
+            this.panel1.Controls.Add(this.Status_Screw_L);
+            this.panel1.Controls.Add(this.Status_PLC);
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.button4);
@@ -245,38 +247,38 @@
             this.panel1.Size = new System.Drawing.Size(1822, 48);
             this.panel1.TabIndex = 8;
             // 
-            // label2
+            // Status_Screw_R
             // 
-            this.label2.BackColor = System.Drawing.Color.Gray;
-            this.label2.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(312, 7);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 32);
-            this.label2.TabIndex = 554;
-            this.label2.Text = "Sensor";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status_Screw_R.BackColor = System.Drawing.Color.Gray;
+            this.Status_Screw_R.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Status_Screw_R.Location = new System.Drawing.Point(312, 7);
+            this.Status_Screw_R.Name = "Status_Screw_R";
+            this.Status_Screw_R.Size = new System.Drawing.Size(121, 32);
+            this.Status_Screw_R.TabIndex = 554;
+            this.Status_Screw_R.Text = "Sensor";
+            this.Status_Screw_R.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // Status_Screw_L
             // 
-            this.label1.BackColor = System.Drawing.Color.Gray;
-            this.label1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(169, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 32);
-            this.label1.TabIndex = 553;
-            this.label1.Text = "Screwdriver";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status_Screw_L.BackColor = System.Drawing.Color.Gray;
+            this.Status_Screw_L.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Status_Screw_L.Location = new System.Drawing.Point(169, 7);
+            this.Status_Screw_L.Name = "Status_Screw_L";
+            this.Status_Screw_L.Size = new System.Drawing.Size(137, 32);
+            this.Status_Screw_L.TabIndex = 553;
+            this.Status_Screw_L.Text = "Screwdriver";
+            this.Status_Screw_L.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lbl_Toe_FL
+            // Status_PLC
             // 
-            this.lbl_Toe_FL.BackColor = System.Drawing.Color.Gray;
-            this.lbl_Toe_FL.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Toe_FL.Location = new System.Drawing.Point(42, 7);
-            this.lbl_Toe_FL.Name = "lbl_Toe_FL";
-            this.lbl_Toe_FL.Size = new System.Drawing.Size(121, 32);
-            this.lbl_Toe_FL.TabIndex = 552;
-            this.lbl_Toe_FL.Text = "PLC";
-            this.lbl_Toe_FL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status_PLC.BackColor = System.Drawing.Color.Gray;
+            this.Status_PLC.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Status_PLC.Location = new System.Drawing.Point(42, 7);
+            this.Status_PLC.Name = "Status_PLC";
+            this.Status_PLC.Size = new System.Drawing.Size(121, 32);
+            this.Status_PLC.TabIndex = 552;
+            this.Status_PLC.Text = "PLC";
+            this.Status_PLC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button3
             // 
@@ -335,6 +337,17 @@
             this.button6.Text = "Manual";
             this.button6.UseVisualStyleBackColor = false;
             // 
+            // Status_BAR
+            // 
+            this.Status_BAR.BackColor = System.Drawing.Color.Gray;
+            this.Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Status_BAR.Location = new System.Drawing.Point(439, 7);
+            this.Status_BAR.Name = "Status_BAR";
+            this.Status_BAR.Size = new System.Drawing.Size(121, 32);
+            this.Status_BAR.TabIndex = 555;
+            this.Status_BAR.Text = "BarCode";
+            this.Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_Mainfrm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -350,6 +363,7 @@
             this.Name = "Frm_Mainfrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parallelism";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Mainfrm_FormClosing);
             this.Load += new System.EventHandler(this.Frm_Mainfrm_Load);
             this.panelNavBar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -376,10 +390,11 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_Toe_FL;
+        private System.Windows.Forms.Label Status_Screw_R;
+        private System.Windows.Forms.Label Status_Screw_L;
+        private System.Windows.Forms.Label Status_PLC;
         private System.Windows.Forms.Button Btn_Result;
+        private System.Windows.Forms.Label Status_BAR;
     }
 }
 

@@ -30,15 +30,15 @@
         {
             this.label19 = new System.Windows.Forms.Label();
             this.GB_common = new System.Windows.Forms.GroupBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.DogRunLT_MAX = new System.Windows.Forms.Label();
+            this.DogRunST = new System.Windows.Forms.Label();
+            this.DogRunLT_MIN = new System.Windows.Forms.Label();
+            this.ToeFR_LT_MAX = new System.Windows.Forms.Label();
+            this.ToeFR_ST = new System.Windows.Forms.Label();
+            this.ToeFR_LT_MIN = new System.Windows.Forms.Label();
+            this.ToeFL_LT_MAX = new System.Windows.Forms.Label();
+            this.ToeFL_ST = new System.Windows.Forms.Label();
+            this.ToeFL_LT_MIN = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -46,12 +46,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.GB_GenInfo = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbl_Barcode = new System.Windows.Forms.Label();
+            this.lbl_PJI = new System.Windows.Forms.Label();
+            this.lbl_LET = new System.Windows.Forms.Label();
+            this.lbl_PARA = new System.Windows.Forms.Label();
+            this.lbl_WB = new System.Windows.Forms.Label();
+            this.lbl_ModelNM = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -59,10 +59,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl_title = new System.Windows.Forms.Label();
-            this.lb_Message = new System.Windows.Forms.ListBox();
+            this.lbl_Message = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.seqList = new System.Windows.Forms.ListView();
+            this.Btn_Delete = new System.Windows.Forms.Button();
+            this.Btn_Start = new System.Windows.Forms.Button();
             this.GB_common.SuspendLayout();
             this.GB_GenInfo.SuspendLayout();
             this.SuspendLayout();
@@ -82,15 +84,15 @@
             // 
             // GB_common
             // 
-            this.GB_common.Controls.Add(this.label26);
-            this.GB_common.Controls.Add(this.label27);
-            this.GB_common.Controls.Add(this.label28);
-            this.GB_common.Controls.Add(this.label23);
-            this.GB_common.Controls.Add(this.label24);
-            this.GB_common.Controls.Add(this.label25);
-            this.GB_common.Controls.Add(this.label22);
-            this.GB_common.Controls.Add(this.label21);
-            this.GB_common.Controls.Add(this.label20);
+            this.GB_common.Controls.Add(this.DogRunLT_MAX);
+            this.GB_common.Controls.Add(this.DogRunST);
+            this.GB_common.Controls.Add(this.DogRunLT_MIN);
+            this.GB_common.Controls.Add(this.ToeFR_LT_MAX);
+            this.GB_common.Controls.Add(this.ToeFR_ST);
+            this.GB_common.Controls.Add(this.ToeFR_LT_MIN);
+            this.GB_common.Controls.Add(this.ToeFL_LT_MAX);
+            this.GB_common.Controls.Add(this.ToeFL_ST);
+            this.GB_common.Controls.Add(this.ToeFL_LT_MIN);
             this.GB_common.Controls.Add(this.label18);
             this.GB_common.Controls.Add(this.label17);
             this.GB_common.Controls.Add(this.label16);
@@ -105,113 +107,113 @@
             this.GB_common.TabStop = false;
             this.GB_common.Text = "Para info";
             // 
-            // label26
+            // DogRunLT_MAX
             // 
-            this.label26.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label26.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(725, 239);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(229, 68);
-            this.label26.TabIndex = 31;
-            this.label26.Text = "0.0";
-            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DogRunLT_MAX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DogRunLT_MAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DogRunLT_MAX.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DogRunLT_MAX.Location = new System.Drawing.Point(725, 239);
+            this.DogRunLT_MAX.Name = "DogRunLT_MAX";
+            this.DogRunLT_MAX.Size = new System.Drawing.Size(229, 68);
+            this.DogRunLT_MAX.TabIndex = 31;
+            this.DogRunLT_MAX.Text = "0.0";
+            this.DogRunLT_MAX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label27
+            // DogRunST
             // 
-            this.label27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label27.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(467, 239);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(229, 68);
-            this.label27.TabIndex = 30;
-            this.label27.Text = "0.0";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DogRunST.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DogRunST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DogRunST.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DogRunST.Location = new System.Drawing.Point(467, 239);
+            this.DogRunST.Name = "DogRunST";
+            this.DogRunST.Size = new System.Drawing.Size(229, 68);
+            this.DogRunST.TabIndex = 30;
+            this.DogRunST.Text = "0.0";
+            this.DogRunST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label28
+            // DogRunLT_MIN
             // 
-            this.label28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label28.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(206, 239);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(229, 68);
-            this.label28.TabIndex = 29;
-            this.label28.Text = "0.0";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.DogRunLT_MIN.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.DogRunLT_MIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DogRunLT_MIN.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DogRunLT_MIN.Location = new System.Drawing.Point(206, 239);
+            this.DogRunLT_MIN.Name = "DogRunLT_MIN";
+            this.DogRunLT_MIN.Size = new System.Drawing.Size(229, 68);
+            this.DogRunLT_MIN.TabIndex = 29;
+            this.DogRunLT_MIN.Text = "0.0";
+            this.DogRunLT_MIN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label23
+            // ToeFR_LT_MAX
             // 
-            this.label23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label23.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(725, 160);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(229, 68);
-            this.label23.TabIndex = 28;
-            this.label23.Text = "0.0";
-            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFR_LT_MAX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFR_LT_MAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFR_LT_MAX.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFR_LT_MAX.Location = new System.Drawing.Point(725, 160);
+            this.ToeFR_LT_MAX.Name = "ToeFR_LT_MAX";
+            this.ToeFR_LT_MAX.Size = new System.Drawing.Size(229, 68);
+            this.ToeFR_LT_MAX.TabIndex = 28;
+            this.ToeFR_LT_MAX.Text = "0.0";
+            this.ToeFR_LT_MAX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label24
+            // ToeFR_ST
             // 
-            this.label24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label24.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(467, 160);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(229, 68);
-            this.label24.TabIndex = 27;
-            this.label24.Text = "0.0";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFR_ST.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFR_ST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFR_ST.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFR_ST.Location = new System.Drawing.Point(467, 160);
+            this.ToeFR_ST.Name = "ToeFR_ST";
+            this.ToeFR_ST.Size = new System.Drawing.Size(229, 68);
+            this.ToeFR_ST.TabIndex = 27;
+            this.ToeFR_ST.Text = "0.0";
+            this.ToeFR_ST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label25
+            // ToeFR_LT_MIN
             // 
-            this.label25.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label25.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(206, 160);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(229, 68);
-            this.label25.TabIndex = 26;
-            this.label25.Text = "0.0";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFR_LT_MIN.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFR_LT_MIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFR_LT_MIN.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFR_LT_MIN.Location = new System.Drawing.Point(206, 160);
+            this.ToeFR_LT_MIN.Name = "ToeFR_LT_MIN";
+            this.ToeFR_LT_MIN.Size = new System.Drawing.Size(229, 68);
+            this.ToeFR_LT_MIN.TabIndex = 26;
+            this.ToeFR_LT_MIN.Text = "0.0";
+            this.ToeFR_LT_MIN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label22
+            // ToeFL_LT_MAX
             // 
-            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label22.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(725, 81);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(229, 68);
-            this.label22.TabIndex = 25;
-            this.label22.Text = "0.0";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFL_LT_MAX.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFL_LT_MAX.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFL_LT_MAX.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFL_LT_MAX.Location = new System.Drawing.Point(725, 81);
+            this.ToeFL_LT_MAX.Name = "ToeFL_LT_MAX";
+            this.ToeFL_LT_MAX.Size = new System.Drawing.Size(229, 68);
+            this.ToeFL_LT_MAX.TabIndex = 25;
+            this.ToeFL_LT_MAX.Text = "0.0";
+            this.ToeFL_LT_MAX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label21
+            // ToeFL_ST
             // 
-            this.label21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label21.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(467, 81);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(229, 68);
-            this.label21.TabIndex = 24;
-            this.label21.Text = "0.0";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFL_ST.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFL_ST.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFL_ST.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFL_ST.Location = new System.Drawing.Point(467, 81);
+            this.ToeFL_ST.Name = "ToeFL_ST";
+            this.ToeFL_ST.Size = new System.Drawing.Size(229, 68);
+            this.ToeFL_ST.TabIndex = 24;
+            this.ToeFL_ST.Text = "0.0";
+            this.ToeFL_ST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label20
+            // ToeFL_LT_MIN
             // 
-            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label20.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(206, 81);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(229, 68);
-            this.label20.TabIndex = 23;
-            this.label20.Text = "0.0";
-            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToeFL_LT_MIN.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ToeFL_LT_MIN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToeFL_LT_MIN.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ToeFL_LT_MIN.Location = new System.Drawing.Point(206, 81);
+            this.ToeFL_LT_MIN.Name = "ToeFL_LT_MIN";
+            this.ToeFL_LT_MIN.Size = new System.Drawing.Size(229, 68);
+            this.ToeFL_LT_MIN.TabIndex = 23;
+            this.ToeFL_LT_MIN.Text = "0.0";
+            this.ToeFL_LT_MIN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label18
             // 
@@ -250,7 +252,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(229, 68);
             this.label15.TabIndex = 16;
-            this.label15.Text = "MIN";
+            this.label15.Text = "MAX";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label14
@@ -275,12 +277,12 @@
             // 
             // GB_GenInfo
             // 
-            this.GB_GenInfo.Controls.Add(this.label12);
-            this.GB_GenInfo.Controls.Add(this.label11);
-            this.GB_GenInfo.Controls.Add(this.label10);
-            this.GB_GenInfo.Controls.Add(this.label9);
-            this.GB_GenInfo.Controls.Add(this.label8);
-            this.GB_GenInfo.Controls.Add(this.label7);
+            this.GB_GenInfo.Controls.Add(this.lbl_Barcode);
+            this.GB_GenInfo.Controls.Add(this.lbl_PJI);
+            this.GB_GenInfo.Controls.Add(this.lbl_LET);
+            this.GB_GenInfo.Controls.Add(this.lbl_PARA);
+            this.GB_GenInfo.Controls.Add(this.lbl_WB);
+            this.GB_GenInfo.Controls.Add(this.lbl_ModelNM);
             this.GB_GenInfo.Controls.Add(this.label6);
             this.GB_GenInfo.Controls.Add(this.label5);
             this.GB_GenInfo.Controls.Add(this.label4);
@@ -295,77 +297,77 @@
             this.GB_GenInfo.TabStop = false;
             this.GB_GenInfo.Text = "General Info";
             // 
-            // label12
+            // lbl_Barcode
             // 
-            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label12.Font = new System.Drawing.Font("Arial", 30F);
-            this.label12.Location = new System.Drawing.Point(386, 457);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(560, 76);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "PP 039096538510510";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_Barcode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_Barcode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Barcode.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_Barcode.Location = new System.Drawing.Point(386, 457);
+            this.lbl_Barcode.Name = "lbl_Barcode";
+            this.lbl_Barcode.Size = new System.Drawing.Size(560, 76);
+            this.lbl_Barcode.TabIndex = 22;
+            this.lbl_Barcode.Text = "PP 039096538510510";
+            this.lbl_Barcode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
+            // lbl_PJI
             // 
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label11.Font = new System.Drawing.Font("Arial", 30F);
-            this.label11.Location = new System.Drawing.Point(386, 369);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(560, 76);
-            this.label11.TabIndex = 21;
-            this.label11.Text = "0930365";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_PJI.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_PJI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_PJI.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_PJI.Location = new System.Drawing.Point(386, 369);
+            this.lbl_PJI.Name = "lbl_PJI";
+            this.lbl_PJI.Size = new System.Drawing.Size(560, 76);
+            this.lbl_PJI.TabIndex = 21;
+            this.lbl_PJI.Text = "0930365";
+            this.lbl_PJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label10
+            // lbl_LET
             // 
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label10.Font = new System.Drawing.Font("Arial", 30F);
-            this.label10.Location = new System.Drawing.Point(386, 281);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(560, 76);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "105";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_LET.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_LET.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_LET.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_LET.Location = new System.Drawing.Point(386, 281);
+            this.lbl_LET.Name = "lbl_LET";
+            this.lbl_LET.Size = new System.Drawing.Size(560, 76);
+            this.lbl_LET.TabIndex = 20;
+            this.lbl_LET.Text = "105";
+            this.lbl_LET.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label9
+            // lbl_PARA
             // 
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label9.Font = new System.Drawing.Font("Arial", 30F);
-            this.label9.Location = new System.Drawing.Point(386, 193);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(560, 76);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "385";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_PARA.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_PARA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_PARA.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_PARA.Location = new System.Drawing.Point(386, 193);
+            this.lbl_PARA.Name = "lbl_PARA";
+            this.lbl_PARA.Size = new System.Drawing.Size(560, 76);
+            this.lbl_PARA.TabIndex = 19;
+            this.lbl_PARA.Text = "385";
+            this.lbl_PARA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // lbl_WB
             // 
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label8.Font = new System.Drawing.Font("Arial", 30F);
-            this.label8.Location = new System.Drawing.Point(386, 105);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(560, 76);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "2345";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_WB.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_WB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_WB.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_WB.Location = new System.Drawing.Point(386, 105);
+            this.lbl_WB.Name = "lbl_WB";
+            this.lbl_WB.Size = new System.Drawing.Size(560, 76);
+            this.lbl_WB.TabIndex = 18;
+            this.lbl_WB.Text = "2345";
+            this.lbl_WB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label7
+            // lbl_ModelNM
             // 
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label7.Font = new System.Drawing.Font("Arial", 30F);
-            this.label7.Location = new System.Drawing.Point(386, 17);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(560, 76);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "BBB PH2";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lbl_ModelNM.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_ModelNM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_ModelNM.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_ModelNM.Location = new System.Drawing.Point(386, 17);
+            this.lbl_ModelNM.Name = "lbl_ModelNM";
+            this.lbl_ModelNM.Size = new System.Drawing.Size(560, 76);
+            this.lbl_ModelNM.TabIndex = 17;
+            this.lbl_ModelNM.Text = "BBB PH2";
+            this.lbl_ModelNM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label6
             // 
@@ -438,14 +440,14 @@
             this.lbl_title.Text = "PROCESS INFO";
             this.lbl_title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lb_Message
+            // lbl_Message
             // 
-            this.lb_Message.FormattingEnabled = true;
-            this.lb_Message.ItemHeight = 12;
-            this.lb_Message.Location = new System.Drawing.Point(15, 765);
-            this.lb_Message.Name = "lb_Message";
-            this.lb_Message.Size = new System.Drawing.Size(788, 172);
-            this.lb_Message.TabIndex = 150;
+            this.lbl_Message.FormattingEnabled = true;
+            this.lbl_Message.ItemHeight = 12;
+            this.lbl_Message.Location = new System.Drawing.Point(15, 765);
+            this.lbl_Message.Name = "lbl_Message";
+            this.lbl_Message.Size = new System.Drawing.Size(788, 172);
+            this.lbl_Message.TabIndex = 150;
             // 
             // button1
             // 
@@ -464,7 +466,7 @@
             this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label29.Location = new System.Drawing.Point(10, 716);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(797, 44);
+            this.label29.Size = new System.Drawing.Size(242, 44);
             this.label29.TabIndex = 156;
             this.label29.Text = "Log";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -487,12 +489,40 @@
             this.seqList.View = System.Windows.Forms.View.Details;
             this.seqList.SelectedIndexChanged += new System.EventHandler(this.seqList_SelectedIndexChanged);
             // 
+            // Btn_Delete
+            // 
+            this.Btn_Delete.BackColor = System.Drawing.Color.Silver;
+            this.Btn_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Delete.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Delete.Location = new System.Drawing.Point(533, 716);
+            this.Btn_Delete.Name = "Btn_Delete";
+            this.Btn_Delete.Size = new System.Drawing.Size(127, 44);
+            this.Btn_Delete.TabIndex = 163;
+            this.Btn_Delete.Text = "DELETE";
+            this.Btn_Delete.UseVisualStyleBackColor = false;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click_1);
+            // 
+            // Btn_Start
+            // 
+            this.Btn_Start.BackColor = System.Drawing.Color.Silver;
+            this.Btn_Start.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Start.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Start.Location = new System.Drawing.Point(676, 715);
+            this.Btn_Start.Name = "Btn_Start";
+            this.Btn_Start.Size = new System.Drawing.Size(127, 44);
+            this.Btn_Start.TabIndex = 164;
+            this.Btn_Start.Text = "START";
+            this.Btn_Start.UseVisualStyleBackColor = false;
+            this.Btn_Start.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1797, 1003);
+            this.Controls.Add(this.Btn_Start);
+            this.Controls.Add(this.Btn_Delete);
             this.Controls.Add(this.seqList);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.button1);
@@ -500,7 +530,7 @@
             this.Controls.Add(this.GB_common);
             this.Controls.Add(this.GB_GenInfo);
             this.Controls.Add(this.lbl_title);
-            this.Controls.Add(this.lb_Message);
+            this.Controls.Add(this.lbl_Message);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_Main";
             this.ShowInTaskbar = false;
@@ -516,15 +546,15 @@
 
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.GroupBox GB_common;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label DogRunLT_MAX;
+        private System.Windows.Forms.Label DogRunST;
+        private System.Windows.Forms.Label DogRunLT_MIN;
+        private System.Windows.Forms.Label ToeFR_LT_MAX;
+        private System.Windows.Forms.Label ToeFR_ST;
+        private System.Windows.Forms.Label ToeFR_LT_MIN;
+        private System.Windows.Forms.Label ToeFL_LT_MAX;
+        private System.Windows.Forms.Label ToeFL_ST;
+        private System.Windows.Forms.Label ToeFL_LT_MIN;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
@@ -532,12 +562,12 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.GroupBox GB_GenInfo;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbl_Barcode;
+        private System.Windows.Forms.Label lbl_PJI;
+        private System.Windows.Forms.Label lbl_LET;
+        private System.Windows.Forms.Label lbl_PARA;
+        private System.Windows.Forms.Label lbl_WB;
+        private System.Windows.Forms.Label lbl_ModelNM;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -545,9 +575,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl_title;
-        private System.Windows.Forms.ListBox lb_Message;
+        private System.Windows.Forms.ListBox lbl_Message;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ListView seqList;
+        private System.Windows.Forms.Button Btn_Delete;
+        private System.Windows.Forms.Button Btn_Start;
     }
 }

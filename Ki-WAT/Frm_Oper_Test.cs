@@ -13,7 +13,7 @@ namespace Ki_WAT
     public partial class Frm_Oper_Test : Form
     {
         Frm_Mainfrm m_Mainfrm;
-        Frm_Operator m_Operator;
+        private Frm_Operator m_Operator;
 
 
         public Frm_Oper_Test()

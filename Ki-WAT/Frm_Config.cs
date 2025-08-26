@@ -38,7 +38,7 @@ namespace Ki_WAT
             modelList.Columns.Add("MODEL", modelList.Width , HorizontalAlignment.Center);
 
 
-            
+            RefreshListView();
             UpdateGeneralUI();
 
 

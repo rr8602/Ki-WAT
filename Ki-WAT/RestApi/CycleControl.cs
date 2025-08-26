@@ -36,7 +36,7 @@ namespace LETInterface
         {
             try
             {
-                var req = new { context = "System", activity = "start-cycle", uid = uid };
+                var req = new { context = "System", activity = "start-cycle", uid };
                 (bool success, string message) = TasksProcessTask(req);
 
                 return success;
@@ -67,7 +67,7 @@ namespace LETInterface
         {
             try
             {
-                var req = new { context = "System", activity = "perform-tests", line = line, floor_pitch = floorpitch };
+                var req = new { context = "System", activity = "perform-tests", line, floorpitch };
                 (bool success, string message) = TasksProcessTask(req);
 
                 return success;
@@ -201,11 +201,7 @@ namespace LETInterface
             {
                 Console.WriteLine("처리 중 예외 발생: " + ex.Message);
             }
-
             return result;
         }
-
-
-       
     }
 }

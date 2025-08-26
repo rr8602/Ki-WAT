@@ -24,7 +24,7 @@ namespace Ki_WAT
     {
 
         GlobalVal _GV = GlobalVal.Instance;
-        Frm_Mainfrm m_frmParent;
+        private Frm_Mainfrm m_frmParent;
 
         LET_Param m_LetParam = new LET_Param();
         public Frm_Manual()

@@ -14,7 +14,7 @@ namespace Ki_WAT
         public string WatCycle;
         public string LetCycle;
         public string Car_Step;
-        public string Spare__1;
+        public string TotalBar;
         public string Spare__2;
         public string Spare__3;
     }

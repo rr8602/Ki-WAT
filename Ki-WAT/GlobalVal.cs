@@ -88,9 +88,6 @@ namespace Ki_WAT
         public IntPtr lpData;
     }
 
-
-
-
     internal class GlobalVal
     {
         // private static 필드로 Lazy<T> 사용
@@ -105,8 +102,14 @@ namespace Ki_WAT
             g_DppData = new MeasureData();
             g_DppState = new SensorState();
             Config = new AppConfig();
+            _frmMNG = new FormManager();
+            _TestThread = new TestThread_Kint(this);
+            _PLCVal = new PLCVal();
         }
+        public void InitData()
+        {
 
+        }
         public MeasureData g_DppData;
         public SensorState g_DppState;
 
@@ -115,5 +118,13 @@ namespace Ki_WAT
         
         // Configuration instance
         public AppConfig Config;
+
+        public FormManager _frmMNG;
+        public TestThread_Kint _TestThread;
+
+        public PLCVal _PLCVal;
+
+        public bool g_Substitu_PEV = false;
+        //public bool g_Substitu_PEV = false;
     }
 }

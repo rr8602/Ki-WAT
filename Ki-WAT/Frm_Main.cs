@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DG_ComLib;
+using KINT_Lib;
+using static KINT_Lib.Lib_TcpClient;
 
 namespace Ki_WAT
 {
@@ -20,6 +23,9 @@ namespace Ki_WAT
         public static string LAMP_RED = @"Resource\RED.png";
 
         private delegate void _d_SetStatusListMsg(string strText);
+        GlobalVal _GV = GlobalVal.Instance;
+        TblCarModel m_Cur_Model = new TblCarModel();
+        TblCarInfo m_Cur_CarInfo = new TblCarInfo();
 
         public Frm_Main()
         {
@@ -33,7 +39,74 @@ namespace Ki_WAT
             seqList.Columns.Add("PJI", seqList.Width / 2, HorizontalAlignment.Center);
 
             RefreshCarInfoList();
+			// 상태 업데이트 이벤트 구독
+			TestThread_Kint.OnStatusUpdate += OnStatusUpdate_Main;
+
+            m_frmParent.m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
         }
+        public void GetBarCode(string pBarcode)
+        {
+            
+            try
+            {
+                string PP = pBarcode.Substring(0, 2);
+                string PJI = pBarcode.Substring(2, 7);
+                string PARA = pBarcode.Substring(9, 3);
+                string PROJECT = pBarcode.Substring(12, 3);
+                string ADAS = pBarcode.Substring(15, 3);
+                m_Cur_Model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
+                Debug.Print("");
+
+
+
+                m_Cur_CarInfo.CarPJINo = PJI;
+                m_Cur_CarInfo.CarModel = m_Cur_Model.Model_NM;
+                m_Cur_CarInfo.WatCycle = PARA;
+                m_Cur_CarInfo.LetCycle = PROJECT;
+                m_Cur_CarInfo.Car_Step = "0";
+                m_Cur_CarInfo.TotalBar = pBarcode;
+                m_Cur_CarInfo.Spare__2 = "0";
+                m_Cur_CarInfo.Spare__3 = "0";
+                m_frmParent.m_dbJob.AddNewAcceptNo(ref m_Cur_CarInfo);
+                RefreshCarInfoList();
+            }
+            catch(Exception ex)
+            {
+                _Log_ListBox(ex.Message);
+            }
+            
+        }
+    
+
+        public void event_GetBarcode(byte[] data)
+        {
+            //PP(2)PJI(7)PARA(3)PROJECTEURS(3)ADAS(3)
+
+            try
+            {
+                if (data.Length < 18) return;
+                string input = System.Text.Encoding.UTF8.GetString(data);
+                _Log_ListBox("Barcode : " + input);
+                GetBarCode(input);
+                // 고정 길이 필드 파싱
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+        }
+        
+        // 폼 종료 시 이벤트 해제
+        protected override void OnFormClosed(FormClosedEventArgs e)
+		{
+			TestThread_Kint.OnStatusUpdate -= OnStatusUpdate_Main;
+			base.OnFormClosed(e);
+		}
 
         public void RefreshCarInfoList()
         {
@@ -47,28 +120,50 @@ namespace Ki_WAT
                 string sSQL = $"SELECT * FROM TableCarInfo WHERE AcceptNo LIKE '{today}%' ORDER BY AcceptNo DESC";
                 var dt = m_frmParent.m_dbJob.GetDataSet(sSQL);
 
-                seqList.Items.Clear();
-
-                if (dt != null && dt.Rows.Count > 0)
+                if (seqList.InvokeRequired)
                 {
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        string acceptNo = row["AcceptNo"].ToString();
-                        string carPjiNo = row["CarPJINo"].ToString();
-
-                        ListViewItem item = new ListViewItem(acceptNo);
-                        item.SubItems.Add(acceptNo); // UID
-                        item.SubItems.Add(carPjiNo); // PJI
-                        seqList.Items.Add(item);
-                    }
+                    seqList.Invoke(new Action(() => UpdateCarList(dt)));
+                }
+                else
+                {
+                    UpdateCarList(dt);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"CarInfo 리스트 새로고침 중 오류: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // MessageBox도 UI 스레드에서 실행해야 안전
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show($"CarInfo 리스트 새로고침 중 오류: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show($"CarInfo 리스트 새로고침 중 오류: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
+        private void UpdateCarList(DataTable dt)
+        {
+            seqList.Items.Clear();
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    string acceptNo = row["AcceptNo"].ToString();
+                    string carPjiNo = row["CarPJINo"].ToString();
+
+                    ListViewItem item = new ListViewItem(acceptNo);
+                    item.SubItems.Add(acceptNo); // UID
+                    item.SubItems.Add(carPjiNo); // PJI
+                    seqList.Items.Add(item);
+                }
+            }
+        }
         public void SetParent(Frm_Mainfrm f)
         {
             m_frmParent = f;
@@ -80,29 +175,82 @@ namespace Ki_WAT
             _Log_ListBox("asdf");
         }
 
+        public void RefreshCurrentInfo()
+        {
+            lbl_PARA.Text = m_Cur_Model.Bar_Code;
+            lbl_ModelNM.Text = m_Cur_Model.Model_NM;
+            lbl_WB.Text = m_Cur_Model.WhelBase;
+            lbl_LET.Text = m_Cur_CarInfo.LetCycle;
+            lbl_PJI.Text = m_Cur_CarInfo.CarPJINo;
+            lbl_Barcode.Text = m_Cur_CarInfo.TotalBar;
+
+            int nMin, nMax;
+
+            DogRunST.Text = m_Cur_Model.DogRunST;
+            
+            nMin = Int32.Parse(m_Cur_Model.DogRunST) - Int32.Parse(m_Cur_Model.DogRunLT);
+            DogRunLT_MIN.Text = nMin.ToString();
+
+            nMax = Int32.Parse(m_Cur_Model.DogRunST) + Int32.Parse(m_Cur_Model.DogRunLT);
+            DogRunLT_MAX.Text = nMax.ToString();
+
+            ToeFL_ST.Text = m_Cur_Model.ToeFL_ST;
+            nMin = Int32.Parse(m_Cur_Model.ToeFL_ST) - Int32.Parse(m_Cur_Model.ToeFL_LT);
+            ToeFL_LT_MIN.Text = nMin.ToString();
+
+            nMax = Int32.Parse(m_Cur_Model.ToeFL_ST) + Int32.Parse(m_Cur_Model.ToeFL_LT);
+            ToeFL_LT_MAX.Text = nMax.ToString();
+
+            ToeFR_ST.Text = m_Cur_Model.ToeFR_ST;
+            nMin = Int32.Parse(m_Cur_Model.ToeFR_ST) - Int32.Parse(m_Cur_Model.ToeFR_LT);
+            ToeFR_LT_MIN.Text = nMin.ToString();
+
+            nMax = Int32.Parse(m_Cur_Model.ToeFR_ST) + Int32.Parse(m_Cur_Model.ToeFR_LT);
+            ToeFR_LT_MAX.Text = nMax.ToString();
+
+
+        }
         private void seqList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            Console.WriteLine("");
+            try
+            {
+                if (seqList.SelectedItems.Count > 0)
+                {
+                    ListViewItem selectedItem = seqList.SelectedItems[0];
+                    string acceptNo = selectedItem.Text; // 첫 번째 컬럼 (AcceptNo)
+                    
+                    // 선택된 AcceptNo로 CarInfo 조회
+                    if (m_frmParent != null && m_frmParent.m_dbJob != null)
+                    {
+                        m_Cur_CarInfo = m_frmParent.m_dbJob.SelectCarInfo(acceptNo);
+                        m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(m_Cur_CarInfo.CarModel);
+                        RefreshCurrentInfo();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"차량 정보 선택 중 오류: {ex.Message}");
+            }
         }
 
         public void _Log_ListBox(string strText)
         {
             try
             {
-                if (lb_Message.InvokeRequired)
+                if (lbl_Message.InvokeRequired)
                 {
                     _d_SetStatusListMsg d = new _d_SetStatusListMsg(_Log_ListBox);
                     this.Invoke(d, new object[] { strText });
                 }
                 else
                 {
-                    lb_Message.Items.Insert(0, "[" + System.DateTime.Now.ToString("HH:mm:ss") + "] " + strText);
+                    lbl_Message.Items.Insert(0, "[" + System.DateTime.Now.ToString("HH:mm:ss") + "] " + strText);
 
                     DG_Log.SysLog(strText);
 
-                    if (lb_Message.Items.Count >= 1000)
-                        lb_Message.Items.RemoveAt(lb_Message.Items.Count - 1);
+                    if (lbl_Message.Items.Count >= 1000)
+                        lbl_Message.Items.RemoveAt(lbl_Message.Items.Count - 1);
                 }
             }
             catch (Exception ex)
@@ -111,5 +259,47 @@ namespace Ki_WAT
             }
         }
 
+		// TestThread_Kint 상태 업데이트 수신 핸들러 (UI 스레드 보장)
+		private void OnStatusUpdate_Main(string status)
+		{
+			try
+			{
+				if (InvokeRequired)
+				{
+					Invoke(new Action<string>(OnStatusUpdate_Main), status);
+					return;
+				}
+                lbl_Message.Text = status;
+				_Log_ListBox(status);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Status 업데이트 처리 중 오류: {ex.Message}");
+			}
+		}
+
+        public void StartCycle()
+        {
+            if (m_Cur_CarInfo.CarPJINo == "" || m_Cur_CarInfo.CarPJINo == null)
+            {
+                MessageBox.Show("No data");
+                return;
+            }
+            m_frmParent.ChangeOperMonitor(Def.FOM_IDX_TEST);
+            _GV._TestThread.StartThread(m_Cur_CarInfo, m_Cur_Model);
+
+            m_frmParent.User_Monitor.StartTimer();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            StartCycle();
+        }
+        
+
+        private void Btn_Delete_Click_1(object sender, EventArgs e)
+        {
+            m_frmParent.m_dbJob.DeleteCarInfo(m_Cur_CarInfo.AcceptNo);
+            RefreshCarInfoList();
+        }
     }
 }

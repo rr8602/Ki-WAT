@@ -24,6 +24,13 @@ namespace Ki_WAT
 
         private Form m_ActiveSubForm;
         Frm_Mainfrm m_MainFrm;
+
+        // lbl_Time 표시용 타이머와 카운터
+        private Timer m_TimeTimer;
+        private int m_TimeCounter = 0;
+
+
+
         public Frm_Operator()
         {
             InitializeComponent();
@@ -41,15 +48,11 @@ namespace Ki_WAT
 
             m_frm_Oper_Static.SetMainFrm(m_MainFrm);
             m_frm_Oper_Static.SetOperator(this);
-
-
-
-
         }
 
         public void OnReceiveDpp(MeasureData pData)
         {
-            
+
         }
 
         private void Frm_Operator_Load(object sender, EventArgs e)
@@ -59,7 +62,51 @@ namespace Ki_WAT
             InitializeSubForm(m_frm_Oper_Roll);
             InitializeSubForm(m_frm_Oper_Static);
 
+
+
             ShowFrm(2);
+
+            // 1초 타이머 시작 (lbl_Time에 1,2,3... 표시)
+            m_TimeTimer = new Timer();
+            m_TimeTimer.Interval = 1000;
+            m_TimeTimer.Tick += TimeTimer_Tick;
+
+        }
+        public void StartTimer()
+        {
+            m_TimeCounter = 0;
+            if (lbl_Time != null && !lbl_Time.IsDisposed)
+            {
+                lbl_Time.Text = m_TimeCounter.ToString();
+            }
+
+            m_TimeTimer.Start();
+        }
+        public void StopTimer()
+        {
+            m_TimeCounter = 0;
+            m_TimeTimer.Stop();
+        }
+
+
+    private void OnStatusUpdate_Main(string status)
+        {
+            try
+            {
+                if (IsDisposed || !IsHandleCreated) return;
+                if (InvokeRequired)
+                {
+                    BeginInvoke(new Action<string>(OnStatusUpdate_Main), status);
+                    return;
+                }
+                if (lbl_Message == null || lbl_Message.IsDisposed) return;
+
+                lbl_Message.Text = status;  // ListBox라면 _Log_ListBox(status);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Status 업데이트 처리 중 오류: {ex.Message}");
+            }
         }
 
 
@@ -178,6 +225,39 @@ namespace Ki_WAT
         private void NavTop_MouseDown(object sender, MouseEventArgs e)
         {
             mousePoint = new Point(e.X, e.Y); //현재 마우스 좌표 저장
+        }
+
+        private void Frm_Operator_Shown(object sender, EventArgs e)
+        {
+           TestThread_Kint.OnStatusUpdate += OnStatusUpdate_Main;
+        }
+
+        private void TimeTimer_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                m_TimeCounter++;
+                if (lbl_Time != null && !lbl_Time.IsDisposed)
+                {
+                    lbl_Time.Text = m_TimeCounter.ToString();
+                }
+            }
+            catch { }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            try
+            {
+                if (m_TimeTimer != null)
+                {
+                    m_TimeTimer.Stop();
+                    m_TimeTimer.Tick -= TimeTimer_Tick;
+                }
+                TestThread_Kint.OnStatusUpdate -= OnStatusUpdate_Main;
+            }
+            catch { }
+            base.OnFormClosed(e);
         }
     }
 }

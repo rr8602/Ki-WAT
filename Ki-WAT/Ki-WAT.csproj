@@ -90,6 +90,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Common\GPLog.cs" />
+    <Compile Include="FrmManager.cs" />
     <Compile Include="Frm_PLC_IO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,7 +194,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RestApi\TaskService.cs" />
+    <Compile Include="stringdef.cs" />
     <Compile Include="TestThread.cs" />
+    <Compile Include="TestThread_HLT.cs" />
+    <Compile Include="TestThread_Kint.cs" />
     <EmbeddedResource Include="Frm_Config.resx">
       <DependentUpon>Frm_Config.cs</DependentUpon>
     </EmbeddedResource>

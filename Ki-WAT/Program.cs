@@ -35,13 +35,27 @@ namespace Ki_WAT
         public const int STA_MESSAGE = 2002;
         public const int PRO_MESSAGE = 2003;
 
-
-
         public const int ERR_MESSAGE = 3000;
 
 
         /////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        public const int STEP_WAIT = 0;
+
+        public const int STEP_PEV_START = 110;
+        public const int STEP_PEV_SEND_PJI = 111;
+        public const int STEP_MOVE_WHEELBASE = 120;
+
+        public const int STEP_DETECT_CAR_WAIT = 121;
+        public const int STEP_PRESS_STARTCYCLE_WAIT = 122;
+
+        public const int STEP_RUNOUT_POS = 130;
+
+        public const int STEP_START_CYCLE = 210;
+        public const int STEP_SEND_PJI = 220;
+        public const int STEP_CHECK_READY = 230;
+        public const int STEP_FINISH = 9999;
 
 
     }
