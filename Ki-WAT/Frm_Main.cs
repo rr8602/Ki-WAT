@@ -292,6 +292,8 @@ namespace Ki_WAT
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            //GWA.STM("1234");
+            //GWA.STM2("4312");
             StartCycle();
         }
         

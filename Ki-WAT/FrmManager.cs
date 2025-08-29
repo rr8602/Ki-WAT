@@ -32,6 +32,13 @@ public class FormManager
         _forms[typeof(T)] = form;
     }
 
+    // New: register by runtime type to avoid overwriting under typeof(Form)
+    public void RegisterForm(Form form)
+    {
+        if (form == null) return;
+        _forms[form.GetType()] = form;
+    }
+
     public T GetForm<T>() where T : Form
     {
         return _forms.TryGetValue(typeof(T), out var form) ? (T)form : null;

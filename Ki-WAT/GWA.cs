@@ -53,7 +53,21 @@ namespace Ki_WAT
 				SendMessage(hWnd, Constants.WM_COPYDATA, 0, ref cds);
 			}
 		}
-		public static void MW(IntPtr hWnd, int X, int Y, uint nWidth, uint nHeight, bool bRepaint = true)
+        public static void STM2(String strMsg)
+        {
+            COPYDATASTRUCT cds;
+			//strMsg = "";
+            IntPtr hWnd = FindWindow(null, "LogViewer");
+            if (hWnd != IntPtr.Zero)
+            {
+                cds.dwData = (IntPtr)Constants.COPY_MSG_DATA;
+                cds.cbData = strMsg.Length + 1;
+                cds.lpData = strMsg;
+                SendMessage(hWnd, Constants.WM_COPYDATA, 0, ref cds);
+            }
+        }
+
+        public static void MW(IntPtr hWnd, int X, int Y, uint nWidth, uint nHeight, bool bRepaint = true)
 		{
 			MoveWindow(hWnd, X, Y, nWidth, nHeight, bRepaint);
 		}

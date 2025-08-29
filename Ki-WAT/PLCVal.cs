@@ -120,8 +120,12 @@ namespace Ki_WAT
 
         public ushort   _WBDistance;
 
-        public bool     Motor_Run;
-        public bool     Motor_Stop;
+        public bool     _Motor_Run;
+        public bool     _Motor_Stop;
+
+        // 신규 추가
+        public bool _RollerBrake_Lock;
+        public bool _RollerBrake_Free;
 
     }
     internal class PLCVal

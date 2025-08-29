@@ -9,7 +9,6 @@ namespace Ki_WAT
 {
     static class Constants
     {
-
         public const int SubViewWidth = 1850 - 100;
         public const int SubViewHeight = 950 - 50;
 
@@ -23,8 +22,6 @@ namespace Ki_WAT
         public const int WGT_KG = WM_USER + 3001;
         public const int CLOSE_WINDOWS = WM_USER + 9999;
 
-
-
         ////////////////////////////// INTERFACE CMD ////////////////////////////////////////////////
         //인터페이스에서 사용되는 MSG 종류
         public const int INTERFACE_DATA = 1001;
@@ -37,9 +34,7 @@ namespace Ki_WAT
 
         public const int ERR_MESSAGE = 3000;
 
-
         /////////////////////////////////////////////////////////////////////////////////////////////
-
 
         public const int STEP_WAIT = 0;
 
@@ -50,12 +45,62 @@ namespace Ki_WAT
         public const int STEP_DETECT_CAR_WAIT = 121;
         public const int STEP_PRESS_STARTCYCLE_WAIT = 122;
 
-        public const int STEP_RUNOUT_POS = 130;
+        public const int STEP_RUNOUT_POS_0 = 130;
+        public const int STEP_RUNOUT_POS_1 = 131;
+        public const int STEP_RUNOUT_POS_2 = 132;
 
-        public const int STEP_START_CYCLE = 210;
-        public const int STEP_SEND_PJI = 220;
-        public const int STEP_CHECK_READY = 230;
+        public const int STEP_HANDLE_0 = 140;
+        public const int STEP_HANDLE_1 = 141;
+
+        public const int STEP_CHECK_CENTERING = 142;
+        public const int STEP_PRESS_MEASURE_WAIT = 143;
+
+
+        public const int STEP_WAIT_RUNOUT = 150; //
+        public const int STEP_SCREW_SEND_INFO = 160;
+        public const int STEP_SCREW_GET_DATA_LEFT = 161;
+        public const int STEP_SCREW_GET_DATA_RIGHT = 162;
+
+        public const int STEP_PRESS_LEFT_FINISH = 163;
+        public const int STEP_PRESS_RIGHT_FINISH = 164;
+        public const int STEP_CHECK_SREW_ALL_HOME = 165;
+        public const int STEP_PRESS_PIT_OUT_FINISH_WAIT = 166;
+
+        public const int STEP_DISPLAY_RESULT = 170;
+
+        public const int STEP_CHECK_ALL_FINISH = 171;
+        public const int STEP_EXIT_POSITION = 172;
+        public const int STEP_CHECK_SWB_HOME = 173;
+        public const int STEP_CHECK_HLA_HOME = 174;
+
+
+        public const int STEP_SAVE_DATA = 180;
+        public const int STEP_TICKET_PRINT = 181;
+
+        public const int STEP_CHECK_GO_OUT1 = 182;
+        public const int STEP_CHECK_GO_OUT2 = 183;
+        public const int STEP_CHECK_GO_OUT3 = 184;
+
+        public const int STEP_GRET_OK = 190;
+
+
+
+
+
         public const int STEP_FINISH = 9999;
+
+        /// <summary>
+        /// HLT 관련 define
+        /// 
+        /// </summary>
+        public const int STEP_HLT_START = 500;
+        public const int STEP_HLT_1 = 501;
+        public const int STEP_HLT_2 = 502;
+        public const int STEP_HLT_3 = 503;
+        public const int STEP_HLT_4 = 504;
+        public const int STEP_HLT_5 = 505;
+
+
 
 
     }

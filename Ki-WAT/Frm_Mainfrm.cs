@@ -59,6 +59,9 @@ namespace Ki_WAT
 
         TblCarModel m_Cur_Model = new TblCarModel();
 
+        public Lib_TcpClient ScrewDriverL => m_ScrewDriverL;
+        public Lib_TcpClient ScrewDriverR => m_ScrewDriverR;
+
         public Frm_Mainfrm()
         {
             InitializeComponent();
@@ -114,6 +117,8 @@ namespace Ki_WAT
             DeviceOpen();
             InitUI();
 
+            _GV._frmMNG.RegisterForm(this);
+
         }
 
         public void DeviceOpen()
@@ -128,8 +133,8 @@ namespace Ki_WAT
             // 바코드 연결 상태 체크 타이머 시작
             StartBarcodeConnectionTimer();
 
-            //m_ScrewDriverL.Connect("127.0.0.1", 8515);
-            //m_ScrewDriverL.OnDataReceived += new DataReceiveClient(event_GetScrewL);
+            m_ScrewDriverL.Connect("192.168.10.114", 8515);
+            m_ScrewDriverL.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
             //m_ScrewDriverR.Connect("127.0.0.1", 8516);
             //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewR);
@@ -171,7 +176,7 @@ namespace Ki_WAT
             f.FormBorderStyle = FormBorderStyle.None;
             f.StartPosition = FormStartPosition.Manual;
             f.MdiParent = this;
-            _GV._frmMNG.RegisterForm<Form>(f);
+            _GV._frmMNG.RegisterForm(f);
         }
 
 
@@ -326,25 +331,25 @@ namespace Ki_WAT
                     // UI 스레드에서 실행
                     this.Invoke(new Action(() => 
                     {
-                        _GV.g_DppData.dCamFL = receivedData.dCamFL;
-                        _GV.g_DppData.dCamFR = receivedData.dCamFR;
-                        _GV.g_DppData.dCamRL = receivedData.dCamRL;
-                        _GV.g_DppData.dCamRR = receivedData.dCamRR;
-                        
-                        _GV.g_DppData.dToeFL = receivedData.dToeFL;
-                        _GV.g_DppData.dToeFR = receivedData.dToeFR;
-                        _GV.g_DppData.dToeRL = receivedData.dToeRL;
-                        _GV.g_DppData.dToeRR = receivedData.dToeRR;
-                        
-                        _GV.g_DppData.dTA = receivedData.dTA;
-                        _GV.g_DppData.dSymm = receivedData.dSymm;
-                        
-                        _GV.g_DppData.dHeightFL = receivedData.dHeightFL;
-                        _GV.g_DppData.dHeightFR = receivedData.dHeightFR;
-                        _GV.g_DppData.dHeightRL = receivedData.dHeightRL;
-                        _GV.g_DppData.dHeightRR = receivedData.dHeightRR;
+                        _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
+                        _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
+                        _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
+                        _GV.g_MeasureData.dCamRR = receivedData.dCamRR;
+                            
+                        _GV.g_MeasureData.dToeFL = receivedData.dToeFL;
+                        _GV.g_MeasureData.dToeFR = receivedData.dToeFR;
+                        _GV.g_MeasureData.dToeRL = receivedData.dToeRL;
+                        _GV.g_MeasureData.dToeRR = receivedData.dToeRR;
+                            
+                        _GV.g_MeasureData.dTA = receivedData.dTA;
+                        _GV.g_MeasureData.dSymm = receivedData.dSymm;
+                            
+                        _GV.g_MeasureData.dHeightFL = receivedData.dHeightFL;
+                        _GV.g_MeasureData.dHeightFR = receivedData.dHeightFR;
+                        _GV.g_MeasureData.dHeightRL = receivedData.dHeightRL;
+                        _GV.g_MeasureData.dHeightRR = receivedData.dHeightRR;
 
-                        OnDppDataReceived?.Invoke(_GV.g_DppData);
+                        OnDppDataReceived?.Invoke(_GV.g_MeasureData);
 
                     }));
                 }

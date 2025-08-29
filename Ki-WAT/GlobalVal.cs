@@ -99,7 +99,7 @@ namespace Ki_WAT
         // private 생성자로 외부에서 new 방지
         private GlobalVal()
         {
-            g_DppData = new MeasureData();
+            g_MeasureData = new MeasureData();
             g_DppState = new SensorState();
             Config = new AppConfig();
             _frmMNG = new FormManager();
@@ -110,7 +110,7 @@ namespace Ki_WAT
         {
 
         }
-        public MeasureData g_DppData;
+        public MeasureData g_MeasureData;
         public SensorState g_DppState;
 
         // LET Controller variable
@@ -125,6 +125,14 @@ namespace Ki_WAT
         public PLCVal _PLCVal;
 
         public bool g_Substitu_PEV = false;
+        public bool g_Substitu_HLT = false;
+        public bool g_Substitu_SWB = false;
+        public bool g_Substitu_MovingFlate = false;
+        public bool g_Substitu_WheelAdjust = false;
+        public bool g_Substitu_ScrewDriver_L = false;
+        public bool g_Substitu_ScrewDriver_R = false;
+        public bool g_Substitu_Printer = false;
+
         //public bool g_Substitu_PEV = false;
     }
 }
