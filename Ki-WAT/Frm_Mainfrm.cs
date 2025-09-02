@@ -33,6 +33,7 @@ namespace Ki_WAT
         public Frm_StaticMaster m_frmStatic = new Frm_StaticMaster();
         public Frm_Result m_frmResult = new Frm_Result();
         public Frm_Manual m_frmManual = new Frm_Manual() ;
+        public FrmSimulator m_frmSimul;
 
         private List<Button> m_NavButtons = new List<Button>();
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
@@ -118,6 +119,7 @@ namespace Ki_WAT
             InitUI();
 
             _GV._frmMNG.RegisterForm(this);
+            m_frmSimul = new FrmSimulator(this);
 
         }
 
@@ -276,21 +278,7 @@ namespace Ki_WAT
             ChangeButtonColor((Button)sender);
             ShowFrm(Def.FOM_IDX_MANUAL);
         }
-        private void Btn_T_Click(object sender, EventArgs e)
-        {
-            TblCarInfo tblCarInfo = new TblCarInfo();
-            tblCarInfo.CarPJINo = "adf";
-            tblCarInfo.CarModel = "adf";
-            tblCarInfo.WatCycle = "999";
-            tblCarInfo.LetCycle = "123";
-            tblCarInfo.Car_Step = "0";
-            tblCarInfo.TotalBar = "0";
-            tblCarInfo.Spare__2 = "0";
-            tblCarInfo.Spare__3 = "0";
-            m_dbJob.AddNewAcceptNo(ref tblCarInfo);
-            m_frmMain.RefreshCarInfoList();
-            
-        }
+      
         private void btnIo_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
@@ -318,6 +306,27 @@ namespace Ki_WAT
             base.WndProc(ref m);
         }
 
+        public void SetDppData(MeasureData receivedData)
+        {
+            this.Invoke(new Action(() =>
+            {
+                var stSensor = GlobalVal.Instance;
+                _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
+                _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
+                _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
+                _GV.g_MeasureData.dCamRR = receivedData.dCamRR;
+
+                _GV.g_MeasureData.dToeFL = receivedData.dToeFL;
+                _GV.g_MeasureData.dToeFR = receivedData.dToeFR;
+                _GV.g_MeasureData.dToeRL = receivedData.dToeRL;
+                _GV.g_MeasureData.dToeRR = receivedData.dToeRR;
+
+                _GV.g_MeasureData.dTA = receivedData.dTA;
+                _GV.g_MeasureData.dSymm = receivedData.dSymm;
+                OnDppDataReceived?.Invoke(_GV.g_MeasureData);
+            }));
+
+        }
         private void GetDppData(ref Message m)
         {
             try
@@ -331,23 +340,20 @@ namespace Ki_WAT
                     // UI 스레드에서 실행
                     this.Invoke(new Action(() => 
                     {
+
                         _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
                         _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
                         _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
                         _GV.g_MeasureData.dCamRR = receivedData.dCamRR;
-                            
+
                         _GV.g_MeasureData.dToeFL = receivedData.dToeFL;
                         _GV.g_MeasureData.dToeFR = receivedData.dToeFR;
                         _GV.g_MeasureData.dToeRL = receivedData.dToeRL;
                         _GV.g_MeasureData.dToeRR = receivedData.dToeRR;
-                            
+
                         _GV.g_MeasureData.dTA = receivedData.dTA;
                         _GV.g_MeasureData.dSymm = receivedData.dSymm;
-                            
-                        _GV.g_MeasureData.dHeightFL = receivedData.dHeightFL;
-                        _GV.g_MeasureData.dHeightFR = receivedData.dHeightFR;
-                        _GV.g_MeasureData.dHeightRL = receivedData.dHeightRL;
-                        _GV.g_MeasureData.dHeightRR = receivedData.dHeightRR;
+
 
                         OnDppDataReceived?.Invoke(_GV.g_MeasureData);
 
@@ -505,5 +511,12 @@ namespace Ki_WAT
             }
         }
         #endregion
+
+
+        private void Btn_T_Click(object sender, EventArgs e)
+        {
+            m_frmSimul.Show();
+        }
+
     }
 }

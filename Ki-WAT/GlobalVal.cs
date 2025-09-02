@@ -34,10 +34,7 @@ namespace Ki_WAT
         public double dHandle;
         public double dTA;
 
-        public double dHeightFL;
-        public double dHeightFR;
-        public double dHeightRL;
-        public double dHeightRR;
+
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -69,6 +66,8 @@ namespace Ki_WAT
         public double dHeightFR;
         public double dHeightRL;
         public double dHeightRR;
+
+        
     }
     
     [StructLayout(LayoutKind.Sequential, Pack = 1)]

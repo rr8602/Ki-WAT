@@ -16,10 +16,7 @@ namespace Ki_WAT
         {
             InitializeComponent();
             MoveFormToSecondMonitor();
-
-
         }
-
         private void MoveFormToSecondMonitor()
         {
             // 연결된 모든 모니터 가져오기
@@ -43,6 +40,5 @@ namespace Ki_WAT
                 MessageBox.Show("세번째 모니터가 감지되지 않았습니다.");
             }
         }
-
     }
 }

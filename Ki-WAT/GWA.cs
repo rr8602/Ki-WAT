@@ -5,6 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
+
 
 namespace Ki_WAT
 {
@@ -41,18 +43,34 @@ namespace Ki_WAT
 		public static extern int GetClientRect(IntPtr hWnd, ref RECT lpRect);
 		public static String strName = "";
 
-		public static void STM(String strMsg)
+
+
+        public static void STM(String strMsg)
+        {
+            COPYDATASTRUCT cds;
+            IntPtr hWnd = FindWindow(null, "MessageView");
+            if (hWnd != IntPtr.Zero)
+            {
+                cds.dwData = (IntPtr)Constants.COPY_MSG_DATA;
+                cds.cbData = strMsg.Length + 1;
+                cds.lpData = strMsg;
+                SendMessage(hWnd, Constants.WM_COPYDATA, 0, ref cds);
+            }
+        }
+
+        public static void TakePicture(String strMsg)
 		{
 			COPYDATASTRUCT cds;
 			IntPtr hWnd = FindWindow(null, "MessageView");
 			if (hWnd != IntPtr.Zero)
 			{
-				cds.dwData = (IntPtr)Constants.COPY_MSG_DATA;
+				cds.dwData = (IntPtr)Constants.COPY_MSG_TAKEPIC;
 				cds.cbData = strMsg.Length + 1;
 				cds.lpData = strMsg;
 				SendMessage(hWnd, Constants.WM_COPYDATA, 0, ref cds);
 			}
 		}
+
         public static void STM2(String strMsg)
         {
             COPYDATASTRUCT cds;
@@ -66,6 +84,43 @@ namespace Ki_WAT
                 SendMessage(hWnd, Constants.WM_COPYDATA, 0, ref cds);
             }
         }
+
+        public static void CaptureToPictureBox(PictureBox pictureBox, int x, int y, int width, int height)
+        {
+            // 캡처할 영역 크기만큼 비트맵 생성
+            Bitmap bmp = new Bitmap(width, height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                // 스크린의 지정된 위치에서 bmp로 복사
+                g.CopyFromScreen(x, y, 0, 0, new Size(width, height));
+            }
+
+            // PictureBox에 표시
+            if (pictureBox.Image != null)
+            {
+                pictureBox.Image.Dispose(); // 기존 이미지 해제
+            }
+            pictureBox.Image = bmp;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage; // 자동 맞춤
+        }
+        public static void CaptureFormToPictureBox(PictureBox pictureBox, Form form)
+        {
+            Rectangle bounds = form.Bounds; // 폼의 스크린 좌표와 크기 가져오기
+            Bitmap bmp = new Bitmap(bounds.Width, bounds.Height);
+
+            using (Graphics g = Graphics.FromImage(bmp))
+            {
+                g.CopyFromScreen(bounds.X, bounds.Y, 0, 0, bounds.Size);
+            }
+
+            if (pictureBox.Image != null)
+                pictureBox.Image.Dispose();
+
+            pictureBox.Image = bmp;
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
 
         public static void MW(IntPtr hWnd, int X, int Y, uint nWidth, uint nHeight, bool bRepaint = true)
 		{

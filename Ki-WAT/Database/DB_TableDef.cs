@@ -65,9 +65,9 @@ namespace Ki_WAT
         public string TotToer_ST;
         public string TotToer_LT;
 
-        public string ToeFL_ST;
-        public string ToeFL_AT;
-        public string ToeFL_LT;
+        public string ToeFL_ST; // 기준
+        public string ToeFL_AT; // 조정
+        public string ToeFL_LT; // 평가
         public string ToeFR_ST;
         public string ToeFR_AT;
         public string ToeFR_LT;
@@ -78,9 +78,9 @@ namespace Ki_WAT
         public string ToeRR_AT;
         public string ToeRR_LT;
 
-        public string CamFL_ST;
-        public string CamFL_AT;
-        public string CamFL_LT;
+        public string CamFL_ST; 
+        public string CamFL_AT; 
+        public string CamFL_LT; 
         public string CamFR_ST;
         public string CamFR_AT;
         public string CamFR_LT;

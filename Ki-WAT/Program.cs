@@ -18,6 +18,7 @@ namespace Ki_WAT
         public const int WM_COPYDATA = 0x4A;
         public const int WM_USER = 0x0400;
         public const int COPY_MSG_DATA = WM_USER + 101;
+        public const int COPY_MSG_TAKEPIC = WM_USER + 1010;
 
         public const int WGT_KG = WM_USER + 3001;
         public const int CLOSE_WINDOWS = WM_USER + 9999;
@@ -69,9 +70,10 @@ namespace Ki_WAT
         public const int STEP_DISPLAY_RESULT = 170;
 
         public const int STEP_CHECK_ALL_FINISH = 171;
-        public const int STEP_EXIT_POSITION = 172;
-        public const int STEP_CHECK_SWB_HOME = 173;
-        public const int STEP_CHECK_HLA_HOME = 174;
+        public const int STEP_CHECK_SWB_HOME = 172;
+        public const int STEP_CHECK_HLA_HOME = 173;
+        public const int STEP_EXIT_POSITION = 174;
+        
 
 
         public const int STEP_SAVE_DATA = 180;
@@ -82,11 +84,6 @@ namespace Ki_WAT
         public const int STEP_CHECK_GO_OUT3 = 184;
 
         public const int STEP_GRET_OK = 190;
-
-
-
-
-
         public const int STEP_FINISH = 9999;
 
         /// <summary>
@@ -99,9 +96,6 @@ namespace Ki_WAT
         public const int STEP_HLT_3 = 503;
         public const int STEP_HLT_4 = 504;
         public const int STEP_HLT_5 = 505;
-
-
-
 
     }
 

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace RollTester
 {
-	public class CGuage : Control
+	internal class CGuage : Control
 	{
 		public float currentValue { get; set; } = 0;
 
@@ -44,7 +44,7 @@ namespace RollTester
 		}
 		public void SetTargetAdjust(float target, float adjust, float evaluation)
 		{
-			//if (Target != target)
+			if (Target != target)
 			{
 
 				float oldTarget = Target; // 이전 값 저장
@@ -64,14 +64,7 @@ namespace RollTester
 				}
 			}
 		}
-        public void SetRange(float range)
-        {
-            this.minValue = Target - range;
-            this.maxValue = Target + range;
-            Invalidate();
-        }
-
-        public void SetRange(float min, float max)
+		public void SetRange(float min, float max)
 		{
 			this.minValue = min;
 			this.maxValue = max;
@@ -110,6 +103,11 @@ namespace RollTester
 
 		private void DrawGauge(Graphics g)
 		{
+
+
+
+
+
 
 			g.SmoothingMode = SmoothingMode.AntiAlias;
 			g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;

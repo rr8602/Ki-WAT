@@ -193,9 +193,9 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Image = global::Ki_WAT.Properties.Resources.Handle;
-            this.pictureBox2.Location = new System.Drawing.Point(332, 795);
+            this.pictureBox2.Location = new System.Drawing.Point(48, 736);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(209, 91);
+            this.pictureBox2.Size = new System.Drawing.Size(228, 162);
             this.pictureBox2.TabIndex = 160;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Visible = false;

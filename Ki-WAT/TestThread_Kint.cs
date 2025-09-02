@@ -35,11 +35,8 @@ internal class TestThread_Kint
     private static extern short GetAsyncKeyState(int vKey);
     private bool IsShiftEnterPressed()
     {
-        // Shift + F4 조합으로 변경
-        // VK_SHIFT = 0x10, VK_F4 = 0x73
-
-        return (GetAsyncKeyState(0x10) & 0x8000) != 0 &&
-               (GetAsyncKeyState(0x73) & 0x8000) != 0;
+        return (GetAsyncKeyState(0xA0) & 0x8000) != 0 &&
+               (GetAsyncKeyState(0x6B) & 0x8000) != 0;
     }
 
     // UI 업데이트를 위한 이벤트들
@@ -145,6 +142,8 @@ internal class TestThread_Kint
             UI_Update_Status("ABC");
             while (true)
             {
+
+                if (!m_bRun) break;
                 Thread.Sleep(100);
 
                 if (m_nState == Constants.STEP_WAIT)
@@ -193,12 +192,94 @@ internal class TestThread_Kint
                 {
                     DoHandle_0();
                 }
+                else if (m_nState == Constants.STEP_HANDLE_1)
+                {
+                    DoHandle_1();
+                }
                 else if (m_nState == Constants.STEP_CHECK_CENTERING)
                 {
-                    DoHandle_0();
+                    DoCheckCentering();
                 }
-
-
+                else if (m_nState == Constants.STEP_PRESS_MEASURE_WAIT)
+                {
+                    Do_PressMeasureButton_Wait();
+                }
+                else if (m_nState == Constants.STEP_WAIT_RUNOUT)
+                {
+                    Do_WaitRunOutTime();
+                }
+                else if (m_nState == Constants.STEP_SCREW_SEND_INFO)
+                {
+                    Do_SrewSendInfo();
+                }
+                else if (m_nState == Constants.STEP_SCREW_GET_DATA_LEFT)
+                {
+                    Do_GetSrewLeft();
+                }
+                else if (m_nState == Constants.STEP_SCREW_GET_DATA_RIGHT)
+                {
+                    Do_GetSrewRight();
+                }
+                else if (m_nState == Constants.STEP_PRESS_LEFT_FINISH)
+                {
+                    Do_PressLeftFinish_Wait();
+                }
+                else if (m_nState == Constants.STEP_PRESS_RIGHT_FINISH)
+                {
+                    Do_PressRightFinish_Wait();
+                }
+                else if (m_nState == Constants.STEP_CHECK_SREW_ALL_HOME)
+                {
+                    Do_Check_SrewAllHome();
+                }
+                else if (m_nState == Constants.STEP_PRESS_PIT_OUT_FINISH_WAIT)
+                {
+                    Do_Press_PitOut_Finish_wait();
+                }
+                else if (m_nState == Constants.STEP_DISPLAY_RESULT)
+                {
+                    Do_DisplayResult();
+                }
+                else if (m_nState == Constants.STEP_CHECK_ALL_FINISH)
+                {
+                    Do_CheckAllFinish();
+                }
+                else if (m_nState == Constants.STEP_EXIT_POSITION)
+                {
+                    Do_Exit_Position();
+                }
+                else if (m_nState == Constants.STEP_CHECK_SWB_HOME)
+                {
+                    Do_CheckSWB_HOME();
+                }
+                else if (m_nState == Constants.STEP_CHECK_HLA_HOME)
+                {
+                    Do_CheckHLA_HOME();
+                }
+                else if (m_nState == Constants.STEP_SAVE_DATA)
+                {
+                    Do_SaveData();
+                }
+                else if (m_nState == Constants.STEP_TICKET_PRINT)
+                {
+                    Do_TicketPrint();
+                }
+                else if (m_nState == Constants.STEP_CHECK_GO_OUT1)
+                {
+                    Do_CheckGoOut1();
+                }
+                else if (m_nState == Constants.STEP_CHECK_GO_OUT2)
+                {
+                    Do_CheckGoOut2();
+                }
+                else if (m_nState == Constants.STEP_CHECK_GO_OUT3)
+                {
+                    Do_CheckGoOut3();
+                }
+                else if (m_nState == Constants.STEP_GRET_OK)
+                {
+                    Do_GretComm(true);
+                }
                 else if (m_nState == Constants.STEP_FINISH)
                 {
                     DoFinish();
@@ -214,6 +295,12 @@ internal class TestThread_Kint
             WLog("TEST THREAD Exception : " + ex.Message);
         }
 
+        var main = _GV._frmMNG.GetForm<Frm_Main>();
+        if (main != null )
+        {
+            main.FinishCycleUI();
+        }
+            
         UI_Update_Status("Finish Thread");
 
     }
@@ -541,7 +628,7 @@ internal class TestThread_Kint
 
             UI_Update_Status("RUN-OUT_2");
             DateTime startTime = DateTime.Now;
-            const int TIMEOUT_SECONDS = 3;
+            const int TIMEOUT_SECONDS = 10;
 
             while (true)
             {
@@ -615,7 +702,7 @@ internal class TestThread_Kint
         }
         catch (Exception ex)
         {
-            OnErrorOccurred?.Invoke($"DoHandle_0:  {ex.Message}");
+            OnErrorOccurred?.Invoke($"DoHandle_1:  {ex.Message}");
         }
         m_bExitStep = false;
         SetState(Constants.STEP_CHECK_CENTERING);
@@ -658,7 +745,7 @@ internal class TestThread_Kint
         return nRet;
     }
 
-    private int Do_PresstheMeasureButton_Wait()
+    private int Do_PressMeasureButton_Wait()
     {
         int nRet = 0;
         try
@@ -772,67 +859,18 @@ internal class TestThread_Kint
             OnErrorOccurred?.Invoke($"Do_SrewSendInfo:  {ex.Message}");
         }
         m_bExitStep = false;
-        SetState(Constants.STEP_FINISH);
-        Thread.Sleep(100);
-        return nRet;
-    }
-
-    private int Do_SrewLeftTighten()
-    {
-        int nRet = 0;
-        try
-        {
-
-            UI_Update_Status("Do_SrewLeftTighten");
-
-
-
-            var main = _GV._frmMNG.GetForm<Frm_Mainfrm>();
-            if (main != null && main.ScrewDriverL != null)
-            {
-                if (!_GV.g_Substitu_ScrewDriver_L)
-                    main.ScrewDriverL.Send("asdf");
-            }
-            if (main != null && main.ScrewDriverR != null)
-            {
-
-                if (!_GV.g_Substitu_ScrewDriver_R)
-                    main.ScrewDriverR.Send("asdf");
-            }
-
-
-            DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 0.5;
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-                Thread.Sleep(10);
-            }
-
-      
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_SrewSendInfo:  {ex.Message}");
-        }
-        m_bExitStep = false;
         SetState(Constants.STEP_SCREW_GET_DATA_LEFT);
         Thread.Sleep(100);
         return nRet;
     }
 
+   
     private int Do_GetSrewLeft()
     {
         int nRet = 0;
         try
         {
             UI_Update_Status("Do_GetSrewLeft");
-           
-            
-
             DateTime startTime = DateTime.Now;
             //const double TIMEOUT_SECONDS = 0.5;
 
@@ -849,7 +887,7 @@ internal class TestThread_Kint
         }
         catch (Exception ex)
         {
-            OnErrorOccurred?.Invoke($"Do_SrewSendInfo:  {ex.Message}");
+            OnErrorOccurred?.Invoke($"Do_GetSrewLeft:  {ex.Message}");
         }
         m_bExitStep = false;
         SetState(Constants.STEP_PRESS_LEFT_FINISH);
@@ -942,43 +980,6 @@ internal class TestThread_Kint
         Thread.Sleep(100);
         return nRet;
     }
-
-
-    private int Do_PressPitOut_Finish()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_PressPitOut_Finish");
-            DateTime startTime = DateTime.Now;
-            //const double TIMEOUT_SECONDS = 0.5;
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                // if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-
-                if (_GV._PLCVal.DI._Screw_driver_L_HOME &&
-                    _GV._PLCVal.DI._Screw_driver_R_HOME &&
-                    _GV._PLCVal.DI._UnWrench_Tool_Home &&
-                    _GV._PLCVal.DI._OperatorExit_Finish) 
-                    
-                    break;
-                
-                Thread.Sleep(10);
-            }
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_PressPitOut_Finish:  {ex.Message}");
-        }
-        m_bExitStep = false;
-        SetState(Constants.STEP_CHECK_SREW_ALL_HOME);
-        Thread.Sleep(100);
-        return nRet;
-    }
-
     private int Do_Check_SrewAllHome()
     {
         int nRet = 0;
@@ -995,7 +996,7 @@ internal class TestThread_Kint
 
                 if (_GV._PLCVal.DI._Screw_driver_L_HOME &&
                     _GV._PLCVal.DI._Screw_driver_R_HOME &&
-                    _GV._PLCVal.DI._UnWrench_Tool_Home 
+                    _GV._PLCVal.DI._UnWrench_Tool_Home
                     )
                     break;
 
@@ -1104,56 +1105,6 @@ internal class TestThread_Kint
         return nRet;
 
     }
-    private int Do_Exit_Position()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_Exit_Position");
-            DateTime startTime = DateTime.Now;
-
-            _GV._PLCVal.DO._Moving_plate_Home = true;
-            _GV._PLCVal.DO._Moving_plate_ON = false;
-
-            _GV._PLCVal.DO._Safety_Roller_Down = true;
-            _GV._PLCVal.DO._Safety_Roller_Up = false;
-
-            _GV._PLCVal.DO._Centering_Home = true;
-            _GV._PLCVal.DO._Centering_ON = false;
-
-            _GV._PLCVal.DO._Camera_sensor_Enable = false;
-
-            _GV._PLCVal.DO._Floating_plate_Lock = true;
-            _GV._PLCVal.DO._Floating_plate_Free = false;
-
-            _GV._PLCVal.DO._RollerBrake_Lock = true;
-            _GV._PLCVal.DO._RollerBrake_Free = false;
-
-            
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-
-                //if ( 모든 조건들이 참일때) break;
-
-                Thread.Sleep(10);
-            }
-
-            //피트 신호등 RED
-            //퇴출 신호등 GREEN;
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_Exit_Position:  {ex.Message}");
-        }
-        m_bExitStep = false;
-        SetState(Constants.STEP_CHECK_SWB_HOME);
-        Thread.Sleep(100);
-        return nRet;
-
-    }
 
     private int Do_CheckSWB_HOME()
     {
@@ -1205,11 +1156,64 @@ internal class TestThread_Kint
             OnErrorOccurred?.Invoke($"Do_CheckHLA_HOME:  {ex.Message}");
         }
         m_bExitStep = false;
+        SetState(Constants.STEP_EXIT_POSITION);
+        Thread.Sleep(100);
+        return nRet;
+
+    }
+
+    private int Do_Exit_Position()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Do_Exit_Position");
+            DateTime startTime = DateTime.Now;
+
+            _GV._PLCVal.DO._Moving_plate_Home = true;
+            _GV._PLCVal.DO._Moving_plate_ON = false;
+
+            _GV._PLCVal.DO._Safety_Roller_Down = true;
+            _GV._PLCVal.DO._Safety_Roller_Up = false;
+
+            _GV._PLCVal.DO._Centering_Home = true;
+            _GV._PLCVal.DO._Centering_ON = false;
+
+            _GV._PLCVal.DO._Camera_sensor_Enable = false;
+
+            _GV._PLCVal.DO._Floating_plate_Lock = true;
+            _GV._PLCVal.DO._Floating_plate_Free = false;
+
+            _GV._PLCVal.DO._RollerBrake_Lock = true;
+            _GV._PLCVal.DO._RollerBrake_Free = false;
+
+            
+
+            while (true)
+            {
+                if (CheckLoopExit()) break;
+
+                //if ( 모든 조건들이 참일때) break;
+
+                Thread.Sleep(10);
+            }
+
+            //피트 신호등 RED
+          
+
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_Exit_Position:  {ex.Message}");
+        }
+        m_bExitStep = false;
         SetState(Constants.STEP_SAVE_DATA);
         Thread.Sleep(100);
         return nRet;
 
     }
+
+   
     private int Do_SaveData()
     {
         int nRet = 0;
@@ -1217,7 +1221,7 @@ internal class TestThread_Kint
         {
             UI_Update_Status("Do_SaveData");
             DateTime startTime = DateTime.Now;
-
+            //퇴출 신호등 GREEN;
 
             while (true)
             {
@@ -1304,7 +1308,7 @@ internal class TestThread_Kint
         int nRet = 0;
         try
         {
-            UI_Update_Status("STEP_CHECK_GO_OUT1");
+            UI_Update_Status("STEP_CHECK_GO_OUT2");
             DateTime startTime = DateTime.Now;
 
 
@@ -1333,10 +1337,8 @@ internal class TestThread_Kint
         int nRet = 0;
         try
         {
-            UI_Update_Status("STEP_CHECK_GO_OUT1");
+            UI_Update_Status("STEP_CHECK_GO_OUT3");
             DateTime startTime = DateTime.Now;
-
-
             while (true)
             {
                 if (CheckLoopExit()) break;
@@ -1344,12 +1346,12 @@ internal class TestThread_Kint
                 //DB Write.
                 Thread.Sleep(10);
             }
-
         }
         catch (Exception ex)
         {
             OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
         }
+
         m_bExitStep = false;
         SetState(Constants.STEP_GRET_OK);
         Thread.Sleep(100);
@@ -1378,13 +1380,10 @@ internal class TestThread_Kint
             while (true)
             {
                 if (CheckLoopExit()) break;
-                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-
-                
+                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;   
                 //DB Write.
                 Thread.Sleep(10);
             }
-
         }
         catch (Exception ex)
         {
@@ -1394,10 +1393,5 @@ internal class TestThread_Kint
         SetState(Constants.STEP_FINISH);
         Thread.Sleep(100);
         return nRet;
-
     }
-
-    
-
-
 }

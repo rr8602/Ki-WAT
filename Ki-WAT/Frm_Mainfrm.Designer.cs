@@ -41,6 +41,7 @@
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnMain = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Status_BAR = new System.Windows.Forms.Label();
             this.Status_Screw_R = new System.Windows.Forms.Label();
             this.Status_Screw_L = new System.Windows.Forms.Label();
             this.Status_PLC = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.Status_BAR = new System.Windows.Forms.Label();
             this.panelNavBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -130,7 +130,7 @@
             this.Btn_T.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_T.Font = new System.Drawing.Font("Verdana", 12F);
             this.Btn_T.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Btn_T.Location = new System.Drawing.Point(4, 816);
+            this.Btn_T.Location = new System.Drawing.Point(4, 575);
             this.Btn_T.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_T.Name = "Btn_T";
             this.Btn_T.Size = new System.Drawing.Size(83, 60);
@@ -247,6 +247,17 @@
             this.panel1.Size = new System.Drawing.Size(1822, 48);
             this.panel1.TabIndex = 8;
             // 
+            // Status_BAR
+            // 
+            this.Status_BAR.BackColor = System.Drawing.Color.Gray;
+            this.Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Status_BAR.Location = new System.Drawing.Point(439, 7);
+            this.Status_BAR.Name = "Status_BAR";
+            this.Status_BAR.Size = new System.Drawing.Size(121, 32);
+            this.Status_BAR.TabIndex = 555;
+            this.Status_BAR.Text = "BarCode";
+            this.Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Status_Screw_R
             // 
             this.Status_Screw_R.BackColor = System.Drawing.Color.Gray;
@@ -336,17 +347,6 @@
             this.button6.Tag = "frmManual";
             this.button6.Text = "Manual";
             this.button6.UseVisualStyleBackColor = false;
-            // 
-            // Status_BAR
-            // 
-            this.Status_BAR.BackColor = System.Drawing.Color.Gray;
-            this.Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Status_BAR.Location = new System.Drawing.Point(439, 7);
-            this.Status_BAR.Name = "Status_BAR";
-            this.Status_BAR.Size = new System.Drawing.Size(121, 32);
-            this.Status_BAR.TabIndex = 555;
-            this.Status_BAR.Text = "BarCode";
-            this.Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Frm_Mainfrm
             // 

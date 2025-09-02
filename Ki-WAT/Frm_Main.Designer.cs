@@ -46,6 +46,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.GB_GenInfo = new System.Windows.Forms.GroupBox();
+            this.Btn_Manual = new System.Windows.Forms.Button();
+            this.Txt_Barcode = new System.Windows.Forms.TextBox();
             this.lbl_Barcode = new System.Windows.Forms.Label();
             this.lbl_PJI = new System.Windows.Forms.Label();
             this.lbl_LET = new System.Windows.Forms.Label();
@@ -63,10 +65,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.seqList = new System.Windows.Forms.ListView();
-            this.Btn_Delete = new System.Windows.Forms.Button();
             this.Btn_Start = new System.Windows.Forms.Button();
+            this.Pic_copy = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.Btn_Delete = new System.Windows.Forms.Button();
             this.GB_common.SuspendLayout();
             this.GB_GenInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_copy)).BeginInit();
             this.SuspendLayout();
             // 
             // label19
@@ -277,6 +282,8 @@
             // 
             // GB_GenInfo
             // 
+            this.GB_GenInfo.Controls.Add(this.Btn_Manual);
+            this.GB_GenInfo.Controls.Add(this.Txt_Barcode);
             this.GB_GenInfo.Controls.Add(this.lbl_Barcode);
             this.GB_GenInfo.Controls.Add(this.lbl_PJI);
             this.GB_GenInfo.Controls.Add(this.lbl_LET);
@@ -297,6 +304,28 @@
             this.GB_GenInfo.TabStop = false;
             this.GB_GenInfo.Text = "General Info";
             // 
+            // Btn_Manual
+            // 
+            this.Btn_Manual.BackColor = System.Drawing.Color.Silver;
+            this.Btn_Manual.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Manual.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Manual.Location = new System.Drawing.Point(809, 457);
+            this.Btn_Manual.Name = "Btn_Manual";
+            this.Btn_Manual.Size = new System.Drawing.Size(156, 73);
+            this.Btn_Manual.TabIndex = 167;
+            this.Btn_Manual.Text = "Manual";
+            this.Btn_Manual.UseVisualStyleBackColor = false;
+            this.Btn_Manual.Click += new System.EventHandler(this.Btn_Manual_Click);
+            // 
+            // Txt_Barcode
+            // 
+            this.Txt_Barcode.Font = new System.Drawing.Font("Arial", 30F);
+            this.Txt_Barcode.Location = new System.Drawing.Point(386, 457);
+            this.Txt_Barcode.Multiline = true;
+            this.Txt_Barcode.Name = "Txt_Barcode";
+            this.Txt_Barcode.Size = new System.Drawing.Size(417, 76);
+            this.Txt_Barcode.TabIndex = 165;
+            // 
             // lbl_Barcode
             // 
             this.lbl_Barcode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -304,7 +333,7 @@
             this.lbl_Barcode.Font = new System.Drawing.Font("Arial", 30F);
             this.lbl_Barcode.Location = new System.Drawing.Point(386, 457);
             this.lbl_Barcode.Name = "lbl_Barcode";
-            this.lbl_Barcode.Size = new System.Drawing.Size(560, 76);
+            this.lbl_Barcode.Size = new System.Drawing.Size(416, 76);
             this.lbl_Barcode.TabIndex = 22;
             this.lbl_Barcode.Text = "PP 039096538510510";
             this.lbl_Barcode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -488,19 +517,7 @@
             this.seqList.UseCompatibleStateImageBehavior = false;
             this.seqList.View = System.Windows.Forms.View.Details;
             this.seqList.SelectedIndexChanged += new System.EventHandler(this.seqList_SelectedIndexChanged);
-            // 
-            // Btn_Delete
-            // 
-            this.Btn_Delete.BackColor = System.Drawing.Color.Silver;
-            this.Btn_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_Delete.ForeColor = System.Drawing.Color.Teal;
-            this.Btn_Delete.Location = new System.Drawing.Point(533, 716);
-            this.Btn_Delete.Name = "Btn_Delete";
-            this.Btn_Delete.Size = new System.Drawing.Size(127, 44);
-            this.Btn_Delete.TabIndex = 163;
-            this.Btn_Delete.Text = "DELETE";
-            this.Btn_Delete.UseVisualStyleBackColor = false;
-            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click_1);
+            this.seqList.DoubleClick += new System.EventHandler(this.seqList_DoubleClick);
             // 
             // Btn_Start
             // 
@@ -515,14 +532,51 @@
             this.Btn_Start.UseVisualStyleBackColor = false;
             this.Btn_Start.Click += new System.EventHandler(this.button2_Click);
             // 
+            // Pic_copy
+            // 
+            this.Pic_copy.Location = new System.Drawing.Point(285, 315);
+            this.Pic_copy.Name = "Pic_copy";
+            this.Pic_copy.Size = new System.Drawing.Size(263, 127);
+            this.Pic_copy.TabIndex = 165;
+            this.Pic_copy.TabStop = false;
+            this.Pic_copy.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Silver;
+            this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Teal;
+            this.button2.Location = new System.Drawing.Point(667, 24);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(127, 44);
+            this.button2.TabIndex = 166;
+            this.button2.Text = "TT";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // Btn_Delete
+            // 
+            this.Btn_Delete.BackColor = System.Drawing.Color.Silver;
+            this.Btn_Delete.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Delete.ForeColor = System.Drawing.Color.Teal;
+            this.Btn_Delete.Location = new System.Drawing.Point(285, 716);
+            this.Btn_Delete.Name = "Btn_Delete";
+            this.Btn_Delete.Size = new System.Drawing.Size(127, 44);
+            this.Btn_Delete.TabIndex = 167;
+            this.Btn_Delete.Text = "Delete";
+            this.Btn_Delete.UseVisualStyleBackColor = false;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
+            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1797, 1003);
-            this.Controls.Add(this.Btn_Start);
             this.Controls.Add(this.Btn_Delete);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.Pic_copy);
+            this.Controls.Add(this.Btn_Start);
             this.Controls.Add(this.seqList);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.button1);
@@ -538,6 +592,8 @@
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.GB_common.ResumeLayout(false);
             this.GB_GenInfo.ResumeLayout(false);
+            this.GB_GenInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_copy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -579,7 +635,11 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.ListView seqList;
-        private System.Windows.Forms.Button Btn_Delete;
         private System.Windows.Forms.Button Btn_Start;
+        private System.Windows.Forms.PictureBox Pic_copy;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button Btn_Manual;
+        private System.Windows.Forms.TextBox Txt_Barcode;
+        private System.Windows.Forms.Button Btn_Delete;
     }
 }
