@@ -66,9 +66,9 @@
             this.label29 = new System.Windows.Forms.Label();
             this.seqList = new System.Windows.Forms.ListView();
             this.Btn_Start = new System.Windows.Forms.Button();
-            this.Pic_copy = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.Btn_Delete = new System.Windows.Forms.Button();
+            this.Pic_copy = new System.Windows.Forms.PictureBox();
             this.GB_common.SuspendLayout();
             this.GB_GenInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_copy)).BeginInit();
@@ -309,11 +309,11 @@
             this.Btn_Manual.BackColor = System.Drawing.Color.Silver;
             this.Btn_Manual.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Manual.ForeColor = System.Drawing.Color.Teal;
-            this.Btn_Manual.Location = new System.Drawing.Point(809, 457);
+            this.Btn_Manual.Location = new System.Drawing.Point(840, 457);
             this.Btn_Manual.Name = "Btn_Manual";
-            this.Btn_Manual.Size = new System.Drawing.Size(156, 73);
+            this.Btn_Manual.Size = new System.Drawing.Size(125, 73);
             this.Btn_Manual.TabIndex = 167;
-            this.Btn_Manual.Text = "Manual";
+            this.Btn_Manual.Text = "Registor";
             this.Btn_Manual.UseVisualStyleBackColor = false;
             this.Btn_Manual.Click += new System.EventHandler(this.Btn_Manual_Click);
             // 
@@ -323,7 +323,7 @@
             this.Txt_Barcode.Location = new System.Drawing.Point(386, 457);
             this.Txt_Barcode.Multiline = true;
             this.Txt_Barcode.Name = "Txt_Barcode";
-            this.Txt_Barcode.Size = new System.Drawing.Size(417, 76);
+            this.Txt_Barcode.Size = new System.Drawing.Size(448, 76);
             this.Txt_Barcode.TabIndex = 165;
             // 
             // lbl_Barcode
@@ -532,15 +532,6 @@
             this.Btn_Start.UseVisualStyleBackColor = false;
             this.Btn_Start.Click += new System.EventHandler(this.button2_Click);
             // 
-            // Pic_copy
-            // 
-            this.Pic_copy.Location = new System.Drawing.Point(285, 315);
-            this.Pic_copy.Name = "Pic_copy";
-            this.Pic_copy.Size = new System.Drawing.Size(263, 127);
-            this.Pic_copy.TabIndex = 165;
-            this.Pic_copy.TabStop = false;
-            this.Pic_copy.Visible = false;
-            // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.Silver;
@@ -566,6 +557,15 @@
             this.Btn_Delete.Text = "Delete";
             this.Btn_Delete.UseVisualStyleBackColor = false;
             this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
+            // 
+            // Pic_copy
+            // 
+            this.Pic_copy.Location = new System.Drawing.Point(285, 315);
+            this.Pic_copy.Name = "Pic_copy";
+            this.Pic_copy.Size = new System.Drawing.Size(263, 127);
+            this.Pic_copy.TabIndex = 165;
+            this.Pic_copy.TabStop = false;
+            this.Pic_copy.Visible = false;
             // 
             // Frm_Main
             // 
