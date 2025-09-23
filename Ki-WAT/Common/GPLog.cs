@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Ki_WAT
 {
-	internal class GPLog
+	public class GPLog
 	{
 		private String m_strName = "";
 		private String m_strLogPath = "";

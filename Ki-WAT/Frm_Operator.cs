@@ -19,7 +19,7 @@ namespace Ki_WAT
         public Frm_Oper_Rolling m_frm_Oper_Roll = new Frm_Oper_Rolling();
         public Frm_Oper_Static m_frm_Oper_Static = new Frm_Oper_Static();
         private Point mousePoint; // 현재 마우스 포인터의 좌표저장 변수 선언
-
+        GlobalVal _GV = GlobalVal.Instance;
         public List<Form> m_FrmList = new List<Form>();
 
         private Form m_ActiveSubForm;
@@ -36,7 +36,6 @@ namespace Ki_WAT
             InitializeComponent();
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.UpdateStyles();
-
             MoveFormToSecondMonitor();
 
         }
@@ -45,14 +44,11 @@ namespace Ki_WAT
             m_MainFrm = pParent;
             m_frm_Oper_Test.SetMainFrm(m_MainFrm);
             m_frm_Oper_Test.SetOperator(this);
-
             m_frm_Oper_Static.SetMainFrm(m_MainFrm);
             m_frm_Oper_Static.SetOperator(this);
         }
-
         public void OnReceiveDpp(MeasureData pData)
         {
-
         }
 
         private void Frm_Operator_Load(object sender, EventArgs e)
@@ -61,9 +57,6 @@ namespace Ki_WAT
             InitializeSubForm(m_frm_Oper_Test);
             InitializeSubForm(m_frm_Oper_Roll);
             InitializeSubForm(m_frm_Oper_Static);
-
-
-
             ShowFrm(2);
 
             // 1초 타이머 시작 (lbl_Time에 1,2,3... 표시)
@@ -87,9 +80,30 @@ namespace Ki_WAT
             m_TimeCounter = 0;
             m_TimeTimer.Stop();
         }
+        public void SetPJIText(string strPJI)
+        {
+            if (lbl_PJI.InvokeRequired)
+            {
+                lbl_PJI.Invoke(new Action(() => lbl_PJI.Text = strPJI));
+            }
+            else
+            {
+                lbl_PJI.Text = strPJI;
+            }
+        }
+        public void SetNextPJI(string strPJI)
+        {
+            if (lbl_NextPJI.InvokeRequired)
+            {
+                lbl_NextPJI.Invoke(new Action(() => lbl_NextPJI.Text = strPJI));
+            }
+            else
+            {
+                lbl_NextPJI.Text = strPJI;
+            }
+        }
 
-
-    private void OnStatusUpdate_Main(string status)
+        private void OnStatusUpdate_Main(string status)
         {
             try
             {
@@ -101,7 +115,7 @@ namespace Ki_WAT
                 }
                 if (lbl_Message == null || lbl_Message.IsDisposed) return;
 
-                lbl_Message.Text = status;  // ListBox라면 _Log_ListBox(status);
+                lbl_Message.Text = status;
             }
             catch (Exception ex)
             {
@@ -230,7 +244,54 @@ namespace Ki_WAT
         private void Frm_Operator_Shown(object sender, EventArgs e)
         {
            TestThread_Kint.OnStatusUpdate += OnStatusUpdate_Main;
+           TestThread_Kint.OnCycleFinished += OnCycleFinished;
+            m_MainFrm.m_SWBComm._UpdateAngle += UpdateSWBAngle;
         }
+
+        private void UpdateSWBAngle(double dSWB)
+        {
+            try
+            {
+
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => UpdateSWBAngle(dSWB)));
+                    return;
+                }
+                lbl_Hand.Text = dSWB.ToString("F1");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
+
+            
+        }
+
+        private void FinishCycleUI()
+        {
+            lbl_Time.Text = "0";
+            lbl_Message.Text = "";
+            lbl_NextPJI.Text = "";
+            lbl_PJI.Text = "";
+        }
+        private void OnCycleFinished()
+        {
+            try
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(OnCycleFinished));
+                    return;
+                }
+                FinishCycleUI();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
+        }
+
 
         private void TimeTimer_Tick(object sender, EventArgs e)
         {
@@ -241,6 +302,7 @@ namespace Ki_WAT
                 {
                     lbl_Time.Text = m_TimeCounter.ToString();
                 }
+                //lbl_Hand.Text = _GV.dHandle.ToString("F1");
             }
             catch { }
         }

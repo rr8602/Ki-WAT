@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
-//using System.Windows.Media.Media3D;
 
 namespace RollTester
 {
@@ -20,9 +14,9 @@ namespace RollTester
         private float _maximum = 60;
         private float _value = 35;
         private float _barHeight = 50;
-        private float _Target = 00;
-        private float _Adjust = 10;
-        private float _Evaluation = 20;
+        private float _Target = -2;
+        private float _Adjust = 2;
+        private float _Evaluation = 3;
 
 
         public SlideBarGauge()
@@ -120,11 +114,9 @@ namespace RollTester
                (Value - _minimum) / (float)(_maximum - _minimum);
             int valX = barRect.X + (int)(barRect.Width * valT);
 
-            // 0~값 채우기
-            bool bTolerance = true;
 
 
-            if (Tolerance < Math.Abs(Value)) bTolerance = false;
+
 
 
 
@@ -201,6 +193,11 @@ namespace RollTester
                 int thumbHeight = barRect.Height + 0;
                 int thumbTop = barRect.Top - 0;
 
+                if (valX + thumbWidth > barRect.Right)
+                {
+                    thumbWidth = barRect.Right - valX;
+                }
+                if (valX < barRect.Left) valX = barRect.Left;
 
                 Rectangle barEvaluation = new Rectangle(
                          valX,
@@ -296,45 +293,39 @@ namespace RollTester
 
         private void DrawTicks(Graphics g, Rectangle barRect, int zeroX)
         {
-            int nDiv = (int)((Math.Abs(Maximum) + Math.Abs(Minimum)) / 10);
-            int step = (int)((Maximum - Minimum) / nDiv); // 10등분
-            if (step <= 0) step = 1;
+
 
             using (var pen = new Pen(TickColor, 1))
             {
-                for (int v = (int)Minimum; v <= Maximum; v += step)
+
+
+                float range = Math.Abs(Maximum) + Math.Abs(Minimum);
+                float OneSize = barRect.Width / range;
+
+                float ratio = ((int)_Target + (int)Math.Abs(Minimum)) * OneSize;
+
+                int Center = barRect.Left + (int)(ratio);
+
+
+                g.DrawLine(pen, Center, barRect.Top, Center, barRect.Bottom);
+
+
+                int radius = (int)(Math.Min(this.Width, this.Height) * 0.15); // 컨트롤 크기 기준 반지름 설정
+
+                using (Font valueFont = new Font(this.Font.FontFamily, radius * 1f, FontStyle.Bold))
                 {
+                    var strMax = Maximum.ToString();
+                    var strMin = Minimum.ToString();
+                    var strTarget = _Target.ToString();
 
-                    float range = Math.Abs(Maximum) + Math.Abs(Minimum);
-                    float OneSize = barRect.Width / range;
+                    var szMax = g.MeasureString(strMax, valueFont);
+                    var szMin = g.MeasureString(strMin, valueFont);
+                    var szTarget = g.MeasureString(strTarget, valueFont);
 
-                    float ratio = ((int)_Target + (int)Math.Abs(Minimum)) * OneSize;
+                    g.DrawString(strMin, valueFont, Brushes.Black, barRect.Left - szMin.Width / 2 - 2, barRect.Bottom + radius / 10);
+                    g.DrawString(strMax, valueFont, Brushes.Black, barRect.Right - szMax.Width / 2 + 2, barRect.Bottom + radius / 10);
+                    g.DrawString(strTarget, valueFont, Brushes.Black, Center - szTarget.Width / 2, barRect.Bottom + radius / 10);
 
-                    int Center = barRect.Left + (int)(ratio);
-
-
-
-                    if (v == _Target) g.DrawLine(pen, Center, barRect.Top, Center, barRect.Bottom);
-
-                    // 값 레이블
-
-                    if (v == Maximum || v == Minimum || v == _Target)
-                    {
-
-                        int radius = (int)(Math.Min(this.Width, this.Height) * 0.10); // 컨트롤 크기 기준 반지름 설정
-
-                        using (Font valueFont = new Font(this.Font.FontFamily, radius * 1f, FontStyle.Bold))
-                        {
-                            var str = v.ToString();
-                            var sz = g.MeasureString(str, valueFont);
-
-                            if (v == Minimum) g.DrawString(str, valueFont, Brushes.Black, barRect.Left - sz.Width / 2 - 2, barRect.Bottom + radius / 10);
-                            if (v == Maximum) g.DrawString(str, valueFont, Brushes.Black, barRect.Right - sz.Width / 2 + 2, barRect.Bottom + radius / 10);
-                            if (v == _Target) g.DrawString(str, valueFont, Brushes.Black, Center - sz.Width / 2, barRect.Bottom + radius / 10);
-
-                        }
-
-                    }
                 }
 
             }

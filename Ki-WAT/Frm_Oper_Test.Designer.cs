@@ -29,10 +29,9 @@
         private void InitializeComponent()
         {
             this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.GRP_RR_CAM = new RollTester.CGuage();
             this.GRP_RL_TOE = new RollTester.CGuage();
             this.GRP_FR_CAM = new RollTester.CGuage();
@@ -41,7 +40,7 @@
             this.GRP_RR_TOE = new RollTester.CGuage();
             this.GRP_FL_CAM = new RollTester.CGuage();
             this.GRP_FR_TOE = new RollTester.CGuage();
-            this.lblLine = new System.Windows.Forms.Label();
+            this.lbl_SWB = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,28 +55,6 @@
             this.label9.TabIndex = 48;
             this.label9.Text = "WHEEL ALIGNMENT DATA";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label11
-            // 
-            this.label11.BackColor = System.Drawing.Color.Black;
-            this.label11.Font = new System.Drawing.Font("Arial", 30F);
-            this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(844, 529);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(189, 44);
-            this.label11.TabIndex = 50;
-            this.label11.Text = "0.0";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Image = global::Ki_WAT.Properties.Resources.Handle;
-            this.pictureBox2.Location = new System.Drawing.Point(825, 365);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(228, 218);
-            this.pictureBox2.TabIndex = 161;
-            this.pictureBox2.TabStop = false;
             // 
             // button1
             // 
@@ -95,6 +72,16 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(101, 21);
             this.textBox1.TabIndex = 163;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Ki_WAT.Properties.Resources.KakaoTalk_20250904_133015943_05;
+            this.pictureBox2.Location = new System.Drawing.Point(773, 374);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(331, 218);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 161;
+            this.pictureBox2.TabStop = false;
             // 
             // GRP_RR_CAM
             // 
@@ -148,14 +135,14 @@
             this.GRP_FR_CAM.SpeedMode = false;
             this.GRP_FR_CAM.TabIndex = 54;
             this.GRP_FR_CAM.Text = "cGuage3";
-            this.GRP_FR_CAM.TickInterval = 10F;
+            this.GRP_FR_CAM.TickInterval = 30F;
             this.GRP_FR_CAM.Title = "CAMBER";
             this.GRP_FR_CAM.TitleColor = System.Drawing.Color.Black;
             this.GRP_FR_CAM.ValueColor = System.Drawing.Color.LightSteelBlue;
             // 
             // GRP_FL_TOE
             // 
-            this.GRP_FL_TOE.BgColor = System.Drawing.Color.CornflowerBlue;
+            this.GRP_FL_TOE.BgColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.GRP_FL_TOE.currentValue = 0F;
             this.GRP_FL_TOE.Location = new System.Drawing.Point(31, 107);
             this.GRP_FL_TOE.maxValue = 40F;
@@ -186,7 +173,7 @@
             this.GRP_RL_CAM.SpeedMode = false;
             this.GRP_RL_CAM.TabIndex = 56;
             this.GRP_RL_CAM.Text = "cGuage7";
-            this.GRP_RL_CAM.TickInterval = 10F;
+            this.GRP_RL_CAM.TickInterval = 30F;
             this.GRP_RL_CAM.Title = "CAMBER";
             this.GRP_RL_CAM.TitleColor = System.Drawing.Color.Black;
             this.GRP_RL_CAM.ValueColor = System.Drawing.Color.LightSteelBlue;
@@ -224,7 +211,7 @@
             this.GRP_FL_CAM.SpeedMode = false;
             this.GRP_FL_CAM.TabIndex = 52;
             this.GRP_FL_CAM.Text = "cGuage1";
-            this.GRP_FL_CAM.TickInterval = 10F;
+            this.GRP_FL_CAM.TickInterval = 30F;
             this.GRP_FL_CAM.Title = "CAMBER";
             this.GRP_FL_CAM.TitleColor = System.Drawing.Color.Black;
             this.GRP_FL_CAM.ValueColor = System.Drawing.Color.LightSteelBlue;
@@ -248,28 +235,31 @@
             this.GRP_FR_TOE.TitleColor = System.Drawing.Color.Black;
             this.GRP_FR_TOE.ValueColor = System.Drawing.Color.LightSteelBlue;
             // 
-            // lblLine
+            // lbl_SWB
             // 
-            this.lblLine.Location = new System.Drawing.Point(892, 105);
-            this.lblLine.Name = "lblLine";
-            this.lblLine.Size = new System.Drawing.Size(89, 229);
-            this.lblLine.TabIndex = 164;
-            this.lblLine.Text = "label1";
+            this.lbl_SWB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(55)))), ((int)(((byte)(52)))));
+            this.lbl_SWB.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_SWB.ForeColor = System.Drawing.Color.White;
+            this.lbl_SWB.Location = new System.Drawing.Point(919, 494);
+            this.lbl_SWB.Name = "lbl_SWB";
+            this.lbl_SWB.Size = new System.Drawing.Size(150, 43);
+            this.lbl_SWB.TabIndex = 50;
+            this.lbl_SWB.Text = "0.0";
+            this.lbl_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Frm_Oper_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1900, 900);
-            this.Controls.Add(this.lblLine);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.GRP_RR_CAM);
             this.Controls.Add(this.GRP_RL_TOE);
             this.Controls.Add(this.GRP_FR_CAM);
             this.Controls.Add(this.GRP_FL_TOE);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lbl_SWB);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.GRP_RL_CAM);
@@ -281,7 +271,7 @@
             this.Name = "Frm_Oper_Test";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Frm_Oper_Test";
+            this.Text = "ㄱ";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -290,7 +280,6 @@
 
         #endregion
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
         private RollTester.CGuage GRP_FL_TOE;
         private RollTester.CGuage GRP_FL_CAM;
         private RollTester.CGuage GRP_FR_CAM;
@@ -302,6 +291,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label lblLine;
+        private System.Windows.Forms.Label lbl_SWB;
     }
 }

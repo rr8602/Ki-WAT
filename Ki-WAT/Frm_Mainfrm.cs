@@ -1,34 +1,32 @@
-﻿using System;
+﻿using HandleLeveler;
+using KINT_Lib;
+using LETInterface;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-
-using KINT_Lib;
 using static KINT_Lib.Lib_TcpClient;
-using LETInterface;
-using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Ki_WAT
 {
     public partial class Frm_Mainfrm : Form 
     {
-
-
         GlobalVal _GV = GlobalVal.Instance;
         //globalData1.g_DppData.dToeFL = 10.5;
-        
-
+        public  readonly AngleCalculator m_SWBComm;
         public Frm_Main m_frmMain = new Frm_Main();
         public Frm_Config m_frmConfig = new Frm_Config();
         public Frm_Operator User_Monitor = null;
-        public Frm_PitInMonitor Pit_Monitor = null;
+        public Frm_PitInMonitor m_Frm_PitIn = null;
         public Frm_Rolling m_frmRoll = new Frm_Rolling();
         public Frm_StaticMaster m_frmStatic = new Frm_StaticMaster();
         public Frm_Result m_frmResult = new Frm_Result();
@@ -39,18 +37,13 @@ namespace Ki_WAT
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
         private Form m_ActiveSubForm;
 
-
         public Lib_TcpClient m_BarcodeComm = new Lib_TcpClient();
         private Lib_TcpClient m_ScrewDriverL = new Lib_TcpClient();
         private Lib_TcpClient m_ScrewDriverR = new Lib_TcpClient();
 
         // 바코드 통신 연결 상태 체크용 타이머
-        private Timer m_BarcodeConnectionTimer;
-        
-        // 바코드 재연결 관련 변수
-        private bool m_bReconnecting = false;
-        private DateTime m_lastReconnectAttempt = DateTime.MinValue;
-        private const int RECONNECT_INTERVAL_SECONDS = 10; // 재연결 시도 간격 (초)
+        private Timer m_StatusTimer = new Timer() ;
+        private Timer m_TimerTest;
 
         public DB_LocalWat m_dbJob;
         private const int WM_COPYDATA = 0x004A;
@@ -58,19 +51,16 @@ namespace Ki_WAT
         public delegate void DppDataReceive(MeasureData pData);
         public event DppDataReceive OnDppDataReceived;
 
-        TblCarModel m_Cur_Model = new TblCarModel();
-
+        private Random _rand = new Random();  // 클래스 멤버로 선언 (중복 난수 방지)
         public Lib_TcpClient ScrewDriverL => m_ScrewDriverL;
         public Lib_TcpClient ScrewDriverR => m_ScrewDriverR;
 
+        
         public Frm_Mainfrm()
         {
             InitializeComponent();
-            
-            // 바코드 연결 상태 체크 타이머 초기화
-            InitializeBarcodeConnectionTimer();
+            m_SWBComm = new AngleCalculator( UpdateDisplayValues, UpdateSWBAngle);
         }
-
         private void InitUI()
         {
             m_frmMain.SetParent(this);
@@ -78,6 +68,7 @@ namespace Ki_WAT
             m_frmResult.SetParent(this);
             m_frmManual.SetParent(this);
             m_frmStatic.SetParent(this);
+            _GV._TestThread.SetMainFrame(this);
 
             InitializeSubForm(m_frmMain);
             InitializeSubForm(m_frmConfig);
@@ -104,7 +95,11 @@ namespace Ki_WAT
                     User_Monitor.Show();
                 }
 
-
+                if (m_Frm_PitIn == null )
+                {
+                    m_Frm_PitIn = new Frm_PitInMonitor(this);
+                    m_Frm_PitIn.Show();
+                }
             }
 
             ChangeButtonColor(BtnMain);
@@ -114,13 +109,66 @@ namespace Ki_WAT
         private void Frm_Mainfrm_Load(object sender, EventArgs e)
         {
             _GV.Config.LoadConfig();
-
             DeviceOpen();
             InitUI();
-
             _GV._frmMNG.RegisterForm(this);
             m_frmSimul = new FrmSimulator(this);
+            m_StatusTimer.Tick += new EventHandler(StatusTimer_Tick);
+            m_StatusTimer.Interval = 1000; // 1초마다
+            m_StatusTimer.Start();
+        }
+        private void UpdateSWBAngle(double dSWB)
+        {
+            _GV.dHandle = dSWB;
+        }
+        private void UpdateDisplayValues(string fnd, string sensorAd, string boardAngle, string pcAngle)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => UpdateDisplayValues(fnd, sensorAd, boardAngle, pcAngle)));
+                return;
+            }
 
+
+
+        }
+
+        private void StatusTimer_Tick(object sender, EventArgs e)
+        {
+            if (m_BarcodeComm.IsConnected)
+            {
+                lbl_Status_BAR.BackColor = Color.Lime;
+            }
+            else
+            {
+                lbl_Status_BAR.BackColor = Color.Red;
+            }
+
+            if (m_ScrewDriverL.IsConnected)
+            {
+                // lbl_Status_SCRL.BackColor = Color.Lime;
+            }
+            else
+            {
+                //lbl_Status_SCRL.BackColor = Color.Red;
+            }
+            if (_GV._VEP_Client.IsConnected)
+            {
+                lbl_State_VEP.BackColor = Color.Lime;
+            }
+            else
+            {
+                lbl_State_VEP.BackColor = Color.Red;
+            }
+
+            if (m_SWBComm.IsConnected)
+            {
+                lbl_Status_SWB.BackColor = Color.Lime;
+            }
+            else
+            {
+                lbl_Status_SWB.BackColor = Color.Red;
+            }
         }
 
         public void DeviceOpen()
@@ -129,19 +177,48 @@ namespace Ki_WAT
 
             _GV.LET_Controller = new CycleControl();
             //Socket 
-            m_BarcodeComm.Connect("192.168.10.114", 8511);
-            //m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
+            
 
+
+            m_BarcodeComm.OnConnected += () => Console.WriteLine("Connected!");
+            m_BarcodeComm.OnDisconnected += () => Console.WriteLine("Disconnected!");
+            m_BarcodeComm.OnReconnectAttempt += d => Console.WriteLine($"Reconnecting in {d} ms...");
+            m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
+            m_BarcodeComm.EnableAutoReconnect(1000, 15000);
+            // 최초 접속 시도 (실패하면 루프가 계속 재시도)
+            m_BarcodeComm.Connect(_GV.Config.Device.BARCODE_IP, Int32.Parse(_GV.Config.Device.BARCODE_PORT));
             // 바코드 연결 상태 체크 타이머 시작
-            StartBarcodeConnectionTimer();
+            //StartBarcodeConnectionTimer();
 
-            m_ScrewDriverL.Connect("192.168.10.114", 8515);
-            m_ScrewDriverL.OnDataReceived += new DataReceiveClient(event_GetScrewL);
+            //m_ScrewDriverL.Connect(_GV.Config.Device.SCREW_IP, Int32.Parse(_GV.Config.Device.SCREW_PORT));
+            //m_ScrewDriverL.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
-            //m_ScrewDriverR.Connect("127.0.0.1", 8516);
-            //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewR);
+            //m_ScrewDriverR.Connect(_GV.Config.Device.SCREW_IP2, Int32.Parse(_GV.Config.Device.SCREW_PORT2));
+            //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewL);
+
+
+            _GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
+            _GV._VEP_Client.StartMonitoring();
+
+            m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
+
         }
-     
+        public void event_GetBarcode(byte[] data)
+        {
+            //PP(2)PJI(7)PARA(3)PROJECTEURS(3)ADAS(3)
+            try
+            {
+                if (data.Length < 18) return;
+                string input = System.Text.Encoding.UTF8.GetString(data);
+                m_frmMain.GetBarCode(input);
+               
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
         public void event_GetScrewL(byte[] data)
         {
 
@@ -235,9 +312,7 @@ namespace Ki_WAT
                 case Def.FOM_IDX_MANUAL:
                     f = m_frmManual;
                     break;
-
             }
-
             f.Show();
             f.BringToFront();
             ActiveSubForm = f;
@@ -267,18 +342,15 @@ namespace Ki_WAT
             ChangeButtonColor((Button)sender);
             ShowFrm(Def.FOM_IDX_MAIN);
         }
-
         private void btnParameter_Click(object sender, EventArgs e)
         {
-            ChangeButtonColor((Button)sender);
-            
+            ChangeButtonColor((Button)sender);   
         }
         private void btnManual_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
             ShowFrm(Def.FOM_IDX_MANUAL);
         }
-      
         private void btnIo_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
@@ -293,7 +365,6 @@ namespace Ki_WAT
             ChangeButtonColor((Button)sender);
             ShowFrm(Def.FOM_IDX_STATIC);
         }
-
         protected override void WndProc(ref Message m)
         {
             switch (m.Msg)
@@ -305,27 +376,35 @@ namespace Ki_WAT
 
             base.WndProc(ref m);
         }
-
+        //시뮬레이션에서 사용
         public void SetDppData(MeasureData receivedData)
         {
             this.Invoke(new Action(() =>
             {
-                var stSensor = GlobalVal.Instance;
+                
+                double dRatio = Convert.ToDouble(_GV.m_Cur_Model.SWARatio);
+                double dHandle = _GV.dHandle;
+                if (dRatio == 0) dRatio = 17.5;
+                if (dHandle > 1000) dHandle = 0;
+
+                _GV.g_MeasureData.dToeFL = receivedData.dToeFL - (dHandle / dRatio);
+                _GV.g_MeasureData.dToeFR = receivedData.dToeFR + (dHandle / dRatio);
+                _GV.g_MeasureData.dToeRL = receivedData.dToeRL;
+                _GV.g_MeasureData.dToeRR = receivedData.dToeRR;
+
+
                 _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
                 _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
                 _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
                 _GV.g_MeasureData.dCamRR = receivedData.dCamRR;
 
-                _GV.g_MeasureData.dToeFL = receivedData.dToeFL;
-                _GV.g_MeasureData.dToeFR = receivedData.dToeFR;
-                _GV.g_MeasureData.dToeRL = receivedData.dToeRL;
-                _GV.g_MeasureData.dToeRR = receivedData.dToeRR;
-
+                //_GV.g_MeasureData.dToeFL = receivedData.dToeFL;
+                //_GV.g_MeasureData.dToeFR = receivedData.dToeFR;
+                
                 _GV.g_MeasureData.dTA = receivedData.dTA;
                 _GV.g_MeasureData.dSymm = receivedData.dSymm;
                 OnDppDataReceived?.Invoke(_GV.g_MeasureData);
             }));
-
         }
         private void GetDppData(ref Message m)
         {
@@ -336,11 +415,9 @@ namespace Ki_WAT
                 {
                     // IntPtr을 구조체로 변환
                     DppData receivedData = (DppData)Marshal.PtrToStructure(cds.lpData, typeof(DppData));
-
                     // UI 스레드에서 실행
                     this.Invoke(new Action(() => 
                     {
-
                         _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
                         _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
                         _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
@@ -353,8 +430,6 @@ namespace Ki_WAT
 
                         _GV.g_MeasureData.dTA = receivedData.dTA;
                         _GV.g_MeasureData.dSymm = receivedData.dSymm;
-
-
                         OnDppDataReceived?.Invoke(_GV.g_MeasureData);
 
                     }));
@@ -391,8 +466,7 @@ namespace Ki_WAT
         {
             try
             {
-                // 바코드 연결 상태 체크 타이머 정지
-                StopBarcodeConnectionTimer();
+                
                 
                 // 테스트 스레드 정지
                 if (_GV != null && _GV._TestThread != null)
@@ -409,114 +483,34 @@ namespace Ki_WAT
 
         }
 
-        #region 바코드 연결 상태 체크 타이머
-        private void InitializeBarcodeConnectionTimer()
+        private void InitTestTimer()
         {
-            m_BarcodeConnectionTimer = new Timer();
-            m_BarcodeConnectionTimer.Interval = 1000; // 1초마다
-            m_BarcodeConnectionTimer.Tick += new EventHandler(BarcodeConnectionTimer_Tick);
+            m_TimerTest = new Timer();
+            m_TimerTest.Interval = 100; // 1초마다
+            m_TimerTest.Tick += new EventHandler(TestTimer_Tick);
+            m_TimerTest.Start();
         }
 
-        private void StartBarcodeConnectionTimer()
-        {
-            if (m_BarcodeConnectionTimer != null)
-            {
-                m_BarcodeConnectionTimer.Start();
-            }
-        }
-
-        private void StopBarcodeConnectionTimer()
-        {
-            if (m_BarcodeConnectionTimer != null)
-            {
-                m_BarcodeConnectionTimer.Stop();
-            }
-        }
-
-        private void BarcodeConnectionTimer_Tick(object sender, EventArgs e)
-        {
-            try
-            {
-                // 바코드 통신 연결 상태 확인
-                bool isConnected = m_BarcodeComm != null && m_BarcodeComm.IsConnected;
-                
-                // 연결 상태에 따른 처리 (예: UI 업데이트, 로그 등)
-                if (isConnected)
-                {
-                    Status_BAR.BackColor = Color.Lime;
-                    m_bReconnecting = false; // 연결 성공 시 재연결 플래그 리셋
-                    // 연결됨 - 필요시 UI 업데이트
-                    // Debug.Print("바코드 통신 연결됨");
-                }
-                else
-                {
-                    Status_BAR.BackColor = Color.Red;
-                    
-                    // 재연결 시도 조건 확인
-                    if (!m_bReconnecting && 
-                        (DateTime.Now - m_lastReconnectAttempt).TotalSeconds >= RECONNECT_INTERVAL_SECONDS)
-                    {
-                        m_bReconnecting = true;
-                        m_lastReconnectAttempt = DateTime.Now;
-                        
-                        // 비동기로 재연결 시도 (UI 스레드 블록 방지)
-                        Task.Run(() => AttemptReconnect());
-                        
-                        Debug.Print("바코드 통신 재연결 시도 - " + DateTime.Now.ToString("HH:mm:ss"));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.Print($"바코드 연결 상태 체크 중 오류: {ex.Message}");
-            }
-        }
         
-        private async Task AttemptReconnect()
+        private void TestTimer_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                // 백그라운드 스레드에서 재연결 시도
-                if (m_BarcodeComm != null)
-                {
-                    m_BarcodeComm.Connect("192.168.10.114", 8511);
-                    
-                    // 잠시 대기 후 연결 상태 확인
-                    await Task.Delay(2000);
-                    
-                    // UI 스레드에서 상태 업데이트
-                    if (this.InvokeRequired)
-                    {
-                        this.Invoke(new Action(() => 
-                        {
-                            if (m_BarcodeComm.IsConnected)
-                            {
-                                Debug.Print("바코드 통신 재연결 성공");
-                            }
-                            else
-                            {
-                                Debug.Print("바코드 통신 재연결 실패");
-                            }
-                        }));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.Print($"바코드 재연결 시도 중 오류: {ex.Message}");
-            }
-            finally
-            {
-                m_bReconnecting = false; // 재연결 시도 완료
-            }
+            int nRand = _rand.Next(0, 1001);
+            _GV._VEP_Client.SetTzEtat((ushort)nRand);
         }
-        #endregion
-
 
         private void Btn_T_Click(object sender, EventArgs e)
         {
+            //DppManager.SendToDpp(DppManager.MSG_DPP_VEHICLE_TYPE, 3);
+
+          
+            //InitTestTimer();
             m_frmSimul.Show();
         }
 
+        private void Btn_VEP_Click(object sender, EventArgs e)
+        {
+            Frm_VEP vep = new Frm_VEP(this);
+            vep.ShowVEP();
+        }
     }
 }

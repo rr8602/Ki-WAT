@@ -39,12 +39,16 @@ namespace Ki_WAT
 
         public const int STEP_WAIT = 0;
 
+        public const int STEP_BARCODE_READ = 1;
+        public const int STEP_MOVE_WHEELBASE = 2;
+
         public const int STEP_PEV_START = 110;
         public const int STEP_PEV_SEND_PJI = 111;
-        public const int STEP_MOVE_WHEELBASE = 120;
+        public const int STEP_PEV_MDA_OK = 112;
 
-        public const int STEP_DETECT_CAR_WAIT = 121;
-        public const int STEP_PRESS_STARTCYCLE_WAIT = 122;
+
+        public const int STEP_DETECT_CAR_WAIT = 120;
+        public const int STEP_PRESS_STARTCYCLE_WAIT = 121;
 
         public const int STEP_RUNOUT_POS_0 = 130;
         public const int STEP_RUNOUT_POS_1 = 131;
@@ -72,7 +76,8 @@ namespace Ki_WAT
         public const int STEP_CHECK_ALL_FINISH = 171;
         public const int STEP_CHECK_SWB_HOME = 172;
         public const int STEP_CHECK_HLA_HOME = 173;
-        public const int STEP_EXIT_POSITION = 174;
+        public const int STEP_CHECK_VEP_FINISH = 174;
+        public const int STEP_EXIT_POSITION = 175;
         
 
 

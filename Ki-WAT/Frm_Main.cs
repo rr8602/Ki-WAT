@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DG_ComLib;
@@ -22,13 +23,20 @@ namespace Ki_WAT
         public static string LAMP_GREEN = @"Resource\green.png";
         public static string LAMP_GRAY = @"Resource\GRAY.png";
         public static string LAMP_RED = @"Resource\RED.png";
-        private bool m_bTesting = false;
+        
 
         private delegate void _d_SetStatusListMsg(string strText);
         GlobalVal _GV = GlobalVal.Instance;
-        TblCarModel m_Cur_Model = new TblCarModel();
-        TblCarInfo m_Cur_CarInfo = new TblCarInfo();
-        Timer m_timerScreen = new Timer();
+        //TblCarModel m_Cur_Model = new TblCarModel();
+        //TblCarInfo m_Cur_CarInfo = new TblCarInfo();
+        System.Windows.Forms.Timer m_timerScreen = new System.Windows.Forms.Timer();
+        List<TblCarInfo> m_BarcodeList = new List<TblCarInfo>();
+
+        private Task _barcodePollingTask;
+        private CancellationTokenSource _cancellationTokenSource;
+
+      
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -42,81 +50,180 @@ namespace Ki_WAT
 
             RefreshCarInfoList();
 			// 상태 업데이트 이벤트 구독
-			TestThread_Kint.OnStatusUpdate += OnStatusUpdate_Main;
+			
+           //m_frmParent.m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
+
             m_timerScreen.Enabled = true;
             m_timerScreen.Interval = 200; // 1초마다
             m_timerScreen.Tick += new EventHandler(CopyScreen_Tick);
-
-
-            m_frmParent.m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
-
-
+            
             Pic_copy.Location = new Point(9, 88);
             Pic_copy.Size = new Size(799, 625);
+
+            StartBarcodePolling();
+            _GV._TestThread.StartThread();
+
+            TestThread_Kint.OnStatusUpdate += OnStatusUpdate_Main;
+            TestThread_Kint.OnCycleFinished += OnCycleFinished;
         }
+        
+        private void OnCycleFinished()
+        {
+            try
+            {
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(OnCycleFinished));
+                    return;
+                }
+                FinishCycleUI();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
+        }
+
+
+        public void StartBarcodePolling()
+        {
+            _cancellationTokenSource = new CancellationTokenSource();
+            _barcodePollingTask = Task.Run(() => PollBarcodeList(_cancellationTokenSource.Token));
+        }
+
+        private async Task PollBarcodeList(CancellationToken cancellationToken)
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                try
+                {
+                    if (m_BarcodeList != null && m_BarcodeList.Count > 0 && _GV.m_bTestRun == false)
+                    {
+
+                        _GV.m_Cur_Info = m_BarcodeList[0];
+                        _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
+                        // 사이클 시작
+                        StartCycle();
+                        m_BarcodeList.Clear(); // 처리 후 리스트 클리어
+                    }
+
+                   
+                    await Task.Delay(100, cancellationToken); // 100ms 간격으로 폴링
+                }
+                catch (OperationCanceledException)
+                {
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    // 로그 처리
+                    Debug.WriteLine($"Barcode polling error: {ex.Message}");
+                }
+            }
+        }
+
+        public void StopBarcodePolling()
+        {
+            _cancellationTokenSource?.Cancel();
+            _barcodePollingTask?.Wait(3000); // 최대 3초 대기
+        }
+
         private void CopyScreen_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (m_bTesting)
+                if (_GV.m_bTestRun)
                 {
                     GWA.CaptureFormToPictureBox(Pic_copy, m_frmParent.User_Monitor);
                 }
             }
             catch { }
-            
-            
+        }
+        public void ParseBarcode(string pBarcode)
+        {
+            string PP = pBarcode.Substring(0, 2);
+            string PJI = pBarcode.Substring(2, 7);
+            string PARA = pBarcode.Substring(9, 3);
+            string PROJECT = pBarcode.Substring(12, 3);
+            //string ADAS = pBarcode.Substring(15, 3);
+            _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
+            Debug.Print("");
+            _GV.m_Cur_Info.CarPJINo = PJI;
+            _GV.m_Cur_Info.CarModel = _GV.m_Cur_Model.Model_NM;
+            _GV.m_Cur_Info.WatCycle = PARA;
+            _GV.m_Cur_Info.LetCycle = PROJECT;
+            _GV.m_Cur_Info.Car_Step = "0";
+            _GV.m_Cur_Info.TotalBar = pBarcode;
+            _GV.m_Cur_Info.Spare__2 = "0";
+            _GV.m_Cur_Info.Spare__3 = "0";
+            m_frmParent.m_dbJob.AddNewAcceptNo(ref _GV.m_Cur_Info);
+            RefreshCarInfoList();
         }
         public void GetBarCode(string pBarcode)
         {
-            
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => GetBarCode(pBarcode)));
+                return;
+            }
+
             try
             {
+                if (m_BarcodeList.Count > 1)
+                {
+                    _Log_ListBox("Can't register new vehicle " + pBarcode);
+                    return;
+                }
+
+                if (pBarcode.Length < 15)
+                {
+                    _Log_ListBox("Barcode Length : " + pBarcode);
+                    return;
+                }
+
                 string PP = pBarcode.Substring(0, 2);
                 string PJI = pBarcode.Substring(2, 7);
                 string PARA = pBarcode.Substring(9, 3);
                 string PROJECT = pBarcode.Substring(12, 3);
-                //string ADAS = pBarcode.Substring(15, 3);
-                m_Cur_Model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
-                Debug.Print("");
-                m_Cur_CarInfo.CarPJINo = PJI;
-                m_Cur_CarInfo.CarModel = m_Cur_Model.Model_NM;
-                m_Cur_CarInfo.WatCycle = PARA;
-                m_Cur_CarInfo.LetCycle = PROJECT;
-                m_Cur_CarInfo.Car_Step = "0";
-                m_Cur_CarInfo.TotalBar = pBarcode;
-                m_Cur_CarInfo.Spare__2 = "0";
-                m_Cur_CarInfo.Spare__3 = "0";
-                m_frmParent.m_dbJob.AddNewAcceptNo(ref m_Cur_CarInfo);
+
+                TblCarInfo info = new TblCarInfo();
+                TblCarModel model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
+
+                info.CarPJINo = PJI;
+                info.CarModel = model.Model_NM;
+                info.WatCycle = PARA;
+                info.LetCycle = PROJECT;
+                info.Car_Step = "0";
+                info.TotalBar = pBarcode;
+                info.Spare__2 = "0";
+                info.Spare__3 = "0";
+
+                m_frmParent.m_dbJob.AddNewAcceptNo(ref info);
+                m_BarcodeList.Add(info);
                 RefreshCarInfoList();
+
+                if (_GV.m_bTestRun)
+                {
+                    lbl_NextPJI.Text = m_BarcodeList[0].CarPJINo;
+                    m_frmParent.User_Monitor.SetNextPJI(m_BarcodeList[0].CarPJINo);
+                }
+
+                _Log_ListBox("Barcode : " + pBarcode);
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _Log_ListBox(ex.Message);
-            }   
-        }
-        public void event_GetBarcode(byte[] data)
-        {
-            //PP(2)PJI(7)PARA(3)PROJECTEURS(3)ADAS(3)
-
-            try
-            {
-                if (data.Length < 18) return;
-                string input = System.Text.Encoding.UTF8.GetString(data);
-                _Log_ListBox("Barcode : " + input);
-                GetBarCode(input);
-                // 고정 길이 필드 파싱
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
             }
         }
+       
         // 폼 종료 시 이벤트 해제
         protected override void OnFormClosed(FormClosedEventArgs e)
 		{
 			TestThread_Kint.OnStatusUpdate -= OnStatusUpdate_Main;
-			base.OnFormClosed(e);
+            StopBarcodePolling();
+
+            base.OnFormClosed(e);
 		}
         public void RefreshCarInfoList()
         {
@@ -184,35 +291,35 @@ namespace Ki_WAT
 
         public void RefreshCurrentInfo()
         {
-            lbl_PARA.Text = m_Cur_Model.Bar_Code;
-            lbl_ModelNM.Text = m_Cur_Model.Model_NM;
-            lbl_WB.Text = m_Cur_Model.WhelBase;
-            lbl_LET.Text = m_Cur_CarInfo.LetCycle;
-            lbl_PJI.Text = m_Cur_CarInfo.CarPJINo;
-            lbl_Barcode.Text = m_Cur_CarInfo.TotalBar;
+            lbl_PARA.Text = _GV.m_Cur_Model.Bar_Code;
+            lbl_ModelNM.Text = _GV.m_Cur_Model.Model_NM;
+            lbl_WB.Text = _GV.m_Cur_Model.WhelBase;
+            lbl_LET.Text = _GV.m_Cur_Info.LetCycle;
+            lbl_PJI.Text = _GV.m_Cur_Info.CarPJINo;
+            lbl_Barcode.Text = _GV.m_Cur_Info.TotalBar;
 
             int nMin, nMax;
 
-            DogRunST.Text = m_Cur_Model.DogRunST;
+            DogRunST.Text = _GV.m_Cur_Model.DogRunST;
             
-            nMin = Int32.Parse(m_Cur_Model.DogRunST) - Int32.Parse(m_Cur_Model.DogRunLT);
+            nMin = Int32.Parse(_GV.m_Cur_Model.DogRunST) - Int32.Parse(_GV.m_Cur_Model.DogRunLT);
             DogRunLT_MIN.Text = nMin.ToString();
 
-            nMax = Int32.Parse(m_Cur_Model.DogRunST) + Int32.Parse(m_Cur_Model.DogRunLT);
+            nMax = Int32.Parse(_GV.m_Cur_Model.DogRunST) + Int32.Parse(_GV.m_Cur_Model.DogRunLT);
             DogRunLT_MAX.Text = nMax.ToString();
 
-            ToeFL_ST.Text = m_Cur_Model.ToeFL_ST;
-            nMin = Int32.Parse(m_Cur_Model.ToeFL_ST) - Int32.Parse(m_Cur_Model.ToeFL_LT);
+            ToeFL_ST.Text = _GV.m_Cur_Model.ToeFL_ST;
+            nMin = Int32.Parse(_GV.m_Cur_Model.ToeFL_ST) - Int32.Parse(_GV.m_Cur_Model.ToeFL_LT);
             ToeFL_LT_MIN.Text = nMin.ToString();
 
-            nMax = Int32.Parse(m_Cur_Model.ToeFL_ST) + Int32.Parse(m_Cur_Model.ToeFL_LT);
+            nMax = Int32.Parse(_GV.m_Cur_Model.ToeFL_ST) + Int32.Parse(_GV.m_Cur_Model.ToeFL_LT);
             ToeFL_LT_MAX.Text = nMax.ToString();
 
-            ToeFR_ST.Text = m_Cur_Model.ToeFR_ST;
-            nMin = Int32.Parse(m_Cur_Model.ToeFR_ST) - Int32.Parse(m_Cur_Model.ToeFR_LT);
+            ToeFR_ST.Text = _GV.m_Cur_Model.ToeFR_ST;
+            nMin = Int32.Parse(_GV.m_Cur_Model.ToeFR_ST) - Int32.Parse(_GV.m_Cur_Model.ToeFR_LT);
             ToeFR_LT_MIN.Text = nMin.ToString();
 
-            nMax = Int32.Parse(m_Cur_Model.ToeFR_ST) + Int32.Parse(m_Cur_Model.ToeFR_LT);
+            nMax = Int32.Parse(_GV.m_Cur_Model.ToeFR_ST) + Int32.Parse(_GV.m_Cur_Model.ToeFR_LT);
             ToeFR_LT_MAX.Text = nMax.ToString();
 
         }
@@ -228,8 +335,8 @@ namespace Ki_WAT
                     // 선택된 AcceptNo로 CarInfo 조회
                     if (m_frmParent != null && m_frmParent.m_dbJob != null)
                     {
-                        m_Cur_CarInfo = m_frmParent.m_dbJob.SelectCarInfo(acceptNo);
-                        m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(m_Cur_CarInfo.CarModel);
+                        _GV.m_Cur_Info = m_frmParent.m_dbJob.SelectCarInfo(acceptNo);
+                        _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
                         RefreshCurrentInfo();
                     }
                 }
@@ -287,51 +394,74 @@ namespace Ki_WAT
         public void StartCycle()
         {
 
-            if (m_Cur_CarInfo.CarPJINo == "" || m_Cur_CarInfo.CarPJINo == null)
+            try
             {
-                MessageBox.Show("No data");
-                return;
+                // UI 스레드에서 실행
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(StartCycle));
+                    return;
+                }
+
+                if (_GV.m_bTestRun) return;
+
+                if (_GV.m_Cur_Info.CarPJINo == "" || _GV.m_Cur_Info.CarPJINo == null)
+                {
+                    MessageBox.Show("No data");
+                    return;
+                }
+                if (_GV.m_Cur_Model.Bar_Code == null)
+                {
+                    MessageBox.Show("No Model");
+                    return;
+                }
+                m_frmParent.User_Monitor.m_frm_Oper_Test.SetModel(_GV.m_Cur_Model);
+                m_frmParent.m_Frm_PitIn.SetModel(_GV.m_Cur_Model);
+                
+
+                _GV._TestThread.StartCycle(_GV.m_Cur_Info, _GV.m_Cur_Model);
+
+                StartCycleUI();
+
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Cycle start error: {ex.Message}");
             }
 
-            if (m_Cur_Model.Bar_Code == null )
-            {
-                MessageBox.Show("No Model");
-                return;
-            }
 
-
-            m_frmParent.User_Monitor.m_frm_Oper_Test.SetModel(m_Cur_Model);
-            m_frmParent.ChangeOperMonitor(Def.FOM_IDX_TEST);
-            _GV._TestThread.StartThread(m_Cur_CarInfo, m_Cur_Model);
-            
-            StartCycleUI();   
         }
         public void StopCycle()
         {
-            _GV._TestThread.StopThread();
+            _GV._TestThread.StopTest();
         }
         private void button2_Click(object sender, EventArgs e)
         {
-            if ( !m_bTesting)            StartCycle();
-            else
+            if ( Btn_Start.Text == "STOP")
             {
                 StopCycle();
+                return;
             }
+            StartCycle();
         }
 
-    
         private void button2_Click_1(object sender, EventArgs e)
         {
             
         }
         private void StartCycleUI()
         {
-            m_bTesting = true;
-            Pic_copy.Visible = m_bTesting;
+            
+            Pic_copy.Visible =  true;
             Btn_Start.BackColor = Color.Red;
             Btn_Start.ForeColor = Color.Yellow;
             Btn_Start.Text = "STOP";
+            lbl_NextPJI.Text = "-";
             m_frmParent.User_Monitor.StartTimer();
+
+            m_frmParent.User_Monitor.SetPJIText(_GV.m_Cur_Info.CarPJINo);
+            m_frmParent.ChangeOperMonitor(Def.FOM_IDX_TEST);
         }
         public void FinishCycleUI()
         {
@@ -340,12 +470,14 @@ namespace Ki_WAT
                 this.Invoke(new MethodInvoker(FinishCycleUI)); // UI 스레드에 위임
                 return;
             }
-            m_bTesting = false;
-            Pic_copy.Visible = m_bTesting;
+            m_frmParent.ChangeOperMonitor(Def.FOM_IDX_MAIN);
+            Pic_copy.Visible = false;
             Btn_Start.BackColor = Color.Silver;
             Btn_Start.ForeColor = Color.Teal;
             Btn_Start.Text = "START";
             m_frmParent.User_Monitor.StopTimer();
+            _GV.m_bTestRun = false;
+            
         }
 
         private void Btn_Manual_Click(object sender, EventArgs e)
@@ -368,7 +500,7 @@ namespace Ki_WAT
 
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            m_frmParent.m_dbJob.DeleteCarInfo(m_Cur_CarInfo.AcceptNo);
+            m_frmParent.m_dbJob.DeleteCarInfo(_GV.m_Cur_Info.AcceptNo);
             RefreshCarInfoList();
         }
     }

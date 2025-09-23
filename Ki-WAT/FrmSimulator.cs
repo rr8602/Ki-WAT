@@ -56,7 +56,8 @@ namespace Ki_WAT
 
             dppData.dTA = double.Parse(Txt_TA.Text);
             dppData.dSymm = double.Parse(Txt_Symm.Text);
-            dppData.dHandle = double.Parse(Txt_Swb.Text);
+            //dppData.dHandle = double.Parse(Txt_Swb.Text);
+            _GV.dHandle = double.Parse(Txt_Swb.Text);
 
             m_Parent.SetDppData(dppData);
         }
@@ -80,6 +81,9 @@ namespace Ki_WAT
 
         }
 
-       
+        private void Btn_Next_Step_Click(object sender, EventArgs e)
+        {
+            _GV.m_bNextStep = true;
+        }
     }
 }

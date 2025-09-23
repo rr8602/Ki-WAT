@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KINT_Lib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,11 +32,12 @@ namespace Ki_WAT
         {
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "yyyy-MM-dd";
-            
+            dateTimePicker1.Value = DateTime.Today;   // 오늘 날짜 선택
+
             seqList.Columns.Add("", 0);
             seqList.Columns.Add("DATE", seqList.Width / 2, HorizontalAlignment.Center);
             seqList.Columns.Add("PJI", seqList.Width / 2, HorizontalAlignment.Center);
-            
+            LoadSeqList(dateTimePicker1.Value.ToString("yyyyMMdd"));
         }
         
         public void UpdateUI(TblResult pTable)
@@ -71,7 +73,7 @@ namespace Ki_WAT
 
                 // 기타 정보
                 lbl_Car_Hand.Text = pTable.Car_Hand ?? "0.0";
-                lbl_CarDogRun.Text = pTable.CarDogRun ?? "0.0";
+                lbl_CarDogRun.Text = pTable.CarDogRu ?? "0.0";
                 
                 // 추가 필드들 (UI 컨트롤이 있다면)
                 // Car_Symm, WAT___PK 등은 별도 컨트롤이 필요할 수 있음
@@ -139,13 +141,77 @@ namespace Ki_WAT
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"검색 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+        private void cButton1_Click(object sender, EventArgs e)
+        {
+        }
+        private void seqList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (seqList.SelectedItems.Count > 0)
+                {
+                    ListViewItem item = seqList.SelectedItems[0];
+
+                    // SubItems[0] → 첫 번째 컬럼
+                    // SubItems[1] → 두 번째 컬럼
+                    string pji = item.SubItems[2].Text;
+                    TblResult _res = m_frmParent.m_dbJob.SelectCarResult(pji);
+                    UpdateUI(_res);
+                    ///Debug.Print("");
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show($"날짜별 검색 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            
+        }
+
+        private void LoadSeqList(string pDate)
+        {
+            // DB 조회
+            List<TblCarInfo> _resList = m_frmParent.m_dbJob.SelectCarInfoList(pDate);
+
+            seqList.BeginUpdate();
+            try
+            {
+                seqList.Items.Clear();
+
+                if (_resList == null || _resList.Count == 0)
+                    return;
+
+                int idx = 1;
+                foreach (var car in _resList)
+                {
+                    // 0번째(숨김) 컬럼에는 인덱스나 키를 넣어두면 편리
+                    var lvi = new ListViewItem(idx.ToString());
+
+                    // 1번째: UID -> AcceptNo
+                    lvi.SubItems.Add(car.AcceptNo ?? string.Empty);
+
+                    // 2번째: PJI -> CarPJINo
+                    lvi.SubItems.Add(car.CarPJINo ?? string.Empty);
+
+                    seqList.Items.Add(lvi);
+                    idx++;
+                }
+            }
+            finally
+            {
+                seqList.EndUpdate();
             }
         }
 
-        private void cButton1_Click(object sender, EventArgs e)
+        private void Btn_Date_Search_Click(object sender, EventArgs e)
         {
-
+            string pDate = dateTimePicker1.Value.ToString("yyyyMMdd");
+            LoadSeqList(pDate);
+            
         }
     }
 }

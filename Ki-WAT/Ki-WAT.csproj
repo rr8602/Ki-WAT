@@ -39,6 +39,12 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="NModbus, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NModbus.3.0.81\lib\net46\NModbus.dll</HintPath>
+    </Reference>
+    <Reference Include="NModbus.Serial, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NModbus.Serial.3.0.81\lib\net46\NModbus.Serial.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -80,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AngleCalculator.cs" />
     <Compile Include="Common\CButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -93,6 +100,7 @@
     <Compile Include="Common\SlideBarGauge.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DppManager.cs" />
     <Compile Include="FrmManager.cs" />
     <Compile Include="FrmSimulator.cs">
       <SubType>Form</SubType>
@@ -106,6 +114,13 @@
     <Compile Include="Frm_PLC_IO.Designer.cs">
       <DependentUpon>Frm_PLC_IO.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_VEP.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_VEP.Designer.cs">
+      <DependentUpon>Frm_VEP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VEP\IVEPBenchZone.cs" />
     <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
     <Compile Include="Database\DB_LocalWat.cs" />
@@ -207,6 +222,14 @@
     <Compile Include="TestThread.cs" />
     <Compile Include="TestThread_HLT.cs" />
     <Compile Include="TestThread_Kint.cs" />
+    <Compile Include="VEP\VEPBenchAddTransmissionZone.cs" />
+    <Compile Include="VEP\VEPBenchClient.cs" />
+    <Compile Include="VEP\VEPBenchDataManager.cs" />
+    <Compile Include="VEP\VEPBenchDescriptionZone.cs" />
+    <Compile Include="VEP\VEPBenchReceptionZone.cs" />
+    <Compile Include="VEP\VEPBenchStatusZone.cs" />
+    <Compile Include="VEP\VEPBenchSynchroZone.cs" />
+    <Compile Include="VEP\VEPBenchTransmissionZone.cs" />
     <EmbeddedResource Include="FrmSimulator.resx">
       <DependentUpon>FrmSimulator.cs</DependentUpon>
     </EmbeddedResource>
@@ -252,6 +275,9 @@
     <EmbeddedResource Include="Frm_StaticMaster.resx">
       <DependentUpon>Frm_StaticMaster.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Frm_VEP.resx">
+      <DependentUpon>Frm_VEP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -278,6 +304,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="K-Logo.ico" />
+    <None Include="Resources\KakaoTalk_20250904_133015943_05.png" />
     <None Include="Resources\Res.png" />
     <None Include="Resources\HighQuality_Resized_Result.jpg" />
     <None Include="Resources\Result.jpg" />

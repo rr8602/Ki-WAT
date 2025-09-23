@@ -31,9 +31,25 @@ namespace Ki_WAT
         public double dCamRR;
 
         public double dSymm;
-        public double dHandle;
         public double dTA;
 
+        public void Clear()
+        {
+            dToeFL = 0;
+            dToeFR = 0;
+            dToeRL = 0;
+            dToeRR = 0;
+            dCamFL = 0;
+            dCamFR = 0;
+            dCamRL = 0;
+            dCamRR = 0;
+            dSymm = 0;
+            dTA = 0;
+        }
+        public MeasureData Clone()
+        {
+            return (MeasureData)this.MemberwiseClone();
+        }
 
     }
 
@@ -87,7 +103,7 @@ namespace Ki_WAT
         public IntPtr lpData;
     }
 
-    internal class GlobalVal
+    public class GlobalVal
     {
         // private static 필드로 Lazy<T> 사용
         private static readonly Lazy<GlobalVal> _instance = new Lazy<GlobalVal>(() => new GlobalVal());
@@ -104,6 +120,8 @@ namespace Ki_WAT
             _frmMNG = new FormManager();
             _TestThread = new TestThread_Kint(this);
             _PLCVal = new PLCVal();
+            _VEP_Data = new VEPBenchDataManager(this);
+            _VEP_Client = new VEPBenchClient(this, _VEP_Data);
         }
         public void InitData()
         {
@@ -132,6 +150,15 @@ namespace Ki_WAT
         public bool g_Substitu_ScrewDriver_R = false;
         public bool g_Substitu_Printer = false;
 
+        public VEPBenchDataManager _VEP_Data;
+        public VEPBenchClient     _VEP_Client;
+
+        public TblCarModel m_Cur_Model = new TblCarModel();
+        public TblCarInfo  m_Cur_Info  = new TblCarInfo();
+        // 전역 변수
+        public  bool m_bTestRun = false;
+        public double dHandle = 0.0f;
         //public bool g_Substitu_PEV = false;
+        public bool m_bNextStep = false;
     }
 }

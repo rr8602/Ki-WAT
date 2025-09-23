@@ -17,6 +17,19 @@ namespace Ki_WAT
         public string TotalBar;
         public string Spare__2;
         public string Spare__3;
+
+        public void Clear()
+        {
+            AcceptNo = "";
+            CarPJINo = "";
+            CarModel = "";
+            WatCycle = "";
+            LetCycle = "";
+            Car_Step = "";
+            TotalBar = "";
+            Spare__2 = "";
+            Spare__3 = "";
+        }
     }
 
     public struct TblResult
@@ -38,9 +51,33 @@ namespace Ki_WAT
         public string CarRRCam;
         public string CarRCros;
         public string Car_Hand;
-        public string CarDogRun;
+        public string CarDogRu;
         public string Car_Symm;
         public string WAT___PK;
+        public void Clear()
+        {
+            AcceptNo = "";
+            PJI_Num = "";
+            Model_NM = "";
+            WTstTime = "";
+            CarFLToe = "";
+            CarFRToe = "";
+            CarFTToe = "";
+            CarRLToe = "";
+            CarRRToe = "";
+            CarRTToe = "";
+            CarFLCam = "";
+            CarFRCam = "";
+            CarFCros = "";
+            CarRLCam = "";
+            CarRRCam = "";
+            CarRCros = "";
+            Car_Hand = "";
+            CarDogRu = "";
+            Car_Symm = "";
+            WAT___PK = "";
+        }
+
     }
 
     public struct TblCarModel
@@ -90,7 +127,49 @@ namespace Ki_WAT
         public string CamRR_ST;
         public string CamRR_AT;
         public string CamRR_LT;
+        public void Clear()
+        {
+            Model_NM = "";
+            Bar_Code = "";
+            WhelBase = "";
+            Dpp_Code = "";
+            SWARatio = "";
+            ScrewDriver = "";
+            Display_Unit = "";
+            Spare_1 = "";
+            Spare_2 = "";
+            DogRunST = "";
+            DogRunLT = "";
+            HandleST = "";
+            HandleLT = "";
+            TotToef_ST = "";
+            TotToef_LT = "";
+            TotToer_ST = "";
+            TotToer_LT = "";
+            ToeFL_ST = ""; // 기준
+            ToeFL_AT = ""; // 조정
+            ToeFL_LT = ""; // 평가
+            ToeFR_ST = "";
+            ToeFR_AT = "";
+            ToeFR_LT = "";
+            ToeRL_ST = "";
+            ToeRL_AT = "";
+            ToeRL_LT = "";
+            ToeRR_ST = "";
+            ToeRR_AT = "";
+            ToeRR_LT = "";
+            CamFL_ST = "";
+            CamFL_AT = "";
+            CamFL_LT = "";
+            CamFR_ST = "";
+            CamFR_AT = "";
+            CamFR_LT = "";
+            CamRL_ST = "";
+            CamRL_AT = "";
+            CamRL_LT = "";
+            CamRR_ST = "";
+            CamRR_AT = "";
+            CamRR_LT = "";
+        }
     }
-
-
 }

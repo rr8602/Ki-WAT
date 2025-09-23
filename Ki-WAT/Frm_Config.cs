@@ -6,6 +6,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,11 +37,22 @@ namespace Ki_WAT
         {
             modelList.Columns.Add("", 0);
             modelList.Columns.Add("MODEL", modelList.Width , HorizontalAlignment.Center);
-
+            InitializeCustomComponents();
 
             RefreshListView();
             UpdateGeneralUI();
+            
+        }
 
+        private void InitializeCustomComponents()
+        {
+            cbo_SWB.Items.Clear();
+            string[] portsArray = SerialPort.GetPortNames();
+            cbo_SWB.Items.AddRange(portsArray);
+
+            Debug.Print("");
+            // 저장된 포트 가져오기
+         
 
         }
 
@@ -524,7 +536,10 @@ namespace Ki_WAT
                 // DEVICE 섹션 - SCREW 설정
                 _GV.Config.Device.SCREW_IP = editScrewIP.Text;
                 _GV.Config.Device.SCREW_PORT = editScrewPort.Text;
-                
+
+                _GV.Config.Device.SCREW_IP2 = editScrewIP2.Text;
+                _GV.Config.Device.SCREW_PORT2 = editScrewPort2.Text;
+
                 // DEVICE 섹션 - PRINT 설정
                 _GV.Config.Device.PRINT_IP = editPrintIP.Text;
                 _GV.Config.Device.PRINT_PORT = editPrintPort.Text;
@@ -547,10 +562,18 @@ namespace Ki_WAT
                 _GV.Config.Wheelbase.HOME_POS = editWBHome.Text;
                 _GV.Config.Wheelbase.MIN_POS = editWBMin.Text;
                 _GV.Config.Wheelbase.MAX_POS = editWBMax.Text;
-                
+
+                _GV.Config.Device.SWB_PORT = cbo_SWB.Text;
+                _GV.Config.Device.SWB_BAUD = Txt_SWB_Baud.Text;
+
+                _GV.Config.SWB.BoardType = rd_swb_type_board.Checked ? 0 : 1;
+
                 // INI 파일에 저장
                 _GV.Config.SaveConfig();
-                
+                _GV.Config.SaveSWB();
+
+                m_frmParent.m_SWBComm.SetFndDisplay(_GV.Config.SWB.BoardType);
+
                 MessageBox.Show("설정이 성공적으로 저장되었습니다.", "저장 완료", 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -575,7 +598,11 @@ namespace Ki_WAT
                 // DEVICE 섹션 - SCREW 설정
                 editScrewIP.Text = _GV.Config.Device.SCREW_IP;
                 editScrewPort.Text = _GV.Config.Device.SCREW_PORT;
-                
+
+                // DEVICE 섹션 - SCREW 설정
+                editScrewIP2.Text = _GV.Config.Device.SCREW_IP2;
+                editScrewPort2.Text = _GV.Config.Device.SCREW_PORT2;
+
                 // DEVICE 섹션 - PRINT 설정
                 editPrintIP.Text = _GV.Config.Device.PRINT_IP;
                 editPrintPort.Text = _GV.Config.Device.PRINT_PORT;
@@ -604,6 +631,26 @@ namespace Ki_WAT
                 editWBHome.Text = _GV.Config.Wheelbase.HOME_POS;
                 editWBMin.Text = _GV.Config.Wheelbase.MIN_POS;
                 editWBMax.Text = _GV.Config.Wheelbase.MAX_POS;
+
+                Txt_SWB_Baud.Text = _GV.Config.Device.SWB_BAUD;
+
+                string savedPort = _GV.Config.Device.SWB_PORT;
+
+
+                rd_swb_type_board.Checked = _GV.Config.SWB.BoardType == 0;
+                rd_swb_type_pc.Checked = _GV.Config.SWB.BoardType == 1;
+
+                // 일치하는 항목이 있으면 선택
+                if (!string.IsNullOrEmpty(savedPort))
+                {
+                    int index = cbo_SWB.Items.IndexOf(savedPort);
+                    if (index >= 0)
+                    {
+                        cbo_SWB.SelectedIndex = index;
+                    }
+                }
+
+
             }
             catch (Exception ex)
             {

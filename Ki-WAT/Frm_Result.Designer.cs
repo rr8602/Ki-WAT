@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cButton1 = new KI_Controls.CButton();
             this.Btn_PJI_Search = new KI_Controls.CButton();
             this.Btn_Date_Search = new KI_Controls.CButton();
             this.roundLabel2 = new KI_Controls.RoundLabel();
@@ -53,7 +54,6 @@
             this.lbl_CarDogRun = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.cButton1 = new KI_Controls.CButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -72,6 +72,29 @@
             this.groupBox1.Size = new System.Drawing.Size(1654, 126);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // cButton1
+            // 
+            this.cButton1.BackColor = System.Drawing.Color.LightGray;
+            this.cButton1.bNormalButton = false;
+            this.cButton1.BorderColor = System.Drawing.Color.Black;
+            this.cButton1.BorderSize = ((uint)(1u));
+            this.cButton1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.cButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cButton1.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cButton1.ForeColor = System.Drawing.Color.Black;
+            this.cButton1.IsToggled = false;
+            this.cButton1.Location = new System.Drawing.Point(1499, 21);
+            this.cButton1.Name = "cButton1";
+            this.cButton1.NormalBackColor = System.Drawing.Color.LightGray;
+            this.cButton1.NormalForeColor = System.Drawing.Color.Black;
+            this.cButton1.Size = new System.Drawing.Size(114, 79);
+            this.cButton1.TabIndex = 10;
+            this.cButton1.Text = "Save XML";
+            this.cButton1.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
+            this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
+            this.cButton1.UseVisualStyleBackColor = false;
+            this.cButton1.Click += new System.EventHandler(this.cButton1_Click);
             // 
             // Btn_PJI_Search
             // 
@@ -117,6 +140,7 @@
             this.Btn_Date_Search.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
             this.Btn_Date_Search.ToggleForeColor = System.Drawing.Color.Black;
             this.Btn_Date_Search.UseVisualStyleBackColor = false;
+            this.Btn_Date_Search.Click += new System.EventHandler(this.Btn_Date_Search_Click);
             // 
             // roundLabel2
             // 
@@ -158,11 +182,13 @@
             // 
             // Txt_PJI
             // 
+            this.Txt_PJI.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_PJI.Location = new System.Drawing.Point(444, 66);
             this.Txt_PJI.Multiline = true;
             this.Txt_PJI.Name = "Txt_PJI";
             this.Txt_PJI.Size = new System.Drawing.Size(241, 35);
             this.Txt_PJI.TabIndex = 5;
+            this.Txt_PJI.Text = "1234567";
             // 
             // dateTimePicker1
             // 
@@ -190,6 +216,7 @@
             this.seqList.TabIndex = 158;
             this.seqList.UseCompatibleStateImageBehavior = false;
             this.seqList.View = System.Windows.Forms.View.Details;
+            this.seqList.SelectedIndexChanged += new System.EventHandler(this.seqList_SelectedIndexChanged);
             // 
             // lbl_CarFLToe
             // 
@@ -392,29 +419,6 @@
             this.label4.TabIndex = 176;
             this.label4.Text = "DOGRUN";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cButton1
-            // 
-            this.cButton1.BackColor = System.Drawing.Color.LightGray;
-            this.cButton1.bNormalButton = false;
-            this.cButton1.BorderColor = System.Drawing.Color.Black;
-            this.cButton1.BorderSize = ((uint)(1u));
-            this.cButton1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.cButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cButton1.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cButton1.ForeColor = System.Drawing.Color.Black;
-            this.cButton1.IsToggled = false;
-            this.cButton1.Location = new System.Drawing.Point(1499, 21);
-            this.cButton1.Name = "cButton1";
-            this.cButton1.NormalBackColor = System.Drawing.Color.LightGray;
-            this.cButton1.NormalForeColor = System.Drawing.Color.Black;
-            this.cButton1.Size = new System.Drawing.Size(114, 79);
-            this.cButton1.TabIndex = 10;
-            this.cButton1.Text = "Save XML";
-            this.cButton1.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
-            this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
-            this.cButton1.UseVisualStyleBackColor = false;
-            this.cButton1.Click += new System.EventHandler(this.cButton1_Click);
             // 
             // Frm_Result
             // 

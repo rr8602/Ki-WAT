@@ -128,7 +128,7 @@ namespace Ki_WAT
         public bool _RollerBrake_Free;
 
     }
-    internal class PLCVal
+    public class PLCVal
     {
         private ST_LOW_DATA[] DI_DATA = new ST_LOW_DATA[100];
         private ST_LOW_DATA[] DO_DATA = new ST_LOW_DATA[100];

@@ -20,8 +20,8 @@ namespace Ki_WAT
         private bool m_bBarcodeRead = false;
         private readonly object _lock = new object();
 
-        TblCarModel m_Cur_Model = new TblCarModel();
-        TblCarInfo m_Cur_CarInfo = new TblCarInfo();
+        //TblCarModel m_Cur_Model = new TblCarModel();
+        //TblCarInfo m_Cur_CarInfo = new TblCarInfo();
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern short GetAsyncKeyState(int vKey);
@@ -48,14 +48,12 @@ namespace Ki_WAT
             return !m_bRun || m_bExitStep || IsShiftEnterPressed();
         }
 
-        public int StartThread(TblCarInfo pInfo, TblCarModel pModel)
+        public int StartThread()
         {
             try
             {
                 if (_GV.g_Substitu_HLT) return 0;
-                m_Cur_Model = pModel;
-                m_Cur_CarInfo = pInfo;
-
+                
                 if (testThread != null)
                 {
                     StopThread();

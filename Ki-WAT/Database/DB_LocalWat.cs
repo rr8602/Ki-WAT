@@ -48,6 +48,51 @@ namespace Ki_WAT
             }
         }
 
+        public List<TblCarInfo> SelectCarInfoList(string pDate)
+        {
+            try
+            {
+                List<TblCarInfo> list = new List<TblCarInfo>();
+
+                // AcceptNo 가 yyyymmdd 로만 되어 있다면 "=" 사용
+                // 만약 뒤에 일련번호 붙는 경우라면 LIKE '{pDate}%'
+                string sSQL = $@"
+            SELECT * 
+            FROM TableCarInfo 
+            WHERE AcceptNo LIKE '{pDate}%'";
+
+                DataTable dt = GetDataSet(sSQL);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TblCarInfo tblCarInfo = new TblCarInfo
+                        {
+                            AcceptNo = row["AcceptNo"].ToString(),
+                            CarPJINo = row["CarPJINo"].ToString(),
+                            CarModel = row["CarModel"].ToString(),
+                            WatCycle = row["WatCycle"].ToString(),
+                            LetCycle = row["LetCycle"].ToString(),
+                            Car_Step = row["Car_Step"].ToString(),
+                            TotalBar = row["Spare__1"].ToString(),
+                            Spare__2 = row["Spare__2"].ToString(),
+                            Spare__3 = row["Spare__3"].ToString()
+                        };
+
+                        list.Add(tblCarInfo);
+                    }
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+        }
+
         // 내일 날짜 기준 AcceptNo를 생성하여 TblCarInfo에 할당하고 DB에 insert까지 수행
         public bool AddNewAcceptNo(ref TblCarInfo pData)
         {
@@ -566,7 +611,7 @@ namespace Ki_WAT
                     tblResult.CarRRCam = row["CarRRCam"].ToString();
                     tblResult.CarRCros = row["CarRCros"].ToString();
                     tblResult.Car_Hand = row["Car_Hand"].ToString();
-                    tblResult.CarDogRun = row["CarDogRun"].ToString();
+                    tblResult.CarDogRu = row["CarDogRu"].ToString();
                     tblResult.Car_Symm = row["Car_Symm"].ToString();
                     tblResult.WAT___PK = row["WAT___PK"].ToString();
                 }
@@ -585,6 +630,16 @@ namespace Ki_WAT
         {
             try
             {
+                // PJI_Num과 AcceptNo로 기존 데이터 존재 여부 확인
+                string checkSQL = $"SELECT COUNT(*) FROM TableCar_WAT WHERE PJI_Num = '{result.PJI_Num}' AND AcceptNo = '{result.AcceptNo}'";
+                DataTable checkDt = GetDataSet(checkSQL);
+                
+                bool recordExists = false;
+                if (checkDt != null && checkDt.Rows.Count > 0)
+                {
+                    recordExists = Convert.ToInt32(checkDt.Rows[0][0]) > 0;
+                }
+
                 // 삽입할 데이터를 Dictionary로 구성
                 Dictionary<string, object> data = new Dictionary<string, object>
                 {
@@ -605,19 +660,38 @@ namespace Ki_WAT
                     { "CarRRCam", result.CarRRCam },
                     { "CarRCros", result.CarRCros },
                     { "Car_Hand", result.Car_Hand },
-                    { "CarDogRun", result.CarDogRun },
+                    { "CarDogRu", result.CarDogRu },
                     { "Car_Symm", result.Car_Symm },
                     { "WAT___PK", result.WAT___PK }
                 };
 
-                bool success = InsertData("TableResult", data);
-                //CloseConnection();
+                bool success;
+                if (recordExists)
+                {
+                    // 기존 데이터가 있으면 Update
+                    string whereClause = $"PJI_Num = '{result.PJI_Num}' AND AcceptNo = '{result.AcceptNo}'";
+                    success = UpdateData("TableCar_WAT", data, whereClause);
+                    if (!success)
+                    {
+                        GWA.STM("Result Update Fail");
+                        
+                    }
+                }
+                else
+                {
+                    // 기존 데이터가 없으면 Insert
+                    success = InsertData("TableCar_WAT", data);
+                    if (!success)
+                    {
+                        GWA.STM("Result Insert Fail");
+                    }
+                }
                 
                 return success;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"결과 추가 중 오류가 발생했습니다: {ex.Message}");
+                MessageBox.Show($"결과 처리 중 오류가 발생했습니다: {ex.Message}");
                 return false;
             }
         }
@@ -645,7 +719,7 @@ namespace Ki_WAT
                     { "CarRRCam", result.CarRRCam },
                     { "CarRCros", result.CarRCros },
                     { "Car_Hand", result.Car_Hand },
-                    { "CarDogRun", result.CarDogRun },
+                    { "CarDogRu", result.CarDogRu },
                     { "Car_Symm", result.Car_Symm },
                     { "WAT___PK", result.WAT___PK }
                 };

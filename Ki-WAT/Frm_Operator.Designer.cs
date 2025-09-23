@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.NavTop = new System.Windows.Forms.Panel();
-            this.NavBottom = new System.Windows.Forms.Panel();
+            this.lbl_NextPJI = new KI_Controls.RoundLabel();
             this.analogClock1 = new Ki_WAT.AnalogClock();
-            this.roundLabel4 = new KI_Controls.RoundLabel();
+            this.lbl_Hand = new KI_Controls.RoundLabel();
             this.lbl_Time = new KI_Controls.RoundLabel();
             this.lbl_Message = new KI_Controls.RoundLabel();
-            this.roundLabel1 = new KI_Controls.RoundLabel();
+            this.lbl_PJI = new KI_Controls.RoundLabel();
+            this.NavBottom = new System.Windows.Forms.Panel();
             this.NavTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,11 +44,12 @@
             this.NavTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NavTop.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NavTop.Controls.Add(this.lbl_NextPJI);
             this.NavTop.Controls.Add(this.analogClock1);
-            this.NavTop.Controls.Add(this.roundLabel4);
+            this.NavTop.Controls.Add(this.lbl_Hand);
             this.NavTop.Controls.Add(this.lbl_Time);
             this.NavTop.Controls.Add(this.lbl_Message);
-            this.NavTop.Controls.Add(this.roundLabel1);
+            this.NavTop.Controls.Add(this.lbl_PJI);
             this.NavTop.Location = new System.Drawing.Point(0, 0);
             this.NavTop.Margin = new System.Windows.Forms.Padding(4);
             this.NavTop.Name = "NavTop";
@@ -56,15 +58,24 @@
             this.NavTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseDown);
             this.NavTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseMove);
             // 
-            // NavBottom
+            // lbl_NextPJI
             // 
-            this.NavBottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.NavBottom.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NavBottom.Location = new System.Drawing.Point(0, 974);
-            this.NavBottom.Margin = new System.Windows.Forms.Padding(4);
-            this.NavBottom.Name = "NavBottom";
-            this.NavBottom.Size = new System.Drawing.Size(1920, 104);
-            this.NavBottom.TabIndex = 8;
+            this.lbl_NextPJI.BackColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_NextPJI.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_NextPJI.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_NextPJI.BorderRadius = 20;
+            this.lbl_NextPJI.BorderSize = 0;
+            this.lbl_NextPJI.FlatAppearance.BorderSize = 0;
+            this.lbl_NextPJI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_NextPJI.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbl_NextPJI.ForeColor = System.Drawing.Color.White;
+            this.lbl_NextPJI.Location = new System.Drawing.Point(1061, 12);
+            this.lbl_NextPJI.Name = "lbl_NextPJI";
+            this.lbl_NextPJI.Size = new System.Drawing.Size(552, 54);
+            this.lbl_NextPJI.TabIndex = 10;
+            this.lbl_NextPJI.Text = "-";
+            this.lbl_NextPJI.TextColor = System.Drawing.Color.White;
+            this.lbl_NextPJI.UseVisualStyleBackColor = false;
             // 
             // analogClock1
             // 
@@ -81,24 +92,24 @@
             this.analogClock1.TabIndex = 4;
             this.analogClock1.Text = "analogClock1";
             // 
-            // roundLabel4
+            // lbl_Hand
             // 
-            this.roundLabel4.BackColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel4.BackgroundColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel4.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.roundLabel4.BorderRadius = 20;
-            this.roundLabel4.BorderSize = 0;
-            this.roundLabel4.FlatAppearance.BorderSize = 0;
-            this.roundLabel4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundLabel4.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundLabel4.ForeColor = System.Drawing.Color.White;
-            this.roundLabel4.Location = new System.Drawing.Point(250, 12);
-            this.roundLabel4.Name = "roundLabel4";
-            this.roundLabel4.Size = new System.Drawing.Size(215, 114);
-            this.roundLabel4.TabIndex = 3;
-            this.roundLabel4.Text = "0.0";
-            this.roundLabel4.TextColor = System.Drawing.Color.White;
-            this.roundLabel4.UseVisualStyleBackColor = false;
+            this.lbl_Hand.BackColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_Hand.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_Hand.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_Hand.BorderRadius = 20;
+            this.lbl_Hand.BorderSize = 0;
+            this.lbl_Hand.FlatAppearance.BorderSize = 0;
+            this.lbl_Hand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Hand.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Hand.ForeColor = System.Drawing.Color.White;
+            this.lbl_Hand.Location = new System.Drawing.Point(250, 12);
+            this.lbl_Hand.Name = "lbl_Hand";
+            this.lbl_Hand.Size = new System.Drawing.Size(215, 114);
+            this.lbl_Hand.TabIndex = 3;
+            this.lbl_Hand.Text = "0.0";
+            this.lbl_Hand.TextColor = System.Drawing.Color.White;
+            this.lbl_Hand.UseVisualStyleBackColor = false;
             // 
             // lbl_Time
             // 
@@ -138,24 +149,34 @@
             this.lbl_Message.TextColor = System.Drawing.Color.White;
             this.lbl_Message.UseVisualStyleBackColor = false;
             // 
-            // roundLabel1
+            // lbl_PJI
             // 
-            this.roundLabel1.BackColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel1.BackgroundColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel1.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.roundLabel1.BorderRadius = 20;
-            this.roundLabel1.BorderSize = 0;
-            this.roundLabel1.FlatAppearance.BorderSize = 0;
-            this.roundLabel1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundLabel1.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.roundLabel1.ForeColor = System.Drawing.Color.White;
-            this.roundLabel1.Location = new System.Drawing.Point(471, 12);
-            this.roundLabel1.Name = "roundLabel1";
-            this.roundLabel1.Size = new System.Drawing.Size(1142, 54);
-            this.roundLabel1.TabIndex = 0;
-            this.roundLabel1.Text = "-";
-            this.roundLabel1.TextColor = System.Drawing.Color.White;
-            this.roundLabel1.UseVisualStyleBackColor = false;
+            this.lbl_PJI.BackColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_PJI.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_PJI.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_PJI.BorderRadius = 20;
+            this.lbl_PJI.BorderSize = 0;
+            this.lbl_PJI.FlatAppearance.BorderSize = 0;
+            this.lbl_PJI.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_PJI.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbl_PJI.ForeColor = System.Drawing.Color.White;
+            this.lbl_PJI.Location = new System.Drawing.Point(471, 12);
+            this.lbl_PJI.Name = "lbl_PJI";
+            this.lbl_PJI.Size = new System.Drawing.Size(552, 54);
+            this.lbl_PJI.TabIndex = 0;
+            this.lbl_PJI.Text = "-";
+            this.lbl_PJI.TextColor = System.Drawing.Color.White;
+            this.lbl_PJI.UseVisualStyleBackColor = false;
+            // 
+            // NavBottom
+            // 
+            this.NavBottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.NavBottom.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NavBottom.Location = new System.Drawing.Point(0, 974);
+            this.NavBottom.Margin = new System.Windows.Forms.Padding(4);
+            this.NavBottom.Name = "NavBottom";
+            this.NavBottom.Size = new System.Drawing.Size(1920, 104);
+            this.NavBottom.TabIndex = 8;
             // 
             // Frm_Operator
             // 
@@ -181,10 +202,11 @@
 
         private System.Windows.Forms.Panel NavTop;
         private System.Windows.Forms.Panel NavBottom;
-        private KI_Controls.RoundLabel roundLabel4;
+        private KI_Controls.RoundLabel lbl_Hand;
         private KI_Controls.RoundLabel lbl_Time;
         private KI_Controls.RoundLabel lbl_Message;
-        private KI_Controls.RoundLabel roundLabel1;
+        private KI_Controls.RoundLabel lbl_PJI;
         private AnalogClock analogClock1;
+        private KI_Controls.RoundLabel lbl_NextPJI;
     }
 }

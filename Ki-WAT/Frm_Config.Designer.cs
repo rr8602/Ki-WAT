@@ -30,6 +30,11 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.editScrewPort2 = new System.Windows.Forms.TextBox();
+            this.editScrewIP2 = new System.Windows.Forms.TextBox();
             this.BTN_SAVE = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -155,8 +160,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.cButton1 = new KI_Controls.CButton();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.Txt_SWB_Baud = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.cbo_SWB = new System.Windows.Forms.ComboBox();
+            this.rd_swb_type_pc = new System.Windows.Forms.RadioButton();
+            this.rd_swb_type_board = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -168,6 +181,7 @@
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gbxMList.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -185,6 +199,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox10);
+            this.tabPage3.Controls.Add(this.groupBox9);
             this.tabPage3.Controls.Add(this.BTN_SAVE);
             this.tabPage3.Controls.Add(this.groupBox8);
             this.tabPage3.Controls.Add(this.groupBox3);
@@ -200,6 +216,53 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "General";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label36);
+            this.groupBox9.Controls.Add(this.label37);
+            this.groupBox9.Controls.Add(this.editScrewPort2);
+            this.groupBox9.Controls.Add(this.editScrewIP2);
+            this.groupBox9.Location = new System.Drawing.Point(348, 197);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(303, 121);
+            this.groupBox9.TabIndex = 19;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "ScrewDriver Right";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(24, 78);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(70, 27);
+            this.label36.TabIndex = 2;
+            this.label36.Text = "Port :";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(24, 34);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(48, 27);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "IP :";
+            // 
+            // editScrewPort2
+            // 
+            this.editScrewPort2.Location = new System.Drawing.Point(88, 69);
+            this.editScrewPort2.Name = "editScrewPort2";
+            this.editScrewPort2.Size = new System.Drawing.Size(200, 35);
+            this.editScrewPort2.TabIndex = 1;
+            this.editScrewPort2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // editScrewIP2
+            // 
+            this.editScrewIP2.Location = new System.Drawing.Point(88, 31);
+            this.editScrewIP2.Name = "editScrewIP2";
+            this.editScrewIP2.Size = new System.Drawing.Size(200, 35);
+            this.editScrewIP2.TabIndex = 0;
+            this.editScrewIP2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // BTN_SAVE
             // 
@@ -311,12 +374,12 @@
             this.groupBox7.Controls.Add(this.label34);
             this.groupBox7.Controls.Add(this.editScrewPort);
             this.groupBox7.Controls.Add(this.editScrewIP);
-            this.groupBox7.Location = new System.Drawing.Point(348, 49);
+            this.groupBox7.Location = new System.Drawing.Point(33, 197);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(303, 121);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "ScrewDriver";
+            this.groupBox7.Text = "ScrewDriver Left";
             // 
             // label33
             // 
@@ -358,7 +421,7 @@
             this.groupBox6.Controls.Add(this.label32);
             this.groupBox6.Controls.Add(this.editLETPort);
             this.groupBox6.Controls.Add(this.editLetURL);
-            this.groupBox6.Location = new System.Drawing.Point(33, 493);
+            this.groupBox6.Location = new System.Drawing.Point(44, 634);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(618, 121);
             this.groupBox6.TabIndex = 17;
@@ -546,7 +609,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.editVEPPort);
             this.groupBox1.Controls.Add(this.editVEPIP);
-            this.groupBox1.Location = new System.Drawing.Point(33, 198);
+            this.groupBox1.Location = new System.Drawing.Point(348, 49);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(303, 121);
             this.groupBox1.TabIndex = 3;
@@ -1708,6 +1771,77 @@
             this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
             this.cButton1.UseVisualStyleBackColor = false;
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.rd_swb_type_pc);
+            this.groupBox10.Controls.Add(this.rd_swb_type_board);
+            this.groupBox10.Controls.Add(this.cbo_SWB);
+            this.groupBox10.Controls.Add(this.label39);
+            this.groupBox10.Controls.Add(this.label38);
+            this.groupBox10.Controls.Add(this.Txt_SWB_Baud);
+            this.groupBox10.Location = new System.Drawing.Point(33, 493);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(614, 121);
+            this.groupBox10.TabIndex = 5;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "SWB";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 78);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(83, 27);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Baud :";
+            // 
+            // Txt_SWB_Baud
+            // 
+            this.Txt_SWB_Baud.Location = new System.Drawing.Point(99, 69);
+            this.Txt_SWB_Baud.Name = "Txt_SWB_Baud";
+            this.Txt_SWB_Baud.Size = new System.Drawing.Size(189, 35);
+            this.Txt_SWB_Baud.TabIndex = 1;
+            this.Txt_SWB_Baud.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(9, 34);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(70, 27);
+            this.label39.TabIndex = 3;
+            this.label39.Text = "Port :";
+            // 
+            // cbo_SWB
+            // 
+            this.cbo_SWB.FormattingEnabled = true;
+            this.cbo_SWB.Location = new System.Drawing.Point(99, 28);
+            this.cbo_SWB.Name = "cbo_SWB";
+            this.cbo_SWB.Size = new System.Drawing.Size(189, 35);
+            this.cbo_SWB.TabIndex = 4;
+            // 
+            // rd_swb_type_pc
+            // 
+            this.rd_swb_type_pc.AutoSize = true;
+            this.rd_swb_type_pc.Location = new System.Drawing.Point(447, 30);
+            this.rd_swb_type_pc.Name = "rd_swb_type_pc";
+            this.rd_swb_type_pc.Size = new System.Drawing.Size(63, 31);
+            this.rd_swb_type_pc.TabIndex = 107;
+            this.rd_swb_type_pc.TabStop = true;
+            this.rd_swb_type_pc.Text = "PC";
+            this.rd_swb_type_pc.UseVisualStyleBackColor = true;
+            // 
+            // rd_swb_type_board
+            // 
+            this.rd_swb_type_board.AutoSize = true;
+            this.rd_swb_type_board.Location = new System.Drawing.Point(325, 30);
+            this.rd_swb_type_board.Name = "rd_swb_type_board";
+            this.rd_swb_type_board.Size = new System.Drawing.Size(94, 31);
+            this.rd_swb_type_board.TabIndex = 106;
+            this.rd_swb_type_board.TabStop = true;
+            this.rd_swb_type_board.Text = "Board";
+            this.rd_swb_type_board.UseVisualStyleBackColor = true;
+            // 
             // Frm_Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1720,6 +1854,8 @@
             this.Load += new System.EventHandler(this.Frm_Config_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1741,6 +1877,8 @@
             this.panel1.PerformLayout();
             this.gbxMList.ResumeLayout(false);
             this.gbxMList.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1873,5 +2011,17 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Button BTN_SAVE;
         private KI_Controls.CButton Btn_ResPath;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox editScrewPort2;
+        private System.Windows.Forms.TextBox editScrewIP2;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.ComboBox cbo_SWB;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox Txt_SWB_Baud;
+        private System.Windows.Forms.RadioButton rd_swb_type_pc;
+        private System.Windows.Forms.RadioButton rd_swb_type_board;
     }
 }

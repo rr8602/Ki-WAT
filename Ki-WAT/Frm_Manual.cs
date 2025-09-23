@@ -18,6 +18,7 @@ namespace Ki_WAT
         public string vin;
         public string line;
         public double floorpitch;
+        
     }
 
     public partial class Frm_Manual : Form
@@ -31,9 +32,30 @@ namespace Ki_WAT
         {
             InitializeComponent();
         }
+
+        private void Frm_Manual_Load(object sender, EventArgs e)
+        {
+            
+        }
+
         public void SetParent(Frm_Mainfrm f)
         {
             m_frmParent = f;
+            m_frmParent.m_SWBComm._updateDisplayValues += UpdateDisplayValues;
+        }
+
+        private void UpdateDisplayValues(string fnd, string sensorAd, string boardAngle, string pcAngle)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => UpdateDisplayValues(fnd, sensorAd, boardAngle, pcAngle)));
+                return;
+            }
+
+            lbl_Type.Text = fnd;
+            lbl_Sen_AD.Text = sensorAd;
+            lbl_Angle.Text = boardAngle;
+            lbl_PC_Angle.Text = pcAngle;
         }
 
         private void Btn_Last_Error_Click(object sender, EventArgs e)
@@ -95,5 +117,27 @@ namespace Ki_WAT
             GetLetParamFromUI();
             _GV.LET_Controller.EndCycle();
         }
+
+        private void Btn_Minus_Click(object sender, EventArgs e)
+        {
+            _GV.Config.SWB.adMinusPoint = double.Parse(lbl_Sen_AD.Text);
+        }
+
+        private void Btn_Zero_Click(object sender, EventArgs e)
+        {
+            _GV.Config.SWB.adZeroPoint = double.Parse(lbl_Sen_AD.Text);
+        }
+
+        private void Btn_Plus_Click(object sender, EventArgs e)
+        {
+            _GV.Config.SWB.adPlusPoint = double.Parse(lbl_Sen_AD.Text);
+        }
+
+        private void Btn_Save_Click(object sender, EventArgs e)
+        {
+            _GV.Config.SaveSWB();
+        }
+
+      
     }
 }

@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Mainfrm));
             this.panelNavBar = new System.Windows.Forms.Panel();
+            this.Btn_VEP = new System.Windows.Forms.Button();
             this.Btn_Result = new System.Windows.Forms.Button();
             this.Btn_StaticMaster = new System.Windows.Forms.Button();
             this.Btn_Rolling = new System.Windows.Forms.Button();
@@ -41,8 +42,14 @@
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnMain = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.Status_BAR = new System.Windows.Forms.Label();
-            this.Status_Screw_R = new System.Windows.Forms.Label();
+            this.lbl_SEN_AUTO = new System.Windows.Forms.Label();
+            this.lbl_SEN_RR = new System.Windows.Forms.Label();
+            this.lbl_SEN_RL = new System.Windows.Forms.Label();
+            this.lbl_SEN_FR = new System.Windows.Forms.Label();
+            this.lbl_SEN_FL = new System.Windows.Forms.Label();
+            this.lbl_State_VEP = new System.Windows.Forms.Label();
+            this.lbl_Status_BAR = new System.Windows.Forms.Label();
+            this.lbl_Status_SWB = new System.Windows.Forms.Label();
             this.Status_Screw_L = new System.Windows.Forms.Label();
             this.Status_PLC = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -59,6 +66,7 @@
             // panelNavBar
             // 
             this.panelNavBar.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelNavBar.Controls.Add(this.Btn_VEP);
             this.panelNavBar.Controls.Add(this.Btn_Result);
             this.panelNavBar.Controls.Add(this.Btn_StaticMaster);
             this.panelNavBar.Controls.Add(this.Btn_Rolling);
@@ -75,6 +83,22 @@
             this.panelNavBar.Name = "panelNavBar";
             this.panelNavBar.Size = new System.Drawing.Size(91, 1003);
             this.panelNavBar.TabIndex = 6;
+            // 
+            // Btn_VEP
+            // 
+            this.Btn_VEP.BackColor = System.Drawing.Color.Gainsboro;
+            this.Btn_VEP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.Btn_VEP.Font = new System.Drawing.Font("Verdana", 12F);
+            this.Btn_VEP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Btn_VEP.Location = new System.Drawing.Point(1, 756);
+            this.Btn_VEP.Margin = new System.Windows.Forms.Padding(4);
+            this.Btn_VEP.Name = "Btn_VEP";
+            this.Btn_VEP.Size = new System.Drawing.Size(83, 60);
+            this.Btn_VEP.TabIndex = 556;
+            this.Btn_VEP.Tag = "frmSetting";
+            this.Btn_VEP.Text = "VEP";
+            this.Btn_VEP.UseVisualStyleBackColor = false;
+            this.Btn_VEP.Click += new System.EventHandler(this.Btn_VEP_Click);
             // 
             // Btn_Result
             // 
@@ -136,7 +160,7 @@
             this.Btn_T.Size = new System.Drawing.Size(83, 60);
             this.Btn_T.TabIndex = 551;
             this.Btn_T.Tag = "frmSetting";
-            this.Btn_T.Text = "TT";
+            this.Btn_T.Text = "Simul";
             this.Btn_T.UseVisualStyleBackColor = false;
             this.Btn_T.Click += new System.EventHandler(this.Btn_T_Click);
             // 
@@ -233,8 +257,14 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.Status_BAR);
-            this.panel1.Controls.Add(this.Status_Screw_R);
+            this.panel1.Controls.Add(this.lbl_SEN_AUTO);
+            this.panel1.Controls.Add(this.lbl_SEN_RR);
+            this.panel1.Controls.Add(this.lbl_SEN_RL);
+            this.panel1.Controls.Add(this.lbl_SEN_FR);
+            this.panel1.Controls.Add(this.lbl_SEN_FL);
+            this.panel1.Controls.Add(this.lbl_State_VEP);
+            this.panel1.Controls.Add(this.lbl_Status_BAR);
+            this.panel1.Controls.Add(this.lbl_Status_SWB);
             this.panel1.Controls.Add(this.Status_Screw_L);
             this.panel1.Controls.Add(this.Status_PLC);
             this.panel1.Controls.Add(this.button3);
@@ -247,27 +277,93 @@
             this.panel1.Size = new System.Drawing.Size(1822, 48);
             this.panel1.TabIndex = 8;
             // 
-            // Status_BAR
+            // lbl_SEN_AUTO
             // 
-            this.Status_BAR.BackColor = System.Drawing.Color.Gray;
-            this.Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Status_BAR.Location = new System.Drawing.Point(439, 7);
-            this.Status_BAR.Name = "Status_BAR";
-            this.Status_BAR.Size = new System.Drawing.Size(121, 32);
-            this.Status_BAR.TabIndex = 555;
-            this.Status_BAR.Text = "BarCode";
-            this.Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_AUTO.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_AUTO.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_SEN_AUTO.Location = new System.Drawing.Point(1718, 7);
+            this.lbl_SEN_AUTO.Name = "lbl_SEN_AUTO";
+            this.lbl_SEN_AUTO.Size = new System.Drawing.Size(80, 32);
+            this.lbl_SEN_AUTO.TabIndex = 561;
+            this.lbl_SEN_AUTO.Text = "AUTO";
+            this.lbl_SEN_AUTO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Status_Screw_R
+            // lbl_SEN_RR
             // 
-            this.Status_Screw_R.BackColor = System.Drawing.Color.Gray;
-            this.Status_Screw_R.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Status_Screw_R.Location = new System.Drawing.Point(312, 7);
-            this.Status_Screw_R.Name = "Status_Screw_R";
-            this.Status_Screw_R.Size = new System.Drawing.Size(121, 32);
-            this.Status_Screw_R.TabIndex = 554;
-            this.Status_Screw_R.Text = "Sensor";
-            this.Status_Screw_R.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_RR.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_SEN_RR.Location = new System.Drawing.Point(1649, 7);
+            this.lbl_SEN_RR.Name = "lbl_SEN_RR";
+            this.lbl_SEN_RR.Size = new System.Drawing.Size(63, 32);
+            this.lbl_SEN_RR.TabIndex = 560;
+            this.lbl_SEN_RR.Text = "RR";
+            this.lbl_SEN_RR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_SEN_RL
+            // 
+            this.lbl_SEN_RL.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RL.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_SEN_RL.Location = new System.Drawing.Point(1580, 7);
+            this.lbl_SEN_RL.Name = "lbl_SEN_RL";
+            this.lbl_SEN_RL.Size = new System.Drawing.Size(63, 32);
+            this.lbl_SEN_RL.TabIndex = 559;
+            this.lbl_SEN_RL.Text = "RL";
+            this.lbl_SEN_RL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_SEN_FR
+            // 
+            this.lbl_SEN_FR.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_SEN_FR.Location = new System.Drawing.Point(1511, 7);
+            this.lbl_SEN_FR.Name = "lbl_SEN_FR";
+            this.lbl_SEN_FR.Size = new System.Drawing.Size(63, 32);
+            this.lbl_SEN_FR.TabIndex = 558;
+            this.lbl_SEN_FR.Text = "FR";
+            this.lbl_SEN_FR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_SEN_FL
+            // 
+            this.lbl_SEN_FL.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FL.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_SEN_FL.Location = new System.Drawing.Point(1442, 7);
+            this.lbl_SEN_FL.Name = "lbl_SEN_FL";
+            this.lbl_SEN_FL.Size = new System.Drawing.Size(63, 32);
+            this.lbl_SEN_FL.TabIndex = 557;
+            this.lbl_SEN_FL.Text = "FL";
+            this.lbl_SEN_FL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_State_VEP
+            // 
+            this.lbl_State_VEP.BackColor = System.Drawing.Color.Gray;
+            this.lbl_State_VEP.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_State_VEP.Location = new System.Drawing.Point(566, 7);
+            this.lbl_State_VEP.Name = "lbl_State_VEP";
+            this.lbl_State_VEP.Size = new System.Drawing.Size(121, 32);
+            this.lbl_State_VEP.TabIndex = 556;
+            this.lbl_State_VEP.Text = "VEP";
+            this.lbl_State_VEP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Status_BAR
+            // 
+            this.lbl_Status_BAR.BackColor = System.Drawing.Color.Gray;
+            this.lbl_Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Status_BAR.Location = new System.Drawing.Point(439, 7);
+            this.lbl_Status_BAR.Name = "lbl_Status_BAR";
+            this.lbl_Status_BAR.Size = new System.Drawing.Size(121, 32);
+            this.lbl_Status_BAR.TabIndex = 555;
+            this.lbl_Status_BAR.Text = "BarCode";
+            this.lbl_Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Status_SWB
+            // 
+            this.lbl_Status_SWB.BackColor = System.Drawing.Color.Gray;
+            this.lbl_Status_SWB.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Status_SWB.Location = new System.Drawing.Point(312, 7);
+            this.lbl_Status_SWB.Name = "lbl_Status_SWB";
+            this.lbl_Status_SWB.Size = new System.Drawing.Size(121, 32);
+            this.lbl_Status_SWB.TabIndex = 554;
+            this.lbl_Status_SWB.Text = "SWB";
+            this.lbl_Status_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Status_Screw_L
             // 
@@ -390,11 +486,18 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label Status_Screw_R;
+        private System.Windows.Forms.Label lbl_Status_SWB;
         private System.Windows.Forms.Label Status_Screw_L;
         private System.Windows.Forms.Label Status_PLC;
         private System.Windows.Forms.Button Btn_Result;
-        private System.Windows.Forms.Label Status_BAR;
+        private System.Windows.Forms.Label lbl_Status_BAR;
+        private System.Windows.Forms.Label lbl_State_VEP;
+        private System.Windows.Forms.Button Btn_VEP;
+        private System.Windows.Forms.Label lbl_SEN_AUTO;
+        private System.Windows.Forms.Label lbl_SEN_RR;
+        private System.Windows.Forms.Label lbl_SEN_RL;
+        private System.Windows.Forms.Label lbl_SEN_FR;
+        private System.Windows.Forms.Label lbl_SEN_FL;
     }
 }
 

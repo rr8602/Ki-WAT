@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RollTester;
 using System.Diagnostics;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 namespace Ki_WAT
 {
     public partial class Frm_Oper_Test : Form
@@ -17,11 +18,20 @@ namespace Ki_WAT
         Frm_Mainfrm m_Mainfrm;
         private Frm_Operator m_Operator;
         TblCarModel m_CurModel = new TblCarModel();
+        GlobalVal _GV = GlobalVal.Instance;
+        private const int GRAPH_TYPE_TOE_FL = 100;
+        private const int GRAPH_TYPE_TOE_FR = 200;
+        private const int GRAPH_TYPE_TOE_RL = 300;
+        private const int GRAPH_TYPE_TOE_RR = 400;
+
+        private const int GRAPH_TYPE_CAM_FL = 500;
+        private const int GRAPH_TYPE_CAM_FR = 600;
+        private const int GRAPH_TYPE_CAM_RL = 700;
+        private const int GRAPH_TYPE_CAM_RR = 800;
 
         public Frm_Oper_Test()
         { 
             InitializeComponent();
-
         }
 
         public void SetOperator(Frm_Operator pOper)
@@ -32,7 +42,6 @@ namespace Ki_WAT
         public void SetModel(TblCarModel pModel) 
         {
             m_CurModel = pModel;
-            
             GRP_FL_TOE.SetTargetAdjust(float.Parse(pModel.ToeFL_ST), float.Parse(pModel.ToeFL_AT), float.Parse(pModel.ToeFL_LT));
             GRP_FR_TOE.SetTargetAdjust(float.Parse(pModel.ToeFR_ST), float.Parse(pModel.ToeFR_AT), float.Parse(pModel.ToeFR_LT));
             GRP_RL_TOE.SetTargetAdjust(float.Parse(pModel.ToeRL_ST), float.Parse(pModel.ToeRL_AT), float.Parse(pModel.ToeRL_LT));
@@ -43,21 +52,17 @@ namespace Ki_WAT
             GRP_RL_CAM.SetTargetAdjust(float.Parse(pModel.CamRL_ST), float.Parse(pModel.CamRL_AT), float.Parse(pModel.CamRL_LT));
             GRP_RR_CAM.SetTargetAdjust(float.Parse(pModel.CamRR_ST), float.Parse(pModel.CamRR_AT), float.Parse(pModel.CamRR_LT));
 
-
             GRP_FL_TOE.SetTarget(float.Parse(pModel.ToeFL_ST), 60);
             GRP_FR_TOE.SetTarget(float.Parse(pModel.ToeFR_ST), 60);
             GRP_RL_TOE.SetTarget(float.Parse(pModel.ToeRL_ST), 60);
             GRP_RR_TOE.SetTarget(float.Parse(pModel.ToeRR_ST), 60);
 
-            GRP_FL_CAM.SetTarget(float.Parse(pModel.CamFL_ST), 60);
-            GRP_FR_CAM.SetTarget(float.Parse(pModel.CamFR_ST), 60);
-            GRP_RL_CAM.SetTarget(float.Parse(pModel.CamRL_ST), 60);
-            GRP_RR_CAM.SetTarget(float.Parse(pModel.CamRR_ST), 60);
-
+            GRP_FL_CAM.SetTarget(float.Parse(pModel.CamFL_ST), 120);
+            GRP_FR_CAM.SetTarget(float.Parse(pModel.CamFR_ST), 120);
+            GRP_RL_CAM.SetTarget(float.Parse(pModel.CamRL_ST), 120);
+            GRP_RR_CAM.SetTarget(float.Parse(pModel.CamRR_ST), 120);
             Debug.Print("");
-                
         }
-
         public void SetMainFrm(Frm_Mainfrm pMain)
         {
             m_Mainfrm = pMain;
@@ -65,46 +70,129 @@ namespace Ki_WAT
         }
         public void OnReceiveDpp(MeasureData pData)
         {
-
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(() => OnReceiveDpp(pData)));
                 return;
             }
+            RedrawGauge((float)pData.dToeFL, GRAPH_TYPE_TOE_FL);
+            RedrawGauge((float)pData.dToeFR, GRAPH_TYPE_TOE_FR);
+            RedrawGaugeNoMove((float)pData.dToeRL, GRAPH_TYPE_TOE_RL);
+            RedrawGaugeNoMove((float)pData.dToeRR, GRAPH_TYPE_TOE_RR);
 
-            //lbl_Cam_FL.Text = pData.dCamFL.ToString("F1");
-            //lbl_Cam_FR.Text = pData.dCamFR.ToString("F1");
-            //lbl_Cam_RL.Text = pData.dCamRL.ToString("F1");
-            //lbl_Cam_RR.Text = pData.dCamRR.ToString("F1");
-
-            //lbl_Toe_FL.Text = pData.dToeFL.ToString("F1");
-            //lbl_Toe_FR.Text = pData.dToeFR.ToString("F1");
-            //lbl_Toe_RL.Text = pData.dToeRL.ToString("F1");
-            //lbl_Toe_RR.Text = pData.dToeRR.ToString("F1");
-
-            GRP_FL_TOE.SetValue(pData.dToeFL);
-            GRP_FR_TOE.SetValue(pData.dToeFR);
-            GRP_RL_TOE.SetValue(pData.dToeRL);
-            GRP_RR_TOE.SetValue(pData.dToeRR);
-
-            GRP_FL_CAM.SetValue(pData.dCamFL);
-            GRP_FR_CAM.SetValue(pData.dCamFR);
-            GRP_RL_CAM.SetValue(pData.dCamRL);
-            GRP_RR_CAM.SetValue(pData.dCamRR);
-
-
-            RedrawGauge(GRP_FL_TOE, (float)pData.dToeFL);
-            RedrawGauge(GRP_FR_TOE, (float)pData.dToeFR);
+            RedrawGaugeNoMove((float)pData.dCamFL, GRAPH_TYPE_CAM_FL);
+            RedrawGaugeNoMove((float)pData.dCamFR, GRAPH_TYPE_CAM_FR);
+            RedrawGaugeNoMove((float)pData.dCamRL, GRAPH_TYPE_CAM_RL);
+            RedrawGaugeNoMove((float)pData.dCamRR, GRAPH_TYPE_CAM_RR);
+            
+            lbl_SWB.Text = _GV.dHandle.ToString("F1");
         }
-        public void RedrawGauge(CGuage pGauge, float fValue)
+        public void RedrawGauge(float fValue, int nType)
         {
-            if ( fValue < 13 ) 
+            CGuage pGauge = null;
+            float targetValue = 0 ;
+            float nBigScale = 10;
+            
+            double dST = 0;
+            double dLT = 0;
+            double dAT = 0;
+            switch (nType)
             {
-                pGauge.SetRange(20);
+                case GRAPH_TYPE_TOE_FL:
+                    pGauge = GRP_FL_TOE;
+                    targetValue = float.Parse(m_CurModel.ToeFL_ST);
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.ToeFL_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.ToeFL_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.ToeFL_AT);
+                    break;
+                case GRAPH_TYPE_TOE_FR:
+                    pGauge = GRP_FR_TOE;
+                    targetValue = float.Parse(m_CurModel.ToeFR_ST);
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.ToeFR_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.ToeFR_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.ToeFR_AT);
+                    break;
             }
+            pGauge.ValueColor = GetColor(fValue, dST, dAT, dLT);
             
-            
+            pGauge.SetValue(fValue);
+            float minRange = targetValue - nBigScale;
+            float maxRange = targetValue + nBigScale;
+            pGauge.SetTarget(targetValue, (fValue > minRange && fValue < maxRange) ? nBigScale : 60);
         }
+        public Color GetColor(double dValue, double dST, double dAT, double dLT)
+        {
+            double diff = Math.Abs(dValue - dST);
+
+            if (diff <= dAT)
+            {
+                return Color.Green;   // ±AT 이내 → Green
+            }
+            else if (diff <= dLT)
+            {
+                return Color.Yellow;  // ±LT 이내 → Yellow
+            }
+            else
+            {
+                return Color.Red;     // 그 밖은 Red
+            }
+        }
+
+        public void RedrawGaugeNoMove(float fValue, int nType)
+        {
+            CGuage pGauge = null;
+
+            
+            double dST = 0;
+            double dLT = 0;
+            double dAT = 0;
+
+            switch (nType)
+            {
+                case GRAPH_TYPE_CAM_FL:
+                    pGauge = GRP_FL_CAM;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.CamFL_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.CamFL_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.CamFL_AT);
+                    break;
+                case GRAPH_TYPE_CAM_FR:
+                    pGauge = GRP_FR_CAM;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.CamFR_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.CamFR_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.CamFR_AT);
+                    break;
+                case GRAPH_TYPE_CAM_RL:
+                    pGauge = GRP_RL_CAM;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.CamRL_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.CamRL_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.CamRL_AT);
+                    break;
+                case GRAPH_TYPE_CAM_RR:
+                    pGauge = GRP_RR_CAM;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.CamRR_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.CamRR_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.CamRR_AT);
+                    break;
+                case GRAPH_TYPE_TOE_RL:
+                    pGauge = GRP_RL_TOE;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.ToeRL_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.ToeRL_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.ToeRL_AT);
+                    break;
+                case GRAPH_TYPE_TOE_RR:
+                    pGauge = GRP_RR_TOE;
+                    dST = Convert.ToDouble(_GV.m_Cur_Model.ToeRR_ST);
+                    dLT = Convert.ToDouble(_GV.m_Cur_Model.ToeRR_LT);
+                    dAT = Convert.ToDouble(_GV.m_Cur_Model.ToeRR_AT);
+                    break;
+            }
+
+            pGauge.ValueColor = GetColor(fValue, dST, dAT, dLT);
+            pGauge.SetValue(fValue);
+        }
+
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             Frm_Operator parent = (Frm_Operator)this.MdiParent;
@@ -113,18 +201,22 @@ namespace Ki_WAT
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            MeasureData pData = new MeasureData();
-            pData.dToeFL = 10;
-            pData.dToeFR = 20;
-            pData.dToeRL = 30;
-            pData.dToeRR = 40;
+            //float nVal = float.Parse(textBox1.Text);
+            RedrawGauge((float)30.5, GRAPH_TYPE_TOE_FL);
 
-            pData.dCamFL = 15;
-            pData.dCamFR = 25;
-            pData.dCamRL = 35;
-            pData.dCamRR = 45;
+            GRP_FL_TOE.ValueColor = Color.Red;
+            //MeasureData pData = new MeasureData();
+            //pData.dToeFL = 10;
+            //pData.dToeFR = 20;
+            //pData.dToeRL = 30;
+            //pData.dToeRR = 40;
 
-            OnReceiveDpp(pData);
+            //pData.dCamFL = 15;
+            //pData.dCamFR = 25;
+            //pData.dCamRL = 35;
+            //pData.dCamRR = 45;
+
+            //OnReceiveDpp(pData);
 
 
         }

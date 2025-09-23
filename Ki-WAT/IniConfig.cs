@@ -35,6 +35,36 @@ namespace Ki_WAT
             GetPrivateProfileString(section, key, defaultValue, temp, 255, filePath);
             return temp.ToString();
         }
+        public int ReadInteger(string section, string key, int defaultValue = 0)
+        {
+            string value = ReadValue(section, key, defaultValue.ToString());
+
+            if (int.TryParse(value, out int result))
+                return result;
+
+            return defaultValue;
+        }
+
+        public double ReadDouble(string section, string key, double defaultValue = 0.0)
+        {
+            string value = ReadValue(section, key, defaultValue.ToString());
+
+            if (double.TryParse(value, out double result))
+                return result;
+
+            return defaultValue;
+        }
+
+        public bool ReadBoolean(string section, string key, bool defaultValue = false)
+        {
+            string value = ReadValue(section, key, defaultValue.ToString());
+
+            if (bool.TryParse(value, out bool result))
+                return result;
+
+            return defaultValue;
+        }
+
     }
 
     /// <summary>
@@ -48,12 +78,19 @@ namespace Ki_WAT
         public string VEP_PORT { get; set; } = "";
         public string SCREW_IP { get; set; } = "";
         public string SCREW_PORT { get; set; } = "";
+        public string SCREW_IP2 { get; set; } = "";
+        public string SCREW_PORT2 { get; set; } = "";
+
         public string PRINT_IP { get; set; } = "";
         public string PRINT_PORT { get; set; } = "";
         public string BARCODE_IP { get; set; } = "";
         public string BARCODE_PORT { get; set; } = "";
         public string LET_URL { get; set; } = "";
         public string LET_PORT { get; set; } = "";
+        public string SWB_PORT { get; set; } = "COM3";
+        public string SWB_BAUD { get; set; } = "115200";
+
+
     }
 
     /// <summary>
@@ -74,6 +111,15 @@ namespace Ki_WAT
         public string MIN_POS { get; set; } = "";
         public string MAX_POS { get; set; } = "";
     }
+    public class SWBDataConfig
+    {
+        public double adZeroPoint { get; set; } = 0;
+        public double adPlusPoint { get; set; } = 0;
+        public double adMinusPoint { get; set; } = 0;
+        
+        public int BoardType { get; set; } = 0; // 0: BOARD, 1: PC
+    }
+
 
     /// <summary>
     /// 전체 설정을 관리하는 메인 클래스
@@ -86,7 +132,7 @@ namespace Ki_WAT
         public DeviceConfig Device { get; set; }
         public ProgramConfig Program { get; set; }
         public WheelbaseConfig Wheelbase { get; set; }
-
+        public SWBDataConfig SWB { get; set; }
         public AppConfig(string configPath = "System\\config.ini")
         {
             this.configPath = configPath;
@@ -95,8 +141,11 @@ namespace Ki_WAT
             Device = new DeviceConfig();
             Program = new ProgramConfig();
             Wheelbase = new WheelbaseConfig();
+            SWB = new SWBDataConfig();
         }
 
+
+        
         /// <summary>
         /// INI 파일에서 모든 설정을 읽어옵니다.
         /// </summary>
@@ -111,12 +160,18 @@ namespace Ki_WAT
                 Device.VEP_PORT = iniFile.ReadValue("DEVICE", "VEP_PORT", "");
                 Device.SCREW_IP = iniFile.ReadValue("DEVICE", "SCREW_IP", "");
                 Device.SCREW_PORT = iniFile.ReadValue("DEVICE", "SCREW_PORT", "");
+                Device.SCREW_IP2 = iniFile.ReadValue("DEVICE", "SCREW_IP2", "127.0.0.1");
+                Device.SCREW_PORT2 = iniFile.ReadValue("DEVICE", "SCREW_PORT2", "8500");
                 Device.PRINT_IP = iniFile.ReadValue("DEVICE", "PRINT_IP", "");
                 Device.PRINT_PORT = iniFile.ReadValue("DEVICE", "PRINT_PORT", "");
                 Device.BARCODE_IP = iniFile.ReadValue("DEVICE", "BARCODE_IP", "");
                 Device.BARCODE_PORT = iniFile.ReadValue("DEVICE", "BARCODE_PORT", "");
                 Device.LET_URL = iniFile.ReadValue("DEVICE", "LET_URL", "");
                 Device.LET_PORT = iniFile.ReadValue("DEVICE", "LET_PORT", "");
+
+                Device.SWB_PORT = iniFile.ReadValue("DEVICE", "SWB_PORT", "COM3");
+                Device.SWB_BAUD = iniFile.ReadValue("DEVICE", "SWB_BAUD", "115200");
+
 
                 // PROGRAM 섹션 읽기
                 Program.RESULT_PATH = iniFile.ReadValue("PROGRAM", "RESULT_PATH", "");
@@ -126,13 +181,23 @@ namespace Ki_WAT
                 Wheelbase.HOME_POS = iniFile.ReadValue("WHEELBASE", "HOME_POS", "");
                 Wheelbase.MIN_POS = iniFile.ReadValue("WHEELBASE", "MIN_POS", "");
                 Wheelbase.MAX_POS = iniFile.ReadValue("WHEELBASE", "MAX_POS", "");
+
+
+                SWB.adZeroPoint = iniFile.ReadDouble("AD_Calibration", "ZeroPoint");
+                SWB.adPlusPoint = iniFile.ReadDouble("AD_Calibration", "PlusPoint");
+                SWB.adMinusPoint = iniFile.ReadDouble("AD_Calibration", "MinusPoint");
+
+                SWB.BoardType = iniFile.ReadInteger("AD_Calibration", "AngleType");
+
+
+
+
             }
             catch (Exception ex)
             {
                 throw new Exception($"설정 파일 읽기 중 오류가 발생했습니다: {ex.Message}");
             }
         }
-
         /// <summary>
         /// 현재 설정을 INI 파일에 저장합니다.
         /// </summary>
@@ -147,12 +212,20 @@ namespace Ki_WAT
                 iniFile.WriteValue("DEVICE", "VEP_PORT", Device.VEP_PORT);
                 iniFile.WriteValue("DEVICE", "SCREW_IP", Device.SCREW_IP);
                 iniFile.WriteValue("DEVICE", "SCREW_PORT", Device.SCREW_PORT);
+                iniFile.WriteValue("DEVICE", "SCREW_IP2", Device.SCREW_IP2);
+                iniFile.WriteValue("DEVICE", "SCREW_PORT2", Device.SCREW_PORT2);
                 iniFile.WriteValue("DEVICE", "PRINT_IP", Device.PRINT_IP);
                 iniFile.WriteValue("DEVICE", "PRINT_PORT", Device.PRINT_PORT);
                 iniFile.WriteValue("DEVICE", "BARCODE_IP", Device.BARCODE_IP);
                 iniFile.WriteValue("DEVICE", "BARCODE_PORT", Device.BARCODE_PORT);
                 iniFile.WriteValue("DEVICE", "LET_URL", Device.LET_URL);
                 iniFile.WriteValue("DEVICE", "LET_PORT", Device.LET_PORT);
+
+                iniFile.WriteValue("DEVICE", "SWB_PORT", Device.SWB_PORT);
+                iniFile.WriteValue("DEVICE", "SWB_BAUD", Device.SWB_BAUD);
+
+
+
 
                 // PROGRAM 섹션 저장
                 iniFile.WriteValue("PROGRAM", "RESULT_PATH", Program.RESULT_PATH);
@@ -168,7 +241,20 @@ namespace Ki_WAT
                 throw new Exception($"설정 파일 저장 중 오류가 발생했습니다: {ex.Message}");
             }
         }
-
+        public void SaveSWB()
+        {
+            try
+            {
+                iniFile.WriteValue("AD_Calibration", "ZeroPoint", SWB.adZeroPoint.ToString());
+                iniFile.WriteValue("AD_Calibration", "PlusPoint", SWB.adPlusPoint.ToString());
+                iniFile.WriteValue("AD_Calibration", "MinusPoint", SWB.adMinusPoint.ToString());
+                iniFile.WriteValue("AD_Calibration", "AngleType", SWB.BoardType.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"설정 파일 저장 중 오류가 발생했습니다: {ex.Message}");
+            }
+        }
         /// <summary>
         /// 기본 설정으로 INI 파일을 생성합니다.
         /// </summary>

@@ -96,7 +96,7 @@ namespace RollTester
 		public void SetValue(double dSpeed)
 		{
 			int nSpeed = (int)dSpeed;
-			if (nSpeed < 0) return;
+			if (nSpeed < minValue) return;
 			if(nSpeed > maxValue) return;
 			this.currentValue = (float) dSpeed;	
 			this.Invalidate();
