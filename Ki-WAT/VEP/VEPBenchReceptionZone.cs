@@ -256,5 +256,23 @@ namespace Ki_WAT
                     return "Unknown Function Code";
             }
         }
+
+        public void SetWord(int nAddress, byte highByte, byte lowByte)
+        {
+            if (nAddress < 0) return;
+            if (nAddress >= _values.Length) return;
+
+            _values[nAddress] = (ushort)((highByte << 8) | lowByte);
+        }
+        public void SetSize(int size)
+        {
+            if (size <= 0) return;
+            _values = new ushort[size];
+            for (int i = 0; i < _values.Length; i++)
+            {
+                _values[i] = 0;
+            }
+        }
+
     }
 }

@@ -471,13 +471,15 @@ public class TestThread_Kint
     {
         try
         {
-
-            //m_Cur_CarInfo.CarPJINo
-            //SendPJI ;
+            _GV._VEP_Data.SendPJI(_GV.m_Cur_Info.CarPJINo);
             UI_Update_Status("STEP_PEV_SEND_PJI");
+            //_GV._VEP_Data.TransmissionZone.ExchStatus = 2;
+            const double TIMEOUT_SECONDS = 0.5;
+            DateTime startTime = DateTime.Now;
             while (true)
             {
                 if (CheckLoopExit()) break;
+                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
                 Thread.Sleep(10);
             }
             SetState(Constants.STEP_MOVE_WHEELBASE);
@@ -537,8 +539,6 @@ public class TestThread_Kint
             OnErrorOccurred?.Invoke($"WB Move Error :  {ex.Message}");
         }
 
-        
-        
         return nRet;
     }
     private int DoDetectCar()

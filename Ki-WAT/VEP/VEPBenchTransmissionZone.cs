@@ -252,5 +252,25 @@ namespace Ki_WAT
                     return "Unknown Function Code";
             }
         }
+        public void SetSize(int size)
+        {
+            if (size <= 0) return;
+            _values = new ushort[size];
+            for (int i = 0; i < _values.Length; i++)
+            {
+                _values[i] = 0;
+            }
+        }
+        public void SetValue(int index, ushort value)
+        {
+            _values[index] = value;
+        }
+
+        public int GetValue(int index)
+        {
+            return _values[index];
+        }
+
+
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace KI_VEP
+namespace Ki_WAT
 {
 	public class VEPBenchAddTransmissionZone : IVEPBenchZone
 	{
@@ -137,5 +137,16 @@ namespace KI_VEP
 				Console.WriteLine("POS : " + i.ToString() + " VALUE + " + _values[i].ToString());
 			}
 		}
-	}
+
+        public void SetSize(int size)
+        {
+            if (size <= 0) return;
+            _values = new ushort[size];
+            for (int i = 0; i < _values.Length; i++)
+            {
+                _values[i] = 0;
+            }
+        }
+
+    }
 }

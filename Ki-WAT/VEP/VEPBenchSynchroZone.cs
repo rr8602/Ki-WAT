@@ -13,7 +13,7 @@ namespace Ki_WAT
         private static readonly object _lock = new object();
 
         
-        public const int SYNCHRO_SIZE_PART1 = 90;
+        //public const int SYNCHRO_SIZE_PART1 = 90;
 
 
         //public const int SYNCHRO_SIZE_PART2 = 67;
@@ -38,9 +38,8 @@ namespace Ki_WAT
                 return _instance;
             }
         }
-        private ushort[] lowData;
-
-        private int[] _values;
+        
+        private ushort[] _values;
         public int Size => _values.Length;
         
         public int this[int index]
@@ -57,7 +56,7 @@ namespace Ki_WAT
                 if (index < 0 || index >= _values.Length)
                     throw new IndexOutOfRangeException("Index out of range for VEPBenchSynchro values.");
 
-                _values[index] = value;
+                _values[index] = (ushort)value;
             }
         }
 
@@ -69,9 +68,9 @@ namespace Ki_WAT
             _isChanged = false;
         }
 
-        public VEPBenchSynchroZone(int size = SYNCHRO_SIZE_PART1)
+        public VEPBenchSynchroZone(int size = 90)
         {
-            _values = new int[size];
+            _values = new ushort[size];
             ResetAllValues();
             _isChanged = false;
         }
@@ -79,7 +78,7 @@ namespace Ki_WAT
 
         public void FromRegisters(ushort[] registers)
         {
-            
+
             if (registers == null)
                 throw new ArgumentNullException(nameof(registers));
 
@@ -87,7 +86,8 @@ namespace Ki_WAT
 
             if (_values.Length != registers.Length)
             {
-                _values = new int[registers.Length];
+
+                _values = new ushort[registers.Length];
                 changed = true;
             }
 
@@ -135,5 +135,15 @@ namespace Ki_WAT
         {
             return this[index];
         }
+        public void SetSize(int size)
+        {
+            if (size <= 0) return;
+            _values = new ushort[size];
+            for (int i = 0; i < _values.Length; i++)
+            {
+                _values[i] = 0;
+            }
+        }
+
     }
 }

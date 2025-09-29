@@ -121,6 +121,7 @@ namespace Ki_WAT
         {
             _GV = pGlobal;
             _vepManager = pData;
+            pData.SetParent(this);
         }
 
         private void InitializeAddresses()
@@ -130,6 +131,13 @@ namespace Ki_WAT
             Addr_SynchroZone = _vepManager.DescriptionZone.SynchroZoneAddr;
             Addr_TransmissionZone = _vepManager.DescriptionZone.TransmissionZoneAddr;
             Addr_ReceptionZone = _vepManager.DescriptionZone.ReceptionZoneAddr;
+
+            _vepManager.StatusZone.SetSize(_vepManager.DescriptionZone.StatusZoneSize);
+            _vepManager.SynchroZone.SetSize(_vepManager.DescriptionZone.SynchroZoneSize);
+            _vepManager.ReceptionZone.SetSize(_vepManager.DescriptionZone.ReceptionZoneSize);
+            _vepManager.TransmissionZone.SetSize(_vepManager.DescriptionZone.TransmissionZoneSize);
+            _vepManager.AddTransmissionZone.SetSize(_vepManager.DescriptionZone.AdditionalTZSize);
+
         }
 
         public void PerformInitialRead()
@@ -496,8 +504,8 @@ namespace Ki_WAT
             try
             {
                 ushort[] registers = _vepManager.StatusZone.ToRegisters();
-                _modbusMaster.WriteMultipleRegisters(1, Addr_StatusZone, registers);
-
+                //_modbusMaster.WriteMultipleRegisters(1, Addr_StatusZone, registers);
+                WriteMultiple(1, Addr_StatusZone, registers);
                 LogMessage($"Status Zone 쓰기 성공: VepStatus={_vepManager.StatusZone.GetVepStatusString()}, " +
                  $"StartCycle={_vepManager.StatusZone.StartCycle}, " +
                  $"VepCycleEnd={_vepManager.StatusZone.VepCycleEnd}, " +
@@ -561,16 +569,9 @@ namespace Ki_WAT
 
             try
             {
-                ushort[] arr = _vepManager.SynchroZone.ToRegisters();
-
-                if (arr.Length >= VEPBenchSynchroZone.SYNCHRO_SIZE_PART1)
-                {
-                    ushort[] part1 = new ushort[VEPBenchSynchroZone.SYNCHRO_SIZE_PART1];
-                    Array.Copy(arr, 0, part1, 0, VEPBenchSynchroZone.SYNCHRO_SIZE_PART1);
-                    _modbusMaster.WriteMultipleRegisters(1, Addr_SynchroZone, part1);
-                }
-
-                
+                ushort[] data = _vepManager.SynchroZone.ToRegisters();
+                //_modbusMaster.WriteMultipleRegisters(1, Addr_SynchroZone, data);   
+                WriteMultiple(1, Addr_SynchroZone, data);
                 OnSynchroZoneChanged();
                 
             }
@@ -589,7 +590,8 @@ namespace Ki_WAT
             try
             {
                 ushort[] data = _vepManager.ReceptionZone.ToRegisters();
-                _modbusMaster.WriteMultipleRegisters(1, Addr_ReceptionZone, data);
+                //_modbusMaster.WriteMultipleRegisters(1, Addr_ReceptionZone, data);
+                WriteMultiple(1, Addr_ReceptionZone, data);
                 OnReceptionZoneChanged();
                 LogMessage($"수신 영역 쓰기: {string.Join(", ", data)}");
             }
@@ -600,6 +602,27 @@ namespace Ki_WAT
             }
         }
 
+        public void WriteReceptionZone(ushort pAdd, ushort nVal)
+        {
+            CheckConnection();
+
+            try
+            {
+                //_vepManager.SynchroZone.SetValue(pSyncro, nVal);
+                ushort addr = (ushort)(Addr_ReceptionZone + pAdd);
+                _modbusMaster.WriteSingleRegister(1, addr, nVal);
+                OnReceptionZoneChanged();
+
+
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"동기화 영역 쓰기 오류: {ex.Message}");
+                throw;
+            }
+
+        }
+
         public void WriteTransmissionZone()
         {
             CheckConnection();
@@ -607,7 +630,8 @@ namespace Ki_WAT
             try
             {
                 ushort[] registers = _vepManager.TransmissionZone.ToRegisters();
-                _modbusMaster.WriteMultipleRegisters(1, Addr_TransmissionZone, registers);
+                //_modbusMaster.WriteMultipleRegisters(1, Addr_TransmissionZone, registers);
+                WriteMultiple(1, Addr_TransmissionZone, registers);
 
                 LogMessage($"전송 영역 쓰기 성공: " +
                   $"AddTSize={_vepManager.TransmissionZone.AddTzSize}, " +
@@ -624,6 +648,27 @@ namespace Ki_WAT
                 LogMessage($"전송 영역 쓰기 오류: {ex.Message}");
                 throw;
             }
+        }
+
+        public void WriteTransmissionZone(ushort pAdd, ushort nVal)
+        {
+            CheckConnection();
+
+            try
+            {
+                //_vepManager.SynchroZone.SetValue(pSyncro, nVal);
+                ushort addr = (ushort)(Addr_TransmissionZone + pAdd);
+                _modbusMaster.WriteSingleRegister(1, addr, nVal);
+                OnTransmissionZoneChanged();
+
+
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"동기화 영역 쓰기 오류: {ex.Message}");
+                throw;
+            }
+
         }
 
         // 연결 상태 확인
@@ -752,14 +797,67 @@ namespace Ki_WAT
 
         public void SetTzEtat(ushort pVal)
         {
-            _vepManager.TransmissionZone.ExchStatus = pVal;
-            WriteTransmissionZone();
+            //_vepManager.TransmissionZone.ExchStatus = pVal;
+            WriteTransmissionZone(3, pVal);
         }
         public void SetRzEtat(ushort pVal)
         {
-            _vepManager.ReceptionZone.ExchStatus = pVal;
-            WriteReceptionZone();
+            //_vepManager.ReceptionZone.ExchStatus = pVal;
+            WriteReceptionZone(3, pVal);
         }
+        private int WriteMultiple(int nSlaveID, ushort Addr, ushort[] registers)
+        {
+            int nRet = 0;
+            int nSize = registers.Length;
+
+            int nLimit = 123;
+
+            if (nSize < nLimit)
+            {
+                _modbusMaster.WriteMultipleRegisters(1, Addr, registers);
+                return 1;
+            }
+            int nDoLoop = nSize / nLimit + 1;
+
+
+            ushort nStartAddr = Addr;
+            for (int i = 0; i < nDoLoop; i++)
+            {
+                int nPartPos = i * nLimit;
+
+                // 마지막 구간일 경우 남은 데이터 수를 계산
+                int nPartSize = Math.Min(nLimit, nSize - nPartPos);
+
+                ushort[] part = new ushort[nPartSize];
+                Array.Copy(registers, nPartPos, part, 0, nPartSize);
+
+                // Modbus 전송
+                _modbusMaster.WriteMultipleRegisters(1, (ushort)(Addr + nPartPos), part);
+
+            }
+            return nRet;
+        }
+
+        public void ReadAddTransmissionZone()
+        {
+            try
+            {
+
+                _vepManager.ReadTransmissionZonesFromRegisters(ReadAllRegisters);
+
+                if (_vepManager.AddTransmissionZone.IsChanged)
+                {
+                    //OnAddTransmissionZoneChanged();
+                    _vepManager.AddTransmissionZone.ResetChangedState();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogMessage($"ReadAddTransmissionZone 오류 발생: {ex.Message}");
+            }
+        }
+
+
 
     }
 }

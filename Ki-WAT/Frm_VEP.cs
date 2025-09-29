@@ -301,5 +301,11 @@ namespace Ki_WAT
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _GV._VEP_Client.SetTzEtat(30);
+            
+        }
     }
 }

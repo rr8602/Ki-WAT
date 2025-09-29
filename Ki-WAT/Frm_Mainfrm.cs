@@ -55,7 +55,8 @@ namespace Ki_WAT
         public Lib_TcpClient ScrewDriverL => m_ScrewDriverL;
         public Lib_TcpClient ScrewDriverR => m_ScrewDriverR;
 
-        
+        public BarcodeReader _barcodeReader;
+
         public Frm_Mainfrm()
         {
             InitializeComponent();
@@ -180,14 +181,14 @@ namespace Ki_WAT
             
 
 
-            m_BarcodeComm.OnConnected += () => Console.WriteLine("Connected!");
-            m_BarcodeComm.OnDisconnected += () => Console.WriteLine("Disconnected!");
-            m_BarcodeComm.OnReconnectAttempt += d => Console.WriteLine($"Reconnecting in {d} ms...");
-            m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
-            m_BarcodeComm.EnableAutoReconnect(1000, 15000);
-            // 최초 접속 시도 (실패하면 루프가 계속 재시도)
-            m_BarcodeComm.Connect(_GV.Config.Device.BARCODE_IP, Int32.Parse(_GV.Config.Device.BARCODE_PORT));
-            // 바코드 연결 상태 체크 타이머 시작
+            //m_BarcodeComm.OnConnected += () => Console.WriteLine("Connected!");
+            //m_BarcodeComm.OnDisconnected += () => Console.WriteLine("Disconnected!");
+            //m_BarcodeComm.OnReconnectAttempt += d => Console.WriteLine($"Reconnecting in {d} ms...");
+            //m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
+            //m_BarcodeComm.EnableAutoReconnect(1000, 15000);
+            //// 최초 접속 시도 (실패하면 루프가 계속 재시도)
+            //m_BarcodeComm.Connect(_GV.Config.Device.BARCODE_IP, Int32.Parse(_GV.Config.Device.BARCODE_PORT));
+            //// 바코드 연결 상태 체크 타이머 시작
             //StartBarcodeConnectionTimer();
 
             //m_ScrewDriverL.Connect(_GV.Config.Device.SCREW_IP, Int32.Parse(_GV.Config.Device.SCREW_PORT));
@@ -202,6 +203,7 @@ namespace Ki_WAT
 
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
 
+            StartBarcode();
         }
         public void event_GetBarcode(byte[] data)
         {
@@ -462,12 +464,56 @@ namespace Ki_WAT
             ShowFrm(Def.FOM_IDX_RESULT);
         }
 
+        private void LogInfo(string err)
+        {
+            Debug.Print(err);
+        }
+        private void BarcodeReader_OnError(object sender, Exception e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => LogInfo(e.Message)));
+            }
+            else
+            {
+                LogInfo(e.Message);
+                //MsgBox.ErrorWithFormat("ErrorInBarcodeReadLoop", "Error", e.Message);
+            }
+        }
+
+        private void BarcodeReceivedHandler(object sender, BarcodeReader.BarcodeEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => m_frmMain.GetBarCode(e.BarcodeData)));
+            }
+            else
+            {
+                m_frmMain.GetBarCode(e.BarcodeData);
+            }
+        }
+
+        private void StartBarcode()
+        {
+            try
+            {
+                _barcodeReader = new BarcodeReader(_GV.Config.Device.BARCODE_IP);
+                _barcodeReader.OnBarcodeReceived += BarcodeReceivedHandler;
+                _barcodeReader.OnError += BarcodeReader_OnError;
+                _barcodeReader.ConnectBarcodeReader();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             try
             {
-                
-                
+
+                _barcodeReader?.Disconnect();
+
                 // 테스트 스레드 정지
                 if (_GV != null && _GV._TestThread != null)
                 {

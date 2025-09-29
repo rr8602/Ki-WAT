@@ -134,6 +134,7 @@
             this.label42 = new System.Windows.Forms.Label();
             this.Txt_S32 = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1237,11 +1238,22 @@
             this.label43.Text = "S_32 : HLA Finish";
             this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1105, 555);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 23);
+            this.button2.TabIndex = 392;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Frm_VEP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1714, 882);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.Txt_S32);
             this.Controls.Add(this.label43);
             this.Controls.Add(this.label42);
@@ -1462,5 +1474,6 @@
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox Txt_S32;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Button button2;
     }
 }

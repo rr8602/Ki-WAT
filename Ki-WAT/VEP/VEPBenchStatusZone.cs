@@ -132,10 +132,7 @@ namespace Ki_WAT
             }
         }
 
-        public void SetValue(int index, ushort value)
-        {
-            this[index] = value;
-        }
+    
 
         public static VEPBenchStatusZone Instance
         {
@@ -171,9 +168,26 @@ namespace Ki_WAT
             if (registers == null || registers.Length < ZoneSize)
                 throw new ArgumentException("Invalid register array.");
 
-            if (_values == null || !_values.SequenceEqual(registers))
+            bool changed = false;
+
+            if (_values.Length != registers.Length)
             {
-                _values = (ushort[])registers.Clone();
+
+                _values = new ushort[registers.Length];
+                changed = true;
+            }
+
+            for (int i = 0; i < registers.Length; i++)
+            {
+                if (_values[i] != registers[i])
+                {
+                    _values[i] = registers[i];
+                    changed = true;
+                }
+            }
+
+            if (changed)
+            {
                 _isChanged = true;
             }
         }
@@ -198,6 +212,24 @@ namespace Ki_WAT
                 default:
                     return $"Unknown({VepStatus})";
             }
+        }
+        public void SetSize(int size)
+        {
+            if (size <= 0) return;
+            _values = new ushort[size];
+            for (int i = 0; i < _values.Length; i++)
+            {
+                _values[i] = 0;
+            }
+        }
+
+        public void SetValue(int index, ushort value)
+        {
+            this[index] = value;
+        }
+        public int GetValue(int index)
+        {
+            return _values[index];
         }
     }
 }
