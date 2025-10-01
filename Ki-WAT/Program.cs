@@ -101,6 +101,9 @@ namespace Ki_WAT
         public const int STEP_HLT_3 = 503;
         public const int STEP_HLT_4 = 504;
         public const int STEP_HLT_5 = 505;
+        public const int STEP_HLT_6 = 506;
+        public const int STEP_HLT_7 = 507;
+
 
     }
 

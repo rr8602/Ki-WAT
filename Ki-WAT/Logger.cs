@@ -11,18 +11,29 @@ namespace LETInterface
 {
     public class Logger
     {
-        //private static string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LOG\\LET\\LETInterface_LOG.txt");
-        private static string filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"LOG\\LET\\{DateTime.Now.ToString("yyyyMMdd")}_LET.txt");
-
-
+        private static string filename = GetNewLogFilename();
         private static Queue<string> logQueue = new Queue<string>();
         private static readonly object writeLock = new object();
 
+        private static string GetNewLogFilename()
+        {
+            var logDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var date = DateTime.Now.ToString("yyyyMMdd");
+            var sequence = 1;
+            while (true)
+            {
+                var filename = Path.Combine(logDirectory, $"{date}_{sequence:D4}.log");
+                if (!File.Exists(filename))
+                {
+                    return filename;
+                }
+                sequence++;
+            }
+        }
         public static void WriteLog(string str, bool bwritenow = false)
         {
             Debug.WriteLine(str);
             logQueue.Enqueue(str);
-
             if (bwritenow == true)
             {
                 lock (writeLock)
@@ -68,26 +79,57 @@ namespace LETInterface
                         {
                             sb.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
                         }
+                        var content = request.Content.ReadAsStringAsync().Result;
+
+                        if (!string.IsNullOrEmpty(content))
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine(content);
+                        }
+
+                        var mediaType = request.Content.Headers.ContentType?.MediaType;
+
+                        if (mediaType != null)
+                        {
+                            request.Content = new StringContent(content, Encoding.UTF8, mediaType);
+                        }
+                        else
+                        {
+                            request.Content = new StringContent(content, Encoding.UTF8);
+                        }
                     }
                 }
                 else if (message is HttpResponseMessage response)
                 {
                     sb.AppendLine("server -> client :");
-
                     // Status Line
                     sb.AppendLine($"HTTP/{response.Version} {(int)response.StatusCode} {response.ReasonPhrase}");
-
                     // Header
                     foreach (var header in response.Headers)
                     {
                         sb.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
                     }
-
                     if (response.Content != null)
                     {
                         foreach (var header in response.Content.Headers)
                         {
                             sb.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                        }
+                        var content = response.Content.ReadAsStringAsync().Result;
+                        if (!string.IsNullOrEmpty(content))
+                        {
+                            sb.AppendLine();
+                            sb.AppendLine(content);
+                        }
+                        var mediaType = response.Content.Headers.ContentType?.MediaType;
+
+                        if (mediaType != null)
+                        {
+                            response.Content = new StringContent(content, Encoding.UTF8, mediaType);
+                        }
+                        else
+                        {
+                            response.Content = new StringContent(content, Encoding.UTF8);
                         }
                     }
                 }

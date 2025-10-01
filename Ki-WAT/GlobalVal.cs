@@ -8,13 +8,62 @@ using System.Runtime.InteropServices;
 
 namespace Ki_WAT
 {
+
+    struct LET_Param
+    {
+        public string uid;
+        public int vsn;
+        public string vin;
+        public string line;
+        public double floorpitch;
+
+        public void Clear()
+        {
+            uid = "";
+            vsn = 0;
+            vin = "";
+            line = "";
+            floorpitch = 0.0;
+        }
+    }
+
+
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct LampInclination
     {
-       public double InclinationXFinal_Left;
-       public double InclinationYFinal_Left;
-       public double InclinationXFinal_Right;
-       public double InclinationYFinal_Right;
+        public double High_InclinationXInit_Left;
+        public double High_InclinationYInit_Left;
+        public double High_InclinationXInit_Right;
+        public double High_InclinationYInit_Right;
+                      
+        public double High_InclinationXFinal_Left;
+        public double High_InclinationYFinal_Left;
+        public double High_InclinationXFinal_Right;
+        public double High_InclinationYFinal_Right;
+
+
+        public double Low_InclinationXInit_Left;
+        public double Low_InclinationYInit_Left;
+        public double Low_InclinationXInit_Right;
+        public double Low_InclinationYInit_Right;
+                      
+        public double Low_InclinationXFinal_Left;
+        public double Low_InclinationYFinal_Left;
+        public double Low_InclinationXFinal_Right;
+        public double Low_InclinationYFinal_Right;
+
+        public double Fog_InclinationXInit_Left;
+        public double Fog_InclinationYInit_Left;
+        public double Fog_InclinationXInit_Right;
+        public double Fog_InclinationYInit_Right;
+                      
+        public double Fog_InclinationXFinal_Left;
+        public double Fog_InclinationYFinal_Left;
+        public double Fog_InclinationXFinal_Right;
+        public double Fog_InclinationYFinal_Right;
+
+
+
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -160,5 +209,7 @@ namespace Ki_WAT
         public double dHandle = 0.0f;
         //public bool g_Substitu_PEV = false;
         public bool m_bNextStep = false;
+
+        public bool m_bHLTFinish = false;   
     }
 }

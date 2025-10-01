@@ -30,6 +30,13 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.rd_swb_type_pc = new System.Windows.Forms.RadioButton();
+            this.rd_swb_type_board = new System.Windows.Forms.RadioButton();
+            this.cbo_SWB = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.Txt_SWB_Baud = new System.Windows.Forms.TextBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label36 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
@@ -160,15 +167,9 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.cButton1 = new KI_Controls.CButton();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.Txt_SWB_Baud = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.cbo_SWB = new System.Windows.Forms.ComboBox();
-            this.rd_swb_type_pc = new System.Windows.Forms.RadioButton();
-            this.rd_swb_type_board = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -181,7 +182,6 @@
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gbxMList.SuspendLayout();
-            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -216,6 +216,77 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "General";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.rd_swb_type_pc);
+            this.groupBox10.Controls.Add(this.rd_swb_type_board);
+            this.groupBox10.Controls.Add(this.cbo_SWB);
+            this.groupBox10.Controls.Add(this.label39);
+            this.groupBox10.Controls.Add(this.label38);
+            this.groupBox10.Controls.Add(this.Txt_SWB_Baud);
+            this.groupBox10.Location = new System.Drawing.Point(33, 493);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(614, 121);
+            this.groupBox10.TabIndex = 5;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "SWB";
+            // 
+            // rd_swb_type_pc
+            // 
+            this.rd_swb_type_pc.AutoSize = true;
+            this.rd_swb_type_pc.Location = new System.Drawing.Point(447, 30);
+            this.rd_swb_type_pc.Name = "rd_swb_type_pc";
+            this.rd_swb_type_pc.Size = new System.Drawing.Size(63, 31);
+            this.rd_swb_type_pc.TabIndex = 107;
+            this.rd_swb_type_pc.TabStop = true;
+            this.rd_swb_type_pc.Text = "PC";
+            this.rd_swb_type_pc.UseVisualStyleBackColor = true;
+            // 
+            // rd_swb_type_board
+            // 
+            this.rd_swb_type_board.AutoSize = true;
+            this.rd_swb_type_board.Location = new System.Drawing.Point(325, 30);
+            this.rd_swb_type_board.Name = "rd_swb_type_board";
+            this.rd_swb_type_board.Size = new System.Drawing.Size(94, 31);
+            this.rd_swb_type_board.TabIndex = 106;
+            this.rd_swb_type_board.TabStop = true;
+            this.rd_swb_type_board.Text = "Board";
+            this.rd_swb_type_board.UseVisualStyleBackColor = true;
+            // 
+            // cbo_SWB
+            // 
+            this.cbo_SWB.FormattingEnabled = true;
+            this.cbo_SWB.Location = new System.Drawing.Point(99, 28);
+            this.cbo_SWB.Name = "cbo_SWB";
+            this.cbo_SWB.Size = new System.Drawing.Size(189, 35);
+            this.cbo_SWB.TabIndex = 4;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(9, 34);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(70, 27);
+            this.label39.TabIndex = 3;
+            this.label39.Text = "Port :";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(9, 78);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(83, 27);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "Baud :";
+            // 
+            // Txt_SWB_Baud
+            // 
+            this.Txt_SWB_Baud.Location = new System.Drawing.Point(99, 69);
+            this.Txt_SWB_Baud.Name = "Txt_SWB_Baud";
+            this.Txt_SWB_Baud.Size = new System.Drawing.Size(189, 35);
+            this.Txt_SWB_Baud.TabIndex = 1;
+            this.Txt_SWB_Baud.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox9
             // 
@@ -501,9 +572,10 @@
             // lblResultPath
             // 
             this.lblResultPath.BackColor = System.Drawing.Color.White;
-            this.lblResultPath.Location = new System.Drawing.Point(213, 53);
+            this.lblResultPath.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResultPath.Location = new System.Drawing.Point(6, 104);
             this.lblResultPath.Name = "lblResultPath";
-            this.lblResultPath.Size = new System.Drawing.Size(297, 27);
+            this.lblResultPath.Size = new System.Drawing.Size(563, 27);
             this.lblResultPath.TabIndex = 5;
             this.lblResultPath.Text = "c:\\abc";
             this.lblResultPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -526,7 +598,7 @@
             "Português",
             "Korea",
             "Other"});
-            this.comLang.Location = new System.Drawing.Point(211, 97);
+            this.comLang.Location = new System.Drawing.Point(211, 174);
             this.comLang.Name = "comLang";
             this.comLang.Size = new System.Drawing.Size(299, 35);
             this.comLang.TabIndex = 1;
@@ -534,7 +606,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(43, 101);
+            this.label30.Location = new System.Drawing.Point(43, 178);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(154, 27);
             this.label30.TabIndex = 0;
@@ -1771,77 +1843,6 @@
             this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
             this.cButton1.UseVisualStyleBackColor = false;
             // 
-            // groupBox10
-            // 
-            this.groupBox10.Controls.Add(this.rd_swb_type_pc);
-            this.groupBox10.Controls.Add(this.rd_swb_type_board);
-            this.groupBox10.Controls.Add(this.cbo_SWB);
-            this.groupBox10.Controls.Add(this.label39);
-            this.groupBox10.Controls.Add(this.label38);
-            this.groupBox10.Controls.Add(this.Txt_SWB_Baud);
-            this.groupBox10.Location = new System.Drawing.Point(33, 493);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(614, 121);
-            this.groupBox10.TabIndex = 5;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "SWB";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(9, 78);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(83, 27);
-            this.label38.TabIndex = 2;
-            this.label38.Text = "Baud :";
-            // 
-            // Txt_SWB_Baud
-            // 
-            this.Txt_SWB_Baud.Location = new System.Drawing.Point(99, 69);
-            this.Txt_SWB_Baud.Name = "Txt_SWB_Baud";
-            this.Txt_SWB_Baud.Size = new System.Drawing.Size(189, 35);
-            this.Txt_SWB_Baud.TabIndex = 1;
-            this.Txt_SWB_Baud.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(9, 34);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(70, 27);
-            this.label39.TabIndex = 3;
-            this.label39.Text = "Port :";
-            // 
-            // cbo_SWB
-            // 
-            this.cbo_SWB.FormattingEnabled = true;
-            this.cbo_SWB.Location = new System.Drawing.Point(99, 28);
-            this.cbo_SWB.Name = "cbo_SWB";
-            this.cbo_SWB.Size = new System.Drawing.Size(189, 35);
-            this.cbo_SWB.TabIndex = 4;
-            // 
-            // rd_swb_type_pc
-            // 
-            this.rd_swb_type_pc.AutoSize = true;
-            this.rd_swb_type_pc.Location = new System.Drawing.Point(447, 30);
-            this.rd_swb_type_pc.Name = "rd_swb_type_pc";
-            this.rd_swb_type_pc.Size = new System.Drawing.Size(63, 31);
-            this.rd_swb_type_pc.TabIndex = 107;
-            this.rd_swb_type_pc.TabStop = true;
-            this.rd_swb_type_pc.Text = "PC";
-            this.rd_swb_type_pc.UseVisualStyleBackColor = true;
-            // 
-            // rd_swb_type_board
-            // 
-            this.rd_swb_type_board.AutoSize = true;
-            this.rd_swb_type_board.Location = new System.Drawing.Point(325, 30);
-            this.rd_swb_type_board.Name = "rd_swb_type_board";
-            this.rd_swb_type_board.Size = new System.Drawing.Size(94, 31);
-            this.rd_swb_type_board.TabIndex = 106;
-            this.rd_swb_type_board.TabStop = true;
-            this.rd_swb_type_board.Text = "Board";
-            this.rd_swb_type_board.UseVisualStyleBackColor = true;
-            // 
             // Frm_Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1854,6 +1855,8 @@
             this.Load += new System.EventHandler(this.Frm_Config_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -1877,8 +1880,6 @@
             this.panel1.PerformLayout();
             this.gbxMList.ResumeLayout(false);
             this.gbxMList.PerformLayout();
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }

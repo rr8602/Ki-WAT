@@ -159,6 +159,21 @@ namespace LETInterface
             }
         }
 
+        public string GetResult(string uID)
+        {
+            try
+            {
+                string strLastRes = _service.GetResultByUid(uID);
+                return strLastRes;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetLastResult 예외: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
+
         public LampInclination ParseInclinationFromXml(string xmlContent)
         {
             var result = new LampInclination();
@@ -173,24 +188,82 @@ namespace LETInterface
                 foreach (XmlNode lamp in lamps)
                 {
                     var side = lamp.Attributes?["side"]?.InnerText;
+                    var Type = lamp.Attributes?["beam_type"]?.InnerText;
+
+
                     if (string.IsNullOrWhiteSpace(side)) continue;
 
                     string xFinalStr = lamp["Inclination_X_final"]?.InnerText;
                     string yFinalStr = lamp["Inclination_Y_final"]?.InnerText;
 
+                    string xInitStr = lamp["Inclination_X_initial"]?.InnerText;
+                    string yInitStr = lamp["Inclination_Y_initial"]?.InnerText;
+
                     double? xFinal = double.TryParse(xFinalStr, out var x) ? x : (double?)null;
                     double? yFinal = double.TryParse(yFinalStr, out var y) ? y : (double?)null;
 
-                    if (side == "Left")
+                    double? xInit = double.TryParse(xInitStr, out var x1) ? x1 : (double?)null;
+                    double? yInit = double.TryParse(yInitStr, out var y1) ? y1 : (double?)null;
+
+
+                    if ( Type == "Low")
                     {
-                        result.InclinationXFinal_Left = (double)xFinal;
-                        result.InclinationYFinal_Left = (double)yFinal;
+                        if (side == "Left")
+                        {
+                            result.Low_InclinationXFinal_Left = (double)xFinal;
+                            result.Low_InclinationYFinal_Left = (double)yFinal;
+                            result.Low_InclinationXInit_Left = (double)xInit;
+                            result.Low_InclinationYInit_Left = (double)yInit;
+                        }
+                        else if (side == "Right")
+                        {
+                            result.Low_InclinationXFinal_Right = (double)xFinal;
+                            result.Low_InclinationYFinal_Right = (double)yFinal;
+                                   
+                            result.Low_InclinationXInit_Right = (double)xInit;
+                            result.Low_InclinationYInit_Right = (double)yInit;
+                        }
                     }
-                    else if (side == "Right")
+
+                    if (Type == "High")
                     {
-                        result.InclinationXFinal_Right = (double)xFinal;
-                        result.InclinationYFinal_Right = (double)yFinal;
+                        if (side == "Left")
+                        {
+                            result.High_InclinationXFinal_Left = (double)xFinal;
+                            result.High_InclinationYFinal_Left = (double)yFinal;
+                            result.High_InclinationXInit_Left = (double)xInit;
+                            result.High_InclinationYInit_Left = (double)yInit;
+                        }
+                        else if (side == "Right")
+                        {
+                            result.High_InclinationXFinal_Right = (double)xFinal;
+                            result.High_InclinationYFinal_Right = (double)yFinal;
+                            result.High_InclinationXInit_Right = (double)xInit;
+                            result.High_InclinationYInit_Right = (double)yInit;
+                        }
                     }
+
+                    if (Type == "Fog")
+                    {
+                        if (side == "Left")
+                        {
+                            result.Fog_InclinationXFinal_Left = (double)xFinal;
+                            result.Fog_InclinationYFinal_Left = (double)yFinal;
+                            result.Fog_InclinationXInit_Left = (double)xInit;
+                            result.Fog_InclinationYInit_Left = (double)yInit;
+                        }
+                        else if (side == "Right")
+                        {
+                            result.Fog_InclinationXFinal_Right = (double)xFinal;
+                            result.Fog_InclinationYFinal_Right = (double)yFinal;
+                            result.Fog_InclinationXInit_Right = (double)xInit;
+                            result.Fog_InclinationYInit_Right = (double)yInit;
+                        }
+                    }
+
+
+
+
                 }
             }
             catch (XmlException xe)
