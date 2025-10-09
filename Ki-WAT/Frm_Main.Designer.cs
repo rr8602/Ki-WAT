@@ -70,6 +70,7 @@
             this.Btn_Delete = new System.Windows.Forms.Button();
             this.Pic_copy = new System.Windows.Forms.PictureBox();
             this.lbl_NextPJI = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.GB_common.SuspendLayout();
             this.GB_GenInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_copy)).BeginInit();
@@ -538,7 +539,7 @@
             this.button2.BackColor = System.Drawing.Color.Silver;
             this.button2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Teal;
-            this.button2.Location = new System.Drawing.Point(543, 719);
+            this.button2.Location = new System.Drawing.Point(543, 715);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(127, 44);
             this.button2.TabIndex = 166;
@@ -572,14 +573,27 @@
             // 
             this.lbl_NextPJI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.lbl_NextPJI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_NextPJI.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_NextPJI.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_NextPJI.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_NextPJI.Location = new System.Drawing.Point(418, 10);
+            this.lbl_NextPJI.Location = new System.Drawing.Point(415, 38);
             this.lbl_NextPJI.Name = "lbl_NextPJI";
-            this.lbl_NextPJI.Size = new System.Drawing.Size(390, 76);
+            this.lbl_NextPJI.Size = new System.Drawing.Size(390, 48);
             this.lbl_NextPJI.TabIndex = 168;
             this.lbl_NextPJI.Text = "-";
             this.lbl_NextPJI.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Silver;
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label7.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Black;
+            this.label7.Location = new System.Drawing.Point(415, 9);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(390, 28);
+            this.label7.TabIndex = 169;
+            this.label7.Text = "Next PJI";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Frm_Main
             // 
@@ -587,6 +601,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1797, 1003);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lbl_NextPJI);
             this.Controls.Add(this.Btn_Delete);
             this.Controls.Add(this.button2);
@@ -657,5 +672,6 @@
         private System.Windows.Forms.TextBox Txt_Barcode;
         private System.Windows.Forms.Button Btn_Delete;
         private System.Windows.Forms.Label lbl_NextPJI;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -79,22 +79,19 @@ namespace Ki_WAT
             Debug.Print("");
         }
 
-        private void SaveXmlToFile(string sXML)
+        private void SaveXmlToFile(string sXML, string PJI)
         {
             // 현재 실행 중인 EXE의 폴더 경로 가져오기
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
 
             // 로그용 서브 폴더 경로 지정
-            string folderPath = Path.Combine(baseDir, "LOG", "XML");
+            string folderPath = Path.Combine(baseDir, "LOG", "LET_XML");
 
-            // 폴더가 없으면 생성
-            if (!Directory.Exists(folderPath))
-            {
-                Directory.CreateDirectory(folderPath);
-            }
 
+            Directory.CreateDirectory(folderPath);
+            
             // 저장할 파일 경로 지정
-            string filePath = Path.Combine(folderPath, "output.xml");
+            string filePath = Path.Combine(folderPath, $"{PJI}.xml");
 
             try
             {
@@ -127,8 +124,7 @@ namespace Ki_WAT
 
 
 
-
-            SaveXmlToFile(sXML);
+            SaveXmlToFile(sXML, m_LetParam.vin);
         }
         private void Btn_Last_Error_Click_2(object sender, EventArgs e)
         {
@@ -186,6 +182,12 @@ namespace Ki_WAT
             GetLetParamFromUI();
             string sRes = _GV.LET_Controller.GetResult(m_LetParam.uid);
             RefreshLetXML(sRes);
+        }
+
+        private void Btn_Delete_Click(object sender, EventArgs e)
+        {
+            GetLetParamFromUI();
+            _GV.LET_Controller.DeleteAllTest();
         }
     }
 }

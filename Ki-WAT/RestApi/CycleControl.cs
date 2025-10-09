@@ -16,9 +16,6 @@ namespace LETInterface
         private readonly TaskService _service;
         GlobalVal _GV = GlobalVal.Instance;
         
-
-        
-
         public CycleControl()
         {
             _service = new TaskService(_GV.Config.Device.LET_URL, Int32.Parse(_GV.Config.Device.LET_PORT));
@@ -183,13 +180,42 @@ namespace LETInterface
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(xmlContent);
 
+                // Equipment 정보 파싱
+                XmlNode equipmentNode = doc.SelectSingleNode("//Equipment");
+                if (equipmentNode != null)
+                {
+                    result.Equipment_Name = equipmentNode["Name"]?.InnerText ?? "";
+                    result.Equipment_Manufacturer = equipmentNode["Manufacturer"]?.InnerText ?? "";
+                    result.Equipment_Model = equipmentNode["Model"]?.InnerText ?? "";
+                    result.Equipment_Serial_number = equipmentNode["Serial_number"]?.InnerText ?? "";
+                    result.Equipment_Last_calib_date = equipmentNode["Last_calib_date"]?.InnerText ?? "";
+                }
+
+                // Vehicle 정보 파싱
+                XmlNode vehicleNode = doc.SelectSingleNode("//Vehicle");
+                if (vehicleNode != null)
+                {
+                    result.Vehicle_UID = vehicleNode["UID"]?.InnerText ?? "";
+                    result.Vehicle_Number_plate = vehicleNode["Number_plate"]?.InnerText ?? "";
+                    result.Vehicle_VIN = vehicleNode["VIN"]?.InnerText ?? "";
+                    result.Vehicle_Overall_result = vehicleNode["Overall_result"]?.InnerText ?? "";
+                    
+                    // Test_date_time 정보 파싱
+                    XmlNode testDateTimeNode = vehicleNode["Test_date_time"];
+                    if (testDateTimeNode != null)
+                    {
+                        result.Vehicle_Test_start = testDateTimeNode["Test_start"]?.InnerText ?? "";
+                        result.Vehicle_Test_end = testDateTimeNode["Test_end"]?.InnerText ?? "";
+                    }
+                }
+
+                // Lamp 정보 파싱
                 XmlNodeList lamps = doc.GetElementsByTagName("Lamp");
 
                 foreach (XmlNode lamp in lamps)
                 {
                     var side = lamp.Attributes?["side"]?.InnerText;
                     var Type = lamp.Attributes?["beam_type"]?.InnerText;
-
 
                     if (string.IsNullOrWhiteSpace(side)) continue;
 
@@ -205,23 +231,25 @@ namespace LETInterface
                     double? xInit = double.TryParse(xInitStr, out var x1) ? x1 : (double?)null;
                     double? yInit = double.TryParse(yInitStr, out var y1) ? y1 : (double?)null;
 
-
-                    if ( Type == "Low")
+                    string Lamp_Result = lamp["Lamp_result"]?.InnerText;
+                    
+                    if (Type == "Low")
                     {
                         if (side == "Left")
                         {
-                            result.Low_InclinationXFinal_Left = (double)xFinal;
-                            result.Low_InclinationYFinal_Left = (double)yFinal;
-                            result.Low_InclinationXInit_Left = (double)xInit;
-                            result.Low_InclinationYInit_Left = (double)yInit;
+                            result.Low_InclinationXFinal_Left = xFinal ?? 0.0;
+                            result.Low_InclinationYFinal_Left = yFinal ?? 0.0;
+                            result.Low_InclinationXInit_Left = xInit ?? 0.0;
+                            result.Low_InclinationYInit_Left = yInit ?? 0.0;
+                            result.Low_Left_Result = Lamp_Result ?? "";
                         }
                         else if (side == "Right")
                         {
-                            result.Low_InclinationXFinal_Right = (double)xFinal;
-                            result.Low_InclinationYFinal_Right = (double)yFinal;
-                                   
-                            result.Low_InclinationXInit_Right = (double)xInit;
-                            result.Low_InclinationYInit_Right = (double)yInit;
+                            result.Low_InclinationXFinal_Right = xFinal ?? 0.0;
+                            result.Low_InclinationYFinal_Right = yFinal ?? 0.0;
+                            result.Low_InclinationXInit_Right = xInit ?? 0.0;
+                            result.Low_InclinationYInit_Right = yInit ?? 0.0;
+                            result.Low_Right_Result = Lamp_Result ?? "";
                         }
                     }
 
@@ -229,17 +257,17 @@ namespace LETInterface
                     {
                         if (side == "Left")
                         {
-                            result.High_InclinationXFinal_Left = (double)xFinal;
-                            result.High_InclinationYFinal_Left = (double)yFinal;
-                            result.High_InclinationXInit_Left = (double)xInit;
-                            result.High_InclinationYInit_Left = (double)yInit;
+                            result.High_InclinationXFinal_Left = xFinal ?? 0.0;
+                            result.High_InclinationYFinal_Left = yFinal ?? 0.0;
+                            result.High_InclinationXInit_Left = xInit ?? 0.0;
+                            result.High_InclinationYInit_Left = yInit ?? 0.0;
                         }
                         else if (side == "Right")
                         {
-                            result.High_InclinationXFinal_Right = (double)xFinal;
-                            result.High_InclinationYFinal_Right = (double)yFinal;
-                            result.High_InclinationXInit_Right = (double)xInit;
-                            result.High_InclinationYInit_Right = (double)yInit;
+                            result.High_InclinationXFinal_Right = xFinal ?? 0.0;
+                            result.High_InclinationYFinal_Right = yFinal ?? 0.0;
+                            result.High_InclinationXInit_Right = xInit ?? 0.0;
+                            result.High_InclinationYInit_Right = yInit ?? 0.0;
                         }
                     }
 
@@ -247,23 +275,19 @@ namespace LETInterface
                     {
                         if (side == "Left")
                         {
-                            result.Fog_InclinationXFinal_Left = (double)xFinal;
-                            result.Fog_InclinationYFinal_Left = (double)yFinal;
-                            result.Fog_InclinationXInit_Left = (double)xInit;
-                            result.Fog_InclinationYInit_Left = (double)yInit;
+                            result.Fog_InclinationXFinal_Left = xFinal ?? 0.0;
+                            result.Fog_InclinationYFinal_Left = yFinal ?? 0.0;
+                            result.Fog_InclinationXInit_Left = xInit ?? 0.0;
+                            result.Fog_InclinationYInit_Left = yInit ?? 0.0;
                         }
                         else if (side == "Right")
                         {
-                            result.Fog_InclinationXFinal_Right = (double)xFinal;
-                            result.Fog_InclinationYFinal_Right = (double)yFinal;
-                            result.Fog_InclinationXInit_Right = (double)xInit;
-                            result.Fog_InclinationYInit_Right = (double)yInit;
+                            result.Fog_InclinationXFinal_Right = xFinal ?? 0.0;
+                            result.Fog_InclinationYFinal_Right = yFinal ?? 0.0;
+                            result.Fog_InclinationXInit_Right = xInit ?? 0.0;
+                            result.Fog_InclinationYInit_Right = yInit ?? 0.0;
                         }
                     }
-
-
-
-
                 }
             }
             catch (XmlException xe)

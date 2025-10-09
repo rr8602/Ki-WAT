@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,44 @@ namespace Ki_WAT
             }
         }
 
+        public List<TblCarInfo> SelectCarInfoListFromPJI(string pPJI)
+        {
+            try
+            {
+                List<TblCarInfo> list = new List<TblCarInfo>();
+                string sSQL = $"SELECT * FROM TableCarInfo WHERE CarPJINo = '{pPJI}'";
+
+                DataTable dt = GetDataSet(sSQL);
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TblCarInfo tblCarInfo = new TblCarInfo
+                        {
+                            AcceptNo = row["AcceptNo"].ToString(),
+                            CarPJINo = row["CarPJINo"].ToString(),
+                            CarModel = row["CarModel"].ToString(),
+                            WatCycle = row["WatCycle"].ToString(),
+                            LetCycle = row["LetCycle"].ToString(),
+                            Car_Step = row["Car_Step"].ToString(),
+                            TotalBar = row["Spare__1"].ToString(),
+                            Spare__2 = row["Spare__2"].ToString(),
+                            Spare__3 = row["Spare__3"].ToString()
+                        };
+
+                        list.Add(tblCarInfo);
+                    }
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"PJI로 차량 정보 목록 조회 중 오류가 발생했습니다: {ex.Message}");
+                throw;
+            }
+        }
         public List<TblCarInfo> SelectCarInfoList(string pDate)
         {
             try
@@ -580,12 +619,12 @@ namespace Ki_WAT
 
         #region Result table
 
-        public TblResult SelectCarResult(string pPJI)
+        public TblResult SelectCarResult(string pAcceptNo, string pPJI)
         {
             try
             {
                 TblResult tblResult = new TblResult();
-                string sSQL = $"SELECT * FROM TableCar_WAT WHERE PJI_Num = '{pPJI}'";
+                string sSQL = $"SELECT * FROM TableCar_WAT WHERE PJI_Num = '{pPJI}' and AcceptNo = '{pAcceptNo}'";
 
                 DataTable dt = GetDataSet(sSQL);
                 //CloseConnection();
@@ -625,6 +664,59 @@ namespace Ki_WAT
                 throw;
             }
         }
+
+        public List<TblResult> SelectCarResultList(string pPJI)
+        {
+            try
+            {
+                List<TblResult> list = new List<TblResult>();
+                string sSQL = $"SELECT * FROM TableCar_WAT WHERE PJI_Num = '{pPJI}'";
+
+                DataTable dt = GetDataSet(sSQL);
+                //CloseConnection();
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TblResult tblResult = new TblResult
+                        {
+                            AcceptNo = row["AcceptNo"].ToString(),
+                            PJI_Num = row["PJI_Num"].ToString(),
+                            Model_NM = row["Model_NM"].ToString(),
+                            WTstTime = row["WTstTime"].ToString(),
+                            CarFLToe = row["CarFLToe"].ToString(),
+                            CarFRToe = row["CarFRToe"].ToString(),
+                            CarFTToe = row["CarFTToe"].ToString(),
+                            CarRLToe = row["CarRLToe"].ToString(),
+                            CarRRToe = row["CarRRToe"].ToString(),
+                            CarRTToe = row["CarRTToe"].ToString(),
+                            CarFLCam = row["CarFLCam"].ToString(),
+                            CarFRCam = row["CarFRCam"].ToString(),
+                            CarFCros = row["CarFCros"].ToString(),
+                            CarRLCam = row["CarRLCam"].ToString(),
+                            CarRRCam = row["CarRRCam"].ToString(),
+                            CarRCros = row["CarRCros"].ToString(),
+                            Car_Hand = row["Car_Hand"].ToString(),
+                            CarDogRu = row["CarDogRu"].ToString(),
+                            Car_Symm = row["Car_Symm"].ToString(),
+                            WAT___PK = row["WAT___PK"].ToString()
+                        };
+
+                        list.Add(tblResult);
+                    }
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"결과 목록 조회 중 오류가 발생했습니다: {ex.Message}");
+                throw;
+            }
+        }
+
+
 
         public bool InsertResult(TblResult result)
         {
@@ -755,6 +847,282 @@ namespace Ki_WAT
                 return false;
             }
         }
+        #endregion
+
+        #region CarLamp Table
+
+        // TblCarLamp SELECT - AcceptNo로 조회
+        public TblCarLamp SelectCarLamp(string pAcceptNo)
+        {
+            try
+            {
+                TblCarLamp tblCarLamp = new TblCarLamp();
+                string sSQL = $"SELECT * FROM TableCarLamp WHERE AcceptNo = '{pAcceptNo}'";
+
+                DataTable dt = GetDataSet(sSQL);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+
+                    tblCarLamp.AcceptNo = row["AcceptNo"].ToString();
+                    tblCarLamp.Model_NM = row["Model_NM"].ToString();
+                    tblCarLamp.CarPjiNo = row["CarPjiNo"].ToString();
+                    tblCarLamp.HTstTime = row["HTstTime"].ToString();
+                    tblCarLamp.HEndTime = row["HEndTime"].ToString();
+                    tblCarLamp.LeftXVal = Convert.ToDouble(row["LeftXVal"]);
+                    tblCarLamp.LeftYVal = Convert.ToDouble(row["LeftYVal"]);
+                    tblCarLamp.Left_Res = row["Left_Res"].ToString();
+                    tblCarLamp.RightXVal = Convert.ToDouble(row["RightXVal"]);
+                    tblCarLamp.RightYVal = Convert.ToDouble(row["RightYVal"]);
+                    tblCarLamp.Right_Res = row["Right_Res"].ToString();
+                    tblCarLamp.LampKind = row["LampKind"].ToString();
+                    tblCarLamp.HLT___PK = row["HLT___PK"].ToString();
+                }
+
+                return tblCarLamp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 조회 중 오류가 발생했습니다: {ex.Message}");
+                throw;
+            }
+        }
+
+        // TblCarLamp SELECT - PJI 번호로 조회
+        public TblCarLamp SelectCarLampByPJI(string pPjiNo)
+        {
+            try
+            {
+                TblCarLamp tblCarLamp = new TblCarLamp();
+                string sSQL = $"SELECT * FROM TableCarLamp WHERE CarPjiNo = '{pPjiNo}'";
+
+                DataTable dt = GetDataSet(sSQL);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataRow row = dt.Rows[0];
+
+                    tblCarLamp.AcceptNo = row["AcceptNo"].ToString();
+                    tblCarLamp.Model_NM = row["Model_NM"].ToString();
+                    tblCarLamp.CarPjiNo = row["CarPjiNo"].ToString();
+                    tblCarLamp.HTstTime = row["HTstTime"].ToString();
+                    tblCarLamp.HEndTime = row["HEndTime"].ToString();
+                    tblCarLamp.LeftXVal = Convert.ToDouble(row["LeftXVal"]);
+                    tblCarLamp.LeftYVal = Convert.ToDouble(row["LeftYVal"]);
+                    tblCarLamp.Left_Res = row["Left_Res"].ToString();
+                    tblCarLamp.RightXVal = Convert.ToDouble(row["RightXVal"]);
+                    tblCarLamp.RightYVal = Convert.ToDouble(row["RightYVal"]);
+                    tblCarLamp.Right_Res = row["Right_Res"].ToString();
+                    tblCarLamp.LampKind = row["LampKind"].ToString();
+                    tblCarLamp.HLT___PK = row["HLT___PK"].ToString();
+                }
+
+                return tblCarLamp;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 조회 중 오류가 발생했습니다: {ex.Message}");
+                throw;
+            }
+        }
+
+        // TblCarLamp SELECT - 날짜별 목록 조회
+        public List<TblCarLamp> SelectCarLampList(string pDate)
+        {
+            try
+            {
+                List<TblCarLamp> list = new List<TblCarLamp>();
+                string sSQL = $"SELECT * FROM TableCarLamp WHERE AcceptNo LIKE '{pDate}%'";
+
+                DataTable dt = GetDataSet(sSQL);
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        TblCarLamp tblCarLamp = new TblCarLamp
+                        {
+                            AcceptNo = row["AcceptNo"].ToString(),
+                            Model_NM = row["Model_NM"].ToString(),
+                            CarPjiNo = row["CarPjiNo"].ToString(),
+                            HTstTime = row["HTstTime"].ToString(),
+                            HEndTime = row["HEndTime"].ToString(),
+                            LeftXVal = Convert.ToDouble(row["LeftXVal"]),
+                            LeftYVal = Convert.ToDouble(row["LeftYVal"]),
+                            Left_Res = row["Left_Res"].ToString(),
+                            RightXVal = Convert.ToDouble(row["RightXVal"]),
+                            RightYVal = Convert.ToDouble(row["RightYVal"]),
+                            Right_Res = row["Right_Res"].ToString(),
+                            LampKind = row["LampKind"].ToString(),
+                            HLT___PK = row["HLT___PK"].ToString()
+                        };
+
+                        list.Add(tblCarLamp);
+                    }
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 목록 조회 중 오류가 발생했습니다: {ex.Message}");
+                throw;
+            }
+        }
+
+        // TblCarLamp INSERT
+        public bool InsertCarLamp(TblCarLamp lamp)
+        {
+            try
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "AcceptNo", lamp.AcceptNo },
+                    { "Model_NM", lamp.Model_NM },
+                    { "CarPjiNo", lamp.CarPjiNo },
+                    { "HTstTime", lamp.HTstTime },
+                    { "HEndTime", lamp.HEndTime },
+                    { "LeftXVal", lamp.LeftXVal },
+                    { "LeftYVal", lamp.LeftYVal },
+                    { "Left_Res", lamp.Left_Res },
+                    { "RightXVal", lamp.RightXVal },
+                    { "RightYVal", lamp.RightYVal },
+                    { "Right_Res", lamp.Right_Res },
+                    { "LampKind", lamp.LampKind },
+                    { "HLT___PK", lamp.HLT___PK }
+                };
+
+                return InsertData("TableCarLamp", data);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 추가 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarLamp UPDATE
+        public bool UpdateCarLamp(TblCarLamp lamp)
+        {
+            try
+            {
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "Model_NM", lamp.Model_NM },
+                    { "CarPjiNo", lamp.CarPjiNo },
+                    { "HTstTime", lamp.HTstTime },
+                    { "HEndTime", lamp.HEndTime },
+                    { "LeftXVal", lamp.LeftXVal },
+                    { "LeftYVal", lamp.LeftYVal },
+                    { "Left_Res", lamp.Left_Res },
+                    { "RightXVal", lamp.RightXVal },
+                    { "RightYVal", lamp.RightYVal },
+                    { "Right_Res", lamp.Right_Res },
+                    { "LampKind", lamp.LampKind },
+                    { "HLT___PK", lamp.HLT___PK }
+                };
+
+                string whereClause = $"AcceptNo = '{lamp.AcceptNo}'";
+                return UpdateData("TableCarLamp", data, whereClause);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 수정 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarLamp DELETE - AcceptNo로 삭제
+        public bool DeleteCarLamp(string acceptNo)
+        {
+            try
+            {
+                string sSQL = $"DELETE FROM TableCarLamp WHERE AcceptNo = '{acceptNo}'";
+                return ExecuteNonQuery(sSQL);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 삭제 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarLamp DELETE - PJI 번호로 삭제
+        public bool DeleteCarLampByPJI(string pjiNo)
+        {
+            try
+            {
+                string sSQL = $"DELETE FROM TableCarLamp WHERE CarPjiNo = '{pjiNo}'";
+                return ExecuteNonQuery(sSQL);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 삭제 중 오류: {ex.Message}");
+                return false;
+            }
+        }
+
+        // TblCarLamp UPSERT (Insert or Update) - AcceptNo와 CarPjiNo로 중복 확인
+        public bool UpsertCarLamp(TblCarLamp lamp)
+        {
+            try
+            {
+                // AcceptNo와 CarPjiNo로 기존 데이터 존재 여부 확인
+                string checkSQL = $"SELECT COUNT(*) FROM TableCarLamp WHERE AcceptNo = '{lamp.AcceptNo}' AND CarPjiNo = '{lamp.CarPjiNo}'";
+                DataTable checkDt = GetDataSet(checkSQL);
+                
+                bool recordExists = false;
+                if (checkDt != null && checkDt.Rows.Count > 0)
+                {
+                    recordExists = Convert.ToInt32(checkDt.Rows[0][0]) > 0;
+                }
+
+                // 삽입/업데이트할 데이터를 Dictionary로 구성
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "AcceptNo", lamp.AcceptNo },
+                    { "Model_NM", lamp.Model_NM },
+                    { "CarPjiNo", lamp.CarPjiNo },
+                    { "HTstTime", lamp.HTstTime },
+                    { "HEndTime", lamp.HEndTime },
+                    { "LeftXVal", lamp.LeftXVal },
+                    { "LeftYVal", lamp.LeftYVal },
+                    { "Left_Res", lamp.Left_Res },
+                    { "RightXVal", lamp.RightXVal },
+                    { "RightYVal", lamp.RightYVal },
+                    { "Right_Res", lamp.Right_Res },
+                    { "LampKind", lamp.LampKind },
+                    { "HLT___PK", lamp.HLT___PK }
+                };
+
+                bool success;
+                if (recordExists)
+                {
+                    // 기존 데이터가 있으면 Update
+                    string whereClause = $"AcceptNo = '{lamp.AcceptNo}' AND CarPjiNo = '{lamp.CarPjiNo}'";
+                    success = UpdateData("TableCarLamp", data, whereClause);
+                    if (success)
+                    {
+                        Debug.Print($"램프 데이터 업데이트 완료: AcceptNo = {lamp.AcceptNo}, CarPjiNo = {lamp.CarPjiNo}");
+                    }
+                }
+                else
+                {
+                    // 기존 데이터가 없으면 Insert
+                    success = InsertData("TableCarLamp", data);
+                    if (success)
+                    {
+                        Debug.Print($"램프 데이터 추가 완료: AcceptNo = {lamp.AcceptNo}, CarPjiNo = {lamp.CarPjiNo}");
+                    }
+                }
+                
+                return success;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"램프 데이터 처리 중 오류가 발생했습니다: {ex.Message}");
+                return false;
+            }
+        }
+
         #endregion
 
     }

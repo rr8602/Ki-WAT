@@ -95,12 +95,13 @@ namespace Ki_WAT
         /// HLT 관련 define
         /// 
         /// </summary>
+        
         public const int STEP_HLT_START = 500;
-        public const int STEP_HLT_1 = 501;
-        public const int STEP_HLT_2 = 502;
-        public const int STEP_HLT_3 = 503;
-        public const int STEP_HLT_4 = 504;
-        public const int STEP_HLT_5 = 505;
+        public const int STEP_HLT_VEHICLE_SELECT = 501;
+        public const int STEP_HLT_PERFORM_TEST = 502;
+        public const int STEP_HLT_END_CYCLE = 503;
+        public const int STEP_HLT_GET_RESULT = 504;
+        public const int STEP_HLT_DELETE_ALL = 505;
         public const int STEP_HLT_6 = 506;
         public const int STEP_HLT_7 = 507;
 

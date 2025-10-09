@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -41,7 +42,203 @@ namespace Ki_WAT
 
             RefreshListView();
             UpdateGeneralUI();
-            
+            InitLanguage();
+            LoadLangData();
+        }
+
+
+        private void InitLanguage()
+        {
+            listView1.AllowDrop = true;
+            listView1.View = View.Details;
+            listView1.GridLines = true;
+            listView1.FullRowSelect = true;
+            listView1.MultiSelect = false;
+
+
+            listView1.OwnerDraw = true;
+            listView1.DrawColumnHeader += listView1_DrawColumnHeader;
+            listView1.DrawItem += listView1_DrawItem;
+            listView1.DrawSubItem += listView1_DrawSubItem;
+
+
+            listView1.ItemDrag += listView1_ItemDrag;
+            listView1.DragEnter += listView1_DragEnter;
+            listView1.DragOver += listView1_DragOver;    // <== 하이라이트 핵심!
+            listView1.DragDrop += listView1_DragDrop;
+            int nWidth = 300;
+            listView1.Columns.Add("Description", nWidth, HorizontalAlignment.Center);
+            listView1.Columns.Add("Portuguese", nWidth, HorizontalAlignment.Center);
+            listView1.Columns.Add("English", nWidth, HorizontalAlignment.Center);
+            listView1.Columns.Add("Other", nWidth, HorizontalAlignment.Center);
+
+        }
+
+        private void LoadLangData()
+        {
+            listView1.Items.Clear();
+
+            // LANG_DATA의 public 인스턴스 프로퍼티 가져오기
+            var props = typeof(LangData).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+            foreach (var prop in props)
+            {
+                // desc 값 가져오기
+                string descValue = prop.GetValue(_GV.GetLang("desc"))?.ToString() ?? "";
+
+                // 새 ListViewItem 생성
+                ListViewItem item = new ListViewItem(descValue);
+
+                item.SubItems.Add(prop.GetValue(_GV.GetLang("Portuguese"))?.ToString() ?? "");
+                item.SubItems.Add(prop.GetValue(_GV.GetLang("English"))?.ToString() ?? "");
+                item.SubItems.Add(prop.GetValue(_GV.GetLang("Other"))?.ToString() ?? "");
+
+
+                // ListView에 추가
+                listView1.Items.Add(item);
+            }
+
+
+        }
+
+        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            listView1.DoDragDrop(e.Item, DragDropEffects.Move);
+        }
+
+        // 드래그 대상 진입
+        private void listView1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(ListViewItem)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+        // 드래그 중 마우스 이동 => 하이라이트 처리
+        private void listView1_DragOver(object sender, DragEventArgs e)
+        {
+            Point targetPoint = listView1.PointToClient(new Point(e.X, e.Y));
+            int targetIndex = listView1.InsertionMark.NearestIndex(targetPoint);
+
+            if (targetIndex > -1)
+            {
+                Rectangle itemBounds = listView1.GetItemRect(targetIndex);
+                listView1.InsertionMark.AppearsAfterItem = targetPoint.Y > itemBounds.Top + (itemBounds.Height / 2);
+            }
+
+            listView1.InsertionMark.Index = targetIndex;
+        }
+
+        // 드롭 완료 시 삽입
+        private void listView1_DragDrop(object sender, DragEventArgs e)
+        {
+            int index = listView1.InsertionMark.Index;
+            if (index == -1) return;
+
+            ListViewItem draggedItem = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+            if (draggedItem == null) return;
+
+            // 자기 자신 위치로 드롭한 경우 무시
+            if (draggedItem.Index == index || draggedItem.Index + 1 == index) return;
+
+            // 클론 후 삽입
+            ListViewItem newItem = (ListViewItem)draggedItem.Clone();
+            if (listView1.InsertionMark.AppearsAfterItem)
+            {
+                index++;
+            }
+
+            listView1.Items.Insert(index, newItem);
+            listView1.Items.Remove(draggedItem);
+
+            // 하이라이트 제거
+            listView1.InsertionMark.Index = -1;
+        }
+
+
+        private void listView1_DrawColumnHeader(object sender, DrawListViewColumnHeaderEventArgs e)
+        {
+            StringFormat sf = new StringFormat();
+            if (e.Header.TextAlign == HorizontalAlignment.Center)
+                sf.Alignment = StringAlignment.Center;
+            else if (e.Header.TextAlign == HorizontalAlignment.Right)
+                sf.Alignment = StringAlignment.Far;
+            else
+                sf.Alignment = StringAlignment.Near; // 기본: 왼쪽 정렬
+
+            sf.LineAlignment = StringAlignment.Center;
+
+            using (SolidBrush backBrush = new SolidBrush(Color.Gray)) // 배경색
+            using (SolidBrush textBrush = new SolidBrush(Color.White)) // 글자색
+
+            {
+                //sf.Alignment = StringAlignment.Near;
+                //sf.LineAlignment = StringAlignment.Center;
+
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+                e.Graphics.DrawString(e.Header.Text, listView1.Font, textBrush, e.Bounds, sf);
+            }
+        }
+
+        private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+            e.DrawDefault = true; // 기본 항목은 자동 처리
+        }
+
+        private void listView1_DrawSubItem(object sender, DrawListViewSubItemEventArgs e)
+        {
+            //e.DrawDefault = true; // 서브아이템도 자동 처리
+            using (StringFormat sf = new StringFormat())
+            {
+                HorizontalAlignment align = listView1.Columns[e.ColumnIndex].TextAlign;
+                switch (align)
+                {
+                    case HorizontalAlignment.Center:
+                        sf.Alignment = StringAlignment.Center;
+                        break;
+                    case HorizontalAlignment.Right:
+                        sf.Alignment = StringAlignment.Far;
+                        break;
+                    default:
+                        sf.Alignment = StringAlignment.Near;
+                        break;
+                }
+                sf.LineAlignment = StringAlignment.Center;
+
+                // 배경색 (선택된 행은 다르게 표시 가능)
+                if (e.Item.Selected)
+                {
+                    e.Graphics.FillRectangle(SystemBrushes.Highlight, e.Bounds);
+                    e.Graphics.DrawString(e.SubItem.Text, e.SubItem.Font, SystemBrushes.HighlightText, e.Bounds, sf);
+                }
+                else
+                {
+                    e.Graphics.FillRectangle(Brushes.White, e.Bounds);
+                    e.Graphics.DrawString(e.SubItem.Text, e.SubItem.Font, Brushes.Black, e.Bounds, sf);
+                }
+            }
+        }
+        private string GetSubItemText(ListViewItem.ListViewSubItemCollection subItems, int index)
+        {
+            if (subItems.Count > index && subItems[index].Text != null)
+                return subItems[index].Text;
+            return string.Empty;
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (listView1.SelectedItems.Count > 0)
+            {
+                var selectedItem = listView1.SelectedItems[0];
+                var subItems = selectedItem.SubItems;
+
+                editDesc.Text = GetSubItemText(subItems, 0);
+                editPortuguese.Text = GetSubItemText(subItems, 1);
+                editEnglish.Text = GetSubItemText(subItems, 2);
+                editOther.Text = GetSubItemText(subItems, 3);
+            }
         }
 
         private void InitializeCustomComponents()
@@ -71,7 +268,7 @@ namespace Ki_WAT
                 modelList.Items.Clear();
                 
                 // 데이터베이스에서 모델 목록 가져오기
-                List<TblCarModel> dtList = m_frmParent.m_dbJob.SelectAllCarModels();
+                List<TblCarModel> dtList = _GV._dbJob.SelectAllCarModels();
 
                 // ListView에 데이터 추가
                 foreach (TblCarModel model in dtList)
@@ -206,7 +403,7 @@ namespace Ki_WAT
             if (modelList.SelectedItems.Count > 0)
             {
                 string modelValue = modelList.SelectedItems[0].SubItems[1].Text;
-                selectModel = m_frmParent.m_dbJob.SelectCarModel(modelValue);
+                selectModel = _GV._dbJob.SelectCarModel(modelValue);
                 UpdateUI(); // UI 업데이트 호출
                 Debug.Print("");
             }
@@ -290,7 +487,7 @@ namespace Ki_WAT
                 };
 
                 // 데이터베이스에 추가
-                bool success = m_frmParent.m_dbJob.InsertCarModel(newModel);
+                bool success = _GV._dbJob.InsertCarModel(newModel);
                 
                 if (success)
                 {
@@ -447,7 +644,7 @@ namespace Ki_WAT
                 selectModel.CamRR_LT = Txt_CamRR_LT.Text;
 
                 // 데이터베이스에 업데이트
-                bool success = m_frmParent.m_dbJob.UpdateCarModel(selectModel);
+                bool success = _GV._dbJob.UpdateCarModel(selectModel);
                 
                 if (success)
                 {
@@ -489,7 +686,7 @@ namespace Ki_WAT
                 if (result == DialogResult.Yes)
                 {
                     // 데이터베이스에서 삭제
-                    bool success = m_frmParent.m_dbJob.DeleteCarModel(selectModel.Model_NM);
+                    bool success = _GV._dbJob.DeleteCarModel(selectModel.Model_NM);
                     
                     if (success)
                     {
@@ -701,8 +898,61 @@ namespace Ki_WAT
             }
         }
 
+
+
         #endregion
 
- 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int nSel = -1;
+            if (listView1.SelectedItems.Count > 0)
+            {
+                nSel = listView1.SelectedItems[0].Index;
+
+            }
+            if (nSel < 0) return;
+
+            listView1.Items[nSel].SubItems[0].Text = editDesc.Text;
+            listView1.Items[nSel].SubItems[1].Text = editPortuguese.Text;
+            listView1.Items[nSel].SubItems[2].Text = editEnglish.Text;
+            listView1.Items[nSel].SubItems[3].Text = editOther.Text;
+
+            PropertyInfo[] props = typeof(LangData).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (ListViewItem item in listView1.Items)
+            {
+                string descValue = item.Text; // ListView 첫 컬럼(desc 값)
+                PropertyInfo matchedProp = null;   // 나중에 찾은 프로퍼티 저장할 변수
+
+                // 모든 프로퍼티를 하나씩 검사
+                foreach (PropertyInfo prop in props)
+                {
+                    // desc 구조체에서 해당 프로퍼티의 값 가져오기
+                    object value = prop.GetValue(_GV.GetLang("desc"));
+
+                    // null 체크
+                    if (value != null)
+                    {
+                        // ListView의 desc 값과 일치하면 matchedProp에 저장
+                        if (value.ToString() == descValue)
+                        {
+                            matchedProp = prop;
+                            break; // 찾았으니 반복 종료
+                        }
+                    }
+                }
+
+                // matchedProp이 null이 아니면 Portuguese, English, Other에 값 적용
+                if (matchedProp != null)
+                {
+                    matchedProp.SetValue(_GV.GetLang("Portuguese"), item.SubItems[1].Text);
+                    matchedProp.SetValue(_GV.GetLang("English"), item.SubItems[2].Text);
+                    matchedProp.SetValue(_GV.GetLang("Other"), item.SubItems[3].Text);
+                }
+            }
+
+
+            _GV.SaveLangFile();
+        }
     }
 }

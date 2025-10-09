@@ -19,72 +19,28 @@ namespace Ki_WAT
 		public void SetName(String strName)
 		{
 			m_strName=strName;
-			m_strLogFileName = strName + ".log";
+			m_strLogPath = GetLogPath();
 		}
-		public void SetNewDate()
-		{
-			m_strLogPath = "";
-		}
-		public void WriteLog(String strLog)
-		{
-			if(m_strName.Equals(""))
-			{
-				m_strName = "PGM";
-				m_strLogFileName = m_strName + ".log";
-			}
-			if(m_strLogPath.Equals(""))
-			{
-				m_strLogPath = GetLogPath();
-			}
-			WriteFile(strLog);
+		
+        private string GetLogPath()
+        {
+            DateTime now = DateTime.Now;
 
-		}
+            string logPath = Path.Combine(
+                Application.StartupPath,
+                "LOG",
+                "PGM",
+                now.Year.ToString(),
+                now.Month.ToString("D2"),
+                now.Day.ToString("D2")
+            );
 
-		private String GetLogPath()
-		{
-			
-			DateTime dt = DateTime.Now;
-			int nYear = dt.Year;
-			int nMonth = dt.Month;	
-			int nDay = dt.Day;
+            Directory.CreateDirectory(logPath);
 
-			String strYear = nYear.ToString();
-			String strMonth = nMonth.ToString();
-			String strDay = nDay.ToString();
+            return logPath;
+        }
 
-			String strPath = Application.StartupPath + "\\LOG";
-
-			//LOG 폴더를 확인합니다.
-			{
-				System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
-				if (!di.Exists) { di.Create(); }
-			}
-
-			//년도 폴더를 확인합니다.
-			strPath = Application.StartupPath + "\\LOG\\" + strYear;
-			{
-				System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
-				if (!di.Exists) { di.Create(); }
-			}
-
-			//월 폴더를 확인합니다.
-			strPath = Application.StartupPath + "\\LOG\\" + strYear + "\\" + strMonth;
-			{
-				System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
-				if (!di.Exists) { di.Create(); }
-			}
-
-			//일 폴더를 확인합니다.
-			strPath = Application.StartupPath + "\\LOG\\" + strYear + "\\" + strMonth +  "\\" + strDay;
-			{
-				System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
-				if (!di.Exists) { di.Create(); }
-			}
-
-			return strPath;
-		}
-
-		private bool WriteFile(String strLog)
+        public bool WriteFile(String strLog)
 		{
 			String strTime = "";
 			DateTime now = DateTime.Now;
@@ -93,7 +49,7 @@ namespace Ki_WAT
 			lock(wlock)
 			{
 				StreamWriter writer;
-				String strFullPath = m_strLogPath + "\\" + m_strLogFileName;
+				String strFullPath = m_strLogPath + "\\" + m_strName + ".log";
 				if(strFullPath.Equals(""))
 				{
 					bRet = false;

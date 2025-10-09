@@ -13,13 +13,14 @@ namespace Ki_WAT
     {
         private Thread testThread = null;
         GlobalVal _GV;
-        public GPLog testLog = new GPLog();
+        //public GPLog testLog = new GPLog();
 
         private bool m_bRun = false;
         private bool m_bExitStep = false;
         private int m_nState = 0;
         private bool m_bBarcodeRead = false;
         private readonly object _lock = new object();
+        private bool m_bStartCycle = false;
 
         //TblCarModel m_Cur_Model = new TblCarModel();
         //TblCarInfo m_Cur_CarInfo = new TblCarInfo();
@@ -34,11 +35,21 @@ namespace Ki_WAT
         public TestThread_HLT(GlobalVal gv)
         {
             _GV = gv;
-            testLog.SetName("Test Thread");
-
             Reset();
             SetLetParam();
+            TestThread_Kint.OnCycleStart += OnStartCycle;
         }
+        ~TestThread_HLT()
+        {
+            StopThread();
+            TestThread_Kint.OnCycleStart -= OnStartCycle;
+        }
+
+        private void OnStartCycle()
+        {
+            m_bStartCycle = true;
+        }
+
         private void SetLetParam()
         {
             m_LetParam.line = "1";
@@ -55,6 +66,7 @@ namespace Ki_WAT
             m_bBarcodeRead = false;
             m_LetParam.Clear();
             _GV.m_bHLTFinish = false;
+            m_bStartCycle = false;
         }
 
         private bool IsShiftEnterPressed()
@@ -89,8 +101,10 @@ namespace Ki_WAT
                 SetLetParam();
                 testThread = new Thread(TestHLT);
                 testThread.IsBackground = true;
-                testThread.Start(this);
 
+                SetState(Constants.STEP_HLT_START);
+                testThread.Start(this);
+                
                 
 
                 return 1;
@@ -103,7 +117,7 @@ namespace Ki_WAT
         }
         private void WLog(String strLog)
         {
-            testLog.WriteLog(strLog);
+            
             GWA.STM(strLog);
         }
 
@@ -138,35 +152,31 @@ namespace Ki_WAT
                 
                 m_nState = state;
 
-                if (m_nState == Constants.STEP_WAIT)
+
+                if (m_nState == Constants.STEP_HLT_START)
                 {
-                    Debug.Print("STEP_WAIT");
-                    OnStatusUpdate?.Invoke("HLT STEP_WAIT");
+                    UI_Update_Status("HLT STEP_WAIT");
                 }
-                else if (m_nState == Constants.STEP_HLT_1)
+                else if (m_nState == Constants.STEP_HLT_VEHICLE_SELECT)
                 {
-                    Debug.Print("STEP_HLT_1");
-                    OnStatusUpdate?.Invoke("HLT STEP_HLT_1");
+                    UI_Update_Status("HLT STEP_HLT_VEHICLE_SELECT");
+                 
                 }
-                else if (m_nState == Constants.STEP_HLT_2)
+                else if (m_nState == Constants.STEP_HLT_PERFORM_TEST)
                 {
-                    Debug.Print("STEP_HLT_2");
-                    OnStatusUpdate?.Invoke("HLT STEP_HLT_2");
+                    UI_Update_Status("HLT STEP_HLT_PERFORM_TEST");
                 }
-                else if (m_nState == Constants.STEP_HLT_3)
+                else if (m_nState == Constants.STEP_HLT_END_CYCLE)
                 {
-                    Debug.Print("STEP_HLT_3");
-                    OnStatusUpdate?.Invoke("HLT STEP_HLT_3");
+                    UI_Update_Status("HLT STEP_HLT_END_CYCLE");
                 }
-                else if (m_nState == Constants.STEP_HLT_4)
+                else if (m_nState == Constants.STEP_HLT_GET_RESULT)
                 {
-                    Debug.Print("STEP_HLT_4");
-                    OnStatusUpdate?.Invoke("HLT STEP_HLT_4");
+                    UI_Update_Status("HLT STEP_HLT_GET_RESULT");
                 }
-                else if (m_nState == Constants.STEP_HLT_5)
+                else if (m_nState == Constants.STEP_HLT_DELETE_ALL)
                 {
-                    Debug.Print("STEP_HLT_5");
-                    OnStatusUpdate?.Invoke("HLT STEP_HLT_5");
+                    UI_Update_Status("HLT STEP_HLT_DELETE_ALL");
                 }
                 else if (m_nState == Constants.STEP_HLT_6)
                 {
@@ -203,42 +213,44 @@ namespace Ki_WAT
                 UI_Update_Status("ABC");
                 while (true)
                 {
+                    if ( _GV.m_bTestRun == false)
+                    {
+                        WLog("TEST Thread Stop by m_bTestRun false");
+                        break;
+                    }
                     Thread.Sleep(100);
-                    if (m_nState == Constants.STEP_WAIT)
+                    if (m_nState == Constants.STEP_HLT_START)
                     {
                         Do_HLT_Start();
                     }
-                    else if (m_nState == Constants.STEP_HLT_1)
+                    else if (m_nState == Constants.STEP_HLT_VEHICLE_SELECT)
                     {
-                        Do_HLT_STEP1();
+                        Do_HLT_VEHICLE_SELECT();
                     }
-                    else if (m_nState == Constants.STEP_HLT_2)
+                    else if (m_nState == Constants.STEP_HLT_PERFORM_TEST)
                     {
-                        Do_HLT_STEP2();
+                        Do_HLT_PERFORM_TEST();
                     }
-                    else if (m_nState == Constants.STEP_HLT_3)
+                    else if (m_nState == Constants.STEP_HLT_END_CYCLE)
                     {
-                        Do_HLT_STEP3();
+                        Do_HLT_END_CYCLE();
                     }
-                    else if (m_nState == Constants.STEP_HLT_4)
+                    else if (m_nState == Constants.STEP_HLT_GET_RESULT)
                     {
-                        Do_HLT_STEP4();
-                        
+                        Do_HLT_GET_RESULT();
                     }
-                    else if (m_nState == Constants.STEP_HLT_5)
+                    else if (m_nState == Constants.STEP_HLT_DELETE_ALL)
                     {
-                        Do_HLT_STEP5();
+                        Do_HLT_DeleteAllTesk();
                     }
                     else if (m_nState == Constants.STEP_HLT_6)
                     {
-
                         break;
                     }
                     else if (m_nState == Constants.STEP_HLT_7)
                     {
                         break;
                     }
-
                 }
 
             }
@@ -260,7 +272,7 @@ namespace Ki_WAT
                     m_bRun = false;
                     return;
                 }
-                SetState(Constants.STEP_HLT_1);
+                SetState(Constants.STEP_HLT_VEHICLE_SELECT);
 
                 
             }
@@ -269,7 +281,7 @@ namespace Ki_WAT
                 
             }
         }
-        private void Do_HLT_STEP1()
+        private void Do_HLT_VEHICLE_SELECT()
         {
             try
             {
@@ -281,19 +293,19 @@ namespace Ki_WAT
                     m_bRun = false;
                     return;
                 }
-                SetState(Constants.STEP_HLT_2);
+                SetState(Constants.STEP_HLT_PERFORM_TEST);
             }
             catch (Exception ex)
             {
             }
         }
 
-        private void Do_HLT_STEP2()
+        private void Do_HLT_PERFORM_TEST()
         {
             try
             {
                 //PLC 에서 LET 가출발 됬을때
-                if (!_GV._PLCVal.DI._HLA_Home_position)
+                if (!_GV._PLCVal.DI._HLA_Home_position && m_bStartCycle)
                 {
                     bool bRes = _GV.LET_Controller.PerformTests(m_LetParam.line, m_LetParam.floorpitch);
                     if (bRes == false)
@@ -302,10 +314,8 @@ namespace Ki_WAT
                         m_bRun = false;
                         return;
                     }
-                    SetState(Constants.STEP_HLT_3);
+                    SetState(Constants.STEP_HLT_END_CYCLE);
                 }
-
-                
             }
             catch (Exception ex)
             {
@@ -313,11 +323,11 @@ namespace Ki_WAT
             }
         }
 
-        private void Do_HLT_STEP3()
+        private void Do_HLT_END_CYCLE()
         {
             try
             {
-                if (!_GV._PLCVal.DI._HLA_Home_position)
+                if (_GV._PLCVal.DI._HLA_Home_position)
                 {
                     bool bRes = _GV.LET_Controller.EndCycle();
                     if ( bRes == false) 
@@ -326,18 +336,17 @@ namespace Ki_WAT
                         m_bRun = false;
                         return;
                     }
-                    SetState(Constants.STEP_HLT_4);
+
+                    _GV._VEP_Client.SetSync32HLAFinish();
+                    SetState(Constants.STEP_HLT_GET_RESULT);
                 }
             }
             catch (Exception ex)
             {
-
             }
         }
-
-
         // Save Data
-        private void Do_HLT_STEP4()
+        private void Do_HLT_GET_RESULT()
         {
             try
             {
@@ -347,7 +356,7 @@ namespace Ki_WAT
                     SaveXmlToFile(strXML);
 
                     OnCycleFinished?.Invoke();
-                    SetState(Constants.STEP_HLT_5);
+                    SetState(Constants.STEP_HLT_DELETE_ALL);
                 }
             }
             catch (Exception ex)
@@ -355,7 +364,7 @@ namespace Ki_WAT
 
             }
         }
-        private void Do_HLT_STEP5()
+        private void Do_HLT_DeleteAllTesk()
         {
             try
             {
@@ -367,14 +376,33 @@ namespace Ki_WAT
             }
             catch (Exception ex)
             {
-
             }
         }
+        private void SaveHLTData(string sXML)
+        {
+            LampInclination ResData = _GV.LET_Controller.ParseInclinationFromXml(sXML);
+            TblCarLamp tblCarLamp = new TblCarLamp();
 
-
+            tblCarLamp.AcceptNo = ResData.Vehicle_UID;
+            tblCarLamp.CarPjiNo = ResData.Vehicle_VIN;
+            tblCarLamp.HTstTime = ResData.Vehicle_Test_start;
+            tblCarLamp.HEndTime = ResData.Vehicle_Test_end;
+            tblCarLamp.Model_NM = ResData.Equipment_Model;
+            tblCarLamp.HLT___PK = ResData.Vehicle_Overall_result;
+            tblCarLamp.LampKind = "L";
+            tblCarLamp.LeftXVal = ResData.Low_InclinationXFinal_Left;
+            tblCarLamp.LeftYVal = ResData.Low_InclinationYFinal_Left;
+            tblCarLamp.Left_Res = ResData.Low_Left_Result;
+            tblCarLamp.RightXVal = ResData.Low_InclinationXFinal_Right;
+            tblCarLamp.RightYVal = ResData.Low_InclinationYFinal_Right;
+            tblCarLamp.Right_Res = ResData.Low_Right_Result;
+            
+            _GV._dbJob.InsertCarLamp(tblCarLamp);
+        }
         private void SaveXmlToFile(string sXML)
         {
 
+            SaveHLTData(sXML);
             string basePath = _GV.Config.Program.RESULT_PATH; ;
             string strPath = Path.Combine(
                 basePath,
@@ -382,7 +410,6 @@ namespace Ki_WAT
                 DateTime.Now.Month.ToString("D2"),
                 DateTime.Now.Day.ToString("D2")
             );
-
             // 폴더가 없으면 생성
             if (!Directory.Exists(strPath))
             {
@@ -391,7 +418,6 @@ namespace Ki_WAT
 
             // 저장할 파일 경로 지정
             string filePath = Path.Combine(strPath, _GV.m_Cur_Info.CarPJINo + ".xml");
-
             try
             {
                 File.WriteAllText(filePath, sXML);

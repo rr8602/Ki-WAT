@@ -16,7 +16,7 @@ namespace Ki_WAT
     {
 
         Frm_Mainfrm m_frmParent = null;
-
+        GlobalVal _GV = GlobalVal.Instance;
         public Frm_Result()
         {
             InitializeComponent();
@@ -84,6 +84,31 @@ namespace Ki_WAT
             }
         }
 
+
+        public void UpdateLamp(TblCarLamp pTable)
+        {
+            try
+            {
+                // pTable이 null이거나 유효하지 않은 경우 처리
+                if (string.IsNullOrEmpty(pTable.CarPjiNo))
+                {
+                    ClearUI();
+                    return;
+                }
+
+                lbl_Lamp_LX.Text = pTable.LeftXVal.ToString() ?? "0.0";
+                lbl_Lamp_LY.Text = pTable.LeftYVal.ToString() ?? "0.0";
+                lbl_Lamp_RX.Text = pTable.RightXVal.ToString() ?? "0.0";
+                lbl_Lamp_RY.Text = pTable.RightYVal.ToString().ToString() ?? "0.0";
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"UI 업데이트 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void ClearUI()
         {
             try
@@ -116,28 +141,30 @@ namespace Ki_WAT
         { 
             try
             {
-                // PJI 번호가 입력되었는지 확인
-                if (string.IsNullOrEmpty(Txt_PJI.Text.Trim()))
-                {
-                    MessageBox.Show("PJI 번호를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
 
-                // 데이터베이스에서 결과 조회
-                TblResult tResult = m_frmParent.m_dbJob.SelectCarResult(Txt_PJI.Text.Trim());
+                LoadSeqListFromPJI(Txt_PJI.Text.Trim());
+
+                //// PJI 번호가 입력되었는지 확인
+                //if (string.IsNullOrEmpty(Txt_PJI.Text.Trim()))
+                //{
+                //    MessageBox.Show("PJI 번호를 입력해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return;
+                //}
+
+                //// 데이터베이스에서 결과 조회
+                //List<TblResult> tResult = _GV._dbJob.SelectCarResultList(Txt_PJI.Text.Trim());
                 
-                // 결과가 있는지 확인
-                if (string.IsNullOrEmpty(tResult.PJI_Num))
-                {
-                    MessageBox.Show($"PJI 번호 '{Txt_PJI.Text.Trim()}'에 해당하는 결과를 찾을 수 없습니다.", "검색 결과 없음", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ClearUI();
-                    return;
-                }
+                //// 결과가 있는지 확인
+                //if (tResult == null || tResult.Count == 0)
+                //{
+                //    MessageBox.Show($"PJI 번호 '{Txt_PJI.Text.Trim()}'에 해당하는 결과를 찾을 수 없습니다.", "검색 결과 없음", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //    ClearUI();
+                //    return;
+                //}
 
                 // UI 업데이트
-                UpdateUI(tResult);
+                //UpdateUI(tResult);
                 
-                MessageBox.Show("검색이 완료되었습니다.", "검색 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -157,9 +184,12 @@ namespace Ki_WAT
 
                     // SubItems[0] → 첫 번째 컬럼
                     // SubItems[1] → 두 번째 컬럼
+                    string accept = item.SubItems[1].Text;
                     string pji = item.SubItems[2].Text;
-                    TblResult _res = m_frmParent.m_dbJob.SelectCarResult(pji);
+                    TblResult _res = _GV._dbJob.SelectCarResult(accept, pji);
+                    TblCarLamp tblCarLamp = _GV._dbJob.SelectCarLamp(accept);
                     UpdateUI(_res);
+                    UpdateLamp(tblCarLamp);
                     ///Debug.Print("");
                 }
                     
@@ -175,7 +205,7 @@ namespace Ki_WAT
         private void LoadSeqList(string pDate)
         {
             // DB 조회
-            List<TblCarInfo> _resList = m_frmParent.m_dbJob.SelectCarInfoList(pDate);
+            List<TblCarInfo> _resList = _GV._dbJob.SelectCarInfoList(pDate);
 
             seqList.BeginUpdate();
             try
@@ -206,6 +236,43 @@ namespace Ki_WAT
                 seqList.EndUpdate();
             }
         }
+
+
+        private void LoadSeqListFromPJI(string pPJI)
+        {
+            // DB 조회
+            List<TblCarInfo> _resList = _GV._dbJob.SelectCarInfoListFromPJI(pPJI);
+
+            seqList.BeginUpdate();
+            try
+            {
+                seqList.Items.Clear();
+
+                if (_resList == null || _resList.Count == 0)
+                    return;
+
+                int idx = 1;
+                foreach (var car in _resList)
+                {
+                    // 0번째(숨김) 컬럼에는 인덱스나 키를 넣어두면 편리
+                    var lvi = new ListViewItem(idx.ToString());
+
+                    // 1번째: UID -> AcceptNo
+                    lvi.SubItems.Add(car.AcceptNo ?? string.Empty);
+
+                    // 2번째: PJI -> CarPJINo
+                    lvi.SubItems.Add(car.CarPJINo ?? string.Empty);
+
+                    seqList.Items.Add(lvi);
+                    idx++;
+                }
+            }
+            finally
+            {
+                seqList.EndUpdate();
+            }
+        }
+
 
         private void Btn_Date_Search_Click(object sender, EventArgs e)
         {

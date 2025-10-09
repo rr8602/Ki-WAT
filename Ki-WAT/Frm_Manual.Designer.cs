@@ -33,12 +33,25 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Btn_Last_Error = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lbl_Right_init_Y = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbl_Right_init_X = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
             this.lbl_Right_Final_Y = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.lbl_Right_Final_X = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbl_left_Final_Y = new System.Windows.Forms.Label();
+            this.lbl_left_Final_X = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbl_left_init_Y = new System.Windows.Forms.Label();
+            this.lbl_left_init_X = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.Btn_XML = new System.Windows.Forms.Button();
             this.Btn_Endcycle = new System.Windows.Forms.Button();
             this.Btn_perfoamTest = new System.Windows.Forms.Button();
             this.Btn_VehicleSel = new System.Windows.Forms.Button();
@@ -96,19 +109,7 @@
             this.label26 = new System.Windows.Forms.Label();
             this.lbl_Type = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.Btn_XML = new System.Windows.Forms.Button();
-            this.lbl_left_init_Y = new System.Windows.Forms.Label();
-            this.lbl_left_init_X = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.lbl_left_Final_Y = new System.Windows.Forms.Label();
-            this.lbl_left_Final_X = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbl_Right_init_Y = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.lbl_Right_init_X = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
+            this.Btn_Delete = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -188,6 +189,46 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "RIGHT";
             // 
+            // lbl_Right_init_Y
+            // 
+            this.lbl_Right_init_Y.BackColor = System.Drawing.Color.Black;
+            this.lbl_Right_init_Y.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Right_init_Y.Location = new System.Drawing.Point(313, 99);
+            this.lbl_Right_init_Y.Name = "lbl_Right_init_Y";
+            this.lbl_Right_init_Y.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Right_init_Y.TabIndex = 18;
+            this.lbl_Right_init_Y.Text = "-";
+            this.lbl_Right_init_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(24, 99);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(283, 39);
+            this.label25.TabIndex = 15;
+            this.label25.Text = "Inclination_Y_Init :";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_Right_init_X
+            // 
+            this.lbl_Right_init_X.BackColor = System.Drawing.Color.Black;
+            this.lbl_Right_init_X.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_Right_init_X.Location = new System.Drawing.Point(313, 44);
+            this.lbl_Right_init_X.Name = "lbl_Right_init_X";
+            this.lbl_Right_init_X.Size = new System.Drawing.Size(208, 39);
+            this.lbl_Right_init_X.TabIndex = 17;
+            this.lbl_Right_init_X.Text = "-";
+            this.lbl_Right_init_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label32
+            // 
+            this.label32.Location = new System.Drawing.Point(18, 44);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(289, 39);
+            this.label32.TabIndex = 16;
+            this.label32.Text = "Inclination_X_Init :";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // lbl_Right_Final_Y
             // 
             this.lbl_Right_Final_Y.BackColor = System.Drawing.Color.Black;
@@ -245,8 +286,89 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LEFT";
             // 
+            // lbl_left_Final_Y
+            // 
+            this.lbl_left_Final_Y.BackColor = System.Drawing.Color.Black;
+            this.lbl_left_Final_Y.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_left_Final_Y.Location = new System.Drawing.Point(307, 199);
+            this.lbl_left_Final_Y.Name = "lbl_left_Final_Y";
+            this.lbl_left_Final_Y.Size = new System.Drawing.Size(208, 39);
+            this.lbl_left_Final_Y.TabIndex = 20;
+            this.lbl_left_Final_Y.Text = "-";
+            this.lbl_left_Final_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_left_Final_X
+            // 
+            this.lbl_left_Final_X.BackColor = System.Drawing.Color.Black;
+            this.lbl_left_Final_X.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_left_Final_X.Location = new System.Drawing.Point(307, 144);
+            this.lbl_left_Final_X.Name = "lbl_left_Final_X";
+            this.lbl_left_Final_X.Size = new System.Drawing.Size(208, 39);
+            this.lbl_left_Final_X.TabIndex = 19;
+            this.lbl_left_Final_X.Text = "-";
+            this.lbl_left_Final_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(6, 144);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(295, 39);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Inclination_X_Final :";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(0, 199);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(301, 39);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Inclination_Y_Final :";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_left_init_Y
+            // 
+            this.lbl_left_init_Y.BackColor = System.Drawing.Color.Black;
+            this.lbl_left_init_Y.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_left_init_Y.Location = new System.Drawing.Point(307, 90);
+            this.lbl_left_init_Y.Name = "lbl_left_init_Y";
+            this.lbl_left_init_Y.Size = new System.Drawing.Size(208, 39);
+            this.lbl_left_init_Y.TabIndex = 16;
+            this.lbl_left_init_Y.Text = "-";
+            this.lbl_left_init_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_left_init_X
+            // 
+            this.lbl_left_init_X.BackColor = System.Drawing.Color.Black;
+            this.lbl_left_init_X.ForeColor = System.Drawing.Color.Yellow;
+            this.lbl_left_init_X.Location = new System.Drawing.Point(307, 35);
+            this.lbl_left_init_X.Name = "lbl_left_init_X";
+            this.lbl_left_init_X.Size = new System.Drawing.Size(208, 39);
+            this.lbl_left_init_X.TabIndex = 15;
+            this.lbl_left_init_X.Text = "-";
+            this.lbl_left_init_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(0, 90);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(301, 39);
+            this.label27.TabIndex = 13;
+            this.label27.Text = "Inclination_Y_Init :";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(6, 35);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(295, 39);
+            this.label29.TabIndex = 14;
+            this.label29.Text = "Inclination_X_Init :";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.Btn_Delete);
             this.groupBox7.Controls.Add(this.Btn_XML);
             this.groupBox7.Controls.Add(this.Btn_Endcycle);
             this.groupBox7.Controls.Add(this.Btn_perfoamTest);
@@ -266,6 +388,17 @@
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Parameter";
+            // 
+            // Btn_XML
+            // 
+            this.Btn_XML.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_XML.Location = new System.Drawing.Point(23, 418);
+            this.Btn_XML.Name = "Btn_XML";
+            this.Btn_XML.Size = new System.Drawing.Size(161, 61);
+            this.Btn_XML.TabIndex = 13;
+            this.Btn_XML.Text = "GetXML";
+            this.Btn_XML.UseVisualStyleBackColor = true;
+            this.Btn_XML.Click += new System.EventHandler(this.Btn_XML_Click);
             // 
             // Btn_Endcycle
             // 
@@ -870,136 +1003,16 @@
             this.label23.Text = "Type :";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // Btn_XML
+            // Btn_Delete
             // 
-            this.Btn_XML.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Btn_XML.Location = new System.Drawing.Point(23, 418);
-            this.Btn_XML.Name = "Btn_XML";
-            this.Btn_XML.Size = new System.Drawing.Size(161, 61);
-            this.Btn_XML.TabIndex = 13;
-            this.Btn_XML.Text = "GetXML";
-            this.Btn_XML.UseVisualStyleBackColor = true;
-            this.Btn_XML.Click += new System.EventHandler(this.Btn_XML_Click);
-            // 
-            // lbl_left_init_Y
-            // 
-            this.lbl_left_init_Y.BackColor = System.Drawing.Color.Black;
-            this.lbl_left_init_Y.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_left_init_Y.Location = new System.Drawing.Point(307, 90);
-            this.lbl_left_init_Y.Name = "lbl_left_init_Y";
-            this.lbl_left_init_Y.Size = new System.Drawing.Size(208, 39);
-            this.lbl_left_init_Y.TabIndex = 16;
-            this.lbl_left_init_Y.Text = "-";
-            this.lbl_left_init_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_left_init_X
-            // 
-            this.lbl_left_init_X.BackColor = System.Drawing.Color.Black;
-            this.lbl_left_init_X.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_left_init_X.Location = new System.Drawing.Point(307, 35);
-            this.lbl_left_init_X.Name = "lbl_left_init_X";
-            this.lbl_left_init_X.Size = new System.Drawing.Size(208, 39);
-            this.lbl_left_init_X.TabIndex = 15;
-            this.lbl_left_init_X.Text = "-";
-            this.lbl_left_init_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label27
-            // 
-            this.label27.Location = new System.Drawing.Point(0, 90);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(301, 39);
-            this.label27.TabIndex = 13;
-            this.label27.Text = "Inclination_Y_Init :";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label29
-            // 
-            this.label29.Location = new System.Drawing.Point(6, 35);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(295, 39);
-            this.label29.TabIndex = 14;
-            this.label29.Text = "Inclination_X_Init :";
-            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbl_left_Final_Y
-            // 
-            this.lbl_left_Final_Y.BackColor = System.Drawing.Color.Black;
-            this.lbl_left_Final_Y.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_left_Final_Y.Location = new System.Drawing.Point(307, 199);
-            this.lbl_left_Final_Y.Name = "lbl_left_Final_Y";
-            this.lbl_left_Final_Y.Size = new System.Drawing.Size(208, 39);
-            this.lbl_left_Final_Y.TabIndex = 20;
-            this.lbl_left_Final_Y.Text = "-";
-            this.lbl_left_Final_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_left_Final_X
-            // 
-            this.lbl_left_Final_X.BackColor = System.Drawing.Color.Black;
-            this.lbl_left_Final_X.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_left_Final_X.Location = new System.Drawing.Point(307, 144);
-            this.lbl_left_Final_X.Name = "lbl_left_Final_X";
-            this.lbl_left_Final_X.Size = new System.Drawing.Size(208, 39);
-            this.lbl_left_Final_X.TabIndex = 19;
-            this.lbl_left_Final_X.Text = "-";
-            this.lbl_left_Final_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.Location = new System.Drawing.Point(6, 144);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(295, 39);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Inclination_X_Final :";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label5
-            // 
-            this.label5.Location = new System.Drawing.Point(0, 199);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(301, 39);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Inclination_Y_Final :";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbl_Right_init_Y
-            // 
-            this.lbl_Right_init_Y.BackColor = System.Drawing.Color.Black;
-            this.lbl_Right_init_Y.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Right_init_Y.Location = new System.Drawing.Point(313, 99);
-            this.lbl_Right_init_Y.Name = "lbl_Right_init_Y";
-            this.lbl_Right_init_Y.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Right_init_Y.TabIndex = 18;
-            this.lbl_Right_init_Y.Text = "-";
-            this.lbl_Right_init_Y.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label25
-            // 
-            this.label25.Location = new System.Drawing.Point(24, 99);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(283, 39);
-            this.label25.TabIndex = 15;
-            this.label25.Text = "Inclination_Y_Init :";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbl_Right_init_X
-            // 
-            this.lbl_Right_init_X.BackColor = System.Drawing.Color.Black;
-            this.lbl_Right_init_X.ForeColor = System.Drawing.Color.Yellow;
-            this.lbl_Right_init_X.Location = new System.Drawing.Point(313, 44);
-            this.lbl_Right_init_X.Name = "lbl_Right_init_X";
-            this.lbl_Right_init_X.Size = new System.Drawing.Size(208, 39);
-            this.lbl_Right_init_X.TabIndex = 17;
-            this.lbl_Right_init_X.Text = "-";
-            this.lbl_Right_init_X.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label32
-            // 
-            this.label32.Location = new System.Drawing.Point(18, 44);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(289, 39);
-            this.label32.TabIndex = 16;
-            this.label32.Text = "Inclination_X_Init :";
-            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Btn_Delete.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Delete.Location = new System.Drawing.Point(251, 418);
+            this.Btn_Delete.Name = "Btn_Delete";
+            this.Btn_Delete.Size = new System.Drawing.Size(161, 61);
+            this.Btn_Delete.TabIndex = 14;
+            this.Btn_Delete.Text = "All-Delete";
+            this.Btn_Delete.UseVisualStyleBackColor = true;
+            this.Btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
             // 
             // Frm_Manual
             // 
@@ -1112,5 +1125,6 @@
         private System.Windows.Forms.Label lbl_left_init_X;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Button Btn_Delete;
     }
 }

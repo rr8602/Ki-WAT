@@ -6,31 +6,88 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LETInterface
 {
     public class Logger
     {
-        private static string filename = GetNewLogFilename();
-        private static Queue<string> logQueue = new Queue<string>();
-        private static readonly object writeLock = new object();
+        private string filename;
+        private Queue<string> logQueue = new Queue<string>();
+        private readonly object writeLock = new object();
 
-        private static string GetNewLogFilename()
+
+        public  void SetFileName(string strPJI)
         {
-            var logDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            var date = DateTime.Now.ToString("yyyyMMdd");
-            var sequence = 1;
-            while (true)
-            {
-                var filename = Path.Combine(logDirectory, $"{date}_{sequence:D4}.log");
-                if (!File.Exists(filename))
-                {
-                    return filename;
-                }
-                sequence++;
-            }
+            string sFolder = CreateFolder();
+            filename = sFolder + "\\" + strPJI + ".log";
+            Debug.Print(filename);
         }
-        public static void WriteLog(string str, bool bwritenow = false)
+
+        private  String CreateFolder()
+        {
+
+            DateTime dt = DateTime.Now;
+            int nYear = dt.Year;
+            int nMonth = dt.Month;
+            int nDay = dt.Day;
+
+            String strYear = nYear.ToString();
+            String strMonth = nMonth.ToString();
+            String strDay = nDay.ToString();
+
+            String strPath = Application.StartupPath + "\\LOG\\LET";
+
+            //LOG 폴더를 확인합니다.
+            {
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
+                if (!di.Exists) { di.Create(); }
+            }
+
+            //년도 폴더를 확인합니다.
+            strPath = Application.StartupPath + "\\LOG\\LET\\" + strYear;
+            {
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
+                if (!di.Exists) { di.Create(); }
+            }
+
+            //월 폴더를 확인합니다.
+            strPath = Application.StartupPath + "\\LOG\\LET\\" + strYear + "\\" + strMonth;
+            {
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
+                if (!di.Exists) { di.Create(); }
+            }
+
+            //일 폴더를 확인합니다.
+            strPath = Application.StartupPath + "\\LOG\\LET\\" + strYear + "\\" + strMonth + "\\" + strDay;
+            {
+                System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(strPath);
+                if (!di.Exists) { di.Create(); }
+            }
+
+            return strPath;
+        }
+
+        //private static string GetNewLogFilename()
+        //{
+
+            
+        //    var logDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        //    var date = DateTime.Now.ToString("yyyyMMdd");
+        //    var sequence = 1;
+        //    while (true)
+        //    {
+        //        var filename = Path.Combine(logDirectory, $"{date}_{sequence:D4}.log");
+        //        if (!File.Exists(filename))
+        //        {
+        //            return filename;
+        //        }
+        //        sequence++;
+        //    }
+
+
+        //}
+        public  void WriteLog(string str, bool bwritenow = false)
         {
             Debug.WriteLine(str);
             logQueue.Enqueue(str);
@@ -50,7 +107,7 @@ namespace LETInterface
             }
         }
 
-        public static string HttpMessageToLogString(object message)
+        public  string HttpMessageToLogString(object message)
         {
             var sb = new StringBuilder();
 

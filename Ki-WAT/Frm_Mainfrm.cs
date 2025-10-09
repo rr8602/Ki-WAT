@@ -45,7 +45,7 @@ namespace Ki_WAT
         private Timer m_StatusTimer = new Timer() ;
         private Timer m_TimerTest;
 
-        public DB_LocalWat m_dbJob;
+        //public DB_LocalWat m_dbJob;
         private const int WM_COPYDATA = 0x004A;
 
         public delegate void DppDataReceive(MeasureData pData);
@@ -174,7 +174,7 @@ namespace Ki_WAT
 
         public void DeviceOpen()
         {
-            m_dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+            _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
 
             _GV.LET_Controller = new CycleControl();
             //Socket 

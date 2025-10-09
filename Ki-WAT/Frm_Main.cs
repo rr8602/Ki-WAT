@@ -1,18 +1,20 @@
-﻿using System;
+﻿using DG_ComLib;
+using Ki_WAT.Properties;
+using KINT_Lib;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DG_ComLib;
-using KINT_Lib;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static KINT_Lib.Lib_TcpClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Ki_WAT
 {
@@ -101,8 +103,9 @@ namespace Ki_WAT
                     {
 
                         _GV.m_Cur_Info = m_BarcodeList[0];
-                        _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
+                        _GV.m_Cur_Model = _GV._dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
                         // 사이클 시작
+                        RefreshCurrentInfoSafe();
                         StartCycle();
                         m_BarcodeList.Clear(); // 처리 후 리스트 클리어
                     }
@@ -146,7 +149,7 @@ namespace Ki_WAT
             string PARA = pBarcode.Substring(9, 3);
             string PROJECT = pBarcode.Substring(12, 3);
             //string ADAS = pBarcode.Substring(15, 3);
-            _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
+            _GV.m_Cur_Model = _GV._dbJob.SelectCarModelFromBarcode(PARA);
             Debug.Print("");
             _GV.m_Cur_Info.CarPJINo = PJI;
             _GV.m_Cur_Info.CarModel = _GV.m_Cur_Model.Model_NM;
@@ -156,7 +159,7 @@ namespace Ki_WAT
             _GV.m_Cur_Info.TotalBar = pBarcode;
             _GV.m_Cur_Info.Spare__2 = "0";
             _GV.m_Cur_Info.Spare__3 = "0";
-            m_frmParent.m_dbJob.AddNewAcceptNo(ref _GV.m_Cur_Info);
+            _GV._dbJob.AddNewAcceptNo(ref _GV.m_Cur_Info);
             RefreshCarInfoList();
         }
         public void GetBarCode(string pBarcode)
@@ -187,7 +190,7 @@ namespace Ki_WAT
                 string PROJECT = pBarcode.Substring(12, 3);
 
                 TblCarInfo info = new TblCarInfo();
-                TblCarModel model = m_frmParent.m_dbJob.SelectCarModelFromBarcode(PARA);
+                TblCarModel model = _GV._dbJob.SelectCarModelFromBarcode(PARA);
 
                 info.CarPJINo = PJI;
                 info.CarModel = model.Model_NM;
@@ -198,7 +201,7 @@ namespace Ki_WAT
                 info.Spare__2 = "0";
                 info.Spare__3 = "0";
 
-                m_frmParent.m_dbJob.AddNewAcceptNo(ref info);
+                _GV._dbJob.AddNewAcceptNo(ref info);
                 m_BarcodeList.Add(info);
                 RefreshCarInfoList();
 
@@ -227,7 +230,7 @@ namespace Ki_WAT
 		}
         public void RefreshCarInfoList()
         {
-            if (m_frmParent == null || m_frmParent.m_dbJob == null)
+            if (m_frmParent == null || _GV._dbJob == null)
                 return;
 
             try
@@ -235,7 +238,7 @@ namespace Ki_WAT
                 // 오늘 날짜 yyyyMMdd
                 string today = DateTime.Today.ToString("yyyyMMdd");
                 string sSQL = $"SELECT * FROM TableCarInfo WHERE AcceptNo LIKE '{today}%' ORDER BY AcceptNo DESC";
-                var dt = m_frmParent.m_dbJob.GetDataSet(sSQL);
+                var dt = _GV._dbJob.GetDataSet(sSQL);
 
                 if (seqList.InvokeRequired)
                 {
@@ -289,6 +292,19 @@ namespace Ki_WAT
             _Log_ListBox("asdf");
         }
 
+
+        public void RefreshCurrentInfoSafe()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new MethodInvoker(RefreshCurrentInfo));
+            }
+            else
+            {
+                RefreshCurrentInfo();
+            }
+        }
+
         public void RefreshCurrentInfo()
         {
             lbl_PARA.Text = _GV.m_Cur_Model.Bar_Code;
@@ -333,11 +349,11 @@ namespace Ki_WAT
                     string acceptNo = selectedItem.Text; // 첫 번째 컬럼 (AcceptNo)
                     
                     // 선택된 AcceptNo로 CarInfo 조회
-                    if (m_frmParent != null && m_frmParent.m_dbJob != null)
+                    if (m_frmParent != null && _GV._dbJob != null)
                     {
-                        _GV.m_Cur_Info = m_frmParent.m_dbJob.SelectCarInfo(acceptNo);
-                        _GV.m_Cur_Model = m_frmParent.m_dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
-                        RefreshCurrentInfo();
+                        _GV.m_Cur_Info = _GV._dbJob.SelectCarInfo(acceptNo);
+                        _GV.m_Cur_Model = _GV._dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
+                        RefreshCurrentInfoSafe();
                     }
                 }
             }
@@ -360,7 +376,8 @@ namespace Ki_WAT
                 {
                     lbl_Message.Items.Insert(0, "[" + System.DateTime.Now.ToString("HH:mm:ss") + "] " + strText);
 
-                    DG_Log.SysLog(strText);
+                    //_GV.Log_PGM.WriteFile(strText);
+                    
 
                     if (lbl_Message.Items.Count >= 1000)
                         lbl_Message.Items.RemoveAt(lbl_Message.Items.Count - 1);
@@ -368,7 +385,8 @@ namespace Ki_WAT
             }
             catch (Exception ex)
             {
-                DG_Log.SysLog("[_Log_ListBox ] <" + strText + ">  ERROR : " + ex.Message);
+                Debug.WriteLine("[_Log_ListBox ] <" + strText + ">  ERROR : " + ex.Message);
+                //_GV.Log_PGM.WriteFile("[_Log_ListBox ] <" + strText + ">  ERROR : " + ex.Message);
             }
         }
 
@@ -446,9 +464,240 @@ namespace Ki_WAT
             StartCycle();
         }
 
+        public StationSetting MakeXMLStruct()
+        {
+            TblCarModel model = _GV.m_Cur_Model;
+            TblCarInfo info = _GV.m_Cur_Info;
+
+            StationSetting setting = new StationSetting
+            {
+                DataModel = new DataModel { Version = "1.2.I" },
+                FileFormat = new FileFormat { Version = "1.2.I" },
+                MainPart_ID = "201215836921B",
+                TopStartCyclePart = true,
+                TopPart = true,
+                ParallelismSettingProcessType = new ParallelismSettingProcessType
+                {
+                    VerdictOK = true,
+                    DiversityCode = "DIV1",
+                    BenchNumber = "1",
+                    CmdSignConvention = "ISO",
+                    SwaOffset = 1.2,
+                    GearRatio = 1.0,
+                    CycleTime = 11,
+                    InitialSteeringWheelAngle = 1.3,
+                    FinalSteeringWheelAngle = 1.4,
+                    CmdSteeringWheelAngle = 2.4,
+                    CmdSteeringWheelAngleToleranceMin = 1.5,
+                    CmdSteeringWheelAngleToleranceMax = 1.6,
+                    IsSettingsAdjustReference = true,
+                    AxleTools = new List<ParallelizationAxleToolType>()
+            {
+                // FRONT
+                new ParallelizationAxleToolType
+                {
+                    Name = "ParallelizationAxleTool_FRONT",
+                    AxleType = "FRONT",
+                    InitialDissymetry = 1.1,
+                    FinalDissymetry = 1.2,
+                    CmdDissymetry = 1.22,
+                    CmdDissymetryToleranceMin = 1.3,
+                    CmdDissymetryToleranceMax = 1.4,
+                    TotalToeVerdictOK = true,
+                    InitialTotalToe = 1.5,
+                    FinalTotalToe = 1.6,
+                    CmdTotalToe = 1.62,
+                    CmdTotalToeToleranceMin = 1.7,
+                    CmdTotalToeToleranceMax = 1.8,
+                    ThrustAngleVerdictOK = true,
+                    InitialThrustAngle = 1.9,
+                    FinalThrustAngle = 1.10,
+                    CmdThrustAngle = 1.12,
+                    CmdThrustAngleToleranceMin = 1.2,
+                    CmdThrustAngleToleranceMax = 1.3,
+                    WheelTools = new List<ParallelizationWheelToolType>()
+                    {
+                        new ParallelizationWheelToolType {
+                            Name = "ParallelizationWheelTool_RIGHT",
+                            SideType = "RIGHT",
+                            CamberVerdictOK = true,
+                            InitialCamber = 1.11,
+                            FinalCamber = 1.22,
+                            CmdCamber = 1.23,
+                            CmdCamberToleranceMin = 1.33,
+                            CmdCamberToleranceMax = 1.44,
+                            ToeVerdictOK = true,
+                            InitialToe = 1.55,
+                            FinalToe = 1.66,
+                            CmdToe = 1.67,
+                            CmdToeToleranceMin = 1.77,
+                            CmdToeToleranceMax = 1.88
+                        },
+                        new ParallelizationWheelToolType {
+                            Name = "ParallelizationWheelTool_LEFT",
+                            SideType = "LEFT",
+                            CamberVerdictOK = true,
+                            InitialCamber = 2.11,
+                            FinalCamber = 2.22,
+                            CmdCamber = 2.23,
+                            CmdCamberToleranceMin = 2.33,
+                            CmdCamberToleranceMax = 2.44,
+                            ToeVerdictOK = true,
+                            InitialToe = 2.55,
+                            FinalToe = 2.66,
+                            CmdToe = 2.67,
+                            CmdToeToleranceMin = 2.77,
+                            CmdToeToleranceMax = 2.88
+                        }
+                    }
+                },
+
+                // REAR
+                new ParallelizationAxleToolType
+                {
+                    Name = "ParallelizationAxleTool_REAR",
+                    AxleType = "REAR",
+                    InitialDissymetry = 3.1,
+                    FinalDissymetry = 3.2,
+                    CmdDissymetry = 3.22,
+                    CmdDissymetryToleranceMin = 3.3,
+                    CmdDissymetryToleranceMax = 3.4,
+                    TotalToeVerdictOK = true,
+                    InitialTotalToe = 3.5,
+                    FinalTotalToe = 3.6,
+                    CmdTotalToe = 3.62,
+                    CmdTotalToeToleranceMin = 3.7,
+                    CmdTotalToeToleranceMax = 3.8,
+                    ThrustAngleVerdictOK = true,
+                    InitialThrustAngle = 3.9,
+                    FinalThrustAngle = 3.10,
+                    CmdThrustAngle = 3.12,
+                    CmdThrustAngleToleranceMin = 3.2,
+                    CmdThrustAngleToleranceMax = 3.3,
+                    WheelTools = new List<ParallelizationWheelToolType>()
+                    {
+                        new ParallelizationWheelToolType {
+                            Name = "ParallelizationWheelTool_RIGHT",
+                            SideType = "RIGHT",
+                            CamberVerdictOK = true,
+                            InitialCamber = 3.11,
+                            FinalCamber = 3.22,
+                            CmdCamber = 3.23,
+                            CmdCamberToleranceMin = 3.33,
+                            CmdCamberToleranceMax = 3.44,
+                            ToeVerdictOK = true,
+                            InitialToe = 3.55,
+                            FinalToe = 3.66,
+                            CmdToe = 3.67,
+                            CmdToeToleranceMin = 3.77,
+                            CmdToeToleranceMax = 3.88
+                        },
+                        new ParallelizationWheelToolType {
+                            Name = "ParallelizationWheelTool_LEFT",
+                            SideType = "LEFT",
+                            CamberVerdictOK = true,
+                            InitialCamber = 4.11,
+                            FinalCamber = 4.22,
+                            CmdCamber = 4.23,
+                            CmdCamberToleranceMin = 4.33,
+                            CmdCamberToleranceMax = 4.44,
+                            ToeVerdictOK = true,
+                            InitialToe = 4.55,
+                            FinalToe = 4.66,
+                            CmdToe = 4.67,
+                            CmdToeToleranceMin = 4.77,
+                            CmdToeToleranceMax = 4.88
+                        }
+                    }
+                }
+            }
+                },
+                LightingSettingProcessType = new LightingSettingProcessType
+                {
+                    VerdictOK = true,
+                    LightingTools = new List<LightingSettingToolType>
+    {
+        // LEFT - LowBeam Elevation
+        new LightingSettingToolType
+        {
+            SideType = "LEFT",
+            BeamType = "LowBeam",
+            LightingToolType = "Elevation",
+            VerdictOK = true,
+            InitialMeasure = 2.1,
+            FinalMeasure = 2.2,
+            CmdTarget = 2.3,
+            CmdToleranceMin = 2.4,
+            CmdToleranceMax = 2.5
+        },
+
+        // LEFT - LowBeam Azimuth
+        new LightingSettingToolType
+        {
+            SideType = "LEFT",
+            BeamType = "LowBeam",
+            LightingToolType = "Azimuth",
+            VerdictOK = true,
+            InitialMeasure = 2.6,
+            FinalMeasure = 2.7,
+            CmdTarget = 2.8,
+            CmdToleranceMin = 2.9,
+            CmdToleranceMax = 3.0
+        },
+
+        // RIGHT - LowBeam Elevation
+        new LightingSettingToolType
+        {
+            SideType = "RIGHT",
+            BeamType = "LowBeam",
+            LightingToolType = "Elevation",
+            VerdictOK = true,
+            InitialMeasure = 3.1,
+            FinalMeasure = 3.2,
+            CmdTarget = 3.3,
+            CmdToleranceMin = 3.4,
+            CmdToleranceMax = 3.5
+        },
+
+        // RIGHT - LowBeam Azimuth
+        new LightingSettingToolType
+        {
+            SideType = "RIGHT",
+            BeamType = "LowBeam",
+            LightingToolType = "Azimuth",
+            VerdictOK = true,
+            InitialMeasure = 3.6,
+            FinalMeasure = 3.7,
+            CmdTarget = 3.8,
+            CmdToleranceMin = 3.9,
+            CmdToleranceMax = 4.0
+        }
+    }
+                },
+                PEVProcessType = new PEVProcessType { VerdictOK = true }
+            };
+            return setting;
+
+
+        }
         private void button2_Click_1(object sender, EventArgs e)
         {
-            
+            StationSetting setting =          MakeXMLStruct();
+
+            string basePath = _GV.Config.Program.RESULT_PATH;
+            string strPath = Path.Combine(
+                basePath,
+                DateTime.Now.Year.ToString("D4"),
+                DateTime.Now.Month.ToString("D2"),
+                DateTime.Now.Day.ToString("D2")
+            );
+
+            if (!Directory.Exists(strPath))
+                Directory.CreateDirectory(strPath);
+
+            string filePath = Path.Combine(strPath, _GV.m_Cur_Info.CarPJINo + ".xml");
+
+            XMLWriter.WriteXML(setting, filePath);
         }
         private void StartCycleUI()
         {
@@ -493,14 +742,14 @@ namespace Ki_WAT
             {
                 ListViewItem selectedItem = seqList.SelectedItems[0];
                 string acceptNo = selectedItem.Text; // 첫 번째 컬럼 (AcceptNo)
-                m_frmParent.m_dbJob.DeleteCarInfo(acceptNo);
+                _GV._dbJob.DeleteCarInfo(acceptNo);
                 RefreshCarInfoList();
             }
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            m_frmParent.m_dbJob.DeleteCarInfo(_GV.m_Cur_Info.AcceptNo);
+            _GV._dbJob.DeleteCarInfo(_GV.m_Cur_Info.AcceptNo);
             RefreshCarInfoList();
         }
     }

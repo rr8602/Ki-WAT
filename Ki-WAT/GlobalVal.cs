@@ -31,6 +31,22 @@ namespace Ki_WAT
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct LampInclination
     {
+        // Equipment 정보
+        public string Equipment_Name;
+        public string Equipment_Manufacturer;
+        public string Equipment_Model;
+        public string Equipment_Serial_number;
+        public string Equipment_Last_calib_date;
+
+        // Vehicle 정보
+        public string Vehicle_UID;
+        public string Vehicle_Number_plate;
+        public string Vehicle_VIN;
+        public string Vehicle_Overall_result;
+        public string Vehicle_Test_start;
+        public string Vehicle_Test_end;
+
+        
         public double High_InclinationXInit_Left;
         public double High_InclinationYInit_Left;
         public double High_InclinationXInit_Right;
@@ -41,29 +57,71 @@ namespace Ki_WAT
         public double High_InclinationXFinal_Right;
         public double High_InclinationYFinal_Right;
 
-
-        public double Low_InclinationXInit_Left;
-        public double Low_InclinationYInit_Left;
-        public double Low_InclinationXInit_Right;
-        public double Low_InclinationYInit_Right;
-                      
-        public double Low_InclinationXFinal_Left;
-        public double Low_InclinationYFinal_Left;
-        public double Low_InclinationXFinal_Right;
-        public double Low_InclinationYFinal_Right;
-
         public double Fog_InclinationXInit_Left;
         public double Fog_InclinationYInit_Left;
         public double Fog_InclinationXInit_Right;
         public double Fog_InclinationYInit_Right;
-                      
+
         public double Fog_InclinationXFinal_Left;
         public double Fog_InclinationYFinal_Left;
         public double Fog_InclinationXFinal_Right;
         public double Fog_InclinationYFinal_Right;
 
 
+        public double Low_InclinationXInit_Left;
+        public double Low_InclinationYInit_Left;
+        public double Low_InclinationXInit_Right;
+        public double Low_InclinationYInit_Right;
 
+        public double Low_InclinationXFinal_Left;
+        public double Low_InclinationYFinal_Left;
+        public string Low_Left_Result;
+        public double Low_InclinationXFinal_Right;
+        public double Low_InclinationYFinal_Right;
+        public string Low_Right_Result;
+
+        // 초기화 메서드 추가
+        public void Clear()
+        {
+            Equipment_Name = "";
+            Equipment_Manufacturer = "";
+            Equipment_Model = "";
+            Equipment_Serial_number = "";
+            Equipment_Last_calib_date = "";
+            Vehicle_UID = "";
+            Vehicle_Number_plate = "";
+            Vehicle_VIN = "";
+            Vehicle_Overall_result = "";
+            Vehicle_Test_start = "";
+            Vehicle_Test_end = "";
+            
+            High_InclinationXInit_Left = 0;
+            High_InclinationYInit_Left = 0;
+            High_InclinationXInit_Right = 0;
+            High_InclinationYInit_Right = 0;
+            High_InclinationXFinal_Left = 0;
+            High_InclinationYFinal_Left = 0;
+            High_InclinationXFinal_Right = 0;
+            High_InclinationYFinal_Right = 0;
+            Fog_InclinationXInit_Left = 0;
+            Fog_InclinationYInit_Left = 0;
+            Fog_InclinationXInit_Right = 0;
+            Fog_InclinationYInit_Right = 0;
+            Fog_InclinationXFinal_Left = 0;
+            Fog_InclinationYFinal_Left = 0;
+            Fog_InclinationXFinal_Right = 0;
+            Fog_InclinationYFinal_Right = 0;
+            Low_InclinationXInit_Left = 0;
+            Low_InclinationYInit_Left = 0;
+            Low_InclinationXInit_Right = 0;
+            Low_InclinationYInit_Right = 0;
+            Low_InclinationXFinal_Left = 0;
+            Low_InclinationYFinal_Left = 0;
+            Low_Left_Result = "";
+            Low_InclinationXFinal_Right = 0;
+            Low_InclinationYFinal_Right = 0;
+            Low_Right_Result = "";
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -209,7 +267,29 @@ namespace Ki_WAT
         public double dHandle = 0.0f;
         //public bool g_Substitu_PEV = false;
         public bool m_bNextStep = false;
+        public bool m_bHLTFinish = false;
 
-        public bool m_bHLTFinish = false;   
+        public Logger Log_LET = new Logger();
+        public GPLog Log_PGM = new GPLog();
+
+        private LangController langController = new LangController();
+        private JsonController json = new JsonController();
+        private LangData _currLang = new LangData();
+        public DB_LocalWat _dbJob;
+
+        public void SaveLangFile()
+        {
+            json.SaveLangFile("lang.json", langController);
+            langController = json.LoadLangFile("lang.json");
+        }
+        public LangData GetCurrLang() { return _currLang; }
+        public LangData GetLang(String strLang)
+        {
+            if (strLang == "English") return langController.English;
+            else if (strLang == "Portuguese") return langController.Portuguese;
+            else if (strLang == "Other") return langController.Other;
+            else return langController.desc;
+        }
+
     }
 }

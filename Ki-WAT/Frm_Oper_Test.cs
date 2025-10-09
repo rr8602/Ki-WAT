@@ -67,7 +67,18 @@ namespace Ki_WAT
         {
             m_Mainfrm = pMain;
             m_Mainfrm.OnDppDataReceived += OnReceiveDpp;
+            TestThread_HLT.OnStatusUpdate += OnStatusUpdate;
         }
+        public void OnStatusUpdate(string strStatus)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => OnStatusUpdate(strStatus)));
+                return;
+            }
+            lbl_hlt_message.Text = strStatus;
+        }
+
         public void OnReceiveDpp(MeasureData pData)
         {
             if (this.InvokeRequired)

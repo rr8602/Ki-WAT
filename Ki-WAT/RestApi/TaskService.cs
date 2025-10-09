@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ki_WAT;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace LETInterface
         private readonly int _port;
         private readonly HttpClient _client;
 
+        GlobalVal _GV = GlobalVal.Instance;
+
         public TaskService(string server, int port)
         {
             _server = server;
@@ -27,12 +30,12 @@ namespace LETInterface
         public HttpResponseMessage TaskAddNew()
         {
             var request = new HttpRequestMessage(HttpMethod.Post, Url("/tasks"));
-            string reqLog = Logger.HttpMessageToLogString(request);
-            Logger.WriteLog(reqLog, true); // 로그 기록
+            string reqLog = _GV.Log_LET.HttpMessageToLogString(request);
+            _GV.Log_LET.WriteLog(reqLog, true); // 로그 기록
 
             var response = _client.SendAsync(request).Result;
-            string respLog = Logger.HttpMessageToLogString(response);
-            Logger.WriteLog(respLog, true); // 응답 로그
+            string respLog = _GV.Log_LET.HttpMessageToLogString(response);
+            _GV.Log_LET.WriteLog(respLog, true); // 응답 로그
 
             return response;
         }
@@ -44,24 +47,24 @@ namespace LETInterface
             var request = new HttpRequestMessage(HttpMethod.Put, Url(path));
             request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            string reqLog = Logger.HttpMessageToLogString(request);
-            Logger.WriteLog(reqLog, true);
+            string reqLog = _GV.Log_LET.HttpMessageToLogString(request);
+            _GV.Log_LET.WriteLog(reqLog, true);
 
             var response = _client.SendAsync(request).Result;
-            string respLog = Logger.HttpMessageToLogString(response);
-            Logger.WriteLog(respLog, true);
+            string respLog = _GV.Log_LET.HttpMessageToLogString(response);
+            _GV.Log_LET.WriteLog(respLog, true);
 
             return response;
         }
         public HttpResponseMessage TaskGet(string path)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, Url(path));
-            string reqLog = Logger.HttpMessageToLogString(request);
-            Logger.WriteLog(reqLog, true);
+            string reqLog = _GV.Log_LET.HttpMessageToLogString(request);
+            _GV.Log_LET.WriteLog(reqLog, true);
 
             var response = _client.SendAsync(request).Result;
-            string respLog = Logger.HttpMessageToLogString(response);
-            Logger.WriteLog(respLog, true);
+            string respLog = _GV.Log_LET.HttpMessageToLogString(response);
+            _GV.Log_LET.WriteLog(respLog, true);
 
             return response;
         }
@@ -69,12 +72,12 @@ namespace LETInterface
         public HttpResponseMessage TaskDeleteAll()
         {
             var request = new HttpRequestMessage(HttpMethod.Delete, Url("/tasks"));
-            string reqLog = Logger.HttpMessageToLogString(request);
-            Logger.WriteLog(reqLog, true);
+            string reqLog = _GV.Log_LET.HttpMessageToLogString(request);
+            _GV.Log_LET.WriteLog(reqLog, true);
 
             var response = _client.SendAsync(request).Result;
-            string respLog = Logger.HttpMessageToLogString(response);
-            Logger.WriteLog(respLog, true);
+            string respLog = _GV.Log_LET.HttpMessageToLogString(response);
+            _GV.Log_LET.WriteLog(respLog, true);
 
             return response;
         }

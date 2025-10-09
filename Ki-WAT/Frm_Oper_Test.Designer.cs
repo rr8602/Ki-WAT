@@ -41,6 +41,7 @@
             this.GRP_FL_CAM = new RollTester.CGuage();
             this.GRP_FR_TOE = new RollTester.CGuage();
             this.lbl_SWB = new System.Windows.Forms.Label();
+            this.lbl_hlt_message = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -247,12 +248,25 @@
             this.lbl_SWB.Text = "0.0";
             this.lbl_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lbl_hlt_message
+            // 
+            this.lbl_hlt_message.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.lbl_hlt_message.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_hlt_message.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_hlt_message.Location = new System.Drawing.Point(12, 62);
+            this.lbl_hlt_message.Name = "lbl_hlt_message";
+            this.lbl_hlt_message.Size = new System.Drawing.Size(866, 53);
+            this.lbl_hlt_message.TabIndex = 164;
+            this.lbl_hlt_message.Text = "-";
+            this.lbl_hlt_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_Oper_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1900, 900);
+            this.Controls.Add(this.lbl_hlt_message);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.GRP_RR_CAM);
@@ -292,5 +306,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lbl_SWB;
+        private System.Windows.Forms.Label lbl_hlt_message;
     }
 }

@@ -43,6 +43,9 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=9.0.0.6, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.9.0.6\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NModbus, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NModbus.3.0.81\lib\net46\NModbus.dll</HintPath>
     </Reference>
@@ -125,6 +128,9 @@
     <Compile Include="Frm_VEP.Designer.cs">
       <DependentUpon>Frm_VEP.cs</DependentUpon>
     </Compile>
+    <Compile Include="JsonController.cs" />
+    <Compile Include="LangController.cs" />
+    <Compile Include="LangData.cs" />
     <Compile Include="VEP\IVEPBenchZone.cs" />
     <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
@@ -224,7 +230,6 @@
     </Compile>
     <Compile Include="RestApi\TaskService.cs" />
     <Compile Include="stringdef.cs" />
-    <Compile Include="TestThread.cs" />
     <Compile Include="TestThread_HLT.cs" />
     <Compile Include="TestThread_Kint.cs" />
     <Compile Include="VEP\VEPBenchAddTransmissionZone.cs" />
@@ -235,6 +240,7 @@
     <Compile Include="VEP\VEPBenchStatusZone.cs" />
     <Compile Include="VEP\VEPBenchSynchroZone.cs" />
     <Compile Include="VEP\VEPBenchTransmissionZone.cs" />
+    <Compile Include="XMLWriter.cs" />
     <EmbeddedResource Include="FrmSimulator.resx">
       <DependentUpon>FrmSimulator.cs</DependentUpon>
     </EmbeddedResource>

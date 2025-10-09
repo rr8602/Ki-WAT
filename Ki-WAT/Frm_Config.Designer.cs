@@ -64,7 +64,6 @@
             this.editLETPort = new System.Windows.Forms.TextBox();
             this.editLetURL = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.Btn_ResPath = new KI_Controls.CButton();
             this.lblResultPath = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.comLang = new System.Windows.Forms.ComboBox();
@@ -165,7 +164,18 @@
             this.modelList = new System.Windows.Forms.ListView();
             this.Txt_Model = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.editOther = new System.Windows.Forms.TextBox();
+            this.editEnglish = new System.Windows.Forms.TextBox();
+            this.editPortuguese = new System.Windows.Forms.TextBox();
+            this.editDesc = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_ResPath = new KI_Controls.CButton();
             this.cButton1 = new KI_Controls.CButton();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -182,6 +192,7 @@
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.gbxMList.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -546,28 +557,6 @@
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Program Setting";
-            // 
-            // Btn_ResPath
-            // 
-            this.Btn_ResPath.BackColor = System.Drawing.Color.LightGray;
-            this.Btn_ResPath.bNormalButton = false;
-            this.Btn_ResPath.BorderColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.BorderSize = ((uint)(1u));
-            this.Btn_ResPath.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_ResPath.ForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.IsToggled = false;
-            this.Btn_ResPath.Location = new System.Drawing.Point(510, 55);
-            this.Btn_ResPath.Name = "Btn_ResPath";
-            this.Btn_ResPath.NormalBackColor = System.Drawing.Color.LightGray;
-            this.Btn_ResPath.NormalForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.Size = new System.Drawing.Size(59, 36);
-            this.Btn_ResPath.TabIndex = 6;
-            this.Btn_ResPath.Text = "...";
-            this.Btn_ResPath.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
-            this.Btn_ResPath.ToggleForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.UseVisualStyleBackColor = false;
-            this.Btn_ResPath.Click += new System.EventHandler(this.Btn_ResPath_Click);
             // 
             // lblResultPath
             // 
@@ -1807,6 +1796,16 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.label40);
+            this.tabPage2.Controls.Add(this.label41);
+            this.tabPage2.Controls.Add(this.label42);
+            this.tabPage2.Controls.Add(this.label43);
+            this.tabPage2.Controls.Add(this.editOther);
+            this.tabPage2.Controls.Add(this.editEnglish);
+            this.tabPage2.Controls.Add(this.editPortuguese);
+            this.tabPage2.Controls.Add(this.editDesc);
+            this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Location = new System.Drawing.Point(4, 36);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -1814,6 +1813,98 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Language";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(1335, 239);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(39, 16);
+            this.label40.TabIndex = 8;
+            this.label40.Text = "Other";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(1335, 170);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(50, 16);
+            this.label41.TabIndex = 9;
+            this.label41.Text = "English";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(1335, 97);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(73, 16);
+            this.label42.TabIndex = 10;
+            this.label42.Text = "Portuguese";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(1335, 28);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(43, 16);
+            this.label43.TabIndex = 11;
+            this.label43.Text = "DESC";
+            // 
+            // editOther
+            // 
+            this.editOther.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.editOther.Location = new System.Drawing.Point(1335, 260);
+            this.editOther.Name = "editOther";
+            this.editOther.Size = new System.Drawing.Size(302, 35);
+            this.editOther.TabIndex = 13;
+            // 
+            // editEnglish
+            // 
+            this.editEnglish.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.editEnglish.Location = new System.Drawing.Point(1335, 189);
+            this.editEnglish.Name = "editEnglish";
+            this.editEnglish.Size = new System.Drawing.Size(302, 35);
+            this.editEnglish.TabIndex = 12;
+            // 
+            // editPortuguese
+            // 
+            this.editPortuguese.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.editPortuguese.Location = new System.Drawing.Point(1335, 118);
+            this.editPortuguese.Name = "editPortuguese";
+            this.editPortuguese.Size = new System.Drawing.Size(302, 35);
+            this.editPortuguese.TabIndex = 7;
+            // 
+            // editDesc
+            // 
+            this.editDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.editDesc.Location = new System.Drawing.Point(1335, 49);
+            this.editDesc.Name = "editDesc";
+            this.editDesc.ReadOnly = true;
+            this.editDesc.Size = new System.Drawing.Size(302, 35);
+            this.editDesc.TabIndex = 6;
+            // 
+            // listView1
+            // 
+            this.listView1.AutoArrange = false;
+            this.listView1.BackColor = System.Drawing.Color.White;
+            this.listView1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listView1.FullRowSelect = true;
+            this.listView1.GridLines = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listView1.HideSelection = false;
+            this.listView1.LabelEdit = true;
+            this.listView1.Location = new System.Drawing.Point(22, 27);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(1295, 769);
+            this.listView1.TabIndex = 1;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // tabPage4
             // 
@@ -1823,6 +1914,38 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1385, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 51);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Btn_ResPath
+            // 
+            this.Btn_ResPath.BackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.bNormalButton = false;
+            this.Btn_ResPath.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.BorderSize = ((uint)(1u));
+            this.Btn_ResPath.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_ResPath.ForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.IsToggled = false;
+            this.Btn_ResPath.Location = new System.Drawing.Point(510, 55);
+            this.Btn_ResPath.Name = "Btn_ResPath";
+            this.Btn_ResPath.NormalBackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.NormalForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.Size = new System.Drawing.Size(59, 36);
+            this.Btn_ResPath.TabIndex = 6;
+            this.Btn_ResPath.Text = "...";
+            this.Btn_ResPath.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
+            this.Btn_ResPath.ToggleForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.UseVisualStyleBackColor = false;
+            this.Btn_ResPath.Click += new System.EventHandler(this.Btn_ResPath_Click);
             // 
             // cButton1
             // 
@@ -1880,6 +2003,8 @@
             this.panel1.PerformLayout();
             this.gbxMList.ResumeLayout(false);
             this.gbxMList.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2024,5 +2149,15 @@
         private System.Windows.Forms.TextBox Txt_SWB_Baud;
         private System.Windows.Forms.RadioButton rd_swb_type_pc;
         private System.Windows.Forms.RadioButton rd_swb_type_board;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox editOther;
+        private System.Windows.Forms.TextBox editEnglish;
+        private System.Windows.Forms.TextBox editPortuguese;
+        private System.Windows.Forms.TextBox editDesc;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button button1;
     }
 }

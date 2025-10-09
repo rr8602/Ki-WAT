@@ -16,7 +16,7 @@ public class TestThread_Kint
     Frm_Mainfrm m_MainFrm = null;
     private Thread testThread = null;
     GlobalVal _GV;
-    public GPLog testLog = new GPLog();
+    
 
     private int m_nState = 0;
     
@@ -39,6 +39,10 @@ public class TestThread_Kint
     private Task _swaSendTask;
     private CancellationTokenSource _swaCancellationTokenSource;
 
+    private Task _swaCheckTask;
+    private CancellationTokenSource _swaCheckCancellationTokenSource;
+
+
     private Random _rand = new Random();  // 클래스 멤버로 선언 (중복 난수 방지)
     
     TblResult _result = new TblResult();
@@ -55,13 +59,16 @@ public class TestThread_Kint
     public static event Action<string> OnStatusUpdate;
     public static event Action<string> OnErrorOccurred;
     public static event Action OnCycleFinished;
+    public static event Action OnCycleStart;
+
 
     public TestThread_Kint(GlobalVal gv)
     {
         _GV = gv;
         testThread_HLT = new TestThread_HLT(gv);
-        testLog.SetName("Test Thread");
         
+        
+
     }
     public void SetMainFrame(Frm_Mainfrm frm)
     {
@@ -69,6 +76,8 @@ public class TestThread_Kint
         SubscribeToDppDataReceived();
         //m_MainFrm.OnDppDataReceived += OnReceiveDpp;
     }
+
+    
 
     //public void OnReceiveDpp(MeasureData pData)
     //{
@@ -107,7 +116,8 @@ public class TestThread_Kint
 
     private void WLog(String strLog)
     {
-        testLog.WriteLog(strLog);
+        _GV.Log_PGM.WriteFile(strLog);
+        //testLog.WriteLog(strLog);
         GWA.STM(strLog);
     }
     public int StartThread()
@@ -122,6 +132,8 @@ public class TestThread_Kint
             _GV.m_bTestRun = false;
             m_nState = Constants.STEP_WAIT;
             testThread = new Thread(TestWAB);
+
+            
             testThread.IsBackground = true;
             testThread.Start(this);
             return 1;
@@ -176,6 +188,7 @@ public class TestThread_Kint
     {
         try
         {
+            WLog(Message);
             OnStatusUpdate?.Invoke(Message);
         }
         catch (Exception ex)
@@ -431,11 +444,16 @@ public class TestThread_Kint
                 Thread.Sleep(10);
                 if ( _GV.m_bTestRun ) break;
             }
+
+            _GV.Log_PGM.SetName(_GV.m_Cur_Info.CarPJINo);
+            _GV.Log_LET.SetFileName(_GV.m_Cur_Info.CarPJINo);
             _result.Clear();
             measureData.Clear();
             DppManager.SendToDpp(DppManager.MSG_DPP_WHEELBASE, Int32.Parse(_GV.m_Cur_Model.WhelBase));
             Thread.Sleep(300);
             DppManager.SendToDpp(DppManager.MSG_DPP_VEHICLE_TYPE, Int32.Parse(_GV.m_Cur_Model.Dpp_Code));
+
+            _GV.Log_PGM.WriteFile("Start Test : " + _GV.m_Cur_Info.CarPJINo);
             SetState(Constants.STEP_PEV_START);
         }
         catch (Exception ex)
@@ -482,7 +500,7 @@ public class TestThread_Kint
                 if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
                 Thread.Sleep(10);
             }
-            SetState(Constants.STEP_MOVE_WHEELBASE);
+            SetState(Constants.STEP_PEV_MDA_OK);
         }
         catch (Exception ex)
         {
@@ -501,6 +519,8 @@ public class TestThread_Kint
                 Thread.Sleep(10);
                 if (_GV._VEP_Data.SynchroZone.GetSyncroValue(0) == 1 ) break;
             }
+            _GV._VEP_Client.SetSync30NewVehicle();
+            testThread_HLT.StartThread();
             SetState(Constants.STEP_MOVE_WHEELBASE);
         }
         catch (Exception ex)
@@ -584,12 +604,11 @@ public class TestThread_Kint
                 {
                     break;
                 }
+
                 Thread.Sleep(10);
             }
-
             _GV._PLCVal.DO._Wheelbase_Start = false;
-            testThread_HLT.StartThread();
-
+            OnCycleStart?.Invoke();
             Thread.Sleep(100);
             SetState(Constants.STEP_RUNOUT_POS_0);
 
@@ -849,6 +868,7 @@ public class TestThread_Kint
             }
             // Measuring start 눌렀을때 여기서 실행
 
+            StartSWAChecking();
             DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
 
         }
@@ -867,11 +887,25 @@ public class TestThread_Kint
         _swaSendTask?.Wait(3000);
     }
 
+    private void StopSWAChecking()
+    {
+
+        _swaCheckCancellationTokenSource?.Cancel();
+        _swaCheckTask?.Wait(3000);
+    }
+
+
     private void StartSWASending()
     {
         _swaCancellationTokenSource = new CancellationTokenSource();
         _swaSendTask = Task.Run(() => SendSWALoop(_swaCancellationTokenSource.Token));
     }
+    private void StartSWAChecking()
+    {
+        _swaCheckCancellationTokenSource = new CancellationTokenSource();
+        _swaCheckTask = Task.Run(() => SendSWACheck(_swaCheckCancellationTokenSource.Token));
+    }
+
 
 
     public ushort GetABFromOffset(ushort offset, int nA, int nB, int nC, double dX)
@@ -945,9 +979,8 @@ public class TestThread_Kint
                     ushort usData = (ushort)(nA * _GV.dHandle + nB);
                     _GV._VEP_Client.SetSync07SWBAngle(usData);
                 }
-
                 // 전송 간격 (예: 100ms)
-                await Task.Delay(100, cancellationToken);
+                await Task.Delay(1000, cancellationToken);
 
                 if (_GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 1 ||
                      _GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 2)
@@ -966,17 +999,47 @@ public class TestThread_Kint
             WLog($"SWA 전송 중 오류: {ex.Message}");
         }
     }
+
+    private async Task SendSWACheck(CancellationToken cancellationToken)
+    {
+        try
+        {
+            while (m_bSendSWA && !cancellationToken.IsCancellationRequested)
+            {
+
+                if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 3)
+                {
+                    StopSWAChecking();
+                }
+               if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 1)
+                {
+                    SendFinalSWB();
+                    StopSWAChecking();
+                }
+
+                // 전송 간격 (예: 100ms)
+                await Task.Delay(300, cancellationToken);
+
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // 정상적인 취소
+        }
+        catch (Exception ex)
+        {
+            WLog($"SWA 전송 중 오류: {ex.Message}");
+        }
+    }
+
     private int Do_WaitRunOutTime()
     {
         int nRet = 0;
         try
         {
-
             UI_Update_Status("Running out.");
-
             DateTime startTime = DateTime.Now;
             const double TIMEOUT_SECONDS = 12;
-
             while (true)
             {
                 if (CheckLoopExit()) break;
@@ -984,7 +1047,6 @@ public class TestThread_Kint
 
                 Thread.Sleep(10);
             }
-
             // RUNOUT 이 끝나고 
             _GV._PLCVal.DO._Motor_Run = false;
             _GV._PLCVal.DO._Motor_Stop = true;
@@ -1208,9 +1270,9 @@ public class TestThread_Kint
     private void SendFinalSWB()
     {
         
-        ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(20);
+        //ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(20);
 
-        if (isSWB == 3)
+        //if (isSWB == 3)
         {
             int nA = 100;
             int nB = 0;
@@ -1242,7 +1304,7 @@ public class TestThread_Kint
             StopSWASending(); // Task 중단
             SendThrustangle();
             Thread.Sleep(100);
-            SendFinalSWB();
+            //SendFinalSWB();
             SetState(Constants.STEP_DISPLAY_RESULT);
         }
         catch (Exception ex)
@@ -1297,6 +1359,9 @@ public class TestThread_Kint
                 }
                 Thread.Sleep(10);
             }
+
+            /// 임시;
+            _GV._PLCVal.DI._HLA_Home_position = true;
             SetState(Constants.STEP_CHECK_SWB_HOME);
         }
         catch (Exception ex)
@@ -1457,11 +1522,8 @@ public class TestThread_Kint
 
         bResult = GetResultOKNG(_result.Car_Hand, _GV.m_Cur_Model.HandleST, _GV.m_Cur_Model.HandleLT);
         if (!bResult) return bResult;
-
-
         return bResult;
     }
-
     private bool GetResultOKNG(string stractual, string strstandard, string strtolerance)
     {
 
@@ -1503,7 +1565,7 @@ public class TestThread_Kint
         else           _result.WAT___PK = "NG";
 
         Debug.Print("");
-        m_MainFrm.m_dbJob.InsertResult(_result);
+        _GV._dbJob.InsertResult(_result);
     }
     
     private int Do_SaveData()

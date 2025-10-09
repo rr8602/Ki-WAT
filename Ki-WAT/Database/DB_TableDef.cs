@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,43 @@ namespace Ki_WAT
             TotalBar = "";
             Spare__2 = "";
             Spare__3 = "";
+        }
+    }
+
+    public struct TblCarLamp
+    {
+        public string AcceptNo;        // 접수 번호
+        public string Model_NM;        // 모델명
+        public string CarPjiNo;        // PJI 번호
+        public string HTstTime;        // 시험 날짜 및 시간
+        public string HEndTime;        // 시험 날짜 및 시간
+
+        public double LeftXVal;        // X
+        public double LeftYVal;        // 좌우 99.9
+        public string Left_Res;        // 위치 판정 OK/NG
+
+        public double RightXVal;        // X
+        public double RightYVal;        // 좌우 99.9
+        public string Right_Res;        // 위치 판정 OK/NG
+
+        public string LampKind;        // H or L or F
+        public string HLT___PK;        // 전체 판정 OK/NG
+        
+        public void Clear()
+        {
+            AcceptNo = "";
+            Model_NM = "";
+            CarPjiNo = "";
+            HTstTime = "";
+            HEndTime = "";
+            LeftXVal = 0.0;
+            LeftYVal = 0.0;
+            Left_Res = "";
+            RightXVal = 0.0;
+            RightYVal = 0.0;
+            Right_Res = "";
+            LampKind = "";
+            HLT___PK = "";
         }
     }
 
