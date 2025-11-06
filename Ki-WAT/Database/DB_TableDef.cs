@@ -41,12 +41,33 @@ namespace Ki_WAT
         public string HTstTime;        // 시험 날짜 및 시간
         public string HEndTime;        // 시험 날짜 및 시간
 
+
+        public double Target_X_Left;
+        public double Target_Y_Left;
+        public double Target_X_Right;
+        public double Target_Y_Right;
+
+        public double Tolerance_Up_Left;
+        public double Tolerance_Down_Left;
+        public double Tolerance_Left_Left;
+        public double Tolerance_Right_Left;
+
+        public double Tolerance_Up_Right;
+        public double Tolerance_Down_Right;
+        public double Tolerance_Left_Right;
+        public double Tolerance_Right_Right;
+
+
         public double LeftXVal;        // X
         public double LeftYVal;        // 좌우 99.9
+        public double LeftXVal_F;        // X
+        public double LeftYVal_F;        // 좌우 99.9
         public string Left_Res;        // 위치 판정 OK/NG
 
         public double RightXVal;        // X
         public double RightYVal;        // 좌우 99.9
+        public double RightXVal_F;        // X
+        public double RightYVal_F;        // 좌우 99.9
         public string Right_Res;        // 위치 판정 OK/NG
 
         public string LampKind;        // H or L or F
@@ -75,6 +96,7 @@ namespace Ki_WAT
         public string AcceptNo;
         public string PJI_Num;
         public string Model_NM;
+        public string CycleTime;
         public string WTstTime;
         public string CarFLToe;
         public string CarFRToe;
@@ -91,6 +113,23 @@ namespace Ki_WAT
         public string Car_Hand;
         public string CarDogRu;
         public string Car_Symm;
+
+        public string CarFLToe_F;
+        public string CarFRToe_F;
+        public string CarFTToe_F;
+        public string CarRLToe_F;
+        public string CarRRToe_F;
+        public string CarRTToe_F;
+        public string CarFLCam_F;
+        public string CarFRCam_F;
+        public string CarFCros_F;
+        public string CarRLCam_F;
+        public string CarRRCam_F;
+        public string CarRCros_F;
+        public string Car_Hand_F;
+        public string CarDogRu_F;
+        public string Car_Symm_F;
+
         public string WAT___PK;
         public void Clear()
         {
@@ -123,8 +162,10 @@ namespace Ki_WAT
         public string Model_NM ;
         public string Bar_Code ;
         public string WhelBase ;
+        public string WB___Div ;
         public string Dpp_Code ;
         public string SWARatio;
+        public string SWAOffset;
         public string ScrewDriver;
         public string Display_Unit;
         public string Spare_1;

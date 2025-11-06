@@ -225,11 +225,29 @@ namespace LETInterface
                     string xInitStr = lamp["Inclination_X_initial"]?.InnerText;
                     string yInitStr = lamp["Inclination_Y_initial"]?.InnerText;
 
+                    string strTarget_X = lamp["Target_X"]?.InnerText;
+                    string strTarget_Y = lamp["Target_Y"]?.InnerText;
+
+                    string strTolerance_Up = lamp["Tolerance_Up"]?.InnerText;
+                    string strTolerance_Down = lamp["Tolerance_Down"]?.InnerText;
+                    string strTolerance_Left = lamp["Tolerance_Left"]?.InnerText;
+                    string strTolerance_Right = lamp["Tolerance_Right"]?.InnerText;
+
                     double? xFinal = double.TryParse(xFinalStr, out var x) ? x : (double?)null;
                     double? yFinal = double.TryParse(yFinalStr, out var y) ? y : (double?)null;
 
                     double? xInit = double.TryParse(xInitStr, out var x1) ? x1 : (double?)null;
                     double? yInit = double.TryParse(yInitStr, out var y1) ? y1 : (double?)null;
+
+
+                    double? xTarget = double.TryParse(strTarget_X, out var target_x) ? target_x : (double?)null;
+                    double? yTarget = double.TryParse(strTarget_Y, out var target_y) ? target_y : (double?)null;
+
+                    double? Tolerance_Up = double.TryParse(strTarget_X, out var pTolerance_Up) ? pTolerance_Up : (double?)null;
+                    double? Tolerance_Down = double.TryParse(strTarget_Y, out var pTolerance_Down) ? pTolerance_Down : (double?)null;
+                    double? Tolerance_Left = double.TryParse(strTarget_X, out var pTolerance_Left) ? pTolerance_Left : (double?)null;
+                    double? Tolerance_Right = double.TryParse(strTarget_Y, out var pTolerance_Right) ? pTolerance_Right : (double?)null;
+
 
                     string Lamp_Result = lamp["Lamp_result"]?.InnerText;
                     
@@ -242,6 +260,15 @@ namespace LETInterface
                             result.Low_InclinationXInit_Left = xInit ?? 0.0;
                             result.Low_InclinationYInit_Left = yInit ?? 0.0;
                             result.Low_Left_Result = Lamp_Result ?? "";
+
+                            result.Low_X_Terget_Left = xTarget ?? 0.0;
+                            result.Low_Y_Terget_Left = yTarget ?? 0.0;
+
+                            result.Low_Tolerance_Up_Left = Tolerance_Up ?? 0.0;
+                            result.Low_Tolerance_Down_Left = Tolerance_Down ?? 0.0;
+                            result.Low_Tolerance_Left_Left = Tolerance_Left ?? 0.0;
+                            result.Low_Tolerance_Right_Left = Tolerance_Right ?? 0.0;
+
                         }
                         else if (side == "Right")
                         {
@@ -250,44 +277,53 @@ namespace LETInterface
                             result.Low_InclinationXInit_Right = xInit ?? 0.0;
                             result.Low_InclinationYInit_Right = yInit ?? 0.0;
                             result.Low_Right_Result = Lamp_Result ?? "";
+
+                            result.Low_X_Terget_Right = xTarget ?? 0.0;
+                            result.Low_Y_Terget_Right = yTarget ?? 0.0;
+
+                            result.Low_Tolerance_Up_Right = Tolerance_Up ?? 0.0;
+                            result.Low_Tolerance_Down_Right = Tolerance_Down ?? 0.0;
+                            result.Low_Tolerance_Left_Right = Tolerance_Left ?? 0.0;
+                            result.Low_Tolerance_Right_Right = Tolerance_Right ?? 0.0;
+
                         }
                     }
 
-                    if (Type == "High")
-                    {
-                        if (side == "Left")
-                        {
-                            result.High_InclinationXFinal_Left = xFinal ?? 0.0;
-                            result.High_InclinationYFinal_Left = yFinal ?? 0.0;
-                            result.High_InclinationXInit_Left = xInit ?? 0.0;
-                            result.High_InclinationYInit_Left = yInit ?? 0.0;
-                        }
-                        else if (side == "Right")
-                        {
-                            result.High_InclinationXFinal_Right = xFinal ?? 0.0;
-                            result.High_InclinationYFinal_Right = yFinal ?? 0.0;
-                            result.High_InclinationXInit_Right = xInit ?? 0.0;
-                            result.High_InclinationYInit_Right = yInit ?? 0.0;
-                        }
-                    }
+                    //if (Type == "High")
+                    //{
+                    //    if (side == "Left")
+                    //    {
+                    //        result.High_InclinationXFinal_Left = xFinal ?? 0.0;
+                    //        result.High_InclinationYFinal_Left = yFinal ?? 0.0;
+                    //        result.High_InclinationXInit_Left = xInit ?? 0.0;
+                    //        result.High_InclinationYInit_Left = yInit ?? 0.0;
+                    //    }
+                    //    else if (side == "Right")
+                    //    {
+                    //        result.High_InclinationXFinal_Right = xFinal ?? 0.0;
+                    //        result.High_InclinationYFinal_Right = yFinal ?? 0.0;
+                    //        result.High_InclinationXInit_Right = xInit ?? 0.0;
+                    //        result.High_InclinationYInit_Right = yInit ?? 0.0;
+                    //    }
+                    //}
 
-                    if (Type == "Fog")
-                    {
-                        if (side == "Left")
-                        {
-                            result.Fog_InclinationXFinal_Left = xFinal ?? 0.0;
-                            result.Fog_InclinationYFinal_Left = yFinal ?? 0.0;
-                            result.Fog_InclinationXInit_Left = xInit ?? 0.0;
-                            result.Fog_InclinationYInit_Left = yInit ?? 0.0;
-                        }
-                        else if (side == "Right")
-                        {
-                            result.Fog_InclinationXFinal_Right = xFinal ?? 0.0;
-                            result.Fog_InclinationYFinal_Right = yFinal ?? 0.0;
-                            result.Fog_InclinationXInit_Right = xInit ?? 0.0;
-                            result.Fog_InclinationYInit_Right = yInit ?? 0.0;
-                        }
-                    }
+                    //if (Type == "Fog")
+                    //{
+                    //    if (side == "Left")
+                    //    {
+                    //        result.Fog_InclinationXFinal_Left = xFinal ?? 0.0;
+                    //        result.Fog_InclinationYFinal_Left = yFinal ?? 0.0;
+                    //        result.Fog_InclinationXInit_Left = xInit ?? 0.0;
+                    //        result.Fog_InclinationYInit_Left = yInit ?? 0.0;
+                    //    }
+                    //    else if (side == "Right")
+                    //    {
+                    //        result.Fog_InclinationXFinal_Right = xFinal ?? 0.0;
+                    //        result.Fog_InclinationYFinal_Right = yFinal ?? 0.0;
+                    //        result.Fog_InclinationXInit_Right = xInit ?? 0.0;
+                    //        result.Fog_InclinationYInit_Right = yInit ?? 0.0;
+                    //    }
+                    //}
                 }
             }
             catch (XmlException xe)

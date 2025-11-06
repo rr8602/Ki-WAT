@@ -137,9 +137,7 @@ namespace Ki_WAT
             _vepManager.ReceptionZone.SetSize(_vepManager.DescriptionZone.ReceptionZoneSize);
             _vepManager.TransmissionZone.SetSize(_vepManager.DescriptionZone.TransmissionZoneSize);
             _vepManager.AddTransmissionZone.SetSize(_vepManager.DescriptionZone.AdditionalTZSize);
-
         }
-
         public void PerformInitialRead()
         {
             try
@@ -161,7 +159,6 @@ namespace Ki_WAT
         {
             Connect(_ip, _port);
         }
-
         public void InitializeAndReadDescriptionZone()
         {
             try
@@ -180,7 +177,6 @@ namespace Ki_WAT
                 throw;
             }
         }
-
         public void Connect(string pIP, int pPort)
         {
             try
@@ -245,7 +241,7 @@ namespace Ki_WAT
             {
                 LogMessage($"연결 오류: {ex.Message}");
                 _isConnected = false;
-                throw;
+               // throw;
             }
         }
 
@@ -436,7 +432,7 @@ namespace Ki_WAT
         private ushort[] ReadAllRegisters(int address, int count)
         {
             CheckConnection();
-
+            if (!IsConnected) return null;
             try
             {
                 ushort[] registers = _modbusMaster.ReadHoldingRegisters(1, (ushort)address, (ushort)count);
@@ -478,6 +474,7 @@ namespace Ki_WAT
         public VEPBenchDescriptionZone ReadDescriptionZone()
         {
             CheckConnection();
+            if (!IsConnected) return null;
 
             try
             {

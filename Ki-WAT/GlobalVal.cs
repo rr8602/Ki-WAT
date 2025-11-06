@@ -47,80 +47,38 @@ namespace Ki_WAT
         public string Vehicle_Test_end;
 
         
-        public double High_InclinationXInit_Left;
-        public double High_InclinationYInit_Left;
-        public double High_InclinationXInit_Right;
-        public double High_InclinationYInit_Right;
-                      
-        public double High_InclinationXFinal_Left;
-        public double High_InclinationYFinal_Left;
-        public double High_InclinationXFinal_Right;
-        public double High_InclinationYFinal_Right;
-
-        public double Fog_InclinationXInit_Left;
-        public double Fog_InclinationYInit_Left;
-        public double Fog_InclinationXInit_Right;
-        public double Fog_InclinationYInit_Right;
-
-        public double Fog_InclinationXFinal_Left;
-        public double Fog_InclinationYFinal_Left;
-        public double Fog_InclinationXFinal_Right;
-        public double Fog_InclinationYFinal_Right;
-
-
         public double Low_InclinationXInit_Left;
         public double Low_InclinationYInit_Left;
-        public double Low_InclinationXInit_Right;
-        public double Low_InclinationYInit_Right;
-
         public double Low_InclinationXFinal_Left;
         public double Low_InclinationYFinal_Left;
-        public string Low_Left_Result;
+
+        public double Low_InclinationXInit_Right;
+        public double Low_InclinationYInit_Right;
         public double Low_InclinationXFinal_Right;
         public double Low_InclinationYFinal_Right;
+
+        public double Low_X_Terget_Left;
+        public double Low_Y_Terget_Left;
+        public double Low_X_Terget_Right;
+        public double Low_Y_Terget_Right;
+
+        public double Low_Tolerance_Up_Left;
+        public double Low_Tolerance_Down_Left;
+        public double Low_Tolerance_Left_Left;
+        public double Low_Tolerance_Right_Left;
+
+        public double Low_Tolerance_Up_Right;
+        public double Low_Tolerance_Down_Right;
+        public double Low_Tolerance_Left_Right;
+        public double Low_Tolerance_Right_Right;
+
+        public string Low_Left_Result;
         public string Low_Right_Result;
 
         // 초기화 메서드 추가
-        public void Clear()
+        public void clear()
         {
-            Equipment_Name = "";
-            Equipment_Manufacturer = "";
-            Equipment_Model = "";
-            Equipment_Serial_number = "";
-            Equipment_Last_calib_date = "";
-            Vehicle_UID = "";
-            Vehicle_Number_plate = "";
-            Vehicle_VIN = "";
-            Vehicle_Overall_result = "";
-            Vehicle_Test_start = "";
-            Vehicle_Test_end = "";
             
-            High_InclinationXInit_Left = 0;
-            High_InclinationYInit_Left = 0;
-            High_InclinationXInit_Right = 0;
-            High_InclinationYInit_Right = 0;
-            High_InclinationXFinal_Left = 0;
-            High_InclinationYFinal_Left = 0;
-            High_InclinationXFinal_Right = 0;
-            High_InclinationYFinal_Right = 0;
-            Fog_InclinationXInit_Left = 0;
-            Fog_InclinationYInit_Left = 0;
-            Fog_InclinationXInit_Right = 0;
-            Fog_InclinationYInit_Right = 0;
-            Fog_InclinationXFinal_Left = 0;
-            Fog_InclinationYFinal_Left = 0;
-            Fog_InclinationXFinal_Right = 0;
-            Fog_InclinationYFinal_Right = 0;
-            Low_InclinationXInit_Left = 0;
-            Low_InclinationYInit_Left = 0;
-            Low_InclinationXInit_Right = 0;
-            Low_InclinationYInit_Right = 0;
-            Low_InclinationXFinal_Left = 0;
-            Low_InclinationYFinal_Left = 0;
-            Low_Left_Result = "";
-            Low_InclinationXFinal_Right = 0;
-            Low_InclinationYFinal_Right = 0;
-            Low_Right_Result = "";
         }
     }
 
@@ -226,7 +184,7 @@ namespace Ki_WAT
             Config = new AppConfig();
             _frmMNG = new FormManager();
             _TestThread = new TestThread_Kint(this);
-            _PLCVal = new PLCVal();
+            //_PLCVal = new PLCVal();
             _VEP_Data = new VEPBenchDataManager(this);
             _VEP_Client = new VEPBenchClient(this, _VEP_Data);
         }
@@ -246,7 +204,10 @@ namespace Ki_WAT
         public FormManager _frmMNG;
         public TestThread_Kint _TestThread;
 
-        public PLCVal _PLCVal;
+        //public PLCVal _PLCVal;
+
+        public PLCReadWAT plcRead = null;
+        public PLCWriteWAT plcWrite = null;
 
         public bool g_Substitu_PEV = false;
         public bool g_Substitu_HLT = false;

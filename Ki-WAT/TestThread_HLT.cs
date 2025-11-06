@@ -305,7 +305,7 @@ namespace Ki_WAT
             try
             {
                 //PLC 에서 LET 가출발 됬을때
-                if (!_GV._PLCVal.DI._HLA_Home_position && m_bStartCycle)
+                if (!_GV.plcRead.IsHLAHomePosition() && m_bStartCycle)
                 {
                     bool bRes = _GV.LET_Controller.PerformTests(m_LetParam.line, m_LetParam.floorpitch);
                     if (bRes == false)
@@ -326,8 +326,8 @@ namespace Ki_WAT
         private void Do_HLT_END_CYCLE()
         {
             try
-            {
-                if (_GV._PLCVal.DI._HLA_Home_position)
+            { 
+                if (_GV.plcRead.IsHLAHomePosition())
                 {
                     bool bRes = _GV.LET_Controller.EndCycle();
                     if ( bRes == false) 
@@ -350,7 +350,7 @@ namespace Ki_WAT
         {
             try
             {
-                if (_GV._PLCVal.DI._HLA_Home_position)
+                if (_GV.plcRead.IsHLAHomePosition())
                 {
                     string strXML = _GV.LET_Controller.GetResult(m_LetParam.uid);
                     SaveXmlToFile(strXML);
@@ -372,7 +372,6 @@ namespace Ki_WAT
 
                 _GV.m_bHLTFinish = true;
                 SetState(Constants.STEP_HLT_6);
-                
             }
             catch (Exception ex)
             {
@@ -380,24 +379,64 @@ namespace Ki_WAT
         }
         private void SaveHLTData(string sXML)
         {
-            LampInclination ResData = _GV.LET_Controller.ParseInclinationFromXml(sXML);
-            TblCarLamp tblCarLamp = new TblCarLamp();
+            try
+            {
+                LampInclination ResData = _GV.LET_Controller.ParseInclinationFromXml(sXML);
 
-            tblCarLamp.AcceptNo = ResData.Vehicle_UID;
-            tblCarLamp.CarPjiNo = ResData.Vehicle_VIN;
-            tblCarLamp.HTstTime = ResData.Vehicle_Test_start;
-            tblCarLamp.HEndTime = ResData.Vehicle_Test_end;
-            tblCarLamp.Model_NM = ResData.Equipment_Model;
-            tblCarLamp.HLT___PK = ResData.Vehicle_Overall_result;
-            tblCarLamp.LampKind = "L";
-            tblCarLamp.LeftXVal = ResData.Low_InclinationXFinal_Left;
-            tblCarLamp.LeftYVal = ResData.Low_InclinationYFinal_Left;
-            tblCarLamp.Left_Res = ResData.Low_Left_Result;
-            tblCarLamp.RightXVal = ResData.Low_InclinationXFinal_Right;
-            tblCarLamp.RightYVal = ResData.Low_InclinationYFinal_Right;
-            tblCarLamp.Right_Res = ResData.Low_Right_Result;
-            
-            _GV._dbJob.InsertCarLamp(tblCarLamp);
+                // 숫자 필드가 비정상(NaN 등)인 경우 0으로 대체
+                double Z(double v) => double.IsNaN(v) ? 0.0 : v;
+
+                TblCarLamp tblCarLamp = new TblCarLamp();
+
+                tblCarLamp.AcceptNo = ResData.Vehicle_UID ?? string.Empty;
+                tblCarLamp.Model_NM = ResData.Equipment_Model ?? string.Empty;
+                tblCarLamp.CarPjiNo = ResData.Vehicle_VIN ?? string.Empty;
+                tblCarLamp.HTstTime = ResData.Vehicle_Test_start ?? string.Empty;
+                tblCarLamp.HEndTime = ResData.Vehicle_Test_end ?? string.Empty;
+                
+                // Left
+                tblCarLamp.LeftXVal_F = Z(ResData.Low_InclinationXInit_Left);
+                tblCarLamp.LeftYVal_F = Z(ResData.Low_InclinationYInit_Left);
+                tblCarLamp.LeftXVal   = Z(ResData.Low_InclinationXFinal_Left);
+                tblCarLamp.LeftYVal   = Z(ResData.Low_InclinationYFinal_Left);
+                tblCarLamp.Left_Res   = ResData.Low_Left_Result ?? string.Empty;
+                tblCarLamp.Target_X_Left = Z(ResData.Low_X_Terget_Left);
+                tblCarLamp.Target_Y_Left = Z(ResData.Low_Y_Terget_Left);
+                tblCarLamp.Tolerance_Up_Left = Z(ResData.Low_Tolerance_Up_Left);
+                tblCarLamp.Tolerance_Down_Left = Z(ResData.Low_Tolerance_Down_Left);
+                tblCarLamp.Tolerance_Left_Left = Z(ResData.Low_Tolerance_Left_Left);
+                tblCarLamp.Tolerance_Right_Left = Z(ResData.Low_Tolerance_Right_Left);
+
+                // Right
+                tblCarLamp.RightXVal_F = Z(ResData.Low_InclinationXInit_Right);
+                tblCarLamp.RightYVal_F = Z(ResData.Low_InclinationYInit_Right);
+                tblCarLamp.RightXVal   = Z(ResData.Low_InclinationXFinal_Right);
+                tblCarLamp.RightYVal   = Z(ResData.Low_InclinationYFinal_Right);
+                tblCarLamp.Right_Res   = ResData.Low_Right_Result ?? string.Empty;
+                tblCarLamp.Target_X_Right = Z(ResData.Low_X_Terget_Right);
+                tblCarLamp.Target_Y_Right = Z(ResData.Low_Y_Terget_Right);
+                tblCarLamp.Tolerance_Up_Right = Z(ResData.Low_Tolerance_Up_Right);
+                tblCarLamp.Tolerance_Down_Right = Z(ResData.Low_Tolerance_Down_Right);
+                tblCarLamp.Tolerance_Left_Right = Z(ResData.Low_Tolerance_Left_Right);
+                tblCarLamp.Tolerance_Right_Right = Z(ResData.Low_Tolerance_Right_Right);
+
+                // Tolerances
+                tblCarLamp.HLT___PK = ResData.Vehicle_Overall_result ?? string.Empty;
+                tblCarLamp.LampKind = "L";
+
+
+                if (_GV._dbJob == null)
+                {
+                    WLog("SaveHLTData Error: _dbJob is null");
+                    return;
+                }
+
+                _GV._dbJob.UpsertCarLamp(tblCarLamp);
+            }
+            catch (Exception ex)
+            {
+                WLog("SaveHLTData Error: " + ex.Message);
+            }
         }
         private void SaveXmlToFile(string sXML)
         {
@@ -427,7 +466,6 @@ namespace Ki_WAT
                 // 예외 처리 필요 시 여기에 추가
             }
         }
-
 
     }
 }

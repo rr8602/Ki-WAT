@@ -85,5 +85,10 @@ namespace Ki_WAT
         {
             _GV.m_bNextStep = true;
         }
+
+        private void Chk_LET_Home_CheckedChanged(object sender, EventArgs e)
+        {
+            //_GV._PLCVal.DI._HLA_Home_position = Chk_LET_Home.Checked;
+        }
     }
 }

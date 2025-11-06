@@ -42,25 +42,19 @@
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnMain = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.lbl_SEN_AUTO = new System.Windows.Forms.Label();
-            this.lbl_SEN_RR = new System.Windows.Forms.Label();
-            this.lbl_SEN_RL = new System.Windows.Forms.Label();
-            this.lbl_SEN_FR = new System.Windows.Forms.Label();
-            this.lbl_SEN_FL = new System.Windows.Forms.Label();
-            this.lbl_State_VEP = new System.Windows.Forms.Label();
-            this.lbl_Status_BAR = new System.Windows.Forms.Label();
-            this.lbl_Status_SWB = new System.Windows.Forms.Label();
-            this.Status_Screw_L = new System.Windows.Forms.Label();
-            this.Status_PLC = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.lbl_SEN_RR = new KI_Controls.RoundLabel();
+            this.lbl_SEN_RL = new KI_Controls.RoundLabel();
+            this.lbl_SEN_FR = new KI_Controls.RoundLabel();
+            this.lbl_SEN_FL = new KI_Controls.RoundLabel();
+            this.lbl_State_VEP = new KI_Controls.RoundLabel();
+            this.lbl_Status_BAR = new KI_Controls.RoundLabel();
+            this.lbl_Status_SWB = new KI_Controls.RoundLabel();
+            this.Status_Screw_L = new KI_Controls.RoundLabel();
+            this.Status_PLC = new KI_Controls.RoundLabel();
             this.panelNavBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // panelNavBar
@@ -90,7 +84,7 @@
             this.Btn_VEP.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Btn_VEP.Font = new System.Drawing.Font("Verdana", 12F);
             this.Btn_VEP.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Btn_VEP.Location = new System.Drawing.Point(1, 756);
+            this.Btn_VEP.Location = new System.Drawing.Point(4, 756);
             this.Btn_VEP.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_VEP.Name = "Btn_VEP";
             this.Btn_VEP.Size = new System.Drawing.Size(83, 60);
@@ -257,7 +251,6 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panel1.Controls.Add(this.lbl_SEN_AUTO);
             this.panel1.Controls.Add(this.lbl_SEN_RR);
             this.panel1.Controls.Add(this.lbl_SEN_RL);
             this.panel1.Controls.Add(this.lbl_SEN_FR);
@@ -267,182 +260,182 @@
             this.panel1.Controls.Add(this.lbl_Status_SWB);
             this.panel1.Controls.Add(this.Status_Screw_L);
             this.panel1.Controls.Add(this.Status_PLC);
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button6);
-            this.panel1.Location = new System.Drawing.Point(94, 955);
+            this.panel1.Location = new System.Drawing.Point(94, 950);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1822, 48);
+            this.panel1.Size = new System.Drawing.Size(1822, 55);
             this.panel1.TabIndex = 8;
-            // 
-            // lbl_SEN_AUTO
-            // 
-            this.lbl_SEN_AUTO.BackColor = System.Drawing.Color.Gray;
-            this.lbl_SEN_AUTO.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SEN_AUTO.Location = new System.Drawing.Point(1718, 7);
-            this.lbl_SEN_AUTO.Name = "lbl_SEN_AUTO";
-            this.lbl_SEN_AUTO.Size = new System.Drawing.Size(80, 32);
-            this.lbl_SEN_AUTO.TabIndex = 561;
-            this.lbl_SEN_AUTO.Text = "AUTO";
-            this.lbl_SEN_AUTO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_SEN_RR
             // 
             this.lbl_SEN_RR.BackColor = System.Drawing.Color.Gray;
-            this.lbl_SEN_RR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SEN_RR.Location = new System.Drawing.Point(1649, 7);
+            this.lbl_SEN_RR.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RR.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RR.BorderRadius = 5;
+            this.lbl_SEN_RR.BorderSize = 0;
+            this.lbl_SEN_RR.FlatAppearance.BorderSize = 0;
+            this.lbl_SEN_RR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_SEN_RR.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_SEN_RR.ForeColor = System.Drawing.Color.White;
+            this.lbl_SEN_RR.Location = new System.Drawing.Point(1647, 6);
             this.lbl_SEN_RR.Name = "lbl_SEN_RR";
-            this.lbl_SEN_RR.Size = new System.Drawing.Size(63, 32);
-            this.lbl_SEN_RR.TabIndex = 560;
+            this.lbl_SEN_RR.Size = new System.Drawing.Size(81, 31);
+            this.lbl_SEN_RR.TabIndex = 578;
             this.lbl_SEN_RR.Text = "RR";
-            this.lbl_SEN_RR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_RR.TextColor = System.Drawing.Color.White;
+            this.lbl_SEN_RR.UseVisualStyleBackColor = false;
             // 
             // lbl_SEN_RL
             // 
             this.lbl_SEN_RL.BackColor = System.Drawing.Color.Gray;
-            this.lbl_SEN_RL.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SEN_RL.Location = new System.Drawing.Point(1580, 7);
+            this.lbl_SEN_RL.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RL.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_RL.BorderRadius = 5;
+            this.lbl_SEN_RL.BorderSize = 0;
+            this.lbl_SEN_RL.FlatAppearance.BorderSize = 0;
+            this.lbl_SEN_RL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_SEN_RL.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_SEN_RL.ForeColor = System.Drawing.Color.White;
+            this.lbl_SEN_RL.Location = new System.Drawing.Point(1541, 6);
             this.lbl_SEN_RL.Name = "lbl_SEN_RL";
-            this.lbl_SEN_RL.Size = new System.Drawing.Size(63, 32);
-            this.lbl_SEN_RL.TabIndex = 559;
+            this.lbl_SEN_RL.Size = new System.Drawing.Size(81, 31);
+            this.lbl_SEN_RL.TabIndex = 577;
             this.lbl_SEN_RL.Text = "RL";
-            this.lbl_SEN_RL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_RL.TextColor = System.Drawing.Color.White;
+            this.lbl_SEN_RL.UseVisualStyleBackColor = false;
             // 
             // lbl_SEN_FR
             // 
             this.lbl_SEN_FR.BackColor = System.Drawing.Color.Gray;
-            this.lbl_SEN_FR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SEN_FR.Location = new System.Drawing.Point(1511, 7);
+            this.lbl_SEN_FR.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FR.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FR.BorderRadius = 5;
+            this.lbl_SEN_FR.BorderSize = 0;
+            this.lbl_SEN_FR.FlatAppearance.BorderSize = 0;
+            this.lbl_SEN_FR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_SEN_FR.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_SEN_FR.ForeColor = System.Drawing.Color.White;
+            this.lbl_SEN_FR.Location = new System.Drawing.Point(1435, 6);
             this.lbl_SEN_FR.Name = "lbl_SEN_FR";
-            this.lbl_SEN_FR.Size = new System.Drawing.Size(63, 32);
-            this.lbl_SEN_FR.TabIndex = 558;
+            this.lbl_SEN_FR.Size = new System.Drawing.Size(81, 31);
+            this.lbl_SEN_FR.TabIndex = 576;
             this.lbl_SEN_FR.Text = "FR";
-            this.lbl_SEN_FR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_FR.TextColor = System.Drawing.Color.White;
+            this.lbl_SEN_FR.UseVisualStyleBackColor = false;
             // 
             // lbl_SEN_FL
             // 
             this.lbl_SEN_FL.BackColor = System.Drawing.Color.Gray;
-            this.lbl_SEN_FL.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_SEN_FL.Location = new System.Drawing.Point(1442, 7);
+            this.lbl_SEN_FL.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FL.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_SEN_FL.BorderRadius = 5;
+            this.lbl_SEN_FL.BorderSize = 0;
+            this.lbl_SEN_FL.FlatAppearance.BorderSize = 0;
+            this.lbl_SEN_FL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_SEN_FL.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_SEN_FL.ForeColor = System.Drawing.Color.White;
+            this.lbl_SEN_FL.Location = new System.Drawing.Point(1329, 6);
             this.lbl_SEN_FL.Name = "lbl_SEN_FL";
-            this.lbl_SEN_FL.Size = new System.Drawing.Size(63, 32);
-            this.lbl_SEN_FL.TabIndex = 557;
+            this.lbl_SEN_FL.Size = new System.Drawing.Size(81, 31);
+            this.lbl_SEN_FL.TabIndex = 575;
             this.lbl_SEN_FL.Text = "FL";
-            this.lbl_SEN_FL.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_SEN_FL.TextColor = System.Drawing.Color.White;
+            this.lbl_SEN_FL.UseVisualStyleBackColor = false;
             // 
             // lbl_State_VEP
             // 
             this.lbl_State_VEP.BackColor = System.Drawing.Color.Gray;
-            this.lbl_State_VEP.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_State_VEP.Location = new System.Drawing.Point(566, 7);
+            this.lbl_State_VEP.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_State_VEP.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_State_VEP.BorderRadius = 5;
+            this.lbl_State_VEP.BorderSize = 0;
+            this.lbl_State_VEP.FlatAppearance.BorderSize = 0;
+            this.lbl_State_VEP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_State_VEP.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_State_VEP.ForeColor = System.Drawing.Color.White;
+            this.lbl_State_VEP.Location = new System.Drawing.Point(511, 6);
             this.lbl_State_VEP.Name = "lbl_State_VEP";
-            this.lbl_State_VEP.Size = new System.Drawing.Size(121, 32);
-            this.lbl_State_VEP.TabIndex = 556;
+            this.lbl_State_VEP.Size = new System.Drawing.Size(111, 37);
+            this.lbl_State_VEP.TabIndex = 566;
             this.lbl_State_VEP.Text = "VEP";
-            this.lbl_State_VEP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_State_VEP.TextColor = System.Drawing.Color.White;
+            this.lbl_State_VEP.UseVisualStyleBackColor = false;
             // 
             // lbl_Status_BAR
             // 
             this.lbl_Status_BAR.BackColor = System.Drawing.Color.Gray;
-            this.lbl_Status_BAR.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status_BAR.Location = new System.Drawing.Point(439, 7);
+            this.lbl_Status_BAR.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_Status_BAR.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_Status_BAR.BorderRadius = 5;
+            this.lbl_Status_BAR.BorderSize = 0;
+            this.lbl_Status_BAR.FlatAppearance.BorderSize = 0;
+            this.lbl_Status_BAR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Status_BAR.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_Status_BAR.ForeColor = System.Drawing.Color.White;
+            this.lbl_Status_BAR.Location = new System.Drawing.Point(396, 6);
             this.lbl_Status_BAR.Name = "lbl_Status_BAR";
-            this.lbl_Status_BAR.Size = new System.Drawing.Size(121, 32);
-            this.lbl_Status_BAR.TabIndex = 555;
-            this.lbl_Status_BAR.Text = "BarCode";
-            this.lbl_Status_BAR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Status_BAR.Size = new System.Drawing.Size(111, 37);
+            this.lbl_Status_BAR.TabIndex = 565;
+            this.lbl_Status_BAR.Text = "BARCODE";
+            this.lbl_Status_BAR.TextColor = System.Drawing.Color.White;
+            this.lbl_Status_BAR.UseVisualStyleBackColor = false;
             // 
             // lbl_Status_SWB
             // 
             this.lbl_Status_SWB.BackColor = System.Drawing.Color.Gray;
-            this.lbl_Status_SWB.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Status_SWB.Location = new System.Drawing.Point(312, 7);
+            this.lbl_Status_SWB.BackgroundColor = System.Drawing.Color.Gray;
+            this.lbl_Status_SWB.BorderColor = System.Drawing.Color.Gray;
+            this.lbl_Status_SWB.BorderRadius = 5;
+            this.lbl_Status_SWB.BorderSize = 0;
+            this.lbl_Status_SWB.FlatAppearance.BorderSize = 0;
+            this.lbl_Status_SWB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Status_SWB.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.lbl_Status_SWB.ForeColor = System.Drawing.Color.White;
+            this.lbl_Status_SWB.Location = new System.Drawing.Point(281, 6);
             this.lbl_Status_SWB.Name = "lbl_Status_SWB";
-            this.lbl_Status_SWB.Size = new System.Drawing.Size(121, 32);
-            this.lbl_Status_SWB.TabIndex = 554;
+            this.lbl_Status_SWB.Size = new System.Drawing.Size(111, 37);
+            this.lbl_Status_SWB.TabIndex = 564;
             this.lbl_Status_SWB.Text = "SWB";
-            this.lbl_Status_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_Status_SWB.TextColor = System.Drawing.Color.White;
+            this.lbl_Status_SWB.UseVisualStyleBackColor = false;
             // 
             // Status_Screw_L
             // 
             this.Status_Screw_L.BackColor = System.Drawing.Color.Gray;
-            this.Status_Screw_L.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Status_Screw_L.Location = new System.Drawing.Point(169, 7);
+            this.Status_Screw_L.BackgroundColor = System.Drawing.Color.Gray;
+            this.Status_Screw_L.BorderColor = System.Drawing.Color.Gray;
+            this.Status_Screw_L.BorderRadius = 5;
+            this.Status_Screw_L.BorderSize = 0;
+            this.Status_Screw_L.FlatAppearance.BorderSize = 0;
+            this.Status_Screw_L.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Status_Screw_L.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.Status_Screw_L.ForeColor = System.Drawing.Color.White;
+            this.Status_Screw_L.Location = new System.Drawing.Point(166, 6);
             this.Status_Screw_L.Name = "Status_Screw_L";
-            this.Status_Screw_L.Size = new System.Drawing.Size(137, 32);
-            this.Status_Screw_L.TabIndex = 553;
+            this.Status_Screw_L.Size = new System.Drawing.Size(111, 37);
+            this.Status_Screw_L.TabIndex = 563;
             this.Status_Screw_L.Text = "Screwdriver";
-            this.Status_Screw_L.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Status_Screw_L.TextColor = System.Drawing.Color.White;
+            this.Status_Screw_L.UseVisualStyleBackColor = false;
             // 
             // Status_PLC
             // 
             this.Status_PLC.BackColor = System.Drawing.Color.Gray;
-            this.Status_PLC.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Status_PLC.Location = new System.Drawing.Point(42, 7);
+            this.Status_PLC.BackgroundColor = System.Drawing.Color.Gray;
+            this.Status_PLC.BorderColor = System.Drawing.Color.Gray;
+            this.Status_PLC.BorderRadius = 5;
+            this.Status_PLC.BorderSize = 0;
+            this.Status_PLC.FlatAppearance.BorderSize = 0;
+            this.Status_PLC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Status_PLC.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.Status_PLC.ForeColor = System.Drawing.Color.White;
+            this.Status_PLC.Location = new System.Drawing.Point(51, 6);
             this.Status_PLC.Name = "Status_PLC";
-            this.Status_PLC.Size = new System.Drawing.Size(121, 32);
-            this.Status_PLC.TabIndex = 552;
+            this.Status_PLC.Size = new System.Drawing.Size(111, 37);
+            this.Status_PLC.TabIndex = 562;
             this.Status_PLC.Text = "PLC";
-            this.Status_PLC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Gainsboro;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Font = new System.Drawing.Font("Verdana", 12F);
-            this.button3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button3.Location = new System.Drawing.Point(4, 816);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(83, 60);
-            this.button3.TabIndex = 551;
-            this.button3.Tag = "frmSetting";
-            this.button3.Text = "TT";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(7, 909);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(77, 63);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 550;
-            this.pictureBox2.TabStop = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.Gainsboro;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Font = new System.Drawing.Font("Verdana", 12F);
-            this.button4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button4.Location = new System.Drawing.Point(4, 748);
-            this.button4.Margin = new System.Windows.Forms.Padding(4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(83, 60);
-            this.button4.TabIndex = 94;
-            this.button4.Tag = "frmIo";
-            this.button4.Text = "Digital I/O";
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.Gainsboro;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Font = new System.Drawing.Font("Verdana", 12F);
-            this.button6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button6.Location = new System.Drawing.Point(4, 680);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(83, 60);
-            this.button6.TabIndex = 4;
-            this.button6.Tag = "frmManual";
-            this.button6.Text = "Manual";
-            this.button6.UseVisualStyleBackColor = false;
+            this.Status_PLC.TextColor = System.Drawing.Color.White;
+            this.Status_PLC.UseVisualStyleBackColor = false;
             // 
             // Frm_Mainfrm
             // 
@@ -465,7 +458,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -482,22 +474,17 @@
         private System.Windows.Forms.Button Btn_Rolling;
         private System.Windows.Forms.Button Btn_StaticMaster;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label lbl_Status_SWB;
-        private System.Windows.Forms.Label Status_Screw_L;
-        private System.Windows.Forms.Label Status_PLC;
         private System.Windows.Forms.Button Btn_Result;
-        private System.Windows.Forms.Label lbl_Status_BAR;
-        private System.Windows.Forms.Label lbl_State_VEP;
         private System.Windows.Forms.Button Btn_VEP;
-        private System.Windows.Forms.Label lbl_SEN_AUTO;
-        private System.Windows.Forms.Label lbl_SEN_RR;
-        private System.Windows.Forms.Label lbl_SEN_RL;
-        private System.Windows.Forms.Label lbl_SEN_FR;
-        private System.Windows.Forms.Label lbl_SEN_FL;
+        private KI_Controls.RoundLabel lbl_State_VEP;
+        private KI_Controls.RoundLabel lbl_Status_BAR;
+        private KI_Controls.RoundLabel lbl_Status_SWB;
+        private KI_Controls.RoundLabel Status_Screw_L;
+        private KI_Controls.RoundLabel Status_PLC;
+        private KI_Controls.RoundLabel lbl_SEN_RR;
+        private KI_Controls.RoundLabel lbl_SEN_RL;
+        private KI_Controls.RoundLabel lbl_SEN_FR;
+        private KI_Controls.RoundLabel lbl_SEN_FL;
     }
 }
 

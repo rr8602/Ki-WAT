@@ -869,12 +869,35 @@ namespace Ki_WAT
                     tblCarLamp.CarPjiNo = row["CarPjiNo"].ToString();
                     tblCarLamp.HTstTime = row["HTstTime"].ToString();
                     tblCarLamp.HEndTime = row["HEndTime"].ToString();
+
+                    // Targets
+                    tblCarLamp.Target_X_Left = Convert.ToDouble(row["Target_X_Left"]);
+                    tblCarLamp.Target_Y_Left = Convert.ToDouble(row["Target_Y_Left"]);
+                    tblCarLamp.Target_X_Right = Convert.ToDouble(row["Target_X_Right"]);
+                    tblCarLamp.Target_Y_Right = Convert.ToDouble(row["Target_Y_Right"]);
+
+                    // Tolerances
+                    tblCarLamp.Tolerance_Up_Left = Convert.ToDouble(row["Tolerance_Up_Left"]);
+                    tblCarLamp.Tolerance_Down_Left = Convert.ToDouble(row["Tolerance_Down_Left"]);
+                    tblCarLamp.Tolerance_Left_Left = Convert.ToDouble(row["Tolerance_Left_Left"]);
+                    tblCarLamp.Tolerance_Right_Left = Convert.ToDouble(row["Tolerance_Right_Left"]);
+                    tblCarLamp.Tolerance_Up_Right = Convert.ToDouble(row["Tolerance_Up_Right"]);
+                    tblCarLamp.Tolerance_Down_Right = Convert.ToDouble(row["Tolerance_Down_Right"]);
+                    tblCarLamp.Tolerance_Left_Right = Convert.ToDouble(row["Tolerance_Left_Right"]);
+                    tblCarLamp.Tolerance_Right_Right = Convert.ToDouble(row["Tolerance_Right_Right"]);
+
+                    // Measured values (initial/final)
                     tblCarLamp.LeftXVal = Convert.ToDouble(row["LeftXVal"]);
                     tblCarLamp.LeftYVal = Convert.ToDouble(row["LeftYVal"]);
+                    tblCarLamp.LeftXVal_F = Convert.ToDouble(row["LeftXVal_F"]);
+                    tblCarLamp.LeftYVal_F = Convert.ToDouble(row["LeftYVal_F"]);
                     tblCarLamp.Left_Res = row["Left_Res"].ToString();
                     tblCarLamp.RightXVal = Convert.ToDouble(row["RightXVal"]);
                     tblCarLamp.RightYVal = Convert.ToDouble(row["RightYVal"]);
+                    tblCarLamp.RightXVal_F = Convert.ToDouble(row["RightXVal_F"]);
+                    tblCarLamp.RightYVal_F = Convert.ToDouble(row["RightYVal_F"]);
                     tblCarLamp.Right_Res = row["Right_Res"].ToString();
+                    
                     tblCarLamp.LampKind = row["LampKind"].ToString();
                     tblCarLamp.HLT___PK = row["HLT___PK"].ToString();
                 }
@@ -906,12 +929,32 @@ namespace Ki_WAT
                     tblCarLamp.CarPjiNo = row["CarPjiNo"].ToString();
                     tblCarLamp.HTstTime = row["HTstTime"].ToString();
                     tblCarLamp.HEndTime = row["HEndTime"].ToString();
+
+                    tblCarLamp.Target_X_Left = Convert.ToDouble(row["Target_X_Left"]);
+                    tblCarLamp.Target_Y_Left = Convert.ToDouble(row["Target_Y_Left"]);
+                    tblCarLamp.Target_X_Right = Convert.ToDouble(row["Target_X_Right"]);
+                    tblCarLamp.Target_Y_Right = Convert.ToDouble(row["Target_Y_Right"]);
+
+                    tblCarLamp.Tolerance_Up_Left = Convert.ToDouble(row["Tolerance_Up_Left"]);
+                    tblCarLamp.Tolerance_Down_Left = Convert.ToDouble(row["Tolerance_Down_Left"]);
+                    tblCarLamp.Tolerance_Left_Left = Convert.ToDouble(row["Tolerance_Left_Left"]);
+                    tblCarLamp.Tolerance_Right_Left = Convert.ToDouble(row["Tolerance_Right_Left"]);
+                    tblCarLamp.Tolerance_Up_Right = Convert.ToDouble(row["Tolerance_Up_Right"]);
+                    tblCarLamp.Tolerance_Down_Right = Convert.ToDouble(row["Tolerance_Down_Right"]);
+                    tblCarLamp.Tolerance_Left_Right = Convert.ToDouble(row["Tolerance_Left_Right"]);
+                    tblCarLamp.Tolerance_Right_Right = Convert.ToDouble(row["Tolerance_Right_Right"]);
+
                     tblCarLamp.LeftXVal = Convert.ToDouble(row["LeftXVal"]);
                     tblCarLamp.LeftYVal = Convert.ToDouble(row["LeftYVal"]);
+                    tblCarLamp.LeftXVal_F = Convert.ToDouble(row["LeftXVal_F"]);
+                    tblCarLamp.LeftYVal_F = Convert.ToDouble(row["LeftYVal_F"]);
                     tblCarLamp.Left_Res = row["Left_Res"].ToString();
                     tblCarLamp.RightXVal = Convert.ToDouble(row["RightXVal"]);
                     tblCarLamp.RightYVal = Convert.ToDouble(row["RightYVal"]);
+                    tblCarLamp.RightXVal_F = Convert.ToDouble(row["RightXVal_F"]);
+                    tblCarLamp.RightYVal_F = Convert.ToDouble(row["RightYVal_F"]);
                     tblCarLamp.Right_Res = row["Right_Res"].ToString();
+
                     tblCarLamp.LampKind = row["LampKind"].ToString();
                     tblCarLamp.HLT___PK = row["HLT___PK"].ToString();
                 }
@@ -945,11 +988,30 @@ namespace Ki_WAT
                             CarPjiNo = row["CarPjiNo"].ToString(),
                             HTstTime = row["HTstTime"].ToString(),
                             HEndTime = row["HEndTime"].ToString(),
+
+                            Target_X_Left = Convert.ToDouble(row["Target_X_Left"]),
+                            Target_Y_Left = Convert.ToDouble(row["Target_Y_Left"]),
+                            Target_X_Right = Convert.ToDouble(row["Target_X_Right"]),
+                            Target_Y_Right = Convert.ToDouble(row["Target_Y_Right"]),
+
+                            Tolerance_Up_Left = Convert.ToDouble(row["Tolerance_Up_Left"]),
+                            Tolerance_Down_Left = Convert.ToDouble(row["Tolerance_Down_Left"]),
+                            Tolerance_Left_Left = Convert.ToDouble(row["Tolerance_Left_Left"]),
+                            Tolerance_Right_Left = Convert.ToDouble(row["Tolerance_Right_Left"]),
+                            Tolerance_Up_Right = Convert.ToDouble(row["Tolerance_Up_Right"]),
+                            Tolerance_Down_Right = Convert.ToDouble(row["Tolerance_Down_Right"]),
+                            Tolerance_Left_Right = Convert.ToDouble(row["Tolerance_Left_Right"]),
+                            Tolerance_Right_Right = Convert.ToDouble(row["Tolerance_Right_Right"]),
+
                             LeftXVal = Convert.ToDouble(row["LeftXVal"]),
                             LeftYVal = Convert.ToDouble(row["LeftYVal"]),
+                            LeftXVal_F = Convert.ToDouble(row["LeftXVal_F"]),
+                            LeftYVal_F = Convert.ToDouble(row["LeftYVal_F"]),
                             Left_Res = row["Left_Res"].ToString(),
                             RightXVal = Convert.ToDouble(row["RightXVal"]),
                             RightYVal = Convert.ToDouble(row["RightYVal"]),
+                            RightXVal_F = Convert.ToDouble(row["RightXVal_F"]),
+                            RightYVal_F = Convert.ToDouble(row["RightYVal_F"]),
                             Right_Res = row["Right_Res"].ToString(),
                             LampKind = row["LampKind"].ToString(),
                             HLT___PK = row["HLT___PK"].ToString()
@@ -980,11 +1042,27 @@ namespace Ki_WAT
                     { "CarPjiNo", lamp.CarPjiNo },
                     { "HTstTime", lamp.HTstTime },
                     { "HEndTime", lamp.HEndTime },
+                    { "Target_X_Left", lamp.Target_X_Left },
+                    { "Target_Y_Left", lamp.Target_Y_Left },
+                    { "Target_X_Right", lamp.Target_X_Right },
+                    { "Target_Y_Right", lamp.Target_Y_Right },
+                    { "Tolerance_Up_Left", lamp.Tolerance_Up_Left },
+                    { "Tolerance_Down_Left", lamp.Tolerance_Down_Left },
+                    { "Tolerance_Left_Left", lamp.Tolerance_Left_Left },
+                    { "Tolerance_Right_Left", lamp.Tolerance_Right_Left },
+                    { "Tolerance_Up_Right", lamp.Tolerance_Up_Right },
+                    { "Tolerance_Down_Right", lamp.Tolerance_Down_Right },
+                    { "Tolerance_Left_Right", lamp.Tolerance_Left_Right },
+                    { "Tolerance_Right_Right", lamp.Tolerance_Right_Right },
                     { "LeftXVal", lamp.LeftXVal },
                     { "LeftYVal", lamp.LeftYVal },
+                    { "LeftXVal_F", lamp.LeftXVal_F },
+                    { "LeftYVal_F", lamp.LeftYVal_F },
                     { "Left_Res", lamp.Left_Res },
                     { "RightXVal", lamp.RightXVal },
                     { "RightYVal", lamp.RightYVal },
+                    { "RightXVal_F", lamp.RightXVal_F },
+                    { "RightYVal_F", lamp.RightYVal_F },
                     { "Right_Res", lamp.Right_Res },
                     { "LampKind", lamp.LampKind },
                     { "HLT___PK", lamp.HLT___PK }
@@ -1010,11 +1088,27 @@ namespace Ki_WAT
                     { "CarPjiNo", lamp.CarPjiNo },
                     { "HTstTime", lamp.HTstTime },
                     { "HEndTime", lamp.HEndTime },
+                    { "Target_X_Left", lamp.Target_X_Left },
+                    { "Target_Y_Left", lamp.Target_Y_Left },
+                    { "Target_X_Right", lamp.Target_X_Right },
+                    { "Target_Y_Right", lamp.Target_Y_Right },
+                    { "Tolerance_Up_Left", lamp.Tolerance_Up_Left },
+                    { "Tolerance_Down_Left", lamp.Tolerance_Down_Left },
+                    { "Tolerance_Left_Left", lamp.Tolerance_Left_Left },
+                    { "Tolerance_Right_Left", lamp.Tolerance_Right_Left },
+                    { "Tolerance_Up_Right", lamp.Tolerance_Up_Right },
+                    { "Tolerance_Down_Right", lamp.Tolerance_Down_Right },
+                    { "Tolerance_Left_Right", lamp.Tolerance_Left_Right },
+                    { "Tolerance_Right_Right", lamp.Tolerance_Right_Right },
                     { "LeftXVal", lamp.LeftXVal },
                     { "LeftYVal", lamp.LeftYVal },
+                    { "LeftXVal_F", lamp.LeftXVal_F },
+                    { "LeftYVal_F", lamp.LeftYVal_F },
                     { "Left_Res", lamp.Left_Res },
                     { "RightXVal", lamp.RightXVal },
                     { "RightYVal", lamp.RightYVal },
+                    { "RightXVal_F", lamp.RightXVal_F },
+                    { "RightYVal_F", lamp.RightYVal_F },
                     { "Right_Res", lamp.Right_Res },
                     { "LampKind", lamp.LampKind },
                     { "HLT___PK", lamp.HLT___PK }
@@ -1083,12 +1177,28 @@ namespace Ki_WAT
                     { "CarPjiNo", lamp.CarPjiNo },
                     { "HTstTime", lamp.HTstTime },
                     { "HEndTime", lamp.HEndTime },
+                    { "LeftXVal_F", lamp.LeftXVal_F },
+                    { "LeftYVal_F", lamp.LeftYVal_F },
                     { "LeftXVal", lamp.LeftXVal },
                     { "LeftYVal", lamp.LeftYVal },
                     { "Left_Res", lamp.Left_Res },
+                    { "Target_X_Left", lamp.Target_X_Left },
+                    { "Target_Y_Left", lamp.Target_Y_Left },
+                    { "Tolerance_Up_Left", lamp.Tolerance_Up_Left },
+                    { "Tolerance_Down_Left", lamp.Tolerance_Down_Left },
+                    { "Tolerance_Left_Left", lamp.Tolerance_Left_Left },
+                    { "Tolerance_Right_Left", lamp.Tolerance_Right_Left },
+                    { "RightXVal_F", lamp.RightXVal_F },
+                    { "RightYVal_F", lamp.RightYVal_F },
                     { "RightXVal", lamp.RightXVal },
                     { "RightYVal", lamp.RightYVal },
                     { "Right_Res", lamp.Right_Res },
+                    { "Target_X_Right", lamp.Target_X_Right },
+                    { "Target_Y_Right", lamp.Target_Y_Right },
+                    { "Tolerance_Up_Right", lamp.Tolerance_Up_Right },
+                    { "Tolerance_Down_Right", lamp.Tolerance_Down_Right },
+                    { "Tolerance_Left_Right", lamp.Tolerance_Left_Right },
+                    { "Tolerance_Right_Right", lamp.Tolerance_Right_Right },
                     { "LampKind", lamp.LampKind },
                     { "HLT___PK", lamp.HLT___PK }
                 };

@@ -52,6 +52,9 @@
     <Reference Include="NModbus.Serial, Version=3.0.81.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NModbus.Serial.3.0.81\lib\net46\NModbus.Serial.dll</HintPath>
     </Reference>
+    <Reference Include="Sharp7, Version=1.1.84.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sharp7.1.1.84\lib\net40\Sharp7.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -116,6 +119,24 @@
     <Compile Include="FrmSimulator.Designer.cs">
       <DependentUpon>FrmSimulator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_DigitalIO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_DigitalIO.Designer.cs">
+      <DependentUpon>Frm_DigitalIO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_DigitalIOIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_DigitalIOIn.Designer.cs">
+      <DependentUpon>Frm_DigitalIOIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_DigitalIOOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_DigitalIOOut.Designer.cs">
+      <DependentUpon>Frm_DigitalIOOut.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_PLC_IO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +152,8 @@
     <Compile Include="JsonController.cs" />
     <Compile Include="LangController.cs" />
     <Compile Include="LangData.cs" />
+    <Compile Include="PLCReadWAT.cs" />
+    <Compile Include="PLCWriteWAT.cs" />
     <Compile Include="VEP\IVEPBenchZone.cs" />
     <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
@@ -246,6 +269,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Config.resx">
       <DependentUpon>Frm_Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_DigitalIO.resx">
+      <DependentUpon>Frm_DigitalIO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_DigitalIOIn.resx">
+      <DependentUpon>Frm_DigitalIOIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_DigitalIOOut.resx">
+      <DependentUpon>Frm_DigitalIOOut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Mainfrm.resx">
       <DependentUpon>Frm_Mainfrm.cs</DependentUpon>

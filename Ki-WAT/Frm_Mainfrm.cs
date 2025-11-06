@@ -41,6 +41,10 @@ namespace Ki_WAT
         private Lib_TcpClient m_ScrewDriverL = new Lib_TcpClient();
         private Lib_TcpClient m_ScrewDriverR = new Lib_TcpClient();
 
+
+        Frm_DigitalIO digtalIO = null;
+
+
         // 바코드 통신 연결 상태 체크용 타이머
         private Timer m_StatusTimer = new Timer() ;
         private Timer m_TimerTest;
@@ -117,7 +121,22 @@ namespace Ki_WAT
             m_StatusTimer.Tick += new EventHandler(StatusTimer_Tick);
             m_StatusTimer.Interval = 1000; // 1초마다
             m_StatusTimer.Start();
+
+            CreateIODlg();
         }
+
+
+        public void CreateIODlg()
+        {
+            digtalIO = new Frm_DigitalIO();
+
+            digtalIO.StartPosition = FormStartPosition.Manual;
+            digtalIO.Location = new Point(120, 20);
+            digtalIO.Width = Constants.SubViewWidth;
+            digtalIO.Height = Constants.SubViewHeight;
+
+        }
+
         private void UpdateSWBAngle(double dSWB)
         {
             _GV.dHandle = dSWB;
@@ -136,13 +155,15 @@ namespace Ki_WAT
 
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
+
             if (m_BarcodeComm.IsConnected)
             {
-                lbl_Status_BAR.BackColor = Color.Lime;
+                lbl_Status_BAR.BackColor = Color.LimeGreen;
+
             }
             else
             {
-                lbl_Status_BAR.BackColor = Color.Red;
+                lbl_Status_BAR.BackColor = Color.OrangeRed;
             }
 
             if (m_ScrewDriverL.IsConnected)
@@ -155,20 +176,29 @@ namespace Ki_WAT
             }
             if (_GV._VEP_Client.IsConnected)
             {
-                lbl_State_VEP.BackColor = Color.Lime;
+                lbl_State_VEP.BackColor = Color.LimeGreen;
             }
             else
             {
-                lbl_State_VEP.BackColor = Color.Red;
+                lbl_State_VEP.BackColor = Color.OrangeRed;
             }
 
             if (m_SWBComm.IsConnected)
             {
-                lbl_Status_SWB.BackColor = Color.Lime;
+                lbl_Status_SWB.BackColor = Color.LimeGreen;
             }
             else
             {
-                lbl_Status_SWB.BackColor = Color.Red;
+                lbl_Status_SWB.BackColor = Color.OrangeRed;
+            }
+
+            if (_GV.plcRead.IsPLCConnect())
+            {
+                Status_PLC.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                Status_PLC.BackColor = Color.OrangeRed;
             }
         }
 
@@ -204,6 +234,15 @@ namespace Ki_WAT
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
 
             StartBarcode();
+
+            _GV.plcRead = new PLCReadWAT();
+            _GV.plcWrite = new PLCWriteWAT();
+
+            _GV.plcRead.Create(_GV.Config.Device.PLC_IP);
+            _GV.plcWrite.Create(_GV.Config.Device.PLC_IP);
+
+            _GV.plcRead.StartPolling();
+
         }
         public void event_GetBarcode(byte[] data)
         {
@@ -356,6 +395,7 @@ namespace Ki_WAT
         private void btnIo_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
+            digtalIO.Show();
         }
         private void BtnCal_Click(object sender, EventArgs e)
         {

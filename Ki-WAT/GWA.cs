@@ -45,6 +45,15 @@ namespace Ki_WAT
 
 
 
+        public static bool GetBit(byte byData, int nBitPos)
+        {
+            if (nBitPos < 0 || nBitPos > 7)
+                return false;
+
+
+            return (byData & (1 << nBitPos)) != 0;
+        }
+
         public static void STM(String strMsg)
         {
             COPYDATASTRUCT cds;

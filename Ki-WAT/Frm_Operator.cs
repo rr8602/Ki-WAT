@@ -207,7 +207,7 @@ namespace Ki_WAT
             // 연결된 모든 모니터 가져오기
             Screen[] screens = Screen.AllScreens;
 
-            if (screens.Length > 1)
+            if (screens.Length > 2)
             {
                 // 두 번째 모니터 가져오기
                 Screen secondScreen = screens[2];

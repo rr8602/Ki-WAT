@@ -64,6 +64,7 @@
             this.editLETPort = new System.Windows.Forms.TextBox();
             this.editLetURL = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Btn_ResPath = new KI_Controls.CButton();
             this.lblResultPath = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.comLang = new System.Windows.Forms.ComboBox();
@@ -164,6 +165,7 @@
             this.modelList = new System.Windows.Forms.ListView();
             this.Txt_Model = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -174,9 +176,9 @@
             this.editDesc = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Btn_ResPath = new KI_Controls.CButton();
             this.cButton1 = new KI_Controls.CButton();
+            this.label44 = new System.Windows.Forms.Label();
+            this.Txt_SWAOffset = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -558,6 +560,28 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Program Setting";
             // 
+            // Btn_ResPath
+            // 
+            this.Btn_ResPath.BackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.bNormalButton = false;
+            this.Btn_ResPath.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.BorderSize = ((uint)(1u));
+            this.Btn_ResPath.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_ResPath.ForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.IsToggled = false;
+            this.Btn_ResPath.Location = new System.Drawing.Point(510, 55);
+            this.Btn_ResPath.Name = "Btn_ResPath";
+            this.Btn_ResPath.NormalBackColor = System.Drawing.Color.LightGray;
+            this.Btn_ResPath.NormalForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.Size = new System.Drawing.Size(59, 36);
+            this.Btn_ResPath.TabIndex = 6;
+            this.Btn_ResPath.Text = "...";
+            this.Btn_ResPath.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
+            this.Btn_ResPath.ToggleForeColor = System.Drawing.Color.Black;
+            this.Btn_ResPath.UseVisualStyleBackColor = false;
+            this.Btn_ResPath.Click += new System.EventHandler(this.Btn_ResPath_Click);
+            // 
             // lblResultPath
             // 
             this.lblResultPath.BackColor = System.Drawing.Color.White;
@@ -776,6 +800,8 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.Txt_SWAOffset);
+            this.panel1.Controls.Add(this.label44);
             this.panel1.Controls.Add(this.Txt_CamRR_LT);
             this.panel1.Controls.Add(this.Txt_CamRR_AT);
             this.panel1.Controls.Add(this.Txt_CamRR_ST);
@@ -1400,7 +1426,7 @@
             "8",
             "9",
             "10"});
-            this.Cbo_Screw.Location = new System.Drawing.Point(688, 96);
+            this.Cbo_Screw.Location = new System.Drawing.Point(692, 96);
             this.Cbo_Screw.Name = "Cbo_Screw";
             this.Cbo_Screw.Size = new System.Drawing.Size(264, 32);
             this.Cbo_Screw.TabIndex = 212;
@@ -1425,7 +1451,7 @@
             this.Cbo_Unit.Items.AddRange(new object[] {
             "Minute",
             "Degree"});
-            this.Cbo_Unit.Location = new System.Drawing.Point(688, 148);
+            this.Cbo_Unit.Location = new System.Drawing.Point(692, 148);
             this.Cbo_Unit.Name = "Cbo_Unit";
             this.Cbo_Unit.Size = new System.Drawing.Size(264, 32);
             this.Cbo_Unit.TabIndex = 210;
@@ -1665,7 +1691,7 @@
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label12.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Aqua;
-            this.label12.Location = new System.Drawing.Point(521, 302);
+            this.label12.Location = new System.Drawing.Point(511, 302);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(167, 41);
             this.label12.TabIndex = 157;
@@ -1814,6 +1840,16 @@
             this.tabPage2.Text = "Language";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1385, 330);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(156, 51);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Save";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label40
             // 
             this.label40.AutoSize = true;
@@ -1915,38 +1951,6 @@
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1385, 330);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(156, 51);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // Btn_ResPath
-            // 
-            this.Btn_ResPath.BackColor = System.Drawing.Color.LightGray;
-            this.Btn_ResPath.bNormalButton = false;
-            this.Btn_ResPath.BorderColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.BorderSize = ((uint)(1u));
-            this.Btn_ResPath.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_ResPath.ForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.IsToggled = false;
-            this.Btn_ResPath.Location = new System.Drawing.Point(510, 55);
-            this.Btn_ResPath.Name = "Btn_ResPath";
-            this.Btn_ResPath.NormalBackColor = System.Drawing.Color.LightGray;
-            this.Btn_ResPath.NormalForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.Size = new System.Drawing.Size(59, 36);
-            this.Btn_ResPath.TabIndex = 6;
-            this.Btn_ResPath.Text = "...";
-            this.Btn_ResPath.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
-            this.Btn_ResPath.ToggleForeColor = System.Drawing.Color.Black;
-            this.Btn_ResPath.UseVisualStyleBackColor = false;
-            this.Btn_ResPath.Click += new System.EventHandler(this.Btn_ResPath_Click);
-            // 
             // cButton1
             // 
             this.cButton1.BackColor = System.Drawing.Color.LightGray;
@@ -1965,6 +1969,31 @@
             this.cButton1.ToggleBackColor = System.Drawing.Color.CornflowerBlue;
             this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
             this.cButton1.UseVisualStyleBackColor = false;
+            // 
+            // label44
+            // 
+            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label44.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.Aqua;
+            this.label44.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label44.Location = new System.Drawing.Point(511, 250);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(167, 41);
+            this.label44.TabIndex = 260;
+            this.label44.Text = "SWA Offset";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Txt_SWAOffset
+            // 
+            this.Txt_SWAOffset.BackColor = System.Drawing.Color.Black;
+            this.Txt_SWAOffset.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_SWAOffset.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_SWAOffset.Location = new System.Drawing.Point(692, 250);
+            this.Txt_SWAOffset.Name = "Txt_SWAOffset";
+            this.Txt_SWAOffset.Size = new System.Drawing.Size(117, 43);
+            this.Txt_SWAOffset.TabIndex = 261;
+            this.Txt_SWAOffset.Text = "0.0";
+            this.Txt_SWAOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Config
             // 
@@ -2159,5 +2188,7 @@
         private System.Windows.Forms.TextBox editDesc;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox Txt_SWAOffset;
+        private System.Windows.Forms.Label label44;
     }
 }
