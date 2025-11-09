@@ -771,12 +771,12 @@ namespace Ki_WAT
 
                 m_frmParent.m_SWBComm.SetFndDisplay(_GV.Config.SWB.BoardType);
 
-                MessageBox.Show("설정이 성공적으로 저장되었습니다.", "저장 완료", 
+                MessageBox.Show("Save OK!", "save", 
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"설정 저장 중 오류가 발생했습니다: {ex.Message}", "저장 실패", 
+                MessageBox.Show($"Fail to save {ex.Message}", "Fail", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

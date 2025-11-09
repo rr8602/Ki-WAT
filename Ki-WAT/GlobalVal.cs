@@ -97,7 +97,7 @@ namespace Ki_WAT
 
         public double dSymm;
         public double dTA;
-
+        public double dHandle;
         public void Clear()
         {
             dToeFL = 0;

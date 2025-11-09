@@ -223,7 +223,7 @@ namespace Ki_WAT
             }
             else
             {
-                MessageBox.Show("두 번째 모니터가 감지되지 않았습니다.");
+                MessageBox.Show("Can't find Pit monitor");
             }
         }
 

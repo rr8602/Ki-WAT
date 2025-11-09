@@ -213,7 +213,10 @@ namespace Ki_WAT
 
                         connected = true;
                         _isConnected = true;
-                        LogMessage("Modbus 서버에 연결되었습니다.");
+                        LogMessage("Connect OK");
+
+                        Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.Connect);
+
                     }
                     catch (Exception ex)
                     {

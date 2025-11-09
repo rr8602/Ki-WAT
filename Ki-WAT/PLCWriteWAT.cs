@@ -261,8 +261,36 @@ namespace Ki_WAT
 
 
 
+        public bool SetPJI(String strPJI)
+        {
+            if (String.IsNullOrWhiteSpace(strPJI)) return false;
+            if (strPJI.Length != 7) return false;
 
-		public void SetProg(ushort nProg)
+            String part1 = strPJI.Substring(0, 4); // 앞 4자리
+            String part2 = strPJI.Substring(4, 2); // 다음 2자리
+            String part3 = strPJI.Substring(6, 1); // 마지막 1자리
+
+            bool ok1 = ushort.TryParse(part1, out ushort num1);
+            bool ok2 = ushort.TryParse(part2, out ushort num2);
+            bool ok3 = ushort.TryParse(part3, out ushort num3);
+
+            if (ok1 && ok2 && ok3)
+            {
+                _SetProg(num1);
+                _SetJour(num2);
+                _SetIdent(num3);
+            }
+            else
+            {
+                GWA.STM("변환 중 숫자가 아닌 문자가 포함되어 있습니다.");
+                return false;
+            }
+
+            return true;
+        }
+
+
+        private void _SetProg(ushort nProg)
 		{
 			//ushort value = 0x1234;
 			byte b1 = (byte)(nProg & 0xFF);       // 하위 바이트 (34)
@@ -270,7 +298,7 @@ namespace Ki_WAT
 			SetRawData(22, b2);
 			SetRawData(23, b1);
 		}
-		public void SetJour(ushort nJour)
+        private void _SetJour(ushort nJour)
 		{
 			byte b1 = (byte)(nJour & 0xFF);       // 하위 바이트 
 			byte b2 = (byte)((nJour >> 8) & 0xFF); // 상위 바이트
@@ -278,7 +306,7 @@ namespace Ki_WAT
 			SetRawData(24, b2);
 			SetRawData(25, b1);
 		}
-		public void SetIdent(ushort nIdent)
+        private void _SetIdent(ushort nIdent)
 		{
 			byte b1 = (byte)(nIdent & 0xFF);       // 하위 바이트 
 			byte b2 = (byte)((nIdent >> 8) & 0xFF); // 상위 바이트

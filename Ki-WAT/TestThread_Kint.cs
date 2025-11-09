@@ -1,6 +1,7 @@
 ﻿// ... existing code ...
 using Ki_WAT;
 using NModbus;
+using RollTester;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,8 +36,8 @@ public class TestThread_Kint
 
     //TblCarModel m_Cur_Model = new TblCarModel();
     //TblCarInfo m_Cur_CarInfo = new TblCarInfo();
-    MeasureData measureData = new MeasureData();
-    MeasureData InitMeasureData = new MeasureData();
+    MeasureData m_measureData = new MeasureData();
+    MeasureData m_InitMeasureData = new MeasureData();
     private Task _swaSendTask;
     private CancellationTokenSource _swaCancellationTokenSource;
 
@@ -111,7 +112,7 @@ public class TestThread_Kint
     {
         try
         {
-            measureData = data.Clone();
+            m_measureData = data.Clone();
             
         }
         catch (Exception ex)
@@ -447,7 +448,7 @@ public class TestThread_Kint
         _GV.Log_PGM.SetName(_GV.m_Cur_Info.CarPJINo);
         _GV.Log_LET.SetFileName(_GV.m_Cur_Info.CarPJINo);
         _result.Clear();
-        measureData.Clear();
+        m_measureData.Clear();
         DppManager.SendToDpp(DppManager.MSG_DPP_WHEELBASE, Int32.Parse(_GV.m_Cur_Model.WhelBase));
         Thread.Sleep(300);
         DppManager.SendToDpp(DppManager.MSG_DPP_VEHICLE_TYPE, Int32.Parse(_GV.m_Cur_Model.Dpp_Code));
@@ -657,7 +658,7 @@ public class TestThread_Kint
         int nRet = 0;
         try
         {
-            DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
+           // DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
             UI_Update_Status("RUN-OUT_0");
 
             DateTime startTime = DateTime.Now;
@@ -863,13 +864,13 @@ public class TestThread_Kint
                 Thread.Sleep(10);
             }
 
-            InitMeasureData.Clear();
+            m_InitMeasureData.Clear();
             SetState(Constants.STEP_WAIT_RUNOUT);
 
 
 
             // Measuring start 눌렀을때 여기서 실행
-
+            DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
             StartSWAChecking();
             
 
@@ -1054,6 +1055,10 @@ public class TestThread_Kint
             _GV._VEP_Client.SetSync06RunOutFinish();
             m_bSendSWA = true;
             StartSWASending();
+
+            m_InitMeasureData = m_measureData.Clone();
+            m_InitMeasureData.dHandle = _GV.dHandle;
+
             SetState(Constants.STEP_SCREW_SEND_INFO);
         }
         catch (Exception ex)
@@ -1498,21 +1503,21 @@ public class TestThread_Kint
         _result.PJI_Num  = _GV.m_Cur_Info.CarPJINo;
         _result.Model_NM = _GV.m_Cur_Model.Model_NM;
 
-        _result.CarFLToe = measureData.dToeFL.ToString("F1");
-        _result.CarFRToe = measureData.dToeFR.ToString("F1");
-        _result.CarFTToe = (measureData.dToeFL + measureData.dToeFR).ToString("F1");
-        _result.CarRLToe = measureData.dToeRL.ToString("F1");
-        _result.CarRRToe = measureData.dToeRR.ToString("F1");
-        _result.CarRTToe = (measureData.dToeRL + measureData.dToeRR).ToString("F1");
-        _result.CarFLCam = measureData.dCamFL.ToString("F1");
-        _result.CarFRCam = measureData.dCamFR.ToString("F1");
-        _result.CarFCros = (measureData.dCamFL - measureData.dCamFR).ToString("F1");
-        _result.CarRLCam = measureData.dCamRL.ToString("F1");
-        _result.CarRRCam = measureData.dCamRR.ToString("F1");
-        _result.CarRCros = (measureData.dCamRL - measureData.dCamRR).ToString("F1");
+        _result.CarFLToe = m_measureData.dToeFL.ToString("F1");
+        _result.CarFRToe = m_measureData.dToeFR.ToString("F1");
+        _result.CarFTToe = (m_measureData.dToeFL + m_measureData.dToeFR).ToString("F1");
+        _result.CarRLToe = m_measureData.dToeRL.ToString("F1");
+        _result.CarRRToe = m_measureData.dToeRR.ToString("F1");
+        _result.CarRTToe = (m_measureData.dToeRL + m_measureData.dToeRR).ToString("F1");
+        _result.CarFLCam = m_measureData.dCamFL.ToString("F1");
+        _result.CarFRCam = m_measureData.dCamFR.ToString("F1");
+        _result.CarFCros = (m_measureData.dCamFL - m_measureData.dCamFR).ToString("F1");
+        _result.CarRLCam = m_measureData.dCamRL.ToString("F1");
+        _result.CarRRCam = m_measureData.dCamRR.ToString("F1");
+        _result.CarRCros = (m_measureData.dCamRL - m_measureData.dCamRR).ToString("F1");
         _result.Car_Hand = _GV.dHandle.ToString("F1");
-        _result.CarDogRu = measureData.dTA.ToString("F1");
-        _result.Car_Symm = measureData.dSymm.ToString("F1");
+        _result.CarDogRu = m_measureData.dTA.ToString("F1");
+        _result.Car_Symm = m_measureData.dSymm.ToString("F1");
         _result.WTstTime = startTime.ToString("HH:mm:ss");
 
         if (TotalPanjung())            _result.WAT___PK = "OK";
@@ -1583,6 +1588,115 @@ public class TestThread_Kint
 
     }
 
+    private AlignmentReportData MakePrintData()
+    {
+        AlignmentReportData _Data = new AlignmentReportData();
+
+
+        bool bResult ;
+
+        bResult = GetResultOKNG(_result.CarFLToe, _GV.m_Cur_Model.ToeFL_ST, _GV.m_Cur_Model.ToeFL_LT);
+        _Data.FlToe.After = m_measureData.dToeFL.ToString("F1");
+        _Data.FlToe.Before = m_InitMeasureData.dToeFR.ToString("F1");
+        _Data.FlToe.Evaluation = bResult ? "OK" : "NOK" ;
+        _Data.FlToe.ScrewingDone = "Yes";
+
+
+        bResult = GetResultOKNG(_result.CarFRToe, _GV.m_Cur_Model.ToeFR_ST, _GV.m_Cur_Model.ToeFR_LT);
+        _Data.FrToe.After = m_measureData.dToeFR.ToString("F1");
+        _Data.FrToe.Before = m_InitMeasureData.dToeFR.ToString("F1");
+        _Data.FrToe.Evaluation = bResult ? "OK" : "NOK";
+        _Data.FrToe.ScrewingDone = "Yes";
+
+        bResult = GetResultOKNG(_result.CarFTToe, _GV.m_Cur_Model.TotToef_ST, _GV.m_Cur_Model.TotToef_LT);
+        _Data.FrontTotalToe.After = (m_measureData.dToeFL + m_measureData.dToeFR).ToString("F1");
+        _Data.FrontTotalToe.Before = (m_InitMeasureData.dToeFR + m_InitMeasureData.dToeFR).ToString("F1") ;
+        _Data.FrontTotalToe.Evaluation = bResult ? "OK" : "NOK";
+        _Data.FrontTotalToe.ScrewingDone = "";
+
+        bResult = GetResultOKNG(_result.Car_Hand, _GV.m_Cur_Model.HandleST, _GV.m_Cur_Model.HandleLT);
+        _Data.SteeringWheelAlignment.After = _result.Car_Hand;
+        _Data.SteeringWheelAlignment.Before = m_InitMeasureData.dHandle.ToString("F1");
+        _Data.SteeringWheelAlignment.Evaluation = bResult ? "OK" : "NOK";
+        _Data.SteeringWheelAlignment.ScrewingDone = "Yes";
+
+        bResult = GetResultOKNG(_result.CarRLToe, _GV.m_Cur_Model.ToeRL_ST, _GV.m_Cur_Model.ToeRL_LT);
+        _Data.RlToe.After = m_measureData.dToeRL.ToString("F1");
+        _Data.RlToe.Before = m_InitMeasureData.dToeRR.ToString("F1");
+        _Data.RlToe.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RlToe.ScrewingDone = "";
+
+        bResult = GetResultOKNG(_result.CarRRToe, _GV.m_Cur_Model.ToeRR_ST, _GV.m_Cur_Model.ToeRR_LT);
+        _Data.RrToe.After = m_measureData.dToeRR.ToString("F1");
+        _Data.RrToe.Before = m_InitMeasureData.dToeRR.ToString("F1");
+        _Data.RrToe.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RrToe.ScrewingDone = "";
+
+        bResult = GetResultOKNG(_result.CarRTToe, _GV.m_Cur_Model.TotToer_ST, _GV.m_Cur_Model.TotToer_LT);
+        _Data.RearTotalToe.After = (m_measureData.dToeRL + m_measureData.dToeRR).ToString("F1");
+        _Data.RearTotalToe.Before = (m_InitMeasureData.dToeRR + m_InitMeasureData.dToeRR).ToString("F1");
+        _Data.RearTotalToe.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RearTotalToe.ScrewingDone = "";
+
+        bResult = GetResultOKNG(_result.CarDogRu, _GV.m_Cur_Model.DogRunST, _GV.m_Cur_Model.DogRunLT);
+        _Data.RearThrustAngle.After = m_measureData.dTA.ToString("F1");
+        _Data.RearThrustAngle.Before = m_InitMeasureData.dTA.ToString("F1");
+        _Data.RearThrustAngle.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RearThrustAngle.ScrewingDone = "";
+
+        bResult = true;
+        _Data.FlCamber.After = m_measureData.dCamFL.ToString("F1");
+        _Data.FlCamber.Before = m_InitMeasureData.dCamFL.ToString("F1");
+        _Data.FlCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.FlCamber.ScrewingDone = "";
+
+        _Data.FrCamber.After = m_measureData.dCamFR.ToString("F1");
+        _Data.FrCamber.Before = m_InitMeasureData.dCamFR.ToString("F1");
+        _Data.FrCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.FrCamber.ScrewingDone = "";
+
+        _Data.FrontDissymmetryOfCamber.After = (m_measureData.dCamFR - m_measureData.dCamFL).ToString("F1");
+        _Data.FrontDissymmetryOfCamber.Before = (m_InitMeasureData.dCamFR - m_InitMeasureData.dCamFL).ToString("F1");
+        _Data.FrontDissymmetryOfCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.FrontDissymmetryOfCamber.ScrewingDone = "";
+
+        _Data.RlCamber.After = m_measureData.dCamRL.ToString("F1");
+        _Data.RlCamber.Before = m_InitMeasureData.dCamRL.ToString("F1");
+        _Data.RlCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RlCamber.ScrewingDone = "";
+              
+        _Data.RrCamber.After = m_measureData.dCamRR.ToString("F1");
+        _Data.RrCamber.Before = m_InitMeasureData.dCamRR.ToString("F1");
+        _Data.RrCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RrCamber.ScrewingDone = "";
+              
+        _Data.RearDissymmetryOfCamber.After = (m_measureData.dCamRR - m_measureData.dCamRL).ToString("F1");
+        _Data.RearDissymmetryOfCamber.Before = (m_InitMeasureData.dCamRR - m_InitMeasureData.dCamRL).ToString("F1");
+        _Data.RearDissymmetryOfCamber.Evaluation = bResult ? "OK" : "NOK";
+        _Data.RearDissymmetryOfCamber.ScrewingDone = "";
+
+
+   
+        TblCarLamp pLamp = _GV._dbJob.SelectCarLamp(_GV.m_Cur_Info.AcceptNo);
+
+        if (pLamp.AcceptNo != "")
+        {
+            _Data.LeftHeadlampVertical.After = pLamp.LeftYVal.ToString("F1");
+            _Data.LeftHeadlampVertical.Before = pLamp.LeftYVal_F.ToString("F1");
+            _Data.LeftHeadlampVertical.Evaluation = pLamp.Left_Res;
+
+            _Data.RightHeadlampVertical.After = pLamp.RightYVal.ToString("F1");
+            _Data.RightHeadlampVertical.Before = pLamp.RightYVal_F.ToString("F1");
+            _Data.RightHeadlampVertical.Evaluation = pLamp.Left_Res;
+        }
+        _Data.GlobalEvaluationWAProcess = _result.WAT___PK;
+        _Data.GlobalEvaluationHLAProcess = pLamp.HLT___PK;
+
+
+        _Data.ResultatPEV = _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ? "OK" : "NOK";
+
+        return _Data;
+    }
     private int Do_TicketPrint()
     {
         int nRet = 0;
@@ -1591,18 +1705,24 @@ public class TestThread_Kint
             UI_Update_Status("Do_TicketPrint");
             DateTime startTime = DateTime.Now;
 
+
+            ZPrintController _PrintTicket = new ZPrintController();
+            AlignmentReportData data = MakePrintData();
+            _PrintTicket.PrintAlignmentData(data);
+
             while (true)
             {
                 if (CheckLoopExit()) break;
-                //if (_GV._PLCVal.DI._HLA_Home_position) break;
-                //DB Write.
-                Thread.Sleep(10);
+           
+                Thread.Sleep(100);
+
+                break;
             }
             SetState(Constants.STEP_CHECK_GO_OUT1);
         }
         catch (Exception ex)
         {
-            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
+            OnErrorOccurred?.Invoke($"Do_TicketPrint:  {ex.Message}");
         }
         
         return nRet;

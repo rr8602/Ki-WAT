@@ -41,6 +41,7 @@ namespace Ki_WAT
 
         public const int STEP_BARCODE_READ = 1;
         public const int STEP_MOVE_WHEELBASE = 2;
+        public const int STEP_MOVE_WHEELBASE_END = 3;
 
         public const int STEP_PEV_START = 110;
         public const int STEP_PEV_SEND_PJI = 111;

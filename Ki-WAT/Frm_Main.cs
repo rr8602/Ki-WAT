@@ -1,6 +1,7 @@
 ﻿using DG_ComLib;
 using Ki_WAT.Properties;
 using KINT_Lib;
+using RollTester;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -467,6 +468,38 @@ namespace Ki_WAT
     
         private void button2_Click_1(object sender, EventArgs e)
         {
+
+            ZPrintController _PrintTicket = new ZPrintController();
+            AlignmentReportData data = new AlignmentReportData();
+
+            data.FlToe.After = "1.1";
+            data.FlToe.Before = "1.2";
+            data.FlToe.Evaluation = "OK";
+            data.FlToe.ScrewingDone = "Yes";
+
+            data.FrToe.After = "2.1";
+            data.FrToe.Before = "2.2";
+            data.FrToe.Evaluation = "OK";
+            data.FrToe.ScrewingDone = "Yes";
+
+            data.FrontTotalToe.After = "3.1";
+            data.FrontTotalToe.Before = "3.2";
+            data.FrontTotalToe.Evaluation = "OK";
+            data.FrontTotalToe.ScrewingDone = "Yes";
+
+            data.FrontTotalToe.After = "3.1";
+            data.FrontTotalToe.Before = "3.2";
+            data.FrontTotalToe.Evaluation = "OK";
+            data.FrontTotalToe.ScrewingDone = "Yes";
+
+            data.SteeringWheelAlignment.After = "4.1";
+            data.SteeringWheelAlignment.Before = "4.2";
+            data.SteeringWheelAlignment.Evaluation = "OK";
+            data.SteeringWheelAlignment.ScrewingDone = "Yes";
+
+            _PrintTicket.PrintAlignmentData(data);
+
+            return;
             //StationSetting setting =  XMLWriter.MakeXMLStruct();
 
             string basePath = _GV.Config.Program.RESULT_PATH;

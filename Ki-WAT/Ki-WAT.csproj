@@ -152,6 +152,7 @@
     <Compile Include="JsonController.cs" />
     <Compile Include="LangController.cs" />
     <Compile Include="LangData.cs" />
+    <Compile Include="MsgBroker.cs" />
     <Compile Include="PLCReadWAT.cs" />
     <Compile Include="PLCWriteWAT.cs" />
     <Compile Include="VEP\IVEPBenchZone.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="VEP\VEPBenchSynchroZone.cs" />
     <Compile Include="VEP\VEPBenchTransmissionZone.cs" />
     <Compile Include="XMLWriter.cs" />
+    <Compile Include="ZPrintController.cs" />
     <EmbeddedResource Include="FrmSimulator.resx">
       <DependentUpon>FrmSimulator.cs</DependentUpon>
     </EmbeddedResource>

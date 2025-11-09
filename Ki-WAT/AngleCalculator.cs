@@ -75,13 +75,16 @@ namespace HandleLeveler
                 _cancellationTokenSource = new CancellationTokenSource();
                 _communicationTask = Task.Run(() => CommunicationLoop(_cancellationTokenSource.Token), _cancellationTokenSource.Token);
 
-                
+                Broker.dsBroker.Publish(Topics.DS.SWB, Topics.DS.Connect);
+
             }
             catch (Exception ex)
             {
                 //_updateStatusMessage($"연결 오류: {ex.Message}");
                 port?.Close();
                 IsConnected = false;
+                Broker.dsBroker.Publish(Topics.DS.SWB, Topics.DS.NotConnect);
+
             }
         }
 

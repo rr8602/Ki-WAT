@@ -25,16 +25,21 @@ namespace Ki_WAT
 
         public event EventHandler<BarcodeEventArgs> OnBarcodeReceived;
         public event EventHandler<Exception> OnError;
+        private bool m_bIsConnect = false;
 
         public BarcodeReader(string ipAddress)
         {
             m_reader.IpAddress = ipAddress;
             
         }
+        public bool IsConnected()
+        {
+            return m_bIsConnect;
+        }
 
         public void ConnectBarcodeReader()
         {
-            bool bRes = m_reader.Connect();
+             m_bIsConnect = m_reader.Connect();
 
             if (_readThread == null || !_readThread.IsAlive)
             {
@@ -42,6 +47,8 @@ namespace Ki_WAT
                 _readThread = new Thread(ReadLoop);
                 _readThread.IsBackground = true;
                 _readThread.Start();
+
+                Broker.dsBroker.Publish(Topics.DS.Barcode, Topics.DS.Connect);
             }
         }
 
@@ -76,9 +83,12 @@ namespace Ki_WAT
         public void Disconnect()
         {
             _run = false;
+            Thread.Sleep(300);
+            string data = m_reader.ExecCommand("LOFF");
 
             m_reader.Disconnect();
-
+            m_bIsConnect = false;
+            
             if (_readThread != null && _readThread.IsAlive)
             {
                 _readThread.Join(500);

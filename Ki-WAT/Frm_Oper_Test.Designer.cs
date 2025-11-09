@@ -259,6 +259,7 @@
             this.lbl_hlt_message.TabIndex = 164;
             this.lbl_hlt_message.Text = "-";
             this.lbl_hlt_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_hlt_message.Visible = false;
             // 
             // Frm_Oper_Test
             // 
@@ -286,6 +287,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "ㄱ";
+            this.Load += new System.EventHandler(this.Frm_Oper_Test_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -231,5 +231,10 @@ namespace Ki_WAT
 
 
         }
+
+        private void Frm_Oper_Test_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

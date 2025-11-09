@@ -37,7 +37,7 @@ namespace Ki_WAT
         private int m_nCurrentFrmIdx = Def.FOM_IDX_MAIN;
         private Form m_ActiveSubForm;
 
-        public Lib_TcpClient m_BarcodeComm = new Lib_TcpClient();
+        //public Lib_TcpClient m_BarcodeComm = new Lib_TcpClient();
         private Lib_TcpClient m_ScrewDriverL = new Lib_TcpClient();
         private Lib_TcpClient m_ScrewDriverR = new Lib_TcpClient();
 
@@ -114,7 +114,7 @@ namespace Ki_WAT
         private void Frm_Mainfrm_Load(object sender, EventArgs e)
         {
             _GV.Config.LoadConfig();
-            DeviceOpen();
+            
             InitUI();
             _GV._frmMNG.RegisterForm(this);
             m_frmSimul = new FrmSimulator(this);
@@ -123,6 +123,9 @@ namespace Ki_WAT
             m_StatusTimer.Start();
 
             CreateIODlg();
+
+            DeviceOpen();
+
         }
 
 
@@ -156,7 +159,9 @@ namespace Ki_WAT
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
 
-            if (m_BarcodeComm.IsConnected)
+
+             
+            if (_barcodeReader.IsConnected())
             {
                 lbl_Status_BAR.BackColor = Color.LimeGreen;
 

@@ -29,12 +29,12 @@ namespace Ki_WAT
 
 			if (client.Connected )
 			{
-				//Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
+				Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
 				StartPolling();
 			}
 			else if (!client.Connected )
 			{
-				//Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.NotConnect);
+				Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.NotConnect);
 				
 			}
 
@@ -83,6 +83,10 @@ namespace Ki_WAT
 					{
 						// 예: 로그 남기기, 재연결 시도 등
 					}
+					else
+					{
+                        Broker.dsBroker.Publish(Topics.PLC.Data, 0);
+                    }
 					Thread.Sleep(100);
 				}
 				else
@@ -92,12 +96,11 @@ namespace Ki_WAT
 						int result = client.ConnectTo(_strIP, 0, 1);
 						if (result == 0)
 						{
-							//Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
+							Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
 						}
 						else
 						{
-							//Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.NotConnect);
-							
+							Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.NotConnect);
 							Thread.Sleep(1000);
 							continue;
 						}

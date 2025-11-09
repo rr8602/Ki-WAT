@@ -44,14 +44,10 @@
             this.editScrewIP2 = new System.Windows.Forms.TextBox();
             this.BTN_SAVE = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.editBarcodePort = new System.Windows.Forms.TextBox();
             this.editBarcodeIP = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.editPrintPort = new System.Windows.Forms.TextBox();
             this.editPrintIP = new System.Windows.Forms.TextBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -77,17 +73,15 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.editVEPPort = new System.Windows.Forms.TextBox();
             this.editVEPIP = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.editPLCPort = new System.Windows.Forms.TextBox();
             this.editPLCIP = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Txt_SWAOffset = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
             this.Txt_CamRR_LT = new System.Windows.Forms.TextBox();
             this.Txt_CamRR_AT = new System.Windows.Forms.TextBox();
             this.Txt_CamRR_ST = new System.Windows.Forms.TextBox();
@@ -177,8 +171,15 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.cButton1 = new KI_Controls.CButton();
-            this.label44 = new System.Windows.Forms.Label();
-            this.Txt_SWAOffset = new System.Windows.Forms.TextBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.editPLCPort = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.editVEPPort = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.editPrintPort = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.editBarcodePort = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -195,6 +196,7 @@
             this.panel1.SuspendLayout();
             this.gbxMList.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -212,6 +214,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox11);
             this.tabPage3.Controls.Add(this.groupBox10);
             this.tabPage3.Controls.Add(this.groupBox9);
             this.tabPage3.Controls.Add(this.BTN_SAVE);
@@ -360,9 +363,7 @@
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.label11);
             this.groupBox8.Controls.Add(this.label26);
-            this.groupBox8.Controls.Add(this.editBarcodePort);
             this.groupBox8.Controls.Add(this.editBarcodeIP);
             this.groupBox8.Location = new System.Drawing.Point(348, 349);
             this.groupBox8.Name = "groupBox8";
@@ -370,15 +371,6 @@
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Barcode";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(24, 78);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(70, 27);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Port :";
             // 
             // label26
             // 
@@ -388,14 +380,6 @@
             this.label26.Size = new System.Drawing.Size(48, 27);
             this.label26.TabIndex = 2;
             this.label26.Text = "IP :";
-            // 
-            // editBarcodePort
-            // 
-            this.editBarcodePort.Location = new System.Drawing.Point(88, 69);
-            this.editBarcodePort.Name = "editBarcodePort";
-            this.editBarcodePort.Size = new System.Drawing.Size(200, 35);
-            this.editBarcodePort.TabIndex = 1;
-            this.editBarcodePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // editBarcodeIP
             // 
@@ -407,9 +391,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.editPrintPort);
             this.groupBox3.Controls.Add(this.editPrintIP);
             this.groupBox3.Location = new System.Drawing.Point(33, 349);
             this.groupBox3.Name = "groupBox3";
@@ -417,15 +399,6 @@
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Printer";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(24, 78);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 27);
-            this.label8.TabIndex = 2;
-            this.label8.Text = "Port :";
             // 
             // label9
             // 
@@ -435,14 +408,6 @@
             this.label9.Size = new System.Drawing.Size(48, 27);
             this.label9.TabIndex = 2;
             this.label9.Text = "IP :";
-            // 
-            // editPrintPort
-            // 
-            this.editPrintPort.Location = new System.Drawing.Point(88, 69);
-            this.editPrintPort.Name = "editPrintPort";
-            this.editPrintPort.Size = new System.Drawing.Size(200, 35);
-            this.editPrintPort.TabIndex = 1;
-            this.editPrintPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // editPrintIP
             // 
@@ -505,7 +470,7 @@
             this.groupBox6.Controls.Add(this.label32);
             this.groupBox6.Controls.Add(this.editLETPort);
             this.groupBox6.Controls.Add(this.editLetURL);
-            this.groupBox6.Location = new System.Drawing.Point(44, 634);
+            this.groupBox6.Location = new System.Drawing.Point(33, 634);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(618, 121);
             this.groupBox6.TabIndex = 17;
@@ -690,9 +655,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.editVEPPort);
             this.groupBox1.Controls.Add(this.editVEPIP);
             this.groupBox1.Location = new System.Drawing.Point(348, 49);
             this.groupBox1.Name = "groupBox1";
@@ -700,15 +663,6 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "VEP Setting";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 78);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 27);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Port :";
             // 
             // label6
             // 
@@ -718,14 +672,6 @@
             this.label6.Size = new System.Drawing.Size(48, 27);
             this.label6.TabIndex = 2;
             this.label6.Text = "IP :";
-            // 
-            // editVEPPort
-            // 
-            this.editVEPPort.Location = new System.Drawing.Point(88, 69);
-            this.editVEPPort.Name = "editVEPPort";
-            this.editVEPPort.Size = new System.Drawing.Size(200, 35);
-            this.editVEPPort.TabIndex = 1;
-            this.editVEPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // editVEPIP
             // 
@@ -737,9 +683,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.editPLCPort);
             this.groupBox2.Controls.Add(this.editPLCIP);
             this.groupBox2.Location = new System.Drawing.Point(33, 49);
             this.groupBox2.Name = "groupBox2";
@@ -747,15 +691,6 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "PLC Setting";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 78);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(70, 27);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Port :";
             // 
             // label4
             // 
@@ -765,15 +700,6 @@
             this.label4.Size = new System.Drawing.Size(48, 27);
             this.label4.TabIndex = 2;
             this.label4.Text = "IP :";
-            // 
-            // editPLCPort
-            // 
-            this.editPLCPort.Location = new System.Drawing.Point(88, 69);
-            this.editPLCPort.Name = "editPLCPort";
-            this.editPLCPort.Size = new System.Drawing.Size(200, 35);
-            this.editPLCPort.TabIndex = 1;
-            this.editPLCPort.Text = "4600";
-            this.editPLCPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // editPLCIP
             // 
@@ -874,6 +800,31 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1215, 834);
             this.panel1.TabIndex = 158;
+            // 
+            // Txt_SWAOffset
+            // 
+            this.Txt_SWAOffset.BackColor = System.Drawing.Color.Black;
+            this.Txt_SWAOffset.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
+            this.Txt_SWAOffset.ForeColor = System.Drawing.Color.Yellow;
+            this.Txt_SWAOffset.Location = new System.Drawing.Point(692, 250);
+            this.Txt_SWAOffset.Name = "Txt_SWAOffset";
+            this.Txt_SWAOffset.Size = new System.Drawing.Size(117, 43);
+            this.Txt_SWAOffset.TabIndex = 261;
+            this.Txt_SWAOffset.Text = "0.0";
+            this.Txt_SWAOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label44
+            // 
+            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label44.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.ForeColor = System.Drawing.Color.Aqua;
+            this.label44.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.label44.Location = new System.Drawing.Point(511, 250);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(167, 41);
+            this.label44.TabIndex = 260;
+            this.label44.Text = "SWA Offset";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Txt_CamRR_LT
             // 
@@ -1970,30 +1921,92 @@
             this.cButton1.ToggleForeColor = System.Drawing.Color.Black;
             this.cButton1.UseVisualStyleBackColor = false;
             // 
-            // label44
+            // groupBox11
             // 
-            this.label44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label44.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.ForeColor = System.Drawing.Color.Aqua;
-            this.label44.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.label44.Location = new System.Drawing.Point(511, 250);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(167, 41);
-            this.label44.TabIndex = 260;
-            this.label44.Text = "SWA Offset";
-            this.label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox11.Controls.Add(this.label8);
+            this.groupBox11.Controls.Add(this.editPrintPort);
+            this.groupBox11.Controls.Add(this.label11);
+            this.groupBox11.Controls.Add(this.editBarcodePort);
+            this.groupBox11.Controls.Add(this.label3);
+            this.groupBox11.Controls.Add(this.editPLCPort);
+            this.groupBox11.Controls.Add(this.label2);
+            this.groupBox11.Controls.Add(this.editVEPPort);
+            this.groupBox11.Location = new System.Drawing.Point(715, 673);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(303, 128);
+            this.groupBox11.TabIndex = 20;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "groupBox11";
+            this.groupBox11.Visible = false;
             // 
-            // Txt_SWAOffset
+            // label3
             // 
-            this.Txt_SWAOffset.BackColor = System.Drawing.Color.Black;
-            this.Txt_SWAOffset.Font = new System.Drawing.Font("Tahoma", 21.75F, System.Drawing.FontStyle.Bold);
-            this.Txt_SWAOffset.ForeColor = System.Drawing.Color.Yellow;
-            this.Txt_SWAOffset.Location = new System.Drawing.Point(692, 250);
-            this.Txt_SWAOffset.Name = "Txt_SWAOffset";
-            this.Txt_SWAOffset.Size = new System.Drawing.Size(117, 43);
-            this.Txt_SWAOffset.TabIndex = 261;
-            this.Txt_SWAOffset.Text = "0.0";
-            this.Txt_SWAOffset.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 27);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Port :";
+            // 
+            // editPLCPort
+            // 
+            this.editPLCPort.Location = new System.Drawing.Point(83, 46);
+            this.editPLCPort.Name = "editPLCPort";
+            this.editPLCPort.Size = new System.Drawing.Size(200, 35);
+            this.editPLCPort.TabIndex = 3;
+            this.editPLCPort.Text = "4600";
+            this.editPLCPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 55);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 27);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Port :";
+            // 
+            // editVEPPort
+            // 
+            this.editVEPPort.Location = new System.Drawing.Point(83, 46);
+            this.editVEPPort.Name = "editVEPPort";
+            this.editVEPPort.Size = new System.Drawing.Size(200, 35);
+            this.editVEPPort.TabIndex = 4;
+            this.editVEPPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 63);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 27);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Port :";
+            // 
+            // editPrintPort
+            // 
+            this.editPrintPort.Location = new System.Drawing.Point(91, 54);
+            this.editPrintPort.Name = "editPrintPort";
+            this.editPrintPort.Size = new System.Drawing.Size(200, 35);
+            this.editPrintPort.TabIndex = 7;
+            this.editPrintPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(27, 63);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 27);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "Port :";
+            // 
+            // editBarcodePort
+            // 
+            this.editBarcodePort.Location = new System.Drawing.Point(91, 54);
+            this.editBarcodePort.Name = "editBarcodePort";
+            this.editBarcodePort.Size = new System.Drawing.Size(200, 35);
+            this.editBarcodePort.TabIndex = 8;
+            this.editBarcodePort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Config
             // 
@@ -2034,6 +2047,8 @@
             this.gbxMList.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2121,9 +2136,7 @@
         private System.Windows.Forms.Button Btn_Refresh;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox editPLCPort;
         private System.Windows.Forms.TextBox editPLCIP;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -2147,19 +2160,13 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox editVEPPort;
         private System.Windows.Forms.TextBox editVEPIP;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox editBarcodePort;
         private System.Windows.Forms.TextBox editBarcodeIP;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox editPrintPort;
         private System.Windows.Forms.TextBox editPrintIP;
         private System.Windows.Forms.Label lblResultPath;
         private KI_Controls.CButton cButton1;
@@ -2190,5 +2197,14 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox Txt_SWAOffset;
         private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox editPrintPort;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox editBarcodePort;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox editPLCPort;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox editVEPPort;
     }
 }
