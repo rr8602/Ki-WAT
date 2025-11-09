@@ -337,8 +337,10 @@ namespace Ki_WAT
                         return;
                     }
 
-                    _GV._VEP_Client.SetSync32HLAFinish();
-                    SetState(Constants.STEP_HLT_GET_RESULT);
+					//_GV._VEP_Client.SetSync32HLAFinish();
+					_GV.vep.SetSync32HLAFinish();
+
+					SetState(Constants.STEP_HLT_GET_RESULT);
                 }
             }
             catch (Exception ex)

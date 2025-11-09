@@ -155,6 +155,10 @@
     <Compile Include="MsgBroker.cs" />
     <Compile Include="PLCReadWAT.cs" />
     <Compile Include="PLCWriteWAT.cs" />
+    <Compile Include="VEPController\VEPController.Base.cs" />
+    <Compile Include="VEPController\VEPController.Common.cs" />
+    <Compile Include="VEPController\VEPController.Simulate.cs" />
+    <Compile Include="VEPController\VEPData.cs" />
     <Compile Include="VEP\IVEPBenchZone.cs" />
     <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
@@ -358,11 +362,10 @@
     <None Include="Resources\Gray.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\user\source\repos\pospaker\KI_Library\KI_Library\KI_Library.csproj">
+    <ProjectReference Include="..\..\KI_Library\KI_Library\KI_Library.csproj">
       <Project>{de27fd5c-1908-415f-86f5-8a502139ae71}</Project>
       <Name>KI_Library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

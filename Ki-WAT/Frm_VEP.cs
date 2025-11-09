@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,18 +24,183 @@ namespace Ki_WAT
         {
             InitializeComponent();
             m_Parent = pParent;
-            _GV._VEP_Client.DescriptionZoneRead += BenchClient_OnDescriptionZoneRead;
-            _GV._VEP_Client.StatusZoneChanged += BenchClient_StatusZoneChanged;
-            _GV._VEP_Client.SynchroZoneChanged += BenchClient_SynchroZoneChanged;
-            _GV._VEP_Client.TransmissionZoneChanged += BenchClient_TransmissionZoneChanged;
-            _GV._VEP_Client.ReceptionZoneChanged += BenchClient_ReceptionZoneChanged;
+
         }
         private void Frm_VEP_Load(object sender, EventArgs e)
         {
+			List_Sync.View = View.Details; // REPORT 모드
+			List_Sync.FullRowSelect = true;
+			List_Sync.GridLines = true;
 
-        }
+			List_Sync.Columns.Clear();
 
-        public void ShowVEP()
+			// 컬럼 추가
+			List_Sync.Columns.Add("Non", 0);
+			List_Sync.Columns.Add("Address", List_Sync.Width / 3 - 20, HorizontalAlignment.Center);
+			List_Sync.Columns.Add("Sync No", List_Sync.Width / 3 - 20, HorizontalAlignment.Center);
+			List_Sync.Columns.Add("Value", List_Sync.Width / 3 + 15, HorizontalAlignment.Center);
+
+
+			_GV.vep.broker.Subscribe("VEP", UpdateUI);
+		}
+
+
+
+		private void UpdateUI(object data)
+		{
+			if (this.InvokeRequired)
+			{
+				this.BeginInvoke(new Action<object>(UpdateUI), data);
+				return;
+			}
+
+			string strZone = data as string;
+
+			if (!string.IsNullOrEmpty(strZone))
+			{
+				switch (strZone)
+				{
+					case "DZData":
+						UpdateDZ();
+						break;
+
+					case "SZData":
+						UpdateSZ();
+						break;
+
+					case "SYData":
+						UpdateSY();
+						break;
+					case "TZData":
+						UpdateTZ();
+						break;
+					case "RZData":
+						UpdateRZ();
+						break;
+					case "AddTZData":
+						UpdateAddTZ();
+						break;
+
+
+					default:
+						break;
+				}
+			}
+		}
+
+		private void UpdateDZ()
+		{
+			txtDesZone.Text = _GV.vep.vepData.Validate.ToString();
+			txtStatusZoneAddress.Text = _GV.vep.vepData.SZAddr.ToString();
+			txtStatusZoneSize.Text = _GV.vep.vepData.SZSize.ToString();
+			txtSynchroZoneAddress.Text = _GV.vep.vepData.SYAddr.ToString();
+			txtSynchroZoneSize.Text = _GV.vep.vepData.SYSize.ToString();
+			txtTzAddress.Text = _GV.vep.vepData.TZAddr.ToString();
+			txtTzSize.Text = _GV.vep.vepData.TZSize.ToString();
+			txtReAddress.Text = _GV.vep.vepData.RZAddr.ToString();
+			txtReSize.Text = _GV.vep.vepData.RZSize.ToString();
+			txtAddTzAddress.Text = _GV.vep.vepData.AddTZAddr.ToString();
+			txtAddTzSize.Text = _GV.vep.vepData.AddTZSize.ToString();
+			txtAddReAddress.Text = _GV.vep.vepData.AddRZAddr.ToString();
+			txtAddReSize.Text = _GV.vep.vepData.AddRZSize.ToString();
+		}
+		private void UpdateSZ()
+		{
+
+			txtStVepStatus.Text = _GV.vep.vepData.VEPStatus.ToString();
+			txtStVepCycleInt.Text = _GV.vep.vepData.VEPCycleInterupt.ToString();
+			txtStVepCycleEnd.Text = _GV.vep.vepData.VEPCycleEnd.ToString();
+			txtStBenchCycleInt.Text = _GV.vep.vepData.BenchCycleInterupt.ToString();
+			txtStBenchCycleEnd.Text = _GV.vep.vepData.BenchCycleEnd.ToString();
+			txtStStartCycle.Text = _GV.vep.vepData.StartCycle.ToString();
+
+
+		}
+		private void UpdateSY()
+		{
+			if (List_Sync.Items.Count != _GV.vep.vepData.SYData.Length)
+			{
+				List_Sync.Items.Clear();
+
+				int nAdd = _GV.vep.vepData.SYAddr;
+
+				for (int ni = 0; ni < _GV.vep.vepData.SYData.Length; ni++)
+				{
+					ListViewItem item = new ListViewItem("1");
+					item.SubItems.Add(nAdd.ToString());
+					item.SubItems.Add(ni.ToString());
+					item.SubItems.Add("");
+					List_Sync.Items.Add(item);
+					nAdd++;
+
+				}
+
+			}
+
+			if (List_Sync.Items.Count > 0)
+			{
+				for (int ni = 0; ni < _GV.vep.vepData.SYData.Length; ni++)
+				{
+					//List_Sync.Items[ni].SubItems[3].Text = vep.vepData.SYData[ni].ToString();
+					string newText = _GV.vep.vepData.SYData[ni].ToString();
+					if (List_Sync.Items[ni].SubItems[3].Text != newText)
+						List_Sync.Items[ni].SubItems[3].Text = newText;
+				}
+			}
+
+			Txt_S00.Text = _GV.vep.vepData.SYData[0].ToString();
+			Txt_S01.Text = _GV.vep.vepData.SYData[1].ToString();
+			Txt_S03.Text = _GV.vep.vepData.SYData[3].ToString();
+			Txt_S04.Text = _GV.vep.vepData.SYData[4].ToString();
+			Txt_S06.Text = _GV.vep.vepData.SYData[6].ToString();
+			Txt_S07.Text = _GV.vep.vepData.SYData[7].ToString();
+			Txt_S08.Text = _GV.vep.vepData.SYData[8].ToString();
+			Txt_S09.Text = _GV.vep.vepData.SYData[9].ToString();
+			Txt_S10.Text = _GV.vep.vepData.SYData[10].ToString();
+			Txt_S11.Text = _GV.vep.vepData.SYData[11].ToString();
+			Txt_S12.Text = _GV.vep.vepData.SYData[12].ToString();
+			Txt_S13.Text = _GV.vep.vepData.SYData[13].ToString();
+			Txt_S20.Text = _GV.vep.vepData.SYData[20].ToString();
+			Txt_S21.Text = _GV.vep.vepData.SYData[21].ToString();
+			Txt_S22.Text = _GV.vep.vepData.SYData[22].ToString();
+			Txt_S30.Text = _GV.vep.vepData.SYData[30].ToString();
+			Txt_S32.Text = _GV.vep.vepData.SYData[32].ToString();
+
+
+		}
+
+		private void UpdateTZ()
+		{
+
+			txtAddrTzSize.Text = _GV.vep.vepData.TZ_AddTZSize.ToString();
+			txtTzExchStatus.Text = _GV.vep.vepData.TZ_ExchangeStatus.ToString();
+			txtTzFctCode.Text = _GV.vep.vepData.TZ_FctCode.ToString();
+			txtTzPCNum.Text = _GV.vep.vepData.TZ_PCNum.ToString();
+			txtTzProcessCode.Text = _GV.vep.vepData.TZ_ProcessCode.ToString();
+			txtTzSubFctCode.Text = _GV.vep.vepData.TZ_SubFctCode.ToString();
+			//editTZData.Text = _GV.vep.vepData.TZDataString;
+			richTextBox1.Text = _GV.vep.vepData.TZDataString;
+		}
+
+		private void UpdateRZ()
+		{
+
+			txtAddrReSize.Text = _GV.vep.vepData.RZ_AddRZSize.ToString();
+			txtReExchStatus.Text = _GV.vep.vepData.RZ_ExchangeStatus.ToString();
+			txtReFctCode.Text = _GV.vep.vepData.RZ_FctCode.ToString();
+			txtRePCNum.Text = _GV.vep.vepData.RZ_PCNum.ToString();
+			txtReProcessCode.Text = _GV.vep.vepData.RZ_ProcessCode.ToString();
+			txtReSubFctCode.Text = _GV.vep.vepData.RZ_SubFctCode.ToString();
+			//editRZData.Text = _GV.vep.vepData.RZDataString;
+			richTextBox2.Text = _GV.vep.vepData.RZDataString;
+		}
+
+		private void UpdateAddTZ()
+		{
+
+		}
+
+		public void ShowVEP()
         {
             InitList();
 
@@ -51,26 +218,26 @@ namespace Ki_WAT
             // 싱크로
             for ( int ni = 0; ni < 90; ni++)
             {
-                List_Sync.Items[ni].SubItems[3].Text = _GV._VEP_Data.SynchroZone.GetValue(ni).ToString();
+                List_Sync.Items[ni].SubItems[3].Text = _GV.vep.vepData.SYData[ni].ToString();
             }
 
-            Txt_S00.Text = _GV._VEP_Data.SynchroZone.GetValue(0).ToString();
-            Txt_S01.Text = _GV._VEP_Data.SynchroZone.GetValue(1).ToString();
-            Txt_S03.Text = _GV._VEP_Data.SynchroZone.GetValue(3).ToString();
-            Txt_S04.Text= _GV._VEP_Data.SynchroZone.GetValue(4).ToString(); 
-            Txt_S06.Text= _GV._VEP_Data.SynchroZone.GetValue(6).ToString();
-            Txt_S07.Text= _GV._VEP_Data.SynchroZone.GetValue(7).ToString();
-            Txt_S08.Text= _GV._VEP_Data.SynchroZone.GetValue(08).ToString();
-            Txt_S09.Text= _GV._VEP_Data.SynchroZone.GetValue(9).ToString();
-            Txt_S10.Text= _GV._VEP_Data.SynchroZone.GetValue(10).ToString(); 
-            Txt_S11.Text= _GV._VEP_Data.SynchroZone.GetValue(11).ToString(); 
-            Txt_S12.Text= _GV._VEP_Data.SynchroZone.GetValue(12).ToString();
-            Txt_S13.Text= _GV._VEP_Data.SynchroZone.GetValue(13).ToString();
-            Txt_S20.Text= _GV._VEP_Data.SynchroZone.GetValue(20).ToString();
-            Txt_S21.Text= _GV._VEP_Data.SynchroZone.GetValue(21).ToString();
-            Txt_S22.Text= _GV._VEP_Data.SynchroZone.GetValue(22).ToString();
-            Txt_S30.Text= _GV._VEP_Data.SynchroZone.GetValue(30).ToString();
-            Txt_S32.Text= _GV._VEP_Data.SynchroZone.GetValue(32).ToString();
+            Txt_S00.Text = _GV.vep.vepData.SYData[0].ToString();
+            Txt_S01.Text = _GV.vep.vepData.SYData[1].ToString();
+            Txt_S03.Text = _GV.vep.vepData.SYData[3].ToString();
+            Txt_S04.Text= _GV.vep.vepData.SYData[4].ToString(); 
+            Txt_S06.Text= _GV.vep.vepData.SYData[6].ToString();
+            Txt_S07.Text= _GV.vep.vepData.SYData[7].ToString();
+            Txt_S08.Text= _GV.vep.vepData.SYData[8].ToString();
+            Txt_S09.Text= _GV.vep.vepData.SYData[9].ToString();
+            Txt_S10.Text= _GV.vep.vepData.SYData[10].ToString(); 
+            Txt_S11.Text= _GV.vep.vepData.SYData[11].ToString(); 
+            Txt_S12.Text= _GV.vep.vepData.SYData[12].ToString();
+            Txt_S13.Text= _GV.vep.vepData.SYData[13].ToString();
+            Txt_S20.Text= _GV.vep.vepData.SYData[20].ToString();
+            Txt_S21.Text= _GV.vep.vepData.SYData[21].ToString();
+            Txt_S22.Text= _GV.vep.vepData.SYData[22].ToString();
+            Txt_S30.Text= _GV.vep.vepData.SYData[30].ToString();
+            Txt_S32.Text= _GV.vep.vepData.SYData[32].ToString();
 
 
         }
@@ -105,157 +272,7 @@ namespace Ki_WAT
             cmbValueList.SelectedIndex = 0;
 
         }
-
-        public void UpdateSynchroValues(ushort[] pSync)
-        {
-            if (!this.Visible) return;
-
-            for ( int ni = 0; ni < pSync.Length; ni++)
-            {
-                List_Sync.Items[ni].SubItems[3].Text = pSync[ni].ToString();
-            }
-
-            Txt_S00.Text = pSync[0].ToString();
-            Txt_S01.Text = pSync[1].ToString();
-            Txt_S03.Text = pSync[3].ToString();
-            Txt_S04.Text = pSync[4].ToString();
-            Txt_S06.Text = pSync[6].ToString();
-            Txt_S07.Text = pSync[7].ToString();
-            Txt_S08.Text = pSync[8].ToString();
-            Txt_S09.Text = pSync[9].ToString();
-            Txt_S10.Text = pSync[10].ToString();
-            Txt_S11.Text = pSync[11].ToString();
-            Txt_S12.Text = pSync[12].ToString();
-            Txt_S13.Text = pSync[13].ToString();
-            Txt_S20.Text = pSync[20].ToString();
-            Txt_S21.Text = pSync[21].ToString();
-            Txt_S22.Text = pSync[22].ToString();
-            Txt_S30.Text = pSync[30].ToString();
-            Txt_S32.Text = pSync[32].ToString();
-
-        }
-
-        private void BenchClient_OnDescriptionZoneRead(object sender, VEPBenchDescriptionZone e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action<object, VEPBenchDescriptionZone>(BenchClient_OnDescriptionZoneRead), sender, e);
-                return;
-            }
-
-            txtDesZone.Text = e.ValidityIndicator.ToString();
-            txtStatusZoneAddress.Text = e.StatusZoneAddr.ToString();
-            txtStatusZoneSize.Text = e.StatusZoneSize.ToString();
-            txtSynchroZoneAddress.Text = e.SynchroZoneAddr.ToString();
-            txtSynchroZoneSize.Text = e.SynchroZoneSize.ToString();
-            txtTzAddress.Text = e.TransmissionZoneAddr.ToString();
-            txtTzSize.Text = e.TransmissionZoneSize.ToString();
-            txtReAddress.Text = e.ReceptionZoneAddr.ToString();
-            txtReSize.Text = e.ReceptionZoneSize.ToString();
-            txtAddTzAddress.Text = e.AdditionalTZAddr.ToString();
-            txtAddTzSize.Text = e.AdditionalTZSize.ToString();
-            txtAddReAddress.Text = e.AdditionalRZAddr.ToString();
-            txtAddReSize.Text = e.AdditionalRZSize.ToString();
-        }
-        private void BenchClient_StatusZoneChanged(object sender, VEPBenchStatusZone e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateStatusInfo(
-                    e.VepStatus,
-                    e.VepCycleEnd,
-                    e.BenchCycleEnd,
-                    e.StartCycle,
-                    e.VepCycleInterruption,
-                    e.BenchCycleInterruption)));
-            }
-            else
-            {
-                UpdateStatusInfo(
-                    e.VepStatus,
-                    e.VepCycleEnd,
-                    e.BenchCycleEnd,
-                    e.StartCycle,
-                    e.VepCycleInterruption,
-                    e.BenchCycleInterruption);
-            }
-        }
-        public void UpdateStatusInfo(ushort vepStatus, ushort vepCycleEnd, ushort benchCycleEnd, ushort startCycle, ushort vepCycleInt, ushort benchCycleInt)
-        {
-            txtStVepStatus.Text = vepStatus.ToString();
-            txtStVepCycleEnd.Text = vepCycleEnd.ToString();
-            txtStBenchCycleEnd.Text = benchCycleEnd.ToString();
-            txtStStartCycle.Text = startCycle.ToString();
-            txtStVepCycleInt.Text = vepCycleInt.ToString();
-            txtStBenchCycleInt.Text = benchCycleInt.ToString();
-        }
-
-        private void BenchClient_SynchroZoneChanged(object sender, VEPBenchSynchroZone e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateSynchroValues(e.ToRegisters())));
-                    
-            }
-            else
-            {
-                UpdateSynchroValues(e.ToRegisters());
-            }
-        }
-
-        private void BenchClient_TransmissionZoneChanged(object sender, VEPBenchTransmissionZone e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateTransmissionInfo(e.AddTzSize, e.ExchStatus, e.FctCode, e.PCNum, e.ProcessCode, e.SubFctCode)));
-            }
-            else
-            {
-                UpdateTransmissionInfo(e.AddTzSize, e.ExchStatus, e.FctCode, e.PCNum, e.ProcessCode, e.SubFctCode);
-            }
-
-            if (e.IsRequest)
-            {
-                Console.WriteLine($"TransmissionZoneChanged 이벤트: 요청 감지 FctCode={e.FctCode}, PCNum={e.PCNum}");
-            }
-        }
-
-        public void UpdateTransmissionInfo(ushort size, ushort exchStatus, byte fctCode, byte pcNum, byte processCode, byte subFctCode)
-        {
-            txtAddrTzSize.Text = size.ToString();
-            txtTzExchStatus.Text = exchStatus.ToString();
-            txtTzFctCode.Text = fctCode.ToString();
-            txtTzPCNum.Text = pcNum.ToString();
-            txtTzProcessCode.Text = processCode.ToString();
-            txtTzSubFctCode.Text = subFctCode.ToString();
-        }
-
-        public void UpdateReceptionInfo(ushort size, ushort exchStatus, byte fctCode, byte pcNum, byte processCode, byte subFctCode)
-        {
-            txtAddrReSize.Text = size.ToString();
-            txtReExchStatus.Text = exchStatus.ToString();
-            txtReFctCode.Text = fctCode.ToString();
-            txtRePCNum.Text = pcNum.ToString();
-            txtReProcessCode.Text = processCode.ToString();
-            txtReSubFctCode.Text = subFctCode.ToString();
-        }
-
-        private void BenchClient_ReceptionZoneChanged(object sender, VEPBenchReceptionZone e)
-        {
-            if (InvokeRequired)
-            {
-                BeginInvoke(new Action(() => UpdateReceptionInfo(e.AddReSize, e.ExchStatus, e.FctCode, e.PCNum, e.ProcessCode, e.SubFctCode)));
-            }
-            else
-            {
-                UpdateReceptionInfo(e.AddReSize, e.ExchStatus, e.FctCode, e.PCNum, e.ProcessCode, e.SubFctCode);
-            }
-
-            string status = e.IsResponseCompleted ? "응답 완료" : "응답 준비";
-            Console.WriteLine($"ReceptionZoneChanged 이벤트: {status}, FctCode={e.FctCode}");
-        }
-
-        
+		        
 
         private void btnEditValue_Click(object sender, EventArgs e)
         {
@@ -275,9 +292,11 @@ namespace Ki_WAT
                 }
                 //_GV._VEP_Data.SynchroZone.SetValue(nIndex, (ushort)valueToSet);
                 //_GV._VEP_Client.WriteSynchroZone();
-                _GV._VEP_Client.WriteSyncroZone((ushort)nIndex, (ushort)valueToSet);
+                //_GV._VEP_Client.WriteSyncroZone((ushort)nIndex, (ushort)valueToSet);
 
-            }
+
+				_GV.vep.SetSynchro(nIndex, (ushort)valueToSet);
+			}
             catch (Exception ex)
             {
                 MessageBox.Show($"Error modifying value: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -286,9 +305,9 @@ namespace Ki_WAT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _GV._VEP_Client.SetTzEtat(100);
+			_GV.vep.SetTZExchange(30);
 
-            if (_GV._VEP_Data.StatusZone.StartCycle == 0 )
+			if (_GV.vep.vepData.StartCycle == 0 )
             {
 
             }
@@ -304,8 +323,14 @@ namespace Ki_WAT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _GV._VEP_Client.SetTzEtat(30);
+            
+			_GV.vep.SetTZExchange(100);
             
         }
-    }
+
+		private void Frm_VEP_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			_GV.vep.broker.Unsubscribe("VEP", UpdateUI);
+		}
+	}
 }

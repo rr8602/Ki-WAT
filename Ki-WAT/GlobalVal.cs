@@ -185,8 +185,8 @@ namespace Ki_WAT
             _frmMNG = new FormManager();
             _TestThread = new TestThread_Kint(this);
             //_PLCVal = new PLCVal();
-            _VEP_Data = new VEPBenchDataManager(this);
-            _VEP_Client = new VEPBenchClient(this, _VEP_Data);
+            //_VEP_Data = new VEPBenchDataManager(this);
+            //_VEP_Client = new VEPBenchClient(this, _VEP_Data);
         }
         public void InitData()
         {
@@ -204,9 +204,11 @@ namespace Ki_WAT
         public FormManager _frmMNG;
         public TestThread_Kint _TestThread;
 
-        //public PLCVal _PLCVal;
 
-        public PLCReadWAT plcRead = null;
+		public VEPController vep = new VEPController();
+		//public PLCVal _PLCVal;
+
+		public PLCReadWAT plcRead = null;
         public PLCWriteWAT plcWrite = null;
 
         public bool g_Substitu_PEV = false;

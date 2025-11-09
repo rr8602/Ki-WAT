@@ -476,9 +476,15 @@ public class TestThread_Kint
     {
         try
         {
-            // NEED PEV. Start cycle set Value 1;
-            _GV._VEP_Client.SetAllSyncZero();
-            _GV._VEP_Client.SetStartCycle();
+			// NEED PEV. Start cycle set Value 1;
+			//_GV._VEP_Client.SetAllSyncZero();
+			//_GV._VEP_Client.SetStartCycle();
+			_GV.vep.B_SetSyncroAllZero();
+			_GV.vep.B_StartCycle();
+
+
+
+
             // NEED PLC. 여기서 휠베이스 이동 명령어도 전송;
            // _GV._PLCVal.DO._Wheelbase_Start = true;
             UI_Update_Status("STEP_PEV_START");
@@ -500,7 +506,9 @@ public class TestThread_Kint
     {
         try
         {
-            _GV._VEP_Data.SendPJI(_GV.m_Cur_Info.CarPJINo);
+			//_GV._VEP_Data.SendPJI(_GV.m_Cur_Info.CarPJINo);
+			_GV.vep.B_SendPJIMultiple(_GV.m_Cur_Info.CarPJINo);
+
             UI_Update_Status("STEP_PEV_SEND_PJI");
             //_GV._VEP_Data.TransmissionZone.ExchStatus = 2;
             const double TIMEOUT_SECONDS = 0.5;
@@ -528,10 +536,16 @@ public class TestThread_Kint
             {
                 if (CheckLoopExit()) break;
                 Thread.Sleep(10);
-                if (_GV._VEP_Data.SynchroZone.GetSyncroValue(0) == 1 ) break;
-            }
-            _GV._VEP_Client.SetSync30NewVehicle();
-            testThread_HLT.StartThread();
+				//if (_GV._VEP_Data.SynchroZone.GetSyncroValue(0) == 1 ) break;
+				if (_GV.vep.vepData.SYData[0] == 1) break;
+				
+
+			}
+            //_GV._VEP_Client.SetSync30NewVehicle();
+			_GV.vep.SetSync30NewVehicle();
+
+
+			testThread_HLT.StartThread();
             SetState(Constants.STEP_MOVE_WHEELBASE);
         }
         catch (Exception ex)
@@ -973,25 +987,36 @@ public class TestThread_Kint
             while (m_bSendSWA && !cancellationToken.IsCancellationRequested)
             {
 
-                ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(8);
-                
-                if ( isSWB  == 1 )
+				//ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(8);
+				ushort isSWB = _GV.vep.vepData.SYData[8];
+
+				if ( isSWB  == 1 )
                 {
                     int nA = 100;
                     int nB = 0;
                     ushort usData = (ushort)(nA * _GV.dHandle + nB);
-                    _GV._VEP_Client.SetSync07SWBAngle(usData);
-                }
+					//_GV._VEP_Client.SetSync07SWBAngle(usData);
+					_GV.vep.SetSync07SWBAngle(usData);
+
+				}
                 // 전송 간격 (예: 100ms)
                 await Task.Delay(1000, cancellationToken);
 
-                if (_GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 1 ||
-                     _GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 2)
-                {
-                    StopSWASending();
-                }
+                //if (_GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 1 ||
+                //     _GV._VEP_Data.SynchroZone.GetSyncroValue(9) == 2)
+                //{
+                //    StopSWASending();
+                //}
+				if (_GV.vep.vepData.SYData[9] == 1 ||
+					 _GV.vep.vepData.SYData[9] == 2)
+				{
+					StopSWASending();
+				}
 
-            }
+				
+
+
+			}
         }
         catch (OperationCanceledException)
         {
@@ -1010,18 +1035,29 @@ public class TestThread_Kint
             while (m_bSendSWA && !cancellationToken.IsCancellationRequested)
             {
 
-                if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 3)
-                {
-                    StopSWAChecking();
-                }
-               if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 1)
-                {
-                    SendFinalSWB();
-                    StopSWAChecking();
-                }
+				//            if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 3)
+				//            {
+				//                StopSWAChecking();
+				//            }
+				//if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 1)
+				//            {
+				//                SendFinalSWB();
+				//                StopSWAChecking();
+				//            }
 
-                // 전송 간격 (예: 100ms)
-                await Task.Delay(300, cancellationToken);
+
+				if (_GV.vep.vepData.SYData[20] == 3)
+				{
+					StopSWAChecking();
+				}
+				if (_GV.vep.vepData.SYData[20] == 1)
+				{
+					SendFinalSWB();
+					StopSWAChecking();
+				}
+
+				// 전송 간격 (예: 100ms)
+				await Task.Delay(300, cancellationToken);
 
             }
         }
@@ -1052,8 +1088,12 @@ public class TestThread_Kint
             }
 
             // RUNOUT 이 끝나고 
-            _GV._VEP_Client.SetSync06RunOutFinish();
-            m_bSendSWA = true;
+            //_GV._VEP_Client.SetSync06RunOutFinish();
+			_GV.vep.SetSync06RunOutFinish();
+
+
+
+			m_bSendSWA = true;
             StartSWASending();
 
             m_InitMeasureData = m_measureData.Clone();
@@ -1233,8 +1273,11 @@ public class TestThread_Kint
     }
     private void SendThrustangle()
     {   
-        ushort Offset = _GV._VEP_Data.SynchroZone.GetSyncroValue(12);
-        int nA = 0;
+        //ushort Offset = _GV._VEP_Data.SynchroZone.GetSyncroValue(12);
+		ushort Offset = _GV.vep.vepData.SYData[12];
+
+
+		int nA = 0;
         int nB = 0;
         int nC = 0;
         ushort usData = GetABFromOffset(Offset, nA, nB, nC, _GV.g_MeasureData.dTA);
@@ -1242,10 +1285,15 @@ public class TestThread_Kint
         if ( usData != 65535 )
         {
             usData = (ushort)_rand.Next(0, 1001);
-            _GV._VEP_Client.SetSync10TAReady();
-            _GV._VEP_Client.SetSync11TAAngle(usData);
-        }
-    }
+            
+			//_GV._VEP_Client.SetSync10TAReady();
+            //_GV._VEP_Client.SetSync11TAAngle(usData);
+
+			_GV.vep.SetSync10TAReady();
+			_GV.vep.SetSync11TAAngle(usData);
+
+		}
+	}
     private void SendFinalSWB()
     {
         //ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(20);
@@ -1254,11 +1302,16 @@ public class TestThread_Kint
             int nA = 100;
             int nB = 0;
             ushort usData = (ushort)(nA * _GV.dHandle + nB);
-            _GV._VEP_Client.SetSync04SWB_Imform();
-            _GV._VEP_Client.SetSync07SWBAngle(usData);
-        }
 
-    }
+			//_GV._VEP_Client.SetSync04SWB_Imform();
+			//_GV._VEP_Client.SetSync07SWBAngle(usData);
+
+			_GV.vep.SetSync04SWB_Imform();
+			_GV.vep.SetSync07SWBAngle(usData);
+
+		}
+
+	}
     private int Do_Press_PitOut_Finish_wait()
     {
         int nRet = 0;
@@ -1381,8 +1434,10 @@ public class TestThread_Kint
                 if (_GV.plcRead.IsHLAHomePosition()) break;
                 Thread.Sleep(10);
             }
-            _GV._VEP_Client.SetSync32HLAFinish();
-            SetState(Constants.STEP_CHECK_VEP_FINISH);
+			//_GV._VEP_Client.SetSync32HLAFinish();
+			_GV.vep.SetSync32HLAFinish();
+
+			SetState(Constants.STEP_CHECK_VEP_FINISH);
 
         }
         catch (Exception ex)
@@ -1405,10 +1460,13 @@ public class TestThread_Kint
             {
                 if (CheckLoopExit()) break;
 
-                if ( _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ||
-                    _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 3
-                    )
-                {
+                //if ( _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ||
+                //    _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 3
+                //    )
+				if (_GV.vep.vepData.SYData[1] == 2 ||
+					_GV.vep.vepData.SYData[1] == 3
+				)
+				{
                     break;
                 }
             }
@@ -1693,9 +1751,10 @@ public class TestThread_Kint
         _Data.GlobalEvaluationHLAProcess = pLamp.HLT___PK;
 
 
-        _Data.ResultatPEV = _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ? "OK" : "NOK";
+		//_Data.ResultatPEV = _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ? "OK" : "NOK";
+		_Data.ResultatPEV = _GV.vep.vepData.SYData[1] == 2 ? "OK" : "NOK";
 
-        return _Data;
+		return _Data;
     }
     private int Do_TicketPrint()
     {

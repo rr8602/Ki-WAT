@@ -179,7 +179,7 @@ namespace Ki_WAT
             {
                 //lbl_Status_SCRL.BackColor = Color.Red;
             }
-            if (_GV._VEP_Client.IsConnected)
+            if (_GV.vep.IsConnect())
             {
                 lbl_State_VEP.BackColor = Color.LimeGreen;
             }
@@ -232,9 +232,15 @@ namespace Ki_WAT
             //m_ScrewDriverR.Connect(_GV.Config.Device.SCREW_IP2, Int32.Parse(_GV.Config.Device.SCREW_PORT2));
             //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
+			int nRet = _GV.vep.Create("127.0.0.1", 502);
 
-            _GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
-            _GV._VEP_Client.StartMonitoring();
+			if (nRet != -1)
+			{
+
+			}
+
+			//_GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
+            //_GV._VEP_Client.StartMonitoring();
 
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
 
@@ -586,8 +592,11 @@ namespace Ki_WAT
         private void TestTimer_Tick(object sender, EventArgs e)
         {
             int nRand = _rand.Next(0, 1001);
-            _GV._VEP_Client.SetTzEtat((ushort)nRand);
-        }
+			//_GV._VEP_Client.SetTzEtat((ushort)nRand);
+
+			_GV.vep.SetTZExchange((ushort)nRand);
+
+		}
 
         private void Btn_T_Click(object sender, EventArgs e)
         {
