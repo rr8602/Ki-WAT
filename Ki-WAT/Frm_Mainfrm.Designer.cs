@@ -35,13 +35,15 @@
             this.Btn_StaticMaster = new System.Windows.Forms.Button();
             this.Btn_Rolling = new System.Windows.Forms.Button();
             this.Btn_T = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.picLogo = new System.Windows.Forms.PictureBox();
             this.btnIo = new System.Windows.Forms.Button();
             this.BtnConfig = new System.Windows.Forms.Button();
             this.BtnManual = new System.Windows.Forms.Button();
             this.BtnMain = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.stcLable = new System.Windows.Forms.Label();
+            this.picBK = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picLogo = new System.Windows.Forms.PictureBox();
             this.lbl_SEN_RR = new KI_Controls.RoundLabel();
             this.lbl_SEN_RL = new KI_Controls.RoundLabel();
             this.lbl_SEN_FR = new KI_Controls.RoundLabel();
@@ -52,9 +54,10 @@
             this.Status_Screw_L = new KI_Controls.RoundLabel();
             this.Status_PLC = new KI_Controls.RoundLabel();
             this.panelNavBar.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelNavBar
@@ -158,30 +161,6 @@
             this.Btn_T.UseVisualStyleBackColor = false;
             this.Btn_T.Click += new System.EventHandler(this.Btn_T_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(7, 909);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(77, 63);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 550;
-            this.pictureBox1.TabStop = false;
-            // 
-            // picLogo
-            // 
-            this.picLogo.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
-            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
-            this.picLogo.Location = new System.Drawing.Point(12, 12);
-            this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(66, 64);
-            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLogo.TabIndex = 549;
-            this.picLogo.TabStop = false;
-            // 
             // btnIo
             // 
             this.btnIo.BackColor = System.Drawing.Color.Gainsboro;
@@ -265,6 +244,50 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1822, 55);
             this.panel1.TabIndex = 8;
+            // 
+            // stcLable
+            // 
+            this.stcLable.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stcLable.Location = new System.Drawing.Point(102, 737);
+            this.stcLable.Name = "stcLable";
+            this.stcLable.Size = new System.Drawing.Size(1790, 208);
+            this.stcLable.TabIndex = 557;
+            this.stcLable.Text = "System Initialize ...";
+            this.stcLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // picBK
+            // 
+            this.picBK.BackgroundImage = global::Ki_WAT.Properties.Resources.logo;
+            this.picBK.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.picBK.Location = new System.Drawing.Point(98, 12);
+            this.picBK.Name = "picBK";
+            this.picBK.Size = new System.Drawing.Size(1794, 725);
+            this.picBK.TabIndex = 556;
+            this.picBK.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(7, 909);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(77, 63);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 550;
+            this.pictureBox1.TabStop = false;
+            // 
+            // picLogo
+            // 
+            this.picLogo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
+            this.picLogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("picLogo.InitialImage")));
+            this.picLogo.Location = new System.Drawing.Point(12, 12);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(66, 64);
+            this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLogo.TabIndex = 549;
+            this.picLogo.TabStop = false;
             // 
             // lbl_SEN_RR
             // 
@@ -443,6 +466,8 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1904, 1003);
+            this.Controls.Add(this.stcLable);
+            this.Controls.Add(this.picBK);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelNavBar);
             this.DoubleBuffered = true;
@@ -455,9 +480,10 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Mainfrm_FormClosing);
             this.Load += new System.EventHandler(this.Frm_Mainfrm_Load);
             this.panelNavBar.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picBK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -485,6 +511,8 @@
         private KI_Controls.RoundLabel lbl_SEN_RL;
         private KI_Controls.RoundLabel lbl_SEN_FR;
         private KI_Controls.RoundLabel lbl_SEN_FL;
+        private System.Windows.Forms.PictureBox picBK;
+        private System.Windows.Forms.Label stcLable;
     }
 }
 

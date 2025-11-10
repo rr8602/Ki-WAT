@@ -278,6 +278,7 @@ namespace Ki_WAT
             if (row == 14 && col == 0) return "Sistema pronto";
             if (row == 14 && col == 1) return "Sequenceia OK";
             if (row == 14 && col == 2) return "HLA Position Init";
+            if (row == 14 && col == 3) return "HLA Home";
 
 
             return "";

@@ -353,6 +353,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="K-Logo.ico" />
+    <None Include="Resources\logo.png" />
     <None Include="Resources\KakaoTalk_20250904_133015943_05.png" />
     <None Include="Resources\Res.png" />
     <None Include="Resources\HighQuality_Resized_Result.jpg" />

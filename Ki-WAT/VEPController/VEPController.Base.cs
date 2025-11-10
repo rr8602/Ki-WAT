@@ -24,8 +24,11 @@ namespace Ki_WAT
 		public MsgBroker broker = new MsgBroker();
 
 		CancellationTokenSource readToken;
+        String _IP;
+        int _Port;
+        bool _Connected = false;
 
-		public bool IsConnect() 
+        public bool IsConnect() 
 		{ 
 			if(client == null)  return false;
 			if(client.Connected) return true;
@@ -39,92 +42,150 @@ namespace Ki_WAT
 				catch (ObjectDisposedException) { } // 이미 Dispose된 경우 무시
 			}
 		}
-		public int Create(String IP, int Port)
-		{
-			int nRet = 1;
-			try
-			{
+        public int Create(String IP, int Port)
+        {
+            int nRet = 1;
+            _IP = IP;
+            _Port = Port;
+            try
+            {
 
-				if (master != null)
-				{
-					master.Dispose();
-					master = null;
-				}
+                if (master != null)
+                {
+                    master.Dispose();
+                    master = null;
+                }
 
-				if (client != null)
-				{
-					client.Close();
-					client.Dispose();
-					client = null;
-				}
-				modbusFactory = null;
+                if (client != null)
+                {
+                    client.Close();
+                    client.Dispose();
+                    client = null;
+                }
+                modbusFactory = null;
 
-				client = new TcpClient(IP, Port);
-				modbusFactory = new ModbusFactory();
-				master = modbusFactory.CreateMaster(client);
+                client = new TcpClient(IP, Port);
+                modbusFactory = new ModbusFactory();
+                master = modbusFactory.CreateMaster(client);
 
-				if (client.Connected)
-				{
-					Console.WriteLine($"✅ Connected to {IP}:{Port}");
-
-					CancelReadToken();
-
-					readToken = new CancellationTokenSource();
-					Task task = Task.Run(() => TaskReadStart(readToken.Token), readToken.Token);
-					Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.Connect);
-
-				}
-				else
-					nRet = -1;
+                if (client.Connected)
+                {
+                    Console.WriteLine($"✅ Connected to {IP}:{Port}");
 
 
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"❌ [Create] Connection failed: {ex.Message}");
-				Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.NotConnect);
-				nRet = -1;
-			}
-			return nRet;
-		}
+                    Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.Connect);
 
-		public int TaskReadStart(CancellationToken token)
-		{
-			int nRet = 0;
-
-			try
-			{
-				int nSleepTime = 100;
-
-				Thread.Sleep(nSleepTime);
+                }
+                else
+                {
+                    nRet = -1;
+                    Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.NotConnect);
+                }
 
 
 
-				while (true)
-				{
-					if (token.IsCancellationRequested) break;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ [Create] Connection failed: {ex.Message}");
+                Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.NotConnect);
+                nRet = -1;
+            }
+            //finally
+            {
 
-					Thread.Sleep(nSleepTime);
-					ReadDZData();
+                CancelReadToken();
+                readToken = new CancellationTokenSource();
+                Task task = Task.Run(() => TaskReadStart(readToken.Token), readToken.Token);
+            }
 
-					Thread.Sleep(nSleepTime);
-					if (vepData.SZAddr != 0 && vepData.SZSize != 0) ReadSZData();
-					Thread.Sleep(nSleepTime);
-					if (vepData.SYAddr != 0 && vepData.SYSize != 0) ReadSYData();
-					Thread.Sleep(nSleepTime);
-					if (vepData.TZAddr != 0 && vepData.TZSize != 0) ReadTZData();
-					Thread.Sleep(nSleepTime);
-					if (vepData.RZAddr != 0 && vepData.RZSize != 0) ReadRZData();
 
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.ToString());
-			}
-			return nRet;
-		}
-		public int TaskReadStop()
+
+            return nRet;
+        }
+
+
+
+        public int TaskReadStart(CancellationToken token)
+        {
+            int nRet = 0;
+
+
+
+            int nSleepTime = 100;
+
+            while (true)
+            {
+                if (token.IsCancellationRequested) break;
+
+                Thread.Sleep(nSleepTime);
+                try
+                {
+
+
+                    Thread.Sleep(nSleepTime);
+
+                    if (client != null && client.Connected)
+                    {
+                        ReadDZData();
+
+                        Thread.Sleep(nSleepTime);
+                        if (vepData.SZAddr != 0 && vepData.SZSize != 0) ReadSZData();
+                        Thread.Sleep(nSleepTime);
+                        if (vepData.SYAddr != 0 && vepData.SYSize != 0) ReadSYData();
+                        Thread.Sleep(nSleepTime);
+                        if (vepData.TZAddr != 0 && vepData.TZSize != 0) ReadTZData();
+                        Thread.Sleep(nSleepTime);
+                        if (vepData.RZAddr != 0 && vepData.RZSize != 0) ReadRZData();
+
+                        if (_Connected == false)
+                        {
+                            Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.Connect);
+                            _Connected = true;
+                        }
+
+                    }
+                    else
+                    {
+
+                        if (_Connected == true)
+                        {
+                            Broker.dsBroker.Publish(Topics.DS.VEP, Topics.DS.NotConnect);
+                            _Connected = false;
+                        }
+
+                        if (master != null)
+                        {
+                            master.Dispose();
+                            master = null;
+                        }
+
+                        if (client != null)
+                        {
+                            client.Close();
+                            client.Dispose();
+                            client = null;
+                        }
+                        modbusFactory = null;
+                        Thread.Sleep(500);
+                        client = new TcpClient(_IP, _Port);
+                        modbusFactory = new ModbusFactory();
+                        master = modbusFactory.CreateMaster(client);
+
+                        Thread.Sleep(2000);
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    GWA.STM("READ VEP : " + ex.ToString());
+                }
+            }
+
+            return nRet;
+        }
+        public int TaskReadStop()
 		{
 			int nRet = 0;
 			if (readToken != null)

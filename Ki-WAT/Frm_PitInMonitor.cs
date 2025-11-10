@@ -32,7 +32,7 @@ namespace Ki_WAT
             if (screens.Length > 1)
             {
                 // 두 번째 모니터 가져오기
-                Screen secondScreen = screens[0];
+                Screen secondScreen = screens[1];
 
                 // 두 번째 모니터의 작업 영역 중앙에 폼 위치
                 Rectangle workingArea = secondScreen.WorkingArea;

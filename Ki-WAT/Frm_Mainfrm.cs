@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static KINT_Lib.Lib_TcpClient;
@@ -46,8 +47,12 @@ namespace Ki_WAT
 
 
         // 바코드 통신 연결 상태 체크용 타이머
-        private Timer m_StatusTimer = new Timer() ;
-        private Timer m_TimerTest;
+        private System.Windows.Forms.Timer m_StatusTimer = new System.Windows.Forms.Timer() ;
+        private System.Windows.Forms.Timer m_TimerTest;
+
+        private System.Windows.Forms.Timer m_initCheckTimer = new System.Windows.Forms.Timer();
+        private System.Windows.Forms.Timer m_StartTimer = new System.Windows.Forms.Timer();
+
 
         //public DB_LocalWat m_dbJob;
         private const int WM_COPYDATA = 0x004A;
@@ -118,14 +123,25 @@ namespace Ki_WAT
             InitUI();
             _GV._frmMNG.RegisterForm(this);
             m_frmSimul = new FrmSimulator(this);
+            
             m_StatusTimer.Tick += new EventHandler(StatusTimer_Tick);
             m_StatusTimer.Interval = 1000; // 1초마다
             m_StatusTimer.Start();
 
+            
+            m_initCheckTimer.Interval = 100; // 0.1초 간격
+            m_initCheckTimer.Tick += InitCheckTimer_Tick;
+            m_initCheckTimer.Start();
+
+            m_StartTimer.Interval = 1000; // 0.1초 간격
+            m_StartTimer.Tick += StartTimer_Tick;
+            m_StartTimer.Start();
+
             CreateIODlg();
+            //DeviceOpen();
+            //Thread.Sleep(5000);
 
-            DeviceOpen();
-
+         
         }
 
 
@@ -138,6 +154,11 @@ namespace Ki_WAT
             digtalIO.Width = Constants.SubViewWidth;
             digtalIO.Height = Constants.SubViewHeight;
 
+        }
+        private void StartTimer_Tick(object sender, EventArgs e)
+        {
+            m_StartTimer.Stop();
+            DeviceOpen();
         }
 
         private void UpdateSWBAngle(double dSWB)
@@ -155,77 +176,55 @@ namespace Ki_WAT
 
 
         }
+        private void InitCheckTimer_Tick(object sender, EventArgs e)
+        {
+            new Thread(() =>
+            {
+                //_GV.g_DppState.nState_RR = 0;
+                if (_GV.vep.IsConnect() && _GV.g_DppState.nState_RR == 0 )
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        picBK.Hide();
+                        stcLable.Hide();
+                    }));
+                    m_initCheckTimer.Stop();
+                }
+            }).Start();
+        }
 
         private void StatusTimer_Tick(object sender, EventArgs e)
         {
+            //lbl_Status_SWB.BackColor = m_ScrewDriverL.IsConnected ? Color.LimeGreen : Color.OrangeRed;
+            //lbl_Status_BAR.BackColor = _barcodeReader.IsConnected() ? Color.LimeGreen : Color.OrangeRed;
+            lbl_State_VEP.BackColor = _GV.vep.IsConnect() ? Color.LimeGreen : Color.OrangeRed;
+            lbl_Status_SWB.BackColor = m_SWBComm.IsConnected ? Color.LimeGreen : Color.OrangeRed;
+            Status_PLC.BackColor = _GV.plcRead.IsPLCConnect() ? Color.LimeGreen : Color.OrangeRed;
+            lbl_SEN_FL.BackColor = (_GV.g_DppState.nState_FL == 0) ? Color.LimeGreen : Color.OrangeRed;
+            lbl_SEN_FR.BackColor = (_GV.g_DppState.nState_FR == 0) ? Color.LimeGreen : Color.OrangeRed;
+            lbl_SEN_RL.BackColor = (_GV.g_DppState.nState_RL == 0) ? Color.LimeGreen : Color.OrangeRed;
+            lbl_SEN_RR.BackColor = (_GV.g_DppState.nState_RR == 0) ? Color.LimeGreen : Color.OrangeRed;
 
-
-             
-            if (_barcodeReader.IsConnected())
-            {
-                lbl_Status_BAR.BackColor = Color.LimeGreen;
-
-            }
-            else
-            {
-                lbl_Status_BAR.BackColor = Color.OrangeRed;
-            }
-
-            if (m_ScrewDriverL.IsConnected)
-            {
-                // lbl_Status_SCRL.BackColor = Color.Lime;
-            }
-            else
-            {
-                //lbl_Status_SCRL.BackColor = Color.Red;
-            }
-            if (_GV.vep.IsConnect())
-            {
-                lbl_State_VEP.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                lbl_State_VEP.BackColor = Color.OrangeRed;
-            }
-
-            if (m_SWBComm.IsConnected)
-            {
-                lbl_Status_SWB.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                lbl_Status_SWB.BackColor = Color.OrangeRed;
-            }
-
-            if (_GV.plcRead.IsPLCConnect())
-            {
-                Status_PLC.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                Status_PLC.BackColor = Color.OrangeRed;
-            }
         }
 
         public void DeviceOpen()
         {
-            _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
-
-            _GV.LET_Controller = new CycleControl();
-            //Socket 
+            string exePath = @"\Dpp\visicon.exe";
+            Process[] runningProcesses = Process.GetProcessesByName(exePath);
+            if (runningProcesses.Length == 0)
+            {
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.FileName = Application.StartupPath + exePath;
+                psi.WindowStyle = ProcessWindowStyle.Minimized; // 최소화 실행
+                psi.UseShellExecute = true;
+                Process.Start(psi);
+            }
             
 
+            _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+            _GV.LET_Controller = new CycleControl();
 
-            //m_BarcodeComm.OnConnected += () => Console.WriteLine("Connected!");
-            //m_BarcodeComm.OnDisconnected += () => Console.WriteLine("Disconnected!");
-            //m_BarcodeComm.OnReconnectAttempt += d => Console.WriteLine($"Reconnecting in {d} ms...");
-            //m_BarcodeComm.OnDataReceived += new DataReceiveClient(event_GetBarcode);
-            //m_BarcodeComm.EnableAutoReconnect(1000, 15000);
-            //// 최초 접속 시도 (실패하면 루프가 계속 재시도)
-            //m_BarcodeComm.Connect(_GV.Config.Device.BARCODE_IP, Int32.Parse(_GV.Config.Device.BARCODE_PORT));
-            //// 바코드 연결 상태 체크 타이머 시작
-            //StartBarcodeConnectionTimer();
-
+            //Socket 
             //m_ScrewDriverL.Connect(_GV.Config.Device.SCREW_IP, Int32.Parse(_GV.Config.Device.SCREW_PORT));
             //m_ScrewDriverL.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
@@ -233,25 +232,14 @@ namespace Ki_WAT
             //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
 			int nRet = _GV.vep.Create("127.0.0.1", 502);
-
-			if (nRet != -1)
-			{
-
-			}
-
-			//_GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
+            //_GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
             //_GV._VEP_Client.StartMonitoring();
-
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
-
-            StartBarcode();
-
+            //StartBarcode();
             _GV.plcRead = new PLCReadWAT();
             _GV.plcWrite = new PLCWriteWAT();
-
             _GV.plcRead.Create(_GV.Config.Device.PLC_IP);
             _GV.plcWrite.Create(_GV.Config.Device.PLC_IP);
-
             _GV.plcRead.StartPolling();
 
         }
@@ -582,7 +570,7 @@ namespace Ki_WAT
 
         private void InitTestTimer()
         {
-            m_TimerTest = new Timer();
+            m_TimerTest = new System.Windows.Forms.Timer();
             m_TimerTest.Interval = 100; // 1초마다
             m_TimerTest.Tick += new EventHandler(TestTimer_Tick);
             m_TimerTest.Start();

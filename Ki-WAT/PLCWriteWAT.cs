@@ -55,7 +55,7 @@ namespace Ki_WAT
 
 		public bool GetPLCOutData()
 		{
-			int result = client.ReadArea(S7Area.PA, 0, 0, 229, S7WordLength.Byte, rawDataOut);
+			int result = client.ReadArea(S7Area.DB, 53001, 0, 230, S7WordLength.Byte, rawDataOut);
 
 			return true;
 		}

@@ -202,9 +202,10 @@ namespace Ki_WAT
 
 		public void ShowVEP()
         {
-            InitList();
+			
+            //InitList();
 
-            InitData();
+            //InitData();
             this.Show();
         }
         public void SetParent(Frm_Mainfrm frm)
@@ -244,6 +245,8 @@ namespace Ki_WAT
 
         private void InitList()
         {
+
+
             List_Sync.View = View.Details; // REPORT 모드
             List_Sync.FullRowSelect = true;
             List_Sync.GridLines = true;

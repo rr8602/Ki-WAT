@@ -125,6 +125,13 @@ namespace Ki_WAT
         public int nState_FR;
         public int nState_RL;
         public int nState_RR;
+        public void Initialize()
+        {
+            nState_FL = -1;
+            nState_FR = -1;
+            nState_RL = -1;
+            nState_RR = -1;
+        }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -181,6 +188,7 @@ namespace Ki_WAT
         {
             g_MeasureData = new MeasureData();
             g_DppState = new SensorState();
+            g_DppState.Initialize();
             Config = new AppConfig();
             _frmMNG = new FormManager();
             _TestThread = new TestThread_Kint(this);
