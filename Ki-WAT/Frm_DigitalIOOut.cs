@@ -496,5 +496,101 @@ namespace Ki_WAT
 
             return (byData & (1 << nBitPos)) != 0;
         }
+
+        private void btnWheelbase_Click(object sender, EventArgs e)
+        {
+            String str = comWheelbase.SelectedItem.ToString();
+            String strDistance = editWheelbase.Text;
+
+
+            int distance;
+
+            if (int.TryParse(strDistance, out distance))
+            {
+            }
+            else
+            {
+                MessageBox.Show("입력값이 올바른 숫자가 아닙니다.", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                distance = 0; // 또는 기본값 설정
+                return;
+            }
+
+            if (str == "1")
+            {
+                _GV.plcWrite.SetLeftDivDistance(1, distance);
+                _GV.plcWrite.SetRightDivDistance(1, distance);
+            }
+            else if (str == "2")
+            {
+                _GV.plcWrite.SetLeftDivDistance(2, distance);
+                _GV.plcWrite.SetRightDivDistance(2, distance);
+            }
+            else if (str == "3")
+            {
+                _GV.plcWrite.SetLeftDivDistance(3, distance);
+                _GV.plcWrite.SetRightDivDistance(3, distance);
+            }
+            else if (str == "4")
+            {
+                _GV.plcWrite.SetLeftDivDistance(4, distance);
+                _GV.plcWrite.SetRightDivDistance(4, distance);
+            }
+            else if (str == "5")
+            {
+                _GV.plcWrite.SetLeftDivDistance(5, distance);
+                _GV.plcWrite.SetRightDivDistance(5, distance);
+            }
+            else if (str == "6")
+            {
+                _GV.plcWrite.SetLeftDivDistance(6, distance);
+                _GV.plcWrite.SetRightDivDistance(6, distance);
+            }
+            else if (str == "7")
+            {
+                _GV.plcWrite.SetLeftDivDistance(7, distance);
+                _GV.plcWrite.SetRightDivDistance(7, distance);
+            }
+            else if (str == "8")
+            {
+                _GV.plcWrite.SetLeftDivDistance(8, distance);
+                _GV.plcWrite.SetRightDivDistance(8, distance);
+            }
+            else if (str == "9")
+            {
+                _GV.plcWrite.SetLeftDivDistance(9, distance);
+                _GV.plcWrite.SetRightDivDistance(8, distance);
+            }
+            else if (str == "10")
+            {
+                _GV.plcWrite.SetLeftDivDistance(10, distance);
+                _GV.plcWrite.SetRightDivDistance(10, distance);
+            }
+            else if (str == "HOME")
+            {
+                _GV.plcWrite.SetLeftHome(distance);
+                _GV.plcWrite.SetRightHome(distance);
+            }
+            _GV.plcWrite.WritePLCData();
+        }
+
+        private void btn_PJI_Click(object sender, EventArgs e)
+        {
+            _GV.plcWrite.SetPJI(txx_PJI.Text);
+            _GV.plcWrite.WritePLCData();
+            Thread.Sleep(500);
+            Refresh();
+            ShowStatus();
+
+        }
+
+        private void btn_div_Click(object sender, EventArgs e)
+        {
+            _GV.plcWrite.SetDiv(ushort.Parse(txt_div.Text));
+            _GV.plcWrite.WritePLCData();
+
+            Thread.Sleep(500);
+            Refresh();
+            ShowStatus();
+        }
     }
 }

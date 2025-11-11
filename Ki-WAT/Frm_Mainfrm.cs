@@ -125,7 +125,7 @@ namespace Ki_WAT
             m_frmSimul = new FrmSimulator(this);
             
             m_StatusTimer.Tick += new EventHandler(StatusTimer_Tick);
-            m_StatusTimer.Interval = 1000; // 1초마다
+            m_StatusTimer.Interval = 3000; // 1초마다
             m_StatusTimer.Start();
 
             
@@ -209,8 +209,10 @@ namespace Ki_WAT
 
         public void DeviceOpen()
         {
-            string exePath = @"\Dpp\visicon.exe";
-            Process[] runningProcesses = Process.GetProcessesByName(exePath);
+            string exePath = @"\Dpp\VisiconSampleVC.exe";
+
+
+            Process[] runningProcesses = Process.GetProcessesByName("VisiconSampleVC");
             if (runningProcesses.Length == 0)
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
@@ -219,8 +221,6 @@ namespace Ki_WAT
                 psi.UseShellExecute = true;
                 Process.Start(psi);
             }
-            
-
             _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
             _GV.LET_Controller = new CycleControl();
 
