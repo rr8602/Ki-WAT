@@ -36,6 +36,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.stcProg = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.stcLeft = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.stcRight = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // stcDiv
@@ -114,11 +118,53 @@
             this.label1.Text = "PROG";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // stcLeft
+            // 
+            this.stcLeft.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.stcLeft.Location = new System.Drawing.Point(473, 644);
+            this.stcLeft.Name = "stcLeft";
+            this.stcLeft.Size = new System.Drawing.Size(119, 28);
+            this.stcLeft.TabIndex = 10;
+            this.stcLeft.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Location = new System.Drawing.Point(348, 644);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 28);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "LEFT";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // stcRight
+            // 
+            this.stcRight.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.stcRight.Location = new System.Drawing.Point(473, 672);
+            this.stcRight.Name = "stcRight";
+            this.stcRight.Size = new System.Drawing.Size(119, 28);
+            this.stcRight.TabIndex = 12;
+            this.stcRight.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Location = new System.Drawing.Point(348, 672);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(119, 28);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "RIGHT";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_DigitalIOIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 846);
+            this.Controls.Add(this.stcRight);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.stcLeft);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.stcDiv);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.stcIdent);
@@ -148,5 +194,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label stcProg;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label stcLeft;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label stcRight;
+        private System.Windows.Forms.Label label8;
     }
 }

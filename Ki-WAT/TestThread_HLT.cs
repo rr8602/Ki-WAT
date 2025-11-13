@@ -89,7 +89,7 @@ namespace Ki_WAT
         {
             try
             {
-                if (_GV.g_Substitu_HLT) return 0;
+                if (_GV.plcRead.IsHLADegraded()) return 0;
                 
                 if (testThread != null)
                 {

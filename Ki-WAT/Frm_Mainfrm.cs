@@ -119,7 +119,8 @@ namespace Ki_WAT
         private void Frm_Mainfrm_Load(object sender, EventArgs e)
         {
             _GV.Config.LoadConfig();
-            
+            _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+
             InitUI();
             _GV._frmMNG.RegisterForm(this);
             m_frmSimul = new FrmSimulator(this);
@@ -136,6 +137,8 @@ namespace Ki_WAT
             m_StartTimer.Interval = 1000; // 0.1초 간격
             m_StartTimer.Tick += StartTimer_Tick;
             m_StartTimer.Start();
+
+            
 
             CreateIODlg();
             //DeviceOpen();
@@ -157,6 +160,8 @@ namespace Ki_WAT
         }
         private void StartTimer_Tick(object sender, EventArgs e)
         {
+            picBK.Hide();
+            stcLable.Hide();
             m_StartTimer.Stop();
             DeviceOpen();
         }
@@ -221,7 +226,7 @@ namespace Ki_WAT
                 psi.UseShellExecute = true;
                 Process.Start(psi);
             }
-            _GV._dbJob = new DB_LocalWat(Application.StartupPath + "\\System\\WAT-DataDB.mdb");
+
             _GV.LET_Controller = new CycleControl();
 
             //Socket 
@@ -231,9 +236,8 @@ namespace Ki_WAT
             //m_ScrewDriverR.Connect(_GV.Config.Device.SCREW_IP2, Int32.Parse(_GV.Config.Device.SCREW_PORT2));
             //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
-			int nRet = _GV.vep.Create("127.0.0.1", 502);
-            //_GV._VEP_Client.Connect(_GV.Config.Device.VEP_IP, Int32.Parse(_GV.Config.Device.VEP_PORT));
-            //_GV._VEP_Client.StartMonitoring();
+			int nRet = _GV.vep.Create("172.25.213.11", 502);
+      
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
             //StartBarcode();
             _GV.plcRead = new PLCReadWAT();
@@ -241,6 +245,11 @@ namespace Ki_WAT
             _GV.plcRead.Create(_GV.Config.Device.PLC_IP);
             _GV.plcWrite.Create(_GV.Config.Device.PLC_IP);
             _GV.plcRead.StartPolling();
+
+
+
+            _GV.vep.SetSynchro(88, 1); 
+           
 
         }
         public void event_GetBarcode(byte[] data)
@@ -394,7 +403,13 @@ namespace Ki_WAT
         private void btnIo_Click(object sender, EventArgs e)
         {
             ChangeButtonColor((Button)sender);
+            if (digtalIO == null || digtalIO.IsDisposed )
+            {
+                CreateIODlg();
+            }
             digtalIO.Show();
+            
+
         }
         private void BtnCal_Click(object sender, EventArgs e)
         {

@@ -25,6 +25,31 @@ namespace Ki_WAT
             m_Parent.OnDppDataReceived += OnReceiveDpp;
             MoveFormToSecondMonitor();
         }
+
+        private void Frm_PitInMonitor_Shown(object sender, EventArgs e)
+        {
+            m_Parent.m_SWBComm._UpdateAngle += UpdateSWBAngle;
+        }
+        private void UpdateSWBAngle(double dSWB)
+        {
+            try
+            {
+
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => UpdateSWBAngle(dSWB)));
+                    return;
+                }
+                lbl_Hand.Text = dSWB.ToString("F1");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
+
+
+        }
+
         private void MoveFormToSecondMonitor()
         {
             // 연결된 모든 모니터 가져오기
@@ -32,7 +57,7 @@ namespace Ki_WAT
             if (screens.Length > 1)
             {
                 // 두 번째 모니터 가져오기
-                Screen secondScreen = screens[1];
+                Screen secondScreen = screens[2];
 
                 // 두 번째 모니터의 작업 영역 중앙에 폼 위치
                 Rectangle workingArea = secondScreen.WorkingArea;
@@ -164,5 +189,7 @@ namespace Ki_WAT
             SetValueLeft(nData);
 
         }
+
+      
     }
 }

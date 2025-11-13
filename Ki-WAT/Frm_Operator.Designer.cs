@@ -172,10 +172,10 @@
             // 
             this.NavBottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.NavBottom.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NavBottom.Location = new System.Drawing.Point(0, 974);
+            this.NavBottom.Location = new System.Drawing.Point(0, 1068);
             this.NavBottom.Margin = new System.Windows.Forms.Padding(4);
             this.NavBottom.Name = "NavBottom";
-            this.NavBottom.Size = new System.Drawing.Size(1920, 104);
+            this.NavBottom.Size = new System.Drawing.Size(1920, 10);
             this.NavBottom.TabIndex = 8;
             // 
             // Frm_Operator

@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.NavTop = new System.Windows.Forms.Panel();
-            this.analogClock1 = new Ki_WAT.AnalogClock();
-            this.roundLabel9 = new KI_Controls.RoundLabel();
-            this.lbl_Time = new KI_Controls.RoundLabel();
-            this.lbl_Message = new KI_Controls.RoundLabel();
-            this.roundLabel10 = new KI_Controls.RoundLabel();
             this.button1 = new System.Windows.Forms.Button();
             this.Txt_Left = new System.Windows.Forms.TextBox();
             this.roundLabel1 = new KI_Controls.RoundLabel();
             this.lbl_note = new KI_Controls.RoundLabel();
+            this.analogClock1 = new Ki_WAT.AnalogClock();
+            this.lbl_Hand = new KI_Controls.RoundLabel();
+            this.lbl_Time = new KI_Controls.RoundLabel();
+            this.lbl_Message = new KI_Controls.RoundLabel();
+            this.roundLabel10 = new KI_Controls.RoundLabel();
             this.lbl_Right_Value = new KI_Controls.RoundLabel();
             this.Bar_Right = new RollTester.SlideBarGauge();
             this.roundLabel4 = new KI_Controls.RoundLabel();
@@ -52,7 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NavTop.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.NavTop.Controls.Add(this.analogClock1);
-            this.NavTop.Controls.Add(this.roundLabel9);
+            this.NavTop.Controls.Add(this.lbl_Hand);
             this.NavTop.Controls.Add(this.lbl_Time);
             this.NavTop.Controls.Add(this.lbl_Message);
             this.NavTop.Controls.Add(this.roundLabel10);
@@ -61,97 +61,6 @@
             this.NavTop.Name = "NavTop";
             this.NavTop.Size = new System.Drawing.Size(1920, 146);
             this.NavTop.TabIndex = 11;
-            // 
-            // analogClock1
-            // 
-            this.analogClock1.BackColor = System.Drawing.Color.White;
-            this.analogClock1.BorderColor = System.Drawing.Color.LightCoral;
-            this.analogClock1.BorderThickness = 3;
-            this.analogClock1.HourHandColor = System.Drawing.Color.Black;
-            this.analogClock1.Location = new System.Drawing.Point(35, 12);
-            this.analogClock1.MinuteHandColor = System.Drawing.Color.Black;
-            this.analogClock1.Name = "analogClock1";
-            this.analogClock1.NumberFont = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analogClock1.SecondHandColor = System.Drawing.Color.Red;
-            this.analogClock1.Size = new System.Drawing.Size(187, 114);
-            this.analogClock1.TabIndex = 4;
-            this.analogClock1.Text = "analogClock1";
-            // 
-            // roundLabel9
-            // 
-            this.roundLabel9.BackColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel9.BackgroundColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel9.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.roundLabel9.BorderRadius = 20;
-            this.roundLabel9.BorderSize = 0;
-            this.roundLabel9.FlatAppearance.BorderSize = 0;
-            this.roundLabel9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundLabel9.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.roundLabel9.ForeColor = System.Drawing.Color.White;
-            this.roundLabel9.Location = new System.Drawing.Point(250, 12);
-            this.roundLabel9.Name = "roundLabel9";
-            this.roundLabel9.Size = new System.Drawing.Size(215, 114);
-            this.roundLabel9.TabIndex = 3;
-            this.roundLabel9.Text = "0.0";
-            this.roundLabel9.TextColor = System.Drawing.Color.White;
-            this.roundLabel9.UseVisualStyleBackColor = false;
-            // 
-            // lbl_Time
-            // 
-            this.lbl_Time.BackColor = System.Drawing.Color.Black;
-            this.lbl_Time.BackgroundColor = System.Drawing.Color.Black;
-            this.lbl_Time.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.lbl_Time.BorderRadius = 20;
-            this.lbl_Time.BorderSize = 0;
-            this.lbl_Time.FlatAppearance.BorderSize = 0;
-            this.lbl_Time.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lbl_Time.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Time.ForeColor = System.Drawing.Color.White;
-            this.lbl_Time.Location = new System.Drawing.Point(1676, 12);
-            this.lbl_Time.Name = "lbl_Time";
-            this.lbl_Time.Size = new System.Drawing.Size(215, 114);
-            this.lbl_Time.TabIndex = 2;
-            this.lbl_Time.Text = "0";
-            this.lbl_Time.TextColor = System.Drawing.Color.White;
-            this.lbl_Time.UseVisualStyleBackColor = false;
-            // 
-            // lbl_Message
-            // 
-            this.lbl_Message.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.lbl_Message.BackgroundColor = System.Drawing.Color.LightSteelBlue;
-            this.lbl_Message.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.lbl_Message.BorderRadius = 20;
-            this.lbl_Message.BorderSize = 0;
-            this.lbl_Message.FlatAppearance.BorderSize = 0;
-            this.lbl_Message.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lbl_Message.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lbl_Message.ForeColor = System.Drawing.Color.White;
-            this.lbl_Message.Location = new System.Drawing.Point(471, 72);
-            this.lbl_Message.Name = "lbl_Message";
-            this.lbl_Message.Size = new System.Drawing.Size(1142, 54);
-            this.lbl_Message.TabIndex = 1;
-            this.lbl_Message.Text = "ENSÁIO PARALELISMO";
-            this.lbl_Message.TextColor = System.Drawing.Color.White;
-            this.lbl_Message.UseVisualStyleBackColor = false;
-            // 
-            // roundLabel10
-            // 
-            this.roundLabel10.BackColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel10.BackgroundColor = System.Drawing.Color.MidnightBlue;
-            this.roundLabel10.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.roundLabel10.BorderRadius = 20;
-            this.roundLabel10.BorderSize = 0;
-            this.roundLabel10.FlatAppearance.BorderSize = 0;
-            this.roundLabel10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.roundLabel10.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.roundLabel10.ForeColor = System.Drawing.Color.White;
-            this.roundLabel10.Location = new System.Drawing.Point(471, 12);
-            this.roundLabel10.Name = "roundLabel10";
-            this.roundLabel10.Size = new System.Drawing.Size(1142, 54);
-            this.roundLabel10.TabIndex = 0;
-            this.roundLabel10.Text = "-";
-            this.roundLabel10.TextColor = System.Drawing.Color.White;
-            this.roundLabel10.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
@@ -210,6 +119,97 @@
             this.lbl_note.TextColor = System.Drawing.Color.White;
             this.lbl_note.UseVisualStyleBackColor = false;
             // 
+            // analogClock1
+            // 
+            this.analogClock1.BackColor = System.Drawing.Color.White;
+            this.analogClock1.BorderColor = System.Drawing.Color.LightCoral;
+            this.analogClock1.BorderThickness = 3;
+            this.analogClock1.HourHandColor = System.Drawing.Color.Black;
+            this.analogClock1.Location = new System.Drawing.Point(35, 12);
+            this.analogClock1.MinuteHandColor = System.Drawing.Color.Black;
+            this.analogClock1.Name = "analogClock1";
+            this.analogClock1.NumberFont = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.analogClock1.SecondHandColor = System.Drawing.Color.Red;
+            this.analogClock1.Size = new System.Drawing.Size(187, 114);
+            this.analogClock1.TabIndex = 4;
+            this.analogClock1.Text = "analogClock1";
+            // 
+            // lbl_Hand
+            // 
+            this.lbl_Hand.BackColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_Hand.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.lbl_Hand.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_Hand.BorderRadius = 20;
+            this.lbl_Hand.BorderSize = 0;
+            this.lbl_Hand.FlatAppearance.BorderSize = 0;
+            this.lbl_Hand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Hand.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Hand.ForeColor = System.Drawing.Color.White;
+            this.lbl_Hand.Location = new System.Drawing.Point(250, 12);
+            this.lbl_Hand.Name = "lbl_Hand";
+            this.lbl_Hand.Size = new System.Drawing.Size(215, 114);
+            this.lbl_Hand.TabIndex = 3;
+            this.lbl_Hand.Text = "0.0";
+            this.lbl_Hand.TextColor = System.Drawing.Color.White;
+            this.lbl_Hand.UseVisualStyleBackColor = false;
+            // 
+            // lbl_Time
+            // 
+            this.lbl_Time.BackColor = System.Drawing.Color.Black;
+            this.lbl_Time.BackgroundColor = System.Drawing.Color.Black;
+            this.lbl_Time.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_Time.BorderRadius = 20;
+            this.lbl_Time.BorderSize = 0;
+            this.lbl_Time.FlatAppearance.BorderSize = 0;
+            this.lbl_Time.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Time.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Time.ForeColor = System.Drawing.Color.White;
+            this.lbl_Time.Location = new System.Drawing.Point(1676, 12);
+            this.lbl_Time.Name = "lbl_Time";
+            this.lbl_Time.Size = new System.Drawing.Size(215, 114);
+            this.lbl_Time.TabIndex = 2;
+            this.lbl_Time.Text = "0";
+            this.lbl_Time.TextColor = System.Drawing.Color.White;
+            this.lbl_Time.UseVisualStyleBackColor = false;
+            // 
+            // lbl_Message
+            // 
+            this.lbl_Message.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.lbl_Message.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.lbl_Message.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_Message.BorderRadius = 20;
+            this.lbl_Message.BorderSize = 0;
+            this.lbl_Message.FlatAppearance.BorderSize = 0;
+            this.lbl_Message.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_Message.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lbl_Message.ForeColor = System.Drawing.Color.White;
+            this.lbl_Message.Location = new System.Drawing.Point(471, 72);
+            this.lbl_Message.Name = "lbl_Message";
+            this.lbl_Message.Size = new System.Drawing.Size(1142, 54);
+            this.lbl_Message.TabIndex = 1;
+            this.lbl_Message.Text = "ENSÁIO PARALELISMO";
+            this.lbl_Message.TextColor = System.Drawing.Color.White;
+            this.lbl_Message.UseVisualStyleBackColor = false;
+            // 
+            // roundLabel10
+            // 
+            this.roundLabel10.BackColor = System.Drawing.Color.MidnightBlue;
+            this.roundLabel10.BackgroundColor = System.Drawing.Color.MidnightBlue;
+            this.roundLabel10.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.roundLabel10.BorderRadius = 20;
+            this.roundLabel10.BorderSize = 0;
+            this.roundLabel10.FlatAppearance.BorderSize = 0;
+            this.roundLabel10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.roundLabel10.Font = new System.Drawing.Font("굴림", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.roundLabel10.ForeColor = System.Drawing.Color.White;
+            this.roundLabel10.Location = new System.Drawing.Point(471, 12);
+            this.roundLabel10.Name = "roundLabel10";
+            this.roundLabel10.Size = new System.Drawing.Size(1142, 54);
+            this.roundLabel10.TabIndex = 0;
+            this.roundLabel10.Text = "-";
+            this.roundLabel10.TextColor = System.Drawing.Color.White;
+            this.roundLabel10.UseVisualStyleBackColor = false;
+            // 
             // lbl_Right_Value
             // 
             this.lbl_Right_Value.BackColor = System.Drawing.Color.Yellow;
@@ -225,7 +225,7 @@
             this.lbl_Right_Value.Name = "lbl_Right_Value";
             this.lbl_Right_Value.Size = new System.Drawing.Size(147, 68);
             this.lbl_Right_Value.TabIndex = 9;
-            this.lbl_Right_Value.Text = "99.9\'";
+            this.lbl_Right_Value.Text = "0.0\'";
             this.lbl_Right_Value.TextColor = System.Drawing.Color.Black;
             this.lbl_Right_Value.UseVisualStyleBackColor = false;
             // 
@@ -284,7 +284,7 @@
             this.lbl_Left_Value.Name = "lbl_Left_Value";
             this.lbl_Left_Value.Size = new System.Drawing.Size(147, 68);
             this.lbl_Left_Value.TabIndex = 4;
-            this.lbl_Left_Value.Text = "99.9\'";
+            this.lbl_Left_Value.Text = "0.0\'";
             this.lbl_Left_Value.TextColor = System.Drawing.Color.Black;
             this.lbl_Left_Value.UseVisualStyleBackColor = false;
             // 
@@ -327,6 +327,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Frm_PitInMonitor";
             this.Text = "Frm_PitInMonitor";
+            this.Shown += new System.EventHandler(this.Frm_PitInMonitor_Shown);
             this.NavTop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -342,7 +343,7 @@
         private RollTester.SlideBarGauge Bar_Right;
         private System.Windows.Forms.Panel NavTop;
         private AnalogClock analogClock1;
-        private KI_Controls.RoundLabel roundLabel9;
+        private KI_Controls.RoundLabel lbl_Hand;
         private KI_Controls.RoundLabel lbl_Time;
         private KI_Controls.RoundLabel lbl_Message;
         private KI_Controls.RoundLabel roundLabel10;

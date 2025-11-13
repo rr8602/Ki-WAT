@@ -520,6 +520,7 @@
             this.seqList.View = System.Windows.Forms.View.Details;
             this.seqList.SelectedIndexChanged += new System.EventHandler(this.seqList_SelectedIndexChanged);
             this.seqList.DoubleClick += new System.EventHandler(this.seqList_DoubleClick);
+            this.seqList.MouseDown += new System.Windows.Forms.MouseEventHandler(this.seqList_MouseDown);
             // 
             // Btn_Start
             // 

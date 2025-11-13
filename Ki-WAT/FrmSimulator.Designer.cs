@@ -57,6 +57,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.Btn_Next_Step = new System.Windows.Forms.Button();
             this.Chk_LET_Home = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -363,11 +364,23 @@
             this.Chk_LET_Home.UseVisualStyleBackColor = true;
             this.Chk_LET_Home.CheckedChanged += new System.EventHandler(this.Chk_LET_Home_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(652, 44);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(126, 46);
+            this.button1.TabIndex = 165;
+            this.button1.Text = "88";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmSimulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 776);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Chk_LET_Home);
             this.Controls.Add(this.Btn_Next_Step);
             this.Controls.Add(this.groupBox2);
@@ -414,5 +427,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button Btn_Next_Step;
         private System.Windows.Forms.CheckBox Chk_LET_Home;
+        private System.Windows.Forms.Button button1;
     }
 }

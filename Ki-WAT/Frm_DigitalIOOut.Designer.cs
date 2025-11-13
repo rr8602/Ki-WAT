@@ -54,6 +54,24 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lbl_dis_home = new System.Windows.Forms.Label();
+            this.lbl_dis_div1 = new System.Windows.Forms.Label();
+            this.lbl_dis_div3 = new System.Windows.Forms.Label();
+            this.lbl_dis_div2 = new System.Windows.Forms.Label();
+            this.lbl_dis_div7 = new System.Windows.Forms.Label();
+            this.lbl_dis_div6 = new System.Windows.Forms.Label();
+            this.lbl_dis_div5 = new System.Windows.Forms.Label();
+            this.lbl_dis_div4 = new System.Windows.Forms.Label();
+            this.lbl_dis_div10 = new System.Windows.Forms.Label();
+            this.lbl_dis_div9 = new System.Windows.Forms.Label();
+            this.lbl_dis_div8 = new System.Windows.Forms.Label();
+            this.lbl_dis_static = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.lbl_dis_rolling = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // stcDiv
@@ -144,7 +162,7 @@
             // 
             this.btnWheelbase.Location = new System.Drawing.Point(573, 734);
             this.btnWheelbase.Name = "btnWheelbase";
-            this.btnWheelbase.Size = new System.Drawing.Size(107, 28);
+            this.btnWheelbase.Size = new System.Drawing.Size(121, 28);
             this.btnWheelbase.TabIndex = 25;
             this.btnWheelbase.Text = "Send";
             this.btnWheelbase.UseVisualStyleBackColor = true;
@@ -165,7 +183,9 @@
             "8",
             "9",
             "10",
-            "HOME"});
+            "HOME",
+            "STATIC",
+            "ROLLING"});
             this.comWheelbase.Location = new System.Drawing.Point(573, 666);
             this.comWheelbase.Name = "comWheelbase";
             this.comWheelbase.Size = new System.Drawing.Size(121, 30);
@@ -254,7 +274,7 @@
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(730, 635);
+            this.label7.Location = new System.Drawing.Point(732, 635);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 28);
@@ -265,7 +285,7 @@
             // label8
             // 
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label8.Location = new System.Drawing.Point(730, 669);
+            this.label8.Location = new System.Drawing.Point(732, 669);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 28);
@@ -276,7 +296,7 @@
             // label9
             // 
             this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(730, 704);
+            this.label9.Location = new System.Drawing.Point(732, 704);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(68, 28);
@@ -287,7 +307,7 @@
             // label10
             // 
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Location = new System.Drawing.Point(730, 737);
+            this.label10.Location = new System.Drawing.Point(732, 737);
             this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(68, 28);
@@ -298,18 +318,18 @@
             // label11
             // 
             this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.Location = new System.Drawing.Point(880, 737);
+            this.label11.Location = new System.Drawing.Point(897, 737);
             this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(68, 28);
             this.label11.TabIndex = 39;
-            this.label11.Text = "DIV : 7";
+            this.label11.Text = "DIV 7 :";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label12
             // 
             this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label12.Location = new System.Drawing.Point(880, 704);
+            this.label12.Location = new System.Drawing.Point(897, 704);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(68, 28);
@@ -320,7 +340,7 @@
             // label14
             // 
             this.label14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label14.Location = new System.Drawing.Point(880, 669);
+            this.label14.Location = new System.Drawing.Point(897, 669);
             this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(68, 28);
@@ -331,7 +351,7 @@
             // label15
             // 
             this.label15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label15.Location = new System.Drawing.Point(880, 635);
+            this.label15.Location = new System.Drawing.Point(897, 635);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(68, 28);
@@ -339,11 +359,214 @@
             this.label15.Text = "DIV 4 :";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label16
+            // 
+            this.label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label16.Location = new System.Drawing.Point(1064, 704);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(68, 28);
+            this.label16.TabIndex = 42;
+            this.label16.Text = "DIV 10 :";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label17
+            // 
+            this.label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label17.Location = new System.Drawing.Point(1064, 669);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(68, 28);
+            this.label17.TabIndex = 41;
+            this.label17.Text = "DIV 9 :";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label18.Location = new System.Drawing.Point(1064, 635);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 28);
+            this.label18.TabIndex = 40;
+            this.label18.Text = "DIV 8 :";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_home
+            // 
+            this.lbl_dis_home.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_home.Location = new System.Drawing.Point(803, 635);
+            this.lbl_dis_home.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_home.Name = "lbl_dis_home";
+            this.lbl_dis_home.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_home.TabIndex = 43;
+            this.lbl_dis_home.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div1
+            // 
+            this.lbl_dis_div1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div1.Location = new System.Drawing.Point(803, 669);
+            this.lbl_dis_div1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div1.Name = "lbl_dis_div1";
+            this.lbl_dis_div1.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div1.TabIndex = 44;
+            this.lbl_dis_div1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div3
+            // 
+            this.lbl_dis_div3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div3.Location = new System.Drawing.Point(803, 738);
+            this.lbl_dis_div3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div3.Name = "lbl_dis_div3";
+            this.lbl_dis_div3.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div3.TabIndex = 46;
+            this.lbl_dis_div3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div2
+            // 
+            this.lbl_dis_div2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div2.Location = new System.Drawing.Point(803, 704);
+            this.lbl_dis_div2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div2.Name = "lbl_dis_div2";
+            this.lbl_dis_div2.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div2.TabIndex = 45;
+            this.lbl_dis_div2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div7
+            // 
+            this.lbl_dis_div7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div7.Location = new System.Drawing.Point(973, 738);
+            this.lbl_dis_div7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div7.Name = "lbl_dis_div7";
+            this.lbl_dis_div7.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div7.TabIndex = 50;
+            this.lbl_dis_div7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div6
+            // 
+            this.lbl_dis_div6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div6.Location = new System.Drawing.Point(973, 704);
+            this.lbl_dis_div6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div6.Name = "lbl_dis_div6";
+            this.lbl_dis_div6.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div6.TabIndex = 49;
+            this.lbl_dis_div6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div5
+            // 
+            this.lbl_dis_div5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div5.Location = new System.Drawing.Point(973, 669);
+            this.lbl_dis_div5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div5.Name = "lbl_dis_div5";
+            this.lbl_dis_div5.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div5.TabIndex = 48;
+            this.lbl_dis_div5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div4
+            // 
+            this.lbl_dis_div4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div4.Location = new System.Drawing.Point(973, 635);
+            this.lbl_dis_div4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div4.Name = "lbl_dis_div4";
+            this.lbl_dis_div4.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div4.TabIndex = 47;
+            this.lbl_dis_div4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div10
+            // 
+            this.lbl_dis_div10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div10.Location = new System.Drawing.Point(1135, 704);
+            this.lbl_dis_div10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div10.Name = "lbl_dis_div10";
+            this.lbl_dis_div10.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div10.TabIndex = 53;
+            this.lbl_dis_div10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div9
+            // 
+            this.lbl_dis_div9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div9.Location = new System.Drawing.Point(1135, 669);
+            this.lbl_dis_div9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div9.Name = "lbl_dis_div9";
+            this.lbl_dis_div9.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div9.TabIndex = 52;
+            this.lbl_dis_div9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_div8
+            // 
+            this.lbl_dis_div8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_div8.Location = new System.Drawing.Point(1135, 635);
+            this.lbl_dis_div8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_div8.Name = "lbl_dis_div8";
+            this.lbl_dis_div8.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_div8.TabIndex = 51;
+            this.lbl_dis_div8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_static
+            // 
+            this.lbl_dis_static.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_static.Location = new System.Drawing.Point(1135, 738);
+            this.lbl_dis_static.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_static.Name = "lbl_dis_static";
+            this.lbl_dis_static.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_static.TabIndex = 55;
+            this.lbl_dis_static.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            this.label20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label20.Location = new System.Drawing.Point(1064, 738);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(68, 28);
+            this.label20.TabIndex = 54;
+            this.label20.Text = "Static";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dis_rolling
+            // 
+            this.lbl_dis_rolling.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dis_rolling.Location = new System.Drawing.Point(1135, 771);
+            this.lbl_dis_rolling.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_dis_rolling.Name = "lbl_dis_rolling";
+            this.lbl_dis_rolling.Size = new System.Drawing.Size(83, 28);
+            this.lbl_dis_rolling.TabIndex = 57;
+            this.lbl_dis_rolling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label22
+            // 
+            this.label22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label22.Location = new System.Drawing.Point(1064, 771);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(68, 28);
+            this.label22.TabIndex = 56;
+            this.label22.Text = "Rolling";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_DigitalIOOut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1231, 886);
+            this.Controls.Add(this.lbl_dis_rolling);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.lbl_dis_static);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.lbl_dis_div10);
+            this.Controls.Add(this.lbl_dis_div9);
+            this.Controls.Add(this.lbl_dis_div8);
+            this.Controls.Add(this.lbl_dis_div7);
+            this.Controls.Add(this.lbl_dis_div6);
+            this.Controls.Add(this.lbl_dis_div5);
+            this.Controls.Add(this.lbl_dis_div4);
+            this.Controls.Add(this.lbl_dis_div3);
+            this.Controls.Add(this.lbl_dis_div2);
+            this.Controls.Add(this.lbl_dis_div1);
+            this.Controls.Add(this.lbl_dis_home);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label14);
@@ -410,5 +633,23 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lbl_dis_home;
+        private System.Windows.Forms.Label lbl_dis_div1;
+        private System.Windows.Forms.Label lbl_dis_div3;
+        private System.Windows.Forms.Label lbl_dis_div2;
+        private System.Windows.Forms.Label lbl_dis_div7;
+        private System.Windows.Forms.Label lbl_dis_div6;
+        private System.Windows.Forms.Label lbl_dis_div5;
+        private System.Windows.Forms.Label lbl_dis_div4;
+        private System.Windows.Forms.Label lbl_dis_div10;
+        private System.Windows.Forms.Label lbl_dis_div9;
+        private System.Windows.Forms.Label lbl_dis_div8;
+        private System.Windows.Forms.Label lbl_dis_static;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label lbl_dis_rolling;
+        private System.Windows.Forms.Label label22;
     }
 }

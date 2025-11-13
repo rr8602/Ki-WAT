@@ -34,6 +34,28 @@ namespace Ki_WAT
             InitializeComponent();
         }
 
+        private void Frm_Oper_Test_Load(object sender, EventArgs e)
+        {
+            Broker.dsBroker.Subscribe(Topics.PEV.MDA_OK, SetMDA);
+            Broker.dsBroker.Subscribe(Topics.PEV.Message, SetPEVMessage);
+        }
+        private void SetPEVMessage(object data)
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => SetPEVMessage(data)));
+                return;
+            }
+            string strMessage = data as string;
+            lbl_PEV.Text = strMessage;
+        }
+        private void SetMDA(object data)
+        {
+            lbl_PEV.BackColor = Color.LimeGreen;
+            //SafeLoad(pic_lamp_io, strStatus == Topics.DS.Connect ? LAMP_GREEN : LAMP_RED);
+        }
+
+
         public void SetOperator(Frm_Operator pOper)
         {
             m_Operator = pOper;
@@ -232,9 +254,6 @@ namespace Ki_WAT
 
         }
 
-        private void Frm_Oper_Test_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

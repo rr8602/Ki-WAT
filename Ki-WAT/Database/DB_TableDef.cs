@@ -131,28 +131,44 @@ namespace Ki_WAT
         public string Car_Symm_F;
 
         public string WAT___PK;
-        public void Clear()
-        {
-            AcceptNo = "";
-            PJI_Num = "";
-            Model_NM = "";
-            WTstTime = "";
-            CarFLToe = "";
-            CarFRToe = "";
-            CarFTToe = "";
-            CarRLToe = "";
-            CarRRToe = "";
-            CarRTToe = "";
-            CarFLCam = "";
-            CarFRCam = "";
-            CarFCros = "";
-            CarRLCam = "";
-            CarRRCam = "";
-            CarRCros = "";
-            Car_Hand = "";
-            CarDogRu = "";
-            Car_Symm = "";
-            WAT___PK = "";
+       public void Clear()
+                    {
+            AcceptNo = "0";
+            PJI_Num = "0";
+            Model_NM = "0";
+            CycleTime = "0";
+            WTstTime = "0";
+            CarFLToe = "0";
+            CarFRToe = "0";
+            CarFTToe = "0";
+            CarRLToe =  "0";
+            CarRRToe = "0";
+            CarRTToe = "0";
+            CarFLCam = "0";
+            CarFRCam = "0";
+            CarFCros = "0";
+            CarRLCam = "0";
+            CarRRCam = "0";
+            CarRCros = "0";
+            Car_Hand = "0";
+            CarDogRu = "0";
+            Car_Symm = "0";
+            CarFLToe_F = "0";
+            CarFRToe_F = "0";
+            CarFTToe_F = "0";
+            CarRLToe_F = "0";
+            CarRRToe_F = "0";
+            CarRTToe_F = "0";
+            CarFLCam_F = "0";
+            CarFRCam_F = "0";
+            CarFCros_F = "0";
+            CarRLCam_F = "0";
+            CarRRCam_F = "0";
+            CarRCros_F = "0";
+            Car_Hand_F = "0";
+            CarDogRu_F = "0";
+            Car_Symm_F = "0";
+            WAT___PK = "OK";
         }
 
     }
@@ -164,6 +180,9 @@ namespace Ki_WAT
         public string WhelBase ;
         public string WB___Div ;
         public string Dpp_Code ;
+        public string SWA___ST;
+        public string SWA___LT;
+
         public string SWARatio;
         public string SWAOffset;
         public string ScrewDriver;

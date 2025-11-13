@@ -279,7 +279,7 @@
             this.roundLabel2.Name = "roundLabel2";
             this.roundLabel2.Size = new System.Drawing.Size(683, 72);
             this.roundLabel2.TabIndex = 567;
-            this.roundLabel2.Text = "SAFETY KEY ON";
+            this.roundLabel2.Text = "SCANNER LASER ON";
             this.roundLabel2.TextColor = System.Drawing.Color.Black;
             this.roundLabel2.UseVisualStyleBackColor = false;
             // 

@@ -100,7 +100,7 @@ namespace Ki_WAT
             SafeLoad(pic_swb, _GV.plcRead.IsSteeringWheelBalanceHome() ? LAMP_GREEN : LAMP_RED);
             SafeLoad(pic_hla, _GV.plcRead.IsHLAHomePosition() ? LAMP_GREEN : LAMP_RED);
             SafeLoad(pic_detect, !_GV.plcRead.IsFrontCarDetection() && !_GV.plcRead.IsRearCarDetection()  ? LAMP_GREEN : LAMP_RED);
-            SafeLoad(pic_safety, _GV.plcRead.IsSafetyKeyOn()  ? LAMP_GREEN : LAMP_RED);
+            SafeLoad(pic_safety, _GV.plcRead.IsScannerLaserOn()  ? LAMP_GREEN : LAMP_RED);
             SafeLoad(pic_screw, _GV.plcRead.IsScrewDriverLeftHome() && _GV.plcRead.IsScrewDriverRightHome()  ? LAMP_GREEN : LAMP_RED);
 
 

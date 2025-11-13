@@ -90,5 +90,10 @@ namespace Ki_WAT
         {
             //_GV._PLCVal.DI._HLA_Home_position = Chk_LET_Home.Checked;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _GV.vep.SetSynchro(88, 1);
+        }
     }
 }

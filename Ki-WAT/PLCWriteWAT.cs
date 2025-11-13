@@ -12,15 +12,9 @@ namespace Ki_WAT
 	{
 		uint m_nSize = 230;
 		public Byte[] rawDataOut = null;
-
-
 		S7Client client = new S7Client();
 		private CancellationTokenSource _cts;
-
-
 		private String _strIP = "";
-
-		
 		public void Create(String strIP)
 		{
 
@@ -155,8 +149,14 @@ namespace Ki_WAT
 				rawDataOut[i] = 0;
 			}
 		}
+        public void ClearData()
+        {
+            for (int i = 0; i < m_nSize; i++) rawDataOut[i] = 0;
+			WritePLCData();   
+        }
 
-		public void SetRawData(int nIndex, int nData)
+
+        public void SetRawData(int nIndex, int nData)
 		{
 			if (nIndex < 0 || nIndex >= m_nSize) return;
 			if (nData < 0) return;
@@ -198,7 +198,6 @@ namespace Ki_WAT
 			byte data = rawDataOut[nIndex];
 			return (data & (1 << nBitPos)) != 0;
 		}
-
 
 
 
@@ -256,7 +255,7 @@ namespace Ki_WAT
 
 
 
-		public void SetCodeOK(bool bOn) { SetBit(20, 1, bOn); }
+		public void SetCodeOK(bool bOn) { SetBit(20, 0, bOn); }
 
 
 
@@ -407,7 +406,7 @@ namespace Ki_WAT
 		public void SetLeftStaticMaster(int nDistance)
 		{
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 
 
@@ -424,7 +423,7 @@ namespace Ki_WAT
 		public void SetLeftRollingMaster(int nDistance)
 		{
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 
 
@@ -445,7 +444,7 @@ namespace Ki_WAT
 			if (nPos > 10) return;
 
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 			byte b1 = (byte)(nDistance & 0xFF);       // 하위 바이트 
 			byte b2 = (byte)((nDistance >> 8) & 0xFF); // 상위 바이트
@@ -485,7 +484,7 @@ namespace Ki_WAT
 		public void SetRightStaticMaster(int nDistance)
 		{
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 
 
@@ -500,7 +499,7 @@ namespace Ki_WAT
 		public void SetRightRollingMaster(int nDistance)
 		{
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 
 
@@ -520,7 +519,7 @@ namespace Ki_WAT
 			if (nPos > 10) return;
 
 			if (nDistance < 0) return;
-			if (nDistance > 4000) return;
+			if (nDistance > 1390) return;
 
 
 
@@ -546,10 +545,20 @@ namespace Ki_WAT
 
 
 
+        public UInt16 GetWord(int nPos)
+        {
+            if (nPos < 0) return 0;
+            if (nPos + 1 >= rawDataOut.Length) return 0;
+            byte low = rawDataOut[nPos + 1];
+            byte high = rawDataOut[nPos];
+            return (ushort)((high << 8) | low);
+        }
 
 
 
-		public void SetMotorRun(bool bOn) { SetBit(180, 0, bOn); }
+
+
+        public void SetMotorRun(bool bOn) { SetBit(180, 0, bOn); }
 		public void SetMotorStop(bool bOn) { SetBit(180, 1, bOn); }
 
 
@@ -559,9 +568,11 @@ namespace Ki_WAT
 		public void SetMeasurementFinish(bool bOn) { SetBit(190, 1, bOn); }
 		public void SetCalibrationOK(bool bOn) { SetBit(190, 2, bOn); }
 
+       public void SetScrewDriverOK(bool bOn) { SetBit(190, 3, bOn); }
 
 
-		public void SetTolranceOK(bool bOn) { SetBit(200, 0, bOn); }
+
+        public void SetTolranceOK(bool bOn) { SetBit(200, 0, bOn); }
 
 		public void SetVEPFinish(bool bOn) { SetBit(210, 0, bOn); }
 		public void SetHLAFinish(bool bOn) { SetBit(220, 0, bOn); }

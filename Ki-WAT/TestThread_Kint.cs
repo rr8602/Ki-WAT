@@ -3,6 +3,7 @@ using Ki_WAT;
 using NModbus;
 using RollTester;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -29,6 +30,8 @@ public class TestThread_Kint
     public bool m_SrewRightOK = false;
     public bool m_HLA_Finish = false;
     public bool m_PEV_Finish = false;
+    public bool m_SWB_Finish = false;
+
     public bool m_bPassNext  = false ;
 
     public bool m_bSendSWA = false;
@@ -36,6 +39,7 @@ public class TestThread_Kint
 
     //TblCarModel m_Cur_Model = new TblCarModel();
     //TblCarInfo m_Cur_CarInfo = new TblCarInfo();
+    
     MeasureData m_measureData = new MeasureData();
     MeasureData m_InitMeasureData = new MeasureData();
     private Task _swaSendTask;
@@ -43,6 +47,10 @@ public class TestThread_Kint
 
     private Task _swaCheckTask;
     private CancellationTokenSource _swaCheckCancellationTokenSource;
+
+
+    private Task _taCheckTask;
+    private CancellationTokenSource _taCheckCancellationTokenSource;
 
 
     private Random _rand = new Random();  // 클래스 멤버로 선언 (중복 난수 방지)
@@ -239,12 +247,16 @@ public class TestThread_Kint
                 {
                     DoWait();
                 }
+                else if (m_nState == Constants.STEP_MOVE_WHEELBASE)
+                {
+                    DoMoveWheelbase();
+                }
                 else if (m_nState == Constants.STEP_PEV_START)
                 {
 
-                    if (_GV.g_Substitu_PEV)
+                    if (_GV.plcRead.IsPEVDegraded())
                     {
-                        SetState(Constants.STEP_MOVE_WHEELBASE);
+                        SetState(Constants.STEP_DETECT_CAR_WAIT);
                         continue;
                     }
                     Do_PEV_Start();
@@ -257,10 +269,7 @@ public class TestThread_Kint
                 {
                     Do_PEV_MDA_OK();
                 }
-                else if (m_nState == Constants.STEP_MOVE_WHEELBASE)
-                {
-                    DoMoveWheelbase();
-                }
+                
                 else if (m_nState == Constants.STEP_DETECT_CAR_WAIT)
                 {
                     DoDetectCar();
@@ -283,6 +292,11 @@ public class TestThread_Kint
                 }
                 else if (m_nState == Constants.STEP_HANDLE_0)
                 {
+                    if (_GV.plcRead.IsSteeringWheelDegraded())
+                    {
+                        SetState(Constants.STEP_CHECK_CENTERING);
+                    }
+
                     DoHandle_0();
                 }
                 else if (m_nState == Constants.STEP_HANDLE_1)
@@ -341,18 +355,7 @@ public class TestThread_Kint
                 {
                     Do_Exit_Position();
                 }
-                else if (m_nState == Constants.STEP_CHECK_SWB_HOME)
-                {
-                    Do_CheckSWB_HOME();
-                }
-                else if (m_nState == Constants.STEP_CHECK_HLA_HOME)
-                {
-                    Do_CheckHLA_HOME();
-                }
-                else if ( m_nState == Constants.STEP_CHECK_VEP_FINISH)
-                {
-                    Do_Check_VEP_Finish();
-                }
+                
                 else if (m_nState == Constants.STEP_SAVE_DATA)
                 {
                     Do_SaveData();
@@ -365,14 +368,7 @@ public class TestThread_Kint
                 {
                     Do_CheckGoOut1();
                 }
-                else if (m_nState == Constants.STEP_CHECK_GO_OUT2)
-                {
-                    Do_CheckGoOut2();
-                }
-                else if (m_nState == Constants.STEP_CHECK_GO_OUT3)
-                {
-                    Do_CheckGoOut3();
-                }
+              
                 else if (m_nState == Constants.STEP_GRET_OK)
                 {
                     Do_GretComm(true);
@@ -382,9 +378,9 @@ public class TestThread_Kint
                     DoFinish();
 
                 }
-
             }
         }
+
         catch (Exception ex)
         {
             WLog("TEST THREAD Exception : " + ex.Message);
@@ -407,6 +403,10 @@ public class TestThread_Kint
             m_nState = state;
             m_bPassNext = false;
             _GV.m_bNextStep = false;
+            
+            Thread.Sleep(300);
+            _GV.plcWrite.GetPLCOutData();
+
             if (m_nState == Constants.STEP_WAIT)
             {        
             }
@@ -453,6 +453,13 @@ public class TestThread_Kint
         Thread.Sleep(300);
         DppManager.SendToDpp(DppManager.MSG_DPP_VEHICLE_TYPE, Int32.Parse(_GV.m_Cur_Model.Dpp_Code));
         _GV.Log_PGM.WriteFile("Start Test : " + _GV.m_Cur_Info.CarPJINo);
+
+        StopSWASending(); // Task 중단
+        StopSWAChecking();
+        StopTAChecking();
+        _GV.plcWrite.ClearData();
+
+
     }
     private void DoWait()
     {
@@ -465,13 +472,67 @@ public class TestThread_Kint
                 if ( _GV.m_bTestRun ) break;
             }
             InitTest();
-            SetState(Constants.STEP_PEV_START);
+            SetState(Constants.STEP_MOVE_WHEELBASE);
         }
         catch (Exception ex)
         {
             WLog("DoWait Error: " + ex.Message);
         }
     }
+
+
+    private int DoMoveWheelbase()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Wait Wheelbase position");
+            //_GV._PLCVal.DO._Wheelbase_Start = true;
+            //_GV.plcWrite.SetLeftDivDistance(1, Convert.ToInt32(_GV.m_Cur_Model.WhelBase));
+            //_GV.plcWrite.SetRightDivDistance(1, Convert.ToInt32(_GV.m_Cur_Model.WhelBase));
+            //_GV.plcWrite.SetWheelbaseMoving(true);
+            //_GV.plcWrite.SetDiv(ushort.Parse(_GV.m_Cur_Model.WB___Div));
+
+            int nDist = Convert.ToInt32(_GV.m_Cur_Model.WhelBase) - Convert.ToInt32(_GV.Config.Wheelbase.HOME_POS);
+
+            _GV.plcWrite.SetPJI(_GV.m_Cur_Info.CarPJINo);
+            _GV.plcWrite.SetLeftDivDistance(1, nDist);
+            _GV.plcWrite.SetRightDivDistance(1, nDist);
+            _GV.plcWrite.SetDiv(1);
+            _GV.plcWrite.SetCodeOK(true);
+            _GV.plcWrite.WritePLCData();
+
+            
+            //_GV.plcWrite.setPJI(_GV.m_Cur_Info.CarPJINo);
+
+            //while (true)
+            //{
+            //    if (CheckLoopExit()) break;
+
+            //    int WBDist = Convert.ToInt32(_GV.m_Cur_Model.WhelBase);
+            //    if ( _GV.plcRead.GetLeftDistance() == WBDist)
+            //    {
+            //        break;
+            //    }
+            //    Thread.Sleep(100);
+            //}
+            //_GV._PLCVal.DO._Wheelbase_Start = false;
+            
+            
+            SetState(Constants.STEP_PEV_START);
+            // 입구 신호등 GREEN;
+            //_GV._PLCVal.DO.
+
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"WB Move Error :  {ex.Message}");
+        }
+
+        return nRet;
+    }
+
+    #region _PEV 관련
     private void Do_PEV_Start()
     {
         try
@@ -492,7 +553,9 @@ public class TestThread_Kint
             while (true)
             {
                 if (CheckLoopExit()) break;
-                Thread.Sleep(10);
+
+                if (_GV.vep.IsRequestPJIfromTZ()) break;
+                
             }
 
             SetState(Constants.STEP_PEV_SEND_PJI);
@@ -517,7 +580,7 @@ public class TestThread_Kint
             {
                 if (CheckLoopExit()) break;
                 if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-                Thread.Sleep(10);
+                
             }
             SetState(Constants.STEP_PEV_MDA_OK);
         }
@@ -535,88 +598,57 @@ public class TestThread_Kint
             while (true)
             {
                 if (CheckLoopExit()) break;
-                Thread.Sleep(10);
-				//if (_GV._VEP_Data.SynchroZone.GetSyncroValue(0) == 1 ) break;
-				if (_GV.vep.vepData.SYData[0] == 1) break;
-				
+                //if (_GV._VEP_Data.SynchroZone.GetSyncroValue(0) == 1 ) break;
+                if (_GV.vep.vepData.SYData[0] == 1 && _GV.vep.vepData.VEPStatus == 2)
+                {
+                    Broker.dsBroker.Publish(Topics.PEV.MDA_OK, 0);
+                    Broker.dsBroker.Publish(Topics.PEV.Message, "MDA_OK");
+
+                    break;
+                }
 
 			}
             //_GV._VEP_Client.SetSync30NewVehicle();
-			_GV.vep.SetSync30NewVehicle();
+			
 
-
-			testThread_HLT.StartThread();
-            SetState(Constants.STEP_MOVE_WHEELBASE);
+            if ( !_GV.plcRead.IsHLADegraded() )testThread_HLT.StartThread();
+            SetState(Constants.STEP_DETECT_CAR_WAIT);
         }
         catch (Exception ex)
         {
             WLog("Do_PEV_SendPJI Error: " + ex.Message);
         }
     }
+    #endregion  _PEV 관련
 
-
-
-    private int DoMoveWheelbase()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Wait Wheelbase position");
-
-            //_GV._PLCVal.DO._Wheelbase_Start = true;
-
-            //_GV.plcWrite.SetLeftDivDistance(1, Convert.ToInt32(_GV.m_Cur_Model.WhelBase));
-            //_GV.plcWrite.SetRightDivDistance(1, Convert.ToInt32(_GV.m_Cur_Model.WhelBase));
-            //_GV.plcWrite.SetWheelbaseMoving(true);
-
-            _GV.plcWrite.SetDiv(ushort.Parse(_GV.m_Cur_Model.WB___Div));
-            _GV.plcWrite.SetCodeOK(true);
-            //_GV.plcWrite.setPJI(_GV.m_Cur_Info.CarPJINo);
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                
-                int WBDist = Convert.ToInt32(_GV.m_Cur_Model.WhelBase);
-                if ( _GV.plcRead.GetLeftDistance() == WBDist)
-                {
-                    break;
-                }
-                Thread.Sleep(100);
-            }
-            //_GV._PLCVal.DO._Wheelbase_Start = false;
-            Thread.Sleep(100);
-
-            SetState(Constants.STEP_DETECT_CAR_WAIT);
-            // 입구 신호등 GREEN;
-            //_GV._PLCVal.DO.
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"WB Move Error :  {ex.Message}");
-        }
-
-        return nRet;
-    }
     private int DoDetectCar()
     {
         int nRet = 0;
         try
         {
             UI_Update_Status("STEP_DETECT_CAR_WAIT");
+            int nModelWB = Convert.ToInt32(_GV.m_Cur_Model.WhelBase);
+            int nHomeWB = Convert.ToInt32(_GV.Config.Wheelbase.HOME_POS);
+            int nDist = nModelWB - nHomeWB;
             while (true)
             {
                 if (CheckLoopExit()) break;
 
-                if (_GV.plcRead.IsFrontCarDetection() && _GV.plcRead.IsRearCarDetection())
+                int leftDist = _GV.plcRead.GetLeftDistance();
+                int rightDist = _GV.plcRead.GetRightDistance();
+
+                bool isLeftInRange = Math.Abs(leftDist - nDist) < 5;
+                bool isRightInRange = Math.Abs(rightDist - nDist) < 5;
+
+                if (_GV.plcRead.IsFrontCarDetection() && _GV.plcRead.IsRearCarDetection() &&
+                    isLeftInRange && isRightInRange)
                 {
+                    
                     break;
                 }
-
-                Thread.Sleep(10);
             }
-            Thread.Sleep(100);
+
+            _GV.vep.SetSync30NewVehicle();
             SetState(Constants.STEP_PRESS_STARTCYCLE_WAIT);
 
         }
@@ -645,13 +677,12 @@ public class TestThread_Kint
                     break;
                 }
 
-                Thread.Sleep(10);
+                
             }
 
             
             //_GV._PLCVal.DO._Wheelbase_Start = false;
             OnCycleStart?.Invoke();
-            Thread.Sleep(100);
             SetState(Constants.STEP_RUNOUT_POS_0);
 
 
@@ -673,21 +704,17 @@ public class TestThread_Kint
         try
         {
            // DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
-            UI_Update_Status("RUN-OUT_0");
+            UI_Update_Status(" Check Roller Run");
 
             DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 100;
             while (true)
             {
-                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS)
-                {
-                    break;
-                }
-
                 if (CheckLoopExit()) break;
-                Thread.Sleep(10);
+                if (_GV.plcRead.IsMotorRun())  break;
+
+                
             }
-            SetState(Constants.STEP_RUNOUT_POS_1);
+            SetState(Constants.STEP_HANDLE_0);
         }
         catch (Exception ex)
         {
@@ -704,13 +731,13 @@ public class TestThread_Kint
             UI_Update_Status("RUN-OUT_1");
 
             DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 100;
+            const double TIMEOUT_SECONDS = 0.1;
             
             while (true)
             {
                 if (CheckLoopExit()) break;
                 if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-                Thread.Sleep(10);
+                
             }
             SetState(Constants.STEP_RUNOUT_POS_2);
 
@@ -720,9 +747,6 @@ public class TestThread_Kint
             OnErrorOccurred?.Invoke($"DoPresRunOut_1:  {ex.Message}");
         }
 
-        
-      
-        Thread.Sleep(100);
         return nRet;
     }
     private int DoPresRunOut_2()
@@ -730,21 +754,15 @@ public class TestThread_Kint
         int nRet = 0;
         try
         {
-            
 
             UI_Update_Status("RUN-OUT_2");
             DateTime startTime = DateTime.Now;
-            const int TIMEOUT_SECONDS = 100;
-
+            const double TIMEOUT_SECONDS = 0.1;
             while (true)
             {
                 if (CheckLoopExit()) break;
-                //if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-                if ( _GV.g_MeasureData.dSymm < 0.5 && _GV.g_MeasureData.dSymm > -0.5)
-                {
-                    _GV.plcWrite.SetAccurancyCheck(true);
-                    break;
-                }
+                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
+                
                 Thread.Sleep(10);
             }
 
@@ -766,21 +784,16 @@ public class TestThread_Kint
         int nRet = 0;
         try
         {
-            if (_GV.g_Substitu_SWB)
-            {
-                SetState(Constants.STEP_CHECK_CENTERING);
-                return nRet;
-            }
+          
             UI_Update_Status("Handle_0");
             DateTime startTime = DateTime.Now;
             while (true)
             {
                 if (CheckLoopExit()) break;
-                if (!_GV.plcRead.IsSteeringWheelBalanceHome() && Math.Abs(_GV.dHandle) > 3.0 ) break;
+                if (!_GV.plcRead.IsSteeringWheelBalanceHome()) break;
 
-                Thread.Sleep(10);
             }
-
+            Thread.Sleep(300);
             SetState(Constants.STEP_HANDLE_1);
 
         }
@@ -802,16 +815,24 @@ public class TestThread_Kint
             UI_Update_Status("Handle_1");
             DateTime startTime = DateTime.Now;
 
+            double st = Double.Parse(_GV.m_Cur_Model.SWA___ST) / 60;
+            double lt = Double.Parse(_GV.m_Cur_Model.SWA___LT) / 60;
+    
 
             while (true)
             {
                 if (CheckLoopExit()) break;
-                if ( _GV.dHandle > 1)
+
+
+                double handle = _GV.dHandle;
+
+                if (handle >= (st - lt) && handle <= (st + lt))
                 {
+                    _GV.plcWrite.SetTolranceOK(true);
+                    _GV.plcWrite.SetCodeOK(false);
+                    _GV.plcWrite.WritePLCData();
                     break;
                 }
-
-                Thread.Sleep(10);
             }
 
             SetState(Constants.STEP_HANDLE_1);
@@ -832,31 +853,28 @@ public class TestThread_Kint
         int nRet = 0;
         try
         {
-
             UI_Update_Status("DoCheckCentering");
             DateTime startTime = DateTime.Now;
-
-            bool bRoller_Spain = false;
-            bool bCenteringOK = false;
+            double dStd = 0.5;
             while (true)
             {
                 if (CheckLoopExit()) break;
-                
-                if ( bRoller_Spain && bCenteringOK 
-                     && Math.Abs(_GV.g_MeasureData.dSymm) < 0.5)
+                double dSymm = Math.Abs(_GV.g_MeasureData.dSymm);
+                if (dSymm < 0.5 )
                 {
+                    _GV.plcWrite.SetAccurancyCheck(true);
                     break;
                 }
-
                 
-                Thread.Sleep(10);
             }
         }
         catch (Exception ex)
         {
             OnErrorOccurred?.Invoke($"DoCheckCentering:  {ex.Message}");
         }
-        
+
+        _GV.plcWrite.SetAccurancyCheck(true);
+        _GV.plcWrite.WritePLCData();
         SetState(Constants.STEP_PRESS_MEASURE_WAIT);
         Thread.Sleep(100);
         return nRet;
@@ -868,6 +886,9 @@ public class TestThread_Kint
         try
         {
             UI_Update_Status("Do_PresstheMeasureButton_Wait");
+            _GV.plcWrite.SetCodeOK(false);
+            _GV.plcWrite.WritePLCData();
+
             while (true)
             {
                 if (CheckLoopExit()) break;
@@ -884,8 +905,8 @@ public class TestThread_Kint
 
 
             // Measuring start 눌렀을때 여기서 실행
-            DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
-            StartSWAChecking();
+            //DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START);
+            
             
 
         }
@@ -903,6 +924,14 @@ public class TestThread_Kint
         _swaCancellationTokenSource?.Cancel();
         _swaSendTask?.Wait(3000);
     }
+
+    private void StopTAChecking()
+    {
+
+        _taCheckCancellationTokenSource?.Cancel();
+        _taCheckTask?.Wait(3000);
+    }
+
 
     private void StopSWAChecking()
     {
@@ -922,7 +951,11 @@ public class TestThread_Kint
         _swaCheckCancellationTokenSource = new CancellationTokenSource();
         _swaCheckTask = Task.Run(() => SendSWACheck(_swaCheckCancellationTokenSource.Token));
     }
-
+    private void StartTAChecking()
+    {
+        _taCheckCancellationTokenSource = new CancellationTokenSource();
+        _taCheckTask = Task.Run(() => SendTACheck(_taCheckCancellationTokenSource.Token));
+    }
 
 
     public ushort GetABFromOffset(ushort offset, int nA, int nB, int nC, double dX)
@@ -990,7 +1023,7 @@ public class TestThread_Kint
 				//ushort isSWB = _GV._VEP_Data.SynchroZone.GetSyncroValue(8);
 				ushort isSWB = _GV.vep.vepData.SYData[8];
 
-				if ( isSWB  == 1 )
+				if ( isSWB  == 1 || isSWB == 2)
                 {
                     int nA = 100;
                     int nB = 0;
@@ -1028,23 +1061,43 @@ public class TestThread_Kint
         }
     }
 
+    private async Task SendTACheck(CancellationToken cancellationToken)
+    {
+        try
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+
+                if (_GV.vep.vepData.SYData[13] == 2 || _GV.vep.vepData.SYData[13] == 1)
+                {
+                    StopTAChecking();
+                }
+                if (_GV.vep.vepData.SYData[12] == 1 || _GV.vep.vepData.SYData[12] == 2 || _GV.vep.vepData.SYData[12] == 3 || _GV.vep.vepData.SYData[12] == 4) 
+                {
+                    SendThrustangle();
+                }
+
+                // 전송 간격 (예: 100ms)
+                await Task.Delay(300, cancellationToken);
+
+            }
+        }
+        catch (OperationCanceledException)
+        {
+            // 정상적인 취소
+        }
+        catch (Exception ex)
+        {
+            WLog($"SWA 전송 중 오류: {ex.Message}");
+        }
+    }
+
     private async Task SendSWACheck(CancellationToken cancellationToken)
     {
         try
         {
             while (m_bSendSWA && !cancellationToken.IsCancellationRequested)
             {
-
-				//            if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 3)
-				//            {
-				//                StopSWAChecking();
-				//            }
-				//if (_GV._VEP_Data.SynchroZone.GetSyncroValue(20) == 1)
-				//            {
-				//                SendFinalSWB();
-				//                StopSWAChecking();
-				//            }
-
 
 				if (_GV.vep.vepData.SYData[20] == 3)
 				{
@@ -1055,6 +1108,11 @@ public class TestThread_Kint
 					SendFinalSWB();
 					StopSWAChecking();
 				}
+
+                if (_GV.vep.vepData.SYData[22] == 2 || _GV.vep.vepData.SYData[22] == 1)
+                {
+                    StopSWAChecking();
+                }
 
 				// 전송 간격 (예: 100ms)
 				await Task.Delay(300, cancellationToken);
@@ -1078,24 +1136,29 @@ public class TestThread_Kint
         {
             UI_Update_Status("Running out.");
             DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 12;
+            const double TIMEOUT_SECONDS = 10;
             while (true)
             {
                 if (CheckLoopExit()) break;
                 if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
 
+
+                // 실제로 값을 받았는지 체크 ;;
                 Thread.Sleep(10);
             }
 
             // RUNOUT 이 끝나고 
             //_GV._VEP_Client.SetSync06RunOutFinish();
-			_GV.vep.SetSync06RunOutFinish();
 
 
+            _GV.plcWrite.SetMeasurementFinish(true);
+            _GV.plcWrite.WritePLCData();
+
+            _GV.vep.SetSync06RunOutFinish();
 
 			m_bSendSWA = true;
             StartSWASending();
-
+            StartSWAChecking();
             m_InitMeasureData = m_measureData.Clone();
             m_InitMeasureData.dHandle = _GV.dHandle;
 
@@ -1119,12 +1182,12 @@ public class TestThread_Kint
             var main = _GV._frmMNG.GetForm<Frm_Mainfrm>();
             if (main != null && main.ScrewDriverL != null)
             {
-                if ( !_GV.g_Substitu_ScrewDriver_L )
+                if ( !_GV.plcRead.IsLeftScrewDriverDegraded() )
                     main.ScrewDriverL.Send("asdf");
             }
             if (main != null && main.ScrewDriverR != null)
             {                
-                if (!_GV.g_Substitu_ScrewDriver_R)
+                if (!_GV.plcRead.IsRightScrewDriverDegraded())
                     main.ScrewDriverR.Send("asdf");
             }
             DateTime startTime = DateTime.Now;
@@ -1154,11 +1217,19 @@ public class TestThread_Kint
             UI_Update_Status("Do_GetSrewLeft");
             DateTime startTime = DateTime.Now;
             //const double TIMEOUT_SECONDS = 0.5;
+            //StartTAChecking();
+            m_SrewLeftOK = true;
+
             while (true)
             {
                 if (CheckLoopExit()) break;
                 // if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
+                
+
                 if (m_SrewLeftOK) break;
+            
+                if (_GV.plcRead.IsPitInLeftFinish()) break;
+
                 Thread.Sleep(10);
             }
             SetState(Constants.STEP_PRESS_LEFT_FINISH);
@@ -1183,7 +1254,7 @@ public class TestThread_Kint
                 if (CheckLoopExit()) break;
                 // if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
                 
-                if (_GV.plcRead.IsPitInLeftFinish()) break;
+                if (_GV.plcRead.IsPitInLeftFinish() || _GV.plcRead.IsPitInRightFinish()) break;
                 Thread.Sleep(10);
             }
             SetState(Constants.STEP_SCREW_GET_DATA_RIGHT);
@@ -1203,10 +1274,13 @@ public class TestThread_Kint
             UI_Update_Status("Do_GetSrewRight");
             DateTime startTime = DateTime.Now;
             //const double TIMEOUT_SECONDS = 0.5;
+            m_SrewRightOK = true;
+
             while (true)
             {
                 if (CheckLoopExit()) break;
                 // if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
+                
                 if (m_SrewRightOK) break;
                 Thread.Sleep(10);
             }
@@ -1230,11 +1304,16 @@ public class TestThread_Kint
             {
                 if (CheckLoopExit()) break;
                 // if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
-                if (_GV.plcRead.IsPitInRightFinish()) break;
+                if (_GV.plcRead.IsPitInLeftFinish() || _GV.plcRead.IsPitInRightFinish()) break;
                 Thread.Sleep(10);
+
+                //_GV.plcWrite.
             }
-            SetState(Constants.STEP_PRESS_PIT_OUT_FINISH_WAIT);
+            
             DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_STOP, 0);
+            _GV.plcWrite.SetScrewDriverOK(true);
+            _GV.plcWrite.WritePLCData();
+            SetState(Constants.STEP_CHECK_SREW_ALL_HOME);
         }
         catch (Exception ex)
         {
@@ -1285,13 +1364,13 @@ public class TestThread_Kint
         if ( usData != 65535 )
         {
             usData = (ushort)_rand.Next(0, 1001);
-            
-			//_GV._VEP_Client.SetSync10TAReady();
+
+            //_GV._VEP_Client.SetSync10TAReady();
             //_GV._VEP_Client.SetSync11TAAngle(usData);
+            _GV.vep.SetSync11TAAngle(usData);
 
-			_GV.vep.SetSync10TAReady();
-			_GV.vep.SetSync11TAAngle(usData);
-
+            _GV.vep.SetSync10TAReady();
+			
 		}
 	}
     private void SendFinalSWB()
@@ -1333,7 +1412,7 @@ public class TestThread_Kint
             SendThrustangle();
             Thread.Sleep(100);
             //SendFinalSWB();
-            SetState(Constants.STEP_DISPLAY_RESULT);
+            SetState(Constants.STEP_CHECK_ALL_FINISH);
         }
         catch (Exception ex)
         {
@@ -1342,6 +1421,49 @@ public class TestThread_Kint
 
         
         
+        return nRet;
+    }
+
+    private int Do_CheckAllFinish()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Do_CheckAllFinish");
+            DateTime startTime = DateTime.Now;
+
+            
+            while (true)
+            {
+                if (CheckLoopExit()) break;
+
+                m_HLA_Finish = _GV.plcRead.IsHLADegraded() || _GV.plcRead.IsHLAHomePosition();
+                m_SWB_Finish = _GV.plcRead.IsSteeringWheelDegraded() || _GV.plcRead.IsSteeringWheelBalanceHome();
+                if (!_GV.plcRead.IsPEVDegraded())
+                {
+                    int syValue = _GV.vep.vepData.SYData[1];
+
+                    if (syValue == 2 || syValue == 3 || syValue == 1)
+                    {
+                        _GV.plcWrite.SetVEPFinish(true);
+                        _GV.plcWrite.WritePLCData();
+                        m_PEV_Finish = true;
+
+                    }
+                   
+                }
+                if (m_HLA_Finish && m_SWB_Finish && m_PEV_Finish)
+                {
+                    break;
+                }
+                
+            }
+            SetState(Constants.STEP_DISPLAY_RESULT);
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_CheckAllFinish:  {ex.Message}");
+        }
         return nRet;
     }
 
@@ -1352,7 +1474,7 @@ public class TestThread_Kint
         {
             UI_Update_Status("Do_DisplayResult");
             DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 3;
+            const double TIMEOUT_SECONDS = 1;
             while (true)
             {
                 if (CheckLoopExit()) break;
@@ -1360,7 +1482,7 @@ public class TestThread_Kint
 
                 Thread.Sleep(10);
             }
-            SetState(Constants.STEP_CHECK_ALL_FINISH);
+            SetState(Constants.STEP_EXIT_POSITION);
         }
         catch (Exception ex)
         {
@@ -1370,117 +1492,7 @@ public class TestThread_Kint
         return nRet;
 
     }
-    private int Do_CheckAllFinish()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_CheckAllFinish");
-            DateTime startTime = DateTime.Now;
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-
-                if (m_HLA_Finish && m_PEV_Finish)
-                {
-                    break;
-                }
-                Thread.Sleep(10);
-            }
-
-            SetState(Constants.STEP_CHECK_SWB_HOME);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_CheckAllFinish:  {ex.Message}");
-        }
-        return nRet;
-    }
-
-    private int Do_CheckSWB_HOME()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_CheckSWB_HOME");
-            DateTime startTime = DateTime.Now;
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if (_GV.plcRead.IsSteeringWheelBalanceHome()) break;
-                Thread.Sleep(10);
-            }
-            SetState(Constants.STEP_CHECK_HLA_HOME);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_CheckSWB_HOME:  {ex.Message}");
-        }
-        return nRet;
-    }
-
-    private int Do_CheckHLA_HOME()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_CheckHLA_HOME");
-            DateTime startTime = DateTime.Now;
-
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if (_GV.plcRead.IsHLAHomePosition()) break;
-                Thread.Sleep(10);
-            }
-			//_GV._VEP_Client.SetSync32HLAFinish();
-			_GV.vep.SetSync32HLAFinish();
-
-			SetState(Constants.STEP_CHECK_VEP_FINISH);
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_CheckHLA_HOME:  {ex.Message}");
-        }
-
-        return nRet;
-    }
-
-    private int Do_Check_VEP_Finish()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_Exit_Position");
-           
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-
-                //if ( _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 2 ||
-                //    _GV._VEP_Data.SynchroZone.GetSyncroValue(1) == 3
-                //    )
-				if (_GV.vep.vepData.SYData[1] == 2 ||
-					_GV.vep.vepData.SYData[1] == 3
-				)
-				{
-                    break;
-                }
-            }
-            SetState(Constants.STEP_EXIT_POSITION);
-            //피트 신호등 RED
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_Exit_Position:  {ex.Message}");
-        }
-
-        return nRet;
-
-    }
+   
 
     private int Do_Exit_Position()
     {
@@ -1495,8 +1507,8 @@ public class TestThread_Kint
             while (true)
             {
                 if (CheckLoopExit()) break;
-                //if ( 모든 조건들이 참일때) break;
-                Thread.Sleep(10);
+                if (_GV.plcRead.IsExitPosition()) break;
+                
             }
             SetState(Constants.STEP_SAVE_DATA);
             //피트 신호등 RED
@@ -1511,6 +1523,144 @@ public class TestThread_Kint
         return nRet;
 
     }
+
+    private int Do_SaveData()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Do_SaveData");
+            SaveLocalDB();
+            Thread.Sleep(300);
+            SaveXmlFile();
+            SetState(Constants.STEP_TICKET_PRINT);
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
+        }
+
+        return nRet;
+
+    }
+    private int Do_TicketPrint()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Do_TicketPrint");
+            DateTime startTime = DateTime.Now;
+
+
+            //ZPrintController _PrintTicket = new ZPrintController();
+            //AlignmentReportData data = MakePrintData();
+            //_PrintTicket.PrintAlignmentData(data);
+
+            while (true)
+            {
+                if (CheckLoopExit()) break;
+
+                Thread.Sleep(100);
+                _GV.vep.B_BenchCycleEnd();
+                break;
+            }
+            SetState(Constants.STEP_CHECK_GO_OUT1);
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_TicketPrint:  {ex.Message}");
+        }
+
+        return nRet;
+
+    }
+
+
+    private int Do_CheckGoOut1()
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("STEP_CHECK_GO_OUT1");
+            DateTime startTime = DateTime.Now;
+
+
+            while (true)
+            {
+                if (CheckLoopExit()) break;
+                if (!_GV.plcRead.IsFrontCarDetection() &&
+                     !_GV.plcRead.IsRearCarDetection()) break;
+
+                Thread.Sleep(10);
+            }
+            SetState(Constants.STEP_GRET_OK);
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_CheckGoOut1:  {ex.Message}");
+        }
+
+        return nRet;
+
+    }
+
+    private int Do_GretComm(bool bOK)
+    {
+        int nRet = 0;
+        try
+        {
+            UI_Update_Status("Do_GretComm");
+            DateTime startTime = DateTime.Now;
+
+            const double TIMEOUT_SECONDS = 0.5;
+            // GRET 성공시
+            if (bOK)
+            {
+                // 성공시 GRET ;
+            }
+            else
+            {
+                // NG 시 Gret;
+            }
+            while (true)
+            {
+                if (CheckLoopExit()) break;
+                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;
+                //DB Write.
+                Thread.Sleep(10);
+            }
+            SetState(Constants.STEP_FINISH);
+        }
+        catch (Exception ex)
+        {
+            OnErrorOccurred?.Invoke($"Do_GretComm:  {ex.Message}");
+        }
+        return nRet;
+    }
+
+    private void DoFinish()
+    {
+        try
+        {
+            DateTime startTime = DateTime.Now;
+            const double TIMEOUT_SECONDS = 5.0;
+            while (true)
+            {
+                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS)
+                {
+                    break;
+                }
+                if (CheckLoopExit()) break;
+                Thread.Sleep(10);
+            }
+            FinishTest();
+        }
+        catch (Exception ex)
+        {
+            WLog("DoWait Error: " + ex.Message);
+        }
+    }
+
 
     private bool TotalPanjung()
     {
@@ -1554,7 +1704,7 @@ public class TestThread_Kint
         return (actual >= min && actual <= max);
         
     }
-   private void MakeResult()
+   private void SaveLocalDB()
     {
         DateTime startTime = DateTime.Now;
         _result.AcceptNo = _GV.m_Cur_Info.AcceptNo;
@@ -1611,39 +1761,6 @@ public class TestThread_Kint
         {
             OnErrorOccurred?.Invoke($"SaveXmlFile:  {ex.Message}");
         }
-    }
-    private int Do_SaveData()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_SaveData");
-            DateTime startTime = DateTime.Now;
-            //퇴출 신호등 GREEN;
-            MakeResult();
-            while (true)
-            {
-
-                if (m_HLA_Finish && _GV.g_Substitu_HLT )
-                {
-                    break;
-                }
-                //if (CheckLoopExit()) break;
-
-                //Thread.Sleep(10);
-
-                break;
-            }
-            SaveXmlFile();
-            SetState(Constants.STEP_TICKET_PRINT);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
-        }
-
-        return nRet;
-
     }
 
     private AlignmentReportData MakePrintData()
@@ -1756,189 +1873,33 @@ public class TestThread_Kint
 
 		return _Data;
     }
-    private int Do_TicketPrint()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_TicketPrint");
-            DateTime startTime = DateTime.Now;
+    
 
-
-            ZPrintController _PrintTicket = new ZPrintController();
-            AlignmentReportData data = MakePrintData();
-            _PrintTicket.PrintAlignmentData(data);
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-           
-                Thread.Sleep(100);
-
-                break;
-            }
-            SetState(Constants.STEP_CHECK_GO_OUT1);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_TicketPrint:  {ex.Message}");
-        }
-        
-        return nRet;
-
-    }
-
-
-    private int Do_CheckGoOut1()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("STEP_CHECK_GO_OUT1");
-            DateTime startTime = DateTime.Now;
-
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if ( !_GV.plcRead.IsFrontCarDetection() &&
-                     !_GV.plcRead.IsRearCarDetection()) break;
-               
-                Thread.Sleep(10);
-            }
-            SetState(Constants.STEP_CHECK_GO_OUT2);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
-        }
-        
-        return nRet;
-
-    }
-
-    private int Do_CheckGoOut2()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("STEP_CHECK_GO_OUT2");
-            DateTime startTime = DateTime.Now;
-
-
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if (_GV.plcRead.IsFrontCarDetection()) break;
-                //DB Write.
-                Thread.Sleep(10);
-            }
-            SetState(Constants.STEP_CHECK_GO_OUT3);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
-        }
-        
-        return nRet;
-
-    }
-
-    private int Do_CheckGoOut3()
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("STEP_CHECK_GO_OUT3");
-            DateTime startTime = DateTime.Now;
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if (!_GV.plcRead.IsFrontCarDetection()) break;
-                
-                
-                Thread.Sleep(10);
-            }
-            SetState(Constants.STEP_GRET_OK);
-
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_SaveData:  {ex.Message}");
-        }
-
-        return nRet;
-
-    }
-
-    private int Do_GretComm(bool bOK)
-    {
-        int nRet = 0;
-        try
-        {
-            UI_Update_Status("Do_GretComm");
-            DateTime startTime = DateTime.Now;
-
-            const double TIMEOUT_SECONDS = 0.5;
-            // GRET 성공시
-            if ( bOK )
-            {
-                // 성공시 GRET ;
-            }
-            else
-            {
-                // NG 시 Gret;
-            }
-            while (true)
-            {
-                if (CheckLoopExit()) break;
-                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS) break;   
-                //DB Write.
-                Thread.Sleep(10);
-            }
-            SetState(Constants.STEP_FINISH);
-        }
-        catch (Exception ex)
-        {
-            OnErrorOccurred?.Invoke($"Do_GretComm:  {ex.Message}");
-        }   
-        return nRet;
-    }
-
+  
     private void FinishTest()
     {
+
+        _GV.plcWrite.ClearData();
         _GV.m_Cur_Info.Clear();
         _GV.m_Cur_Model.Clear();
         OnCycleFinished?.Invoke();
         SetState(Constants.STEP_WAIT);
+
+        StopSWASending(); // Task 중단
+        StopSWAChecking();
+        StopTAChecking();
+
+
     }
-    private void DoFinish()
-    {
-        try
-        {
-            DateTime startTime = DateTime.Now;
-            const double TIMEOUT_SECONDS = 5.0;
-            while (true)
-            {
-                if ((DateTime.Now - startTime).TotalSeconds >= TIMEOUT_SECONDS)
-                {
-                    break;
-                }       
-                if (CheckLoopExit()) break;
-                Thread.Sleep(10);
-            }
-            FinishTest();
-        }
-        catch (Exception ex)
-        {
-            WLog("DoWait Error: " + ex.Message);
-        }
-    }
+
     public  void StopTest()
     {
+        _GV.plcWrite.ClearData();
         _GV.m_bTestRun = false;
         m_bSendSWA = false;
         StopSWASending(); // Task 중단
+        StopSWAChecking();
+        StopTAChecking();
         OnCycleFinished?.Invoke();
         SetState(Constants.STEP_WAIT);
         m_bTestStop = true;

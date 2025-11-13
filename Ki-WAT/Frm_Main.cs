@@ -342,6 +342,8 @@ namespace Ki_WAT
         }
         private void seqList_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            return;
             try
             {
                 if (seqList.SelectedItems.Count > 0)
@@ -454,6 +456,7 @@ namespace Ki_WAT
         public void StopCycle()
         {
             _GV._TestThread.StopTest();
+            
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -569,6 +572,30 @@ namespace Ki_WAT
         {
             _GV._dbJob.DeleteCarInfo(_GV.m_Cur_Info.AcceptNo);
             RefreshCarInfoList();
+        }
+
+        private void seqList_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (seqList.SelectedItems.Count > 0)
+                {
+                    ListViewItem selectedItem = seqList.SelectedItems[0];
+                    string acceptNo = selectedItem.Text; // 첫 번째 컬럼 (AcceptNo)
+
+                    // 선택된 AcceptNo로 CarInfo 조회
+                    if (m_frmParent != null && _GV._dbJob != null)
+                    {
+                        _GV.m_Cur_Info = _GV._dbJob.SelectCarInfo(acceptNo);
+                        _GV.m_Cur_Model = _GV._dbJob.SelectCarModel(_GV.m_Cur_Info.CarModel);
+                        RefreshCurrentInfoSafe();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"차량 정보 선택 중 오류: {ex.Message}");
+            }
         }
     }
 }

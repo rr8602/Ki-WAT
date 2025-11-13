@@ -120,17 +120,19 @@ namespace Ki_WAT
             if (row == 4) strAddress = "Address : 3";
             if (row == 5) strAddress = "Address : 10";
             if (row == 6) strAddress = "Address : 11";
-            if (row == 7) strAddress = "Address : 60";
-            if (row == 8) strAddress = "Address : 61";
-            if (row == 9) strAddress = "Address : 62";
-            if (row == 10) strAddress = "Address : 90";
-            if (row == 11) strAddress = "Address : 91";
-            if (row == 12) strAddress = "Address : 100";
-            if (row == 13) strAddress = "Address : 110";
-            if (row == 14) strAddress = "Address : 181";
-            if (row == 15) strAddress = "Address : 220";
-            if (row == 16) strAddress = "Address : ___";
+            if (row == 7) strAddress = "Address : 12";
+
+            if (row == 8) strAddress = "Address : 60";
+            if (row == 9) strAddress = "Address : 61";
+            if (row == 10) strAddress = "Address : 62";
+            if (row == 11) strAddress = "Address : 90";
+            if (row == 12) strAddress = "Address : 91";
+            if (row == 13) strAddress = "Address : 100";
+            if (row == 14) strAddress = "Address : 110";
+            if (row == 15) strAddress = "Address : 181";
+            if (row == 16) strAddress = "Address : 220";
             if (row == 17) strAddress = "Address : ___";
+            if (row == 18) strAddress = "Address : ___";
 
 
             if (col == 0)
@@ -193,92 +195,100 @@ namespace Ki_WAT
 
 
 
-            if (row == 4 && col == 0) return "Start Cycle";
-            if (row == 4 && col == 1) return "ByPass Cycle";
-            if (row == 4 && col == 2) return "Restart Cycle";
-            if (row == 4 && col == 3) return "Re-Print Cycle";
-            if (row == 4 && col == 4) return "Safety Stop";
-            if (row == 4 && col == 5) return "Measuring Start";
-            if (row == 4 && col == 6) return "Pit In Left Fin";
-            if (row == 4 && col == 7) return "Pit In Right Fin";
+            if (row == 4 && col == 0) return "Start Cycle BT";
+            if (row == 4 && col == 1) return "ByPass Cycle BT" ;
+            if (row == 4 && col == 2) return "Restart Cycle BT";
+            if (row == 4 && col == 3) return "Re-Print Cycle BT";
+            if (row == 4 && col == 4) return "Safety Stop BT";
+            if (row == 4 && col == 5) return "Measuring Start BT";
+            if (row == 4 && col == 6) return "Pit In Left Fin BT" ;
+            if (row == 4 && col == 7) return "Pit In Right Fin BT";
 
             if (row == 5 && col == 0) return "Exit Platform";
-            
+            if (row == 5 && col == 1) return "Barcode Cancle BT";
             if (row == 5 && col == 2) return "Auto Mode";
             if (row == 5 && col == 3) return "Manual Mode";
             if (row == 5 && col == 4) return "Cali Rolling Master";
             if (row == 5 && col == 5) return "Cali Static Master";
             if (row == 5 && col == 6) return "Emergency";
 
-
-            if (row == 6 && col == 0) return "Acknowlege 1";
-            if (row == 6 && col == 1) return "Acknowlege 2";
-            if (row == 6 && col == 2) return "Acknowlege 3";
-            if (row == 6 && col == 3) return "Acknowlege 4";
-            if (row == 6 && col == 4) return "Acknowlege 5";
-            if (row == 6 && col == 5) return "Acknowlege 6";
-            if (row == 6 && col == 6) return "Acknowlege 7";
-            if (row == 6 && col == 7) return "Acknowlege 8";
+            if (row == 6 && col == 0) return "0";
+            if (row == 6 && col == 1) return "1";
+            if (row == 6 && col == 2) return "2";
+            if (row == 6 && col == 3) return "3";
+            if (row == 6 && col == 4) return "4";
+            if (row == 6 && col == 5) return "5";
+            if (row == 6 && col == 6) return "6";
 
 
-            if (row == 7 && col == 0) return "Acknowlege 9";
-            if (row == 7 && col == 1) return "Acknowlege 10";
-            if (row == 7 && col == 2) return "Acknowlege 11";
-            if (row == 7 && col == 3) return "Acknowlege 12";
+            if (row == 7 && col == 0) return "Acknowlege 1";
+            if (row == 7 && col == 1) return "Acknowlege 2";
+            if (row == 7 && col == 2) return "Acknowlege 3";
+            if (row == 7 && col == 3) return "Acknowlege 4";
+            if (row == 7 && col == 4) return "Acknowlege 5";
+            if (row == 7 && col == 5) return "Acknowlege 6";
+            if (row == 7 && col == 6) return "Acknowlege 7";
+            if (row == 7 && col == 7) return "Acknowlege 8";
 
 
-
-            if (row == 8 && col == 0) return "Acknowlege 13";
-            if (row == 8 && col == 1) return "Acknowlege 14";
-            if (row == 8 && col == 2) return "Acknowlege 15";
-            if (row == 8 && col == 3) return "Acknowlege 16";
-            if (row == 8 && col == 4) return "Acknowlege 17";
-            if (row == 8 && col == 5) return "Acknowlege 18";
-
+            if (row == 8 && col == 0) return "Acknowlege 9";
+            if (row == 8 && col == 1) return "Acknowlege 10";
+            if (row == 8 && col == 2) return "Acknowlege 11";
+            if (row == 8 && col == 3) return "Acknowlege 12";
 
 
 
-
-            if (row == 9 && col == 0) return "Centering Home";
-            if (row == 9 && col == 1) return "Centering On";
-            if (row == 9 && col == 2) return "Floating Plate Lock";
-            if (row == 9 && col == 3) return "Floationg Plate Free";
-            if (row == 9 && col == 4) return "Moving Plate Home";
-            if (row == 9 && col == 5) return "Moving Plate Adjust";
-            if (row == 9 && col == 6) return "Safety Roller Up";
-            if (row == 9 && col == 7) return "Safety Roller Down";
-
-
-            if (row == 10 && col == 0) return "3D Camera Sensor On";
-            if (row == 10 && col == 1) return "Front Car Dectection";
-            if (row == 10 && col == 2) return "Rear Car Dectection";
-            if (row == 10 && col == 3) return "HLA Home Position";
-            if (row == 10 && col == 4) return "Steering Wheel Home";
-
-
-            if (row == 11 && col == 0) return "UnWrench Tool Home";
-            if (row == 11 && col == 1) return "Screw Left Home";
-            if (row == 11 && col == 2) return "Screw Right Home";
-            if (row == 11 && col == 3) return "Scanner Laser On";
-            if (row == 11 && col == 4) return "Safety Key On";
+            if (row == 9 && col == 0) return "Acknowlege 13";
+            if (row == 9 && col == 1) return "Acknowlege 14";
+            if (row == 9 && col == 2) return "Acknowlege 15";
+            if (row == 9 && col == 3) return "Acknowlege 16";
+            if (row == 9 && col == 4) return "Acknowlege 17";
+            if (row == 9 && col == 5) return "Acknowlege 18";
 
 
 
 
-            if (row == 12 && col == 0) return "Wheelbase Moving";
-            if (row == 12 && col == 1) return "Wheelbase Home Position";
-            if (row == 12 && col == 2) return "Wheelbase In Position";
+
+            if (row == 10 && col == 0) return "Centering Home";
+            if (row == 10 && col == 1) return "Centering On";
+            if (row == 10 && col == 2) return "Floating Plate Lock";
+            if (row == 10 && col == 3) return "Floationg Plate Free";
+            if (row == 10 && col == 4) return "Moving Plate Home";
+            if (row == 10 && col == 5) return "Moving Plate Adjust";
+            if (row == 10 && col == 6) return "Safety Roller Up";
+            if (row == 10 && col == 7) return "Safety Roller Down";
+
+
+            if (row == 11 && col == 0) return "3D Camera Sensor On";
+            if (row == 11 && col == 1) return "Front Car Dectection";
+            if (row == 11 && col == 2) return "Rear Car Dectection";
+            if (row == 11 && col == 3) return "HLA Home Position";
+            if (row == 11 && col == 4) return "Steering Wheel Home";
+
+
+            if (row == 12 && col == 0) return "UnWrench Tool Home";
+            if (row == 12 && col == 1) return "Screw Left Home";
+            if (row == 12 && col == 2) return "Screw Right Home";
+            if (row == 12 && col == 3) return "Scanner Laser On";
+            if (row == 12 && col == 4) return "Safety Key On";
 
 
 
 
-            if (row == 13 && col == 6) return "Motor Run";
-            if (row == 13 && col == 7) return "Motor Stop";
+            if (row == 13 && col == 1) return "Wheelbase Home Position";
+            if (row == 13 && col == 0) return "Wheelbase Moving";
+            if (row == 13 && col == 2) return "Wheelbase In Position";
 
-            if (row == 14 && col == 0) return "Sistema pronto";
-            if (row == 14 && col == 1) return "Sequenceia OK";
-            if (row == 14 && col == 2) return "HLA Position Init";
-            if (row == 14 && col == 3) return "HLA Home";
+
+
+
+            if (row == 14 && col == 6) return "Motor Run";
+            if (row == 14 && col == 7) return "Motor Stop";
+
+            if (row == 15 && col == 0) return "Sistema pronto";
+            if (row == 15 && col == 1) return "Sequenceia OK";
+            if (row == 15 && col == 2) return "HLA Position Init";
+            if (row == 15 && col == 3) return "HLA Home";
 
 
             return "";
@@ -360,22 +370,29 @@ namespace Ki_WAT
             SetLabelColor(5, byData[10]);
 
             SetLabelColor(6, byData[11]);
-            SetLabelColor(7, byData[60]);
-            SetLabelColor(8, byData[61]);
-            SetLabelColor(9, byData[62]);
-            SetLabelColor(10, byData[90]);
+            SetLabelColor(7, byData[12]);
 
-            SetLabelColor(11, byData[91]);
-            SetLabelColor(12, byData[100]);
-            SetLabelColor(13, byData[110]);
-            SetLabelColor(14, byData[181]);
-            SetLabelColor(15, byData[220]);
+            SetLabelColor(8, byData[60]);
+            SetLabelColor(9, byData[61]);
+            SetLabelColor(10, byData[62]);
+            SetLabelColor(11, byData[90]);
+
+            SetLabelColor(12, byData[91]);
+            SetLabelColor(13, byData[100]);
+            SetLabelColor(14, byData[110]);
+            SetLabelColor(15, byData[181]);
+            SetLabelColor(16, byData[220]);
 
             
             stcProg.Text = _GV.plcRead.GetProg().ToString();
             stcJour.Text = _GV.plcRead.GetJour().ToString();
             stcIdent.Text = _GV.plcRead.GetIdent().ToString();
             stcDiv.Text = _GV.plcRead.GetDiv().ToString();
+
+
+
+            stcLeft.Text = _GV.plcRead.GetLeftDistance().ToString();
+            stcRight.Text = _GV.plcRead.GetRightDistance().ToString();
 
         }
 
@@ -387,7 +404,7 @@ namespace Ki_WAT
                 return;
             }
 
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 Control ctrl = table.GetControlFromPosition(i, row);
 

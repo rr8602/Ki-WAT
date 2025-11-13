@@ -32,6 +32,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.lbl_SWB = new System.Windows.Forms.Label();
+            this.lbl_hlt_message = new System.Windows.Forms.Label();
+            this.lbl_PEV = new System.Windows.Forms.Label();
             this.GRP_RR_CAM = new RollTester.CGuage();
             this.GRP_RL_TOE = new RollTester.CGuage();
             this.GRP_FR_CAM = new RollTester.CGuage();
@@ -40,8 +43,6 @@
             this.GRP_RR_TOE = new RollTester.CGuage();
             this.GRP_FL_CAM = new RollTester.CGuage();
             this.GRP_FR_TOE = new RollTester.CGuage();
-            this.lbl_SWB = new System.Windows.Forms.Label();
-            this.lbl_hlt_message = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +84,43 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 161;
             this.pictureBox2.TabStop = false;
+            // 
+            // lbl_SWB
+            // 
+            this.lbl_SWB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(55)))), ((int)(((byte)(52)))));
+            this.lbl_SWB.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_SWB.ForeColor = System.Drawing.Color.White;
+            this.lbl_SWB.Location = new System.Drawing.Point(919, 494);
+            this.lbl_SWB.Name = "lbl_SWB";
+            this.lbl_SWB.Size = new System.Drawing.Size(150, 43);
+            this.lbl_SWB.TabIndex = 50;
+            this.lbl_SWB.Text = "0.0";
+            this.lbl_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_hlt_message
+            // 
+            this.lbl_hlt_message.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.lbl_hlt_message.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_hlt_message.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_hlt_message.Location = new System.Drawing.Point(12, 62);
+            this.lbl_hlt_message.Name = "lbl_hlt_message";
+            this.lbl_hlt_message.Size = new System.Drawing.Size(507, 53);
+            this.lbl_hlt_message.TabIndex = 164;
+            this.lbl_hlt_message.Text = "-";
+            this.lbl_hlt_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_hlt_message.Visible = false;
+            // 
+            // lbl_PEV
+            // 
+            this.lbl_PEV.BackColor = System.Drawing.Color.Gray;
+            this.lbl_PEV.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_PEV.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_PEV.Location = new System.Drawing.Point(-8, 806);
+            this.lbl_PEV.Name = "lbl_PEV";
+            this.lbl_PEV.Size = new System.Drawing.Size(1876, 85);
+            this.lbl_PEV.TabIndex = 165;
+            this.lbl_PEV.Text = "PEV";
+            this.lbl_PEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GRP_RR_CAM
             // 
@@ -236,37 +274,13 @@
             this.GRP_FR_TOE.TitleColor = System.Drawing.Color.Black;
             this.GRP_FR_TOE.ValueColor = System.Drawing.Color.LightSteelBlue;
             // 
-            // lbl_SWB
-            // 
-            this.lbl_SWB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(55)))), ((int)(((byte)(52)))));
-            this.lbl_SWB.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_SWB.ForeColor = System.Drawing.Color.White;
-            this.lbl_SWB.Location = new System.Drawing.Point(919, 494);
-            this.lbl_SWB.Name = "lbl_SWB";
-            this.lbl_SWB.Size = new System.Drawing.Size(150, 43);
-            this.lbl_SWB.TabIndex = 50;
-            this.lbl_SWB.Text = "0.0";
-            this.lbl_SWB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_hlt_message
-            // 
-            this.lbl_hlt_message.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.lbl_hlt_message.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_hlt_message.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbl_hlt_message.Location = new System.Drawing.Point(12, 62);
-            this.lbl_hlt_message.Name = "lbl_hlt_message";
-            this.lbl_hlt_message.Size = new System.Drawing.Size(866, 53);
-            this.lbl_hlt_message.TabIndex = 164;
-            this.lbl_hlt_message.Text = "-";
-            this.lbl_hlt_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl_hlt_message.Visible = false;
-            // 
             // Frm_Oper_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1900, 900);
+            this.Controls.Add(this.lbl_PEV);
             this.Controls.Add(this.lbl_hlt_message);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -309,5 +323,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lbl_SWB;
         private System.Windows.Forms.Label lbl_hlt_message;
+        private System.Windows.Forms.Label lbl_PEV;
     }
 }

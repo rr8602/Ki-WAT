@@ -219,15 +219,7 @@ namespace Ki_WAT
 		public PLCReadWAT plcRead = null;
         public PLCWriteWAT plcWrite = null;
 
-        public bool g_Substitu_PEV = false;
-        public bool g_Substitu_HLT = false;
-        public bool g_Substitu_SWB = false;
-        public bool g_Substitu_MovingFlate = false;
-        public bool g_Substitu_WheelAdjust = false;
-        public bool g_Substitu_ScrewDriver_L = false;
-        public bool g_Substitu_ScrewDriver_R = false;
-        public bool g_Substitu_Printer = false;
-
+        
         public VEPBenchDataManager _VEP_Data;
         public VEPBenchClient     _VEP_Client;
 

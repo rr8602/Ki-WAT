@@ -75,9 +75,9 @@ namespace Ki_WAT
         public const int STEP_DISPLAY_RESULT = 170;
 
         public const int STEP_CHECK_ALL_FINISH = 171;
-        public const int STEP_CHECK_SWB_HOME = 172;
-        public const int STEP_CHECK_HLA_HOME = 173;
-        public const int STEP_CHECK_VEP_FINISH = 174;
+        //public const int STEP_CHECK_SWB_HOME = 172;
+        //public const int STEP_CHECK_HLA_HOME = 173;
+        //public const int STEP_CHECK_VEP_FINISH = 174;
         public const int STEP_EXIT_POSITION = 175;
         
 
@@ -86,8 +86,8 @@ namespace Ki_WAT
         public const int STEP_TICKET_PRINT = 181;
 
         public const int STEP_CHECK_GO_OUT1 = 182;
-        public const int STEP_CHECK_GO_OUT2 = 183;
-        public const int STEP_CHECK_GO_OUT3 = 184;
+        //public const int STEP_CHECK_GO_OUT2 = 183;
+        //public const int STEP_CHECK_GO_OUT3 = 184;
 
         public const int STEP_GRET_OK = 190;
         public const int STEP_FINISH = 9999;

@@ -262,8 +262,10 @@ namespace Ki_WAT
 
 
             if (row == 14 && col == 0) return "Accurancy Check";
-            if (row == 14 && col == 0) return "Measurement Finished";
-            if (row == 14 && col == 0) return "Calibration OK";
+            if (row == 14 && col == 1) return "Measurement Finished";
+            if (row == 14 && col == 2) return "Calibration OK";
+            if (row == 14 && col == 3) return "Screwdriver Finished";
+
 
 
 
@@ -345,7 +347,7 @@ namespace Ki_WAT
                         _GV.plcWrite.SetBit(dataPos, bit, true);
                         //_GV.plcWrite.WritePLCData(dataPos);
                         _GV.plcWrite.WritePLCData();
-                        RefreshData();
+                       // RefreshData();
                     }
                 }
                 else
@@ -356,7 +358,7 @@ namespace Ki_WAT
                         _GV.plcWrite.SetBit(dataPos, bit, false);
                         //_GV.plcWrite.WritePLCData(dataPos);
                         _GV.plcWrite.WritePLCData();
-                        RefreshData();
+                       // RefreshData();
                     }
                 }
             }
@@ -377,13 +379,13 @@ namespace Ki_WAT
         }
         private void RefreshDataTask(CancellationToken token)
         {
-            Thread.Sleep(300);
+            Thread.Sleep(100);
             _GV.plcWrite.GetPLCOutData();
             while (!token.IsCancellationRequested)
             {
-                Thread.Sleep(300);
+                Thread.Sleep(100);
                 ShowStatus();
-                break;
+                //break;
             }
         }
         private void ShowStatus()
@@ -449,6 +451,20 @@ namespace Ki_WAT
             stcDiv.Text = _GV.plcRead.GetDiv().ToString();
 
 
+            lbl_dis_home.Text = _GV.plcWrite.GetWord(112).ToString() + "/" + _GV.plcWrite.GetWord(138).ToString();
+            lbl_dis_static.Text = _GV.plcWrite.GetWord(114).ToString() + "/" + _GV.plcWrite.GetWord(140).ToString();
+            lbl_dis_rolling.Text = _GV.plcWrite.GetWord(116).ToString() + "/" + _GV.plcWrite.GetWord(142).ToString();
+
+            lbl_dis_div1.Text = _GV.plcWrite.GetWord(118).ToString() + "/" + _GV.plcWrite.GetWord(144).ToString();
+            lbl_dis_div2.Text = _GV.plcWrite.GetWord(120).ToString() + "/" + _GV.plcWrite.GetWord(146).ToString();
+            lbl_dis_div3.Text = _GV.plcWrite.GetWord(122).ToString() + "/" + _GV.plcWrite.GetWord(148).ToString();
+            lbl_dis_div4.Text = _GV.plcWrite.GetWord(124).ToString() + "/" + _GV.plcWrite.GetWord(150).ToString();
+            lbl_dis_div5.Text = _GV.plcWrite.GetWord(126).ToString() + "/" + _GV.plcWrite.GetWord(152).ToString();
+            lbl_dis_div6.Text = _GV.plcWrite.GetWord(128).ToString() + "/" + _GV.plcWrite.GetWord(154).ToString();
+            lbl_dis_div7.Text = _GV.plcWrite.GetWord(130).ToString() + "/" + _GV.plcWrite.GetWord(156).ToString();
+            lbl_dis_div8.Text = _GV.plcWrite.GetWord(132).ToString() + "/" + _GV.plcWrite.GetWord(158).ToString();
+            lbl_dis_div9.Text = _GV.plcWrite.GetWord(134).ToString() + "/" + _GV.plcWrite.GetWord(160).ToString();
+            lbl_dis_div10.Text = _GV.plcWrite.GetWord(136).ToString() + "/" + _GV.plcWrite.GetWord(162).ToString();
 
 
         }
@@ -460,7 +476,7 @@ namespace Ki_WAT
                 table.Invoke(new Action(() => SetLabelColor(row, byData)));
                 return;
             }
-            for (int i = 1; i < 8; i++)
+            for (int i = 1; i <= 8; i++)
             {
                 Control ctrl = table.GetControlFromPosition(i, row);
 
@@ -570,17 +586,29 @@ namespace Ki_WAT
                 _GV.plcWrite.SetLeftHome(distance);
                 _GV.plcWrite.SetRightHome(distance);
             }
+            else if ( str =="STATIC")
+            {
+                _GV.plcWrite.SetLeftStaticMaster(distance);
+                _GV.plcWrite.SetRightStaticMaster(distance);
+            }
+            else if ( str == "ROLLING")
+            {
+                _GV.plcWrite.SetLeftRollingMaster(distance);
+                _GV.plcWrite.SetRightRollingMaster(distance);
+            }
             _GV.plcWrite.WritePLCData();
+       
+            //RefreshData();
+       
         }
 
         private void btn_PJI_Click(object sender, EventArgs e)
         {
             _GV.plcWrite.SetPJI(txx_PJI.Text);
             _GV.plcWrite.WritePLCData();
-            Thread.Sleep(500);
-            Refresh();
-            ShowStatus();
-
+            //RefreshData();
+            
+            
         }
 
         private void btn_div_Click(object sender, EventArgs e)
@@ -588,9 +616,8 @@ namespace Ki_WAT
             _GV.plcWrite.SetDiv(ushort.Parse(txt_div.Text));
             _GV.plcWrite.WritePLCData();
 
-            Thread.Sleep(500);
-            Refresh();
-            ShowStatus();
+            //RefreshData();
+            
         }
     }
 }

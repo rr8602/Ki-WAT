@@ -52,10 +52,11 @@ namespace Ki_WAT
 			public const string GenbancData = "Test.GenbancData";
 			public const string BenchMsg = "Test.BenchMsg";
 			public const string VEPMsg = "Test.VEPMsg";
-			
-		}
-		
-		public static class DS
+            public const string CycleTime = "Test.CycleTime";
+
+        }
+
+        public static class DS
 		{
 			public const string VEP = "DS.VEP";
 			public const string PLC = "DS.PLC";
@@ -72,6 +73,13 @@ namespace Ki_WAT
 
 		}
 
+		public static class PEV
+		{
+			public const string MDA_OK = "PEV.MDA_OK";
+			public const string Message = "PEV.Message";
+        }
+		
+
 	}
 	public static class Broker
 	{
@@ -81,7 +89,7 @@ namespace Ki_WAT
 		public static MsgBroker speedBroker = new MsgBroker();
 		public static MsgBroker noticeBroker = new MsgBroker();
 		public static MsgBroker dsBroker = new MsgBroker();
-
+        public static MsgBroker PEVBroker = new MsgBroker();
         public static void NoticeShow(String strTop = "", String strBody = "", String strBottom = "")
         {
             //GWA.SendMessage(workerHwnd, Constants.HIDE_WINDOW, 0, 0);

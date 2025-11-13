@@ -268,7 +268,11 @@ namespace Ki_WAT
                             Bar_Code = row["Bar_Code"].ToString(),
                             WhelBase = row["WhelBase"].ToString(),
                             Dpp_Code = row["Dpp_Code"].ToString(),
+                            SWA___ST = row["SWA___ST"].ToString(),
+                            SWA___LT = row["SWA___LT"].ToString(),
                             SWARatio = row["SWARatio"].ToString(),
+                            SWAOffset = row["SWAOffset"].ToString(),
+
                             ScrewDriver = row["ScrewDriver"].ToString(),
                             Display_Unit = row["Display_Unit"].ToString(),
 
@@ -344,7 +348,10 @@ namespace Ki_WAT
                     carModel.Bar_Code = row["Bar_Code"].ToString();
                     carModel.WhelBase = row["WhelBase"].ToString();
                     carModel.Dpp_Code = row["Dpp_Code"].ToString();
+                    carModel.SWA___ST = row["SWA___ST"].ToString();
+                    carModel.SWA___LT = row["SWA___LT"].ToString();
                     carModel.SWARatio = row["SWARatio"].ToString();
+                    carModel.SWAOffset = row["SWAOffset"].ToString();
 
                     carModel.ScrewDriver = row["ScrewDriver"].ToString();
                     carModel.Display_Unit = row["Display_Unit"].ToString();
@@ -416,7 +423,10 @@ namespace Ki_WAT
                     carModel.Bar_Code = row["Bar_Code"].ToString();
                     carModel.WhelBase = row["WhelBase"].ToString();
                     carModel.Dpp_Code = row["Dpp_Code"].ToString();
+                    carModel.SWA___ST = row["SWA___ST"].ToString();
+                    carModel.SWA___LT = row["SWA___LT"].ToString();
                     carModel.SWARatio = row["SWARatio"].ToString();
+                    carModel.SWAOffset = row["SWAOffset"].ToString();
 
                     carModel.ScrewDriver = row["ScrewDriver"].ToString();
                     carModel.Display_Unit = row["Display_Unit"].ToString();
@@ -481,7 +491,10 @@ namespace Ki_WAT
                     { "Bar_Code", model.Bar_Code },
                     { "WhelBase", model.WhelBase },
                     { "Dpp_Code", model.Dpp_Code },
+                    { "SWA___ST", model.SWA___ST },
+                    { "SWA___LT", model.SWA___LT },
                     { "SWARatio", model.SWARatio },
+                    { "SWAOffset", model.SWAOffset },
                     { "ScrewDriver", model.ScrewDriver },
                     { "Display_Unit", model.Display_Unit },
                     { "Spare_1", model.Spare_1 },
@@ -561,7 +574,10 @@ namespace Ki_WAT
                     { "Bar_Code", model.Bar_Code },
                     { "WhelBase", model.WhelBase },
                     { "Dpp_Code", model.Dpp_Code },
+                    { "SWA___ST", model.SWA___ST },
+                    { "SWA___LT", model.SWA___LT },
                     { "SWARatio", model.SWARatio },
+                    { "SWAOffset", model.SWAOffset },
                     { "ScrewDriver", model.ScrewDriver },
                     { "Display_Unit", model.Display_Unit },
                     { "Spare_1", model.Spare_1 },
