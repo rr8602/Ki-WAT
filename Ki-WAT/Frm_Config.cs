@@ -492,7 +492,7 @@ namespace Ki_WAT
                 if (success)
                 {
                     // 성공 메시지
-                    MessageBox.Show("모델이 성공적으로 추가되었습니다.", "추가 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Model Add OK!", "Add", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     // ListView 새로고침
                     RefreshListView();
@@ -502,12 +502,12 @@ namespace Ki_WAT
                 }
                 else
                 {
-                    MessageBox.Show("모델 추가에 실패했습니다.", "추가 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Model Add Fail!", "Add", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"모델 추가 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Fail: {ex.Message}", "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -574,7 +574,7 @@ namespace Ki_WAT
                 // 선택된 모델이 있는지 확인
                 if ( string.IsNullOrEmpty(selectModel.Model_NM))
                 {
-                    MessageBox.Show("수정할 모델을 먼저 선택해주세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Fail", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -649,19 +649,19 @@ namespace Ki_WAT
                 if (success)
                 {
                     // 성공 메시지
-                    MessageBox.Show("모델이 성공적으로 수정되었습니다.", "수정 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Modify OK", "MODIFY", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     // ListView 새로고침
                     RefreshListView();
                 }
                 else
                 {
-                    MessageBox.Show("모델 수정에 실패했습니다.", "수정 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Modify NOK", "NOK", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"모델 수정 중 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Modify NOK {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

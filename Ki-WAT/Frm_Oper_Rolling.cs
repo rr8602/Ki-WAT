@@ -17,12 +17,32 @@ namespace Ki_WAT
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Frm_Oper_Rolling_Load(object sender, EventArgs e)
         {
-            Frm_Operator parent = (Frm_Operator)this.MdiParent;
-            parent.ShowFrm(0);
 
-
+            Broker.NotifyBroker.Subscribe(Topics.Notify.GetDppData, GetDppData);
         }
+
+        private void GetDppData(object obj)
+        {
+
+            MeasureData pData = (MeasureData)obj;
+
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => GetDppData(obj)));
+                return;
+            }
+            lbl_Cam_FL.Text = pData.dCamFL.ToString("F1");
+            lbl_Cam_FR.Text = pData.dCamFR.ToString("F1");
+            lbl_Cam_RL.Text = pData.dCamRL.ToString("F1");
+            lbl_Cam_RR.Text = pData.dCamRR.ToString("F1");
+
+            lbl_Toe_FL.Text = pData.dToeFL.ToString("F1");
+            lbl_Toe_FR.Text = pData.dToeFR.ToString("F1");
+            lbl_Toe_RL.Text = pData.dToeRL.ToString("F1");
+            lbl_Toe_RR.Text = pData.dToeRR.ToString("F1");
+        }
+
     }
 }

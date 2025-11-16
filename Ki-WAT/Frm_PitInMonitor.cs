@@ -22,13 +22,32 @@ namespace Ki_WAT
         {
             InitializeComponent();
             m_Parent = pMain;
-            m_Parent.OnDppDataReceived += OnReceiveDpp;
+            
             MoveFormToSecondMonitor();
         }
 
         private void Frm_PitInMonitor_Shown(object sender, EventArgs e)
         {
             m_Parent.m_SWBComm._UpdateAngle += UpdateSWBAngle;
+
+            Broker.testBroker.Subscribe(Topics.Test.CycleTime, GetCycleTIme);
+        }
+        private void GetCycleTIme(object obj)
+        {
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => GetCycleTIme(obj)));
+                    return;
+                }
+
+                lbl_CycleTime.Text = obj.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
         }
         private void UpdateSWBAngle(double dSWB)
         {
@@ -57,7 +76,7 @@ namespace Ki_WAT
             if (screens.Length > 1)
             {
                 // 두 번째 모니터 가져오기
-                Screen secondScreen = screens[2];
+                Screen secondScreen = screens[1];
 
                 // 두 번째 모니터의 작업 영역 중앙에 폼 위치
                 Rectangle workingArea = secondScreen.WorkingArea;

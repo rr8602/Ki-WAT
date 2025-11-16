@@ -47,6 +47,14 @@
             this.lbl_Toe_FL = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.lbl_CAM_STD_RR = new System.Windows.Forms.Label();
+            this.lbl_CAM_STD_RL = new System.Windows.Forms.Label();
+            this.lbl_TOE_STD_RR = new System.Windows.Forms.Label();
+            this.lbl_TOE_STD_RL = new System.Windows.Forms.Label();
+            this.lbl_CAM_STD_FR = new System.Windows.Forms.Label();
+            this.lbl_CAM_STD_FL = new System.Windows.Forms.Label();
+            this.lbl_TOE_STD_FR = new System.Windows.Forms.Label();
+            this.lbl_TOE_STD_FL = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label9
@@ -66,7 +74,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 30F);
             this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(996, 464);
+            this.label2.Location = new System.Drawing.Point(996, 479);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(334, 53);
             this.label2.TabIndex = 107;
@@ -90,7 +98,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Arial", 30F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label7.Location = new System.Drawing.Point(1388, 464);
+            this.label7.Location = new System.Drawing.Point(1388, 479);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(334, 53);
             this.label7.TabIndex = 105;
@@ -172,7 +180,7 @@
             // 
             this.lbl_Toe_RR.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_Toe_RR.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Toe_RR.Location = new System.Drawing.Point(996, 549);
+            this.lbl_Toe_RR.Location = new System.Drawing.Point(996, 548);
             this.lbl_Toe_RR.Name = "lbl_Toe_RR";
             this.lbl_Toe_RR.Size = new System.Drawing.Size(334, 137);
             this.lbl_Toe_RR.TabIndex = 98;
@@ -249,30 +257,136 @@
             // 
             this.label11.BackColor = System.Drawing.Color.WhiteSmoke;
             this.label11.Font = new System.Drawing.Font("Arial", 30F);
-            this.label11.Location = new System.Drawing.Point(800, 420);
+            this.label11.Location = new System.Drawing.Point(189, 94);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(190, 140);
+            this.label11.Size = new System.Drawing.Size(82, 38);
             this.label11.TabIndex = 91;
             this.label11.Text = "0.0";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label11.Visible = false;
             // 
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Arial", 30F);
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(800, 356);
+            this.label10.Location = new System.Drawing.Point(-1, 94);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(190, 53);
             this.label10.TabIndex = 90;
             this.label10.Text = "SWA";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label10.Visible = false;
+            // 
+            // lbl_CAM_STD_RR
+            // 
+            this.lbl_CAM_STD_RR.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_CAM_STD_RR.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CAM_STD_RR.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_CAM_STD_RR.Location = new System.Drawing.Point(1498, 686);
+            this.lbl_CAM_STD_RR.Name = "lbl_CAM_STD_RR";
+            this.lbl_CAM_STD_RR.Size = new System.Drawing.Size(129, 53);
+            this.lbl_CAM_STD_RR.TabIndex = 204;
+            this.lbl_CAM_STD_RR.Text = "3\' ±5";
+            this.lbl_CAM_STD_RR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_CAM_STD_RL
+            // 
+            this.lbl_CAM_STD_RL.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_CAM_STD_RL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CAM_STD_RL.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_CAM_STD_RL.Location = new System.Drawing.Point(568, 686);
+            this.lbl_CAM_STD_RL.Name = "lbl_CAM_STD_RL";
+            this.lbl_CAM_STD_RL.Size = new System.Drawing.Size(129, 53);
+            this.lbl_CAM_STD_RL.TabIndex = 203;
+            this.lbl_CAM_STD_RL.Text = "3\' ±5";
+            this.lbl_CAM_STD_RL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_TOE_STD_RR
+            // 
+            this.lbl_TOE_STD_RR.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_TOE_STD_RR.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TOE_STD_RR.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_TOE_STD_RR.Location = new System.Drawing.Point(1104, 686);
+            this.lbl_TOE_STD_RR.Name = "lbl_TOE_STD_RR";
+            this.lbl_TOE_STD_RR.Size = new System.Drawing.Size(129, 53);
+            this.lbl_TOE_STD_RR.TabIndex = 202;
+            this.lbl_TOE_STD_RR.Text = "3\' ±5";
+            this.lbl_TOE_STD_RR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_TOE_STD_RL
+            // 
+            this.lbl_TOE_STD_RL.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_TOE_STD_RL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TOE_STD_RL.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_TOE_STD_RL.Location = new System.Drawing.Point(191, 686);
+            this.lbl_TOE_STD_RL.Name = "lbl_TOE_STD_RL";
+            this.lbl_TOE_STD_RL.Size = new System.Drawing.Size(129, 53);
+            this.lbl_TOE_STD_RL.TabIndex = 201;
+            this.lbl_TOE_STD_RL.Text = "3\' ±5";
+            this.lbl_TOE_STD_RL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_CAM_STD_FR
+            // 
+            this.lbl_CAM_STD_FR.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_CAM_STD_FR.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CAM_STD_FR.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_CAM_STD_FR.Location = new System.Drawing.Point(1498, 426);
+            this.lbl_CAM_STD_FR.Name = "lbl_CAM_STD_FR";
+            this.lbl_CAM_STD_FR.Size = new System.Drawing.Size(129, 53);
+            this.lbl_CAM_STD_FR.TabIndex = 200;
+            this.lbl_CAM_STD_FR.Text = "3\' ±5";
+            this.lbl_CAM_STD_FR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_CAM_STD_FL
+            // 
+            this.lbl_CAM_STD_FL.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_CAM_STD_FL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CAM_STD_FL.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_CAM_STD_FL.Location = new System.Drawing.Point(568, 426);
+            this.lbl_CAM_STD_FL.Name = "lbl_CAM_STD_FL";
+            this.lbl_CAM_STD_FL.Size = new System.Drawing.Size(129, 53);
+            this.lbl_CAM_STD_FL.TabIndex = 199;
+            this.lbl_CAM_STD_FL.Text = "3\' ±5";
+            this.lbl_CAM_STD_FL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_TOE_STD_FR
+            // 
+            this.lbl_TOE_STD_FR.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_TOE_STD_FR.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TOE_STD_FR.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_TOE_STD_FR.Location = new System.Drawing.Point(1104, 426);
+            this.lbl_TOE_STD_FR.Name = "lbl_TOE_STD_FR";
+            this.lbl_TOE_STD_FR.Size = new System.Drawing.Size(129, 53);
+            this.lbl_TOE_STD_FR.TabIndex = 198;
+            this.lbl_TOE_STD_FR.Text = "3\' ±5";
+            this.lbl_TOE_STD_FR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lbl_TOE_STD_FL
+            // 
+            this.lbl_TOE_STD_FL.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_TOE_STD_FL.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_TOE_STD_FL.ForeColor = System.Drawing.Color.LightSeaGreen;
+            this.lbl_TOE_STD_FL.Location = new System.Drawing.Point(191, 422);
+            this.lbl_TOE_STD_FL.Name = "lbl_TOE_STD_FL";
+            this.lbl_TOE_STD_FL.Size = new System.Drawing.Size(129, 53);
+            this.lbl_TOE_STD_FL.TabIndex = 197;
+            this.lbl_TOE_STD_FL.Text = "3\' ±5";
+            this.lbl_TOE_STD_FL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Frm_Oper_Static
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1800, 900);
+            this.Controls.Add(this.lbl_CAM_STD_RR);
+            this.Controls.Add(this.lbl_CAM_STD_RL);
+            this.Controls.Add(this.lbl_TOE_STD_RR);
+            this.Controls.Add(this.lbl_TOE_STD_RL);
+            this.Controls.Add(this.lbl_CAM_STD_FR);
+            this.Controls.Add(this.lbl_CAM_STD_FL);
+            this.Controls.Add(this.lbl_TOE_STD_FR);
+            this.Controls.Add(this.lbl_TOE_STD_FL);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label7);
@@ -319,5 +433,13 @@
         private System.Windows.Forms.Label lbl_Toe_FL;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbl_CAM_STD_RR;
+        private System.Windows.Forms.Label lbl_CAM_STD_RL;
+        private System.Windows.Forms.Label lbl_TOE_STD_RR;
+        private System.Windows.Forms.Label lbl_TOE_STD_RL;
+        private System.Windows.Forms.Label lbl_CAM_STD_FR;
+        private System.Windows.Forms.Label lbl_CAM_STD_FL;
+        private System.Windows.Forms.Label lbl_TOE_STD_FR;
+        private System.Windows.Forms.Label lbl_TOE_STD_FL;
     }
 }

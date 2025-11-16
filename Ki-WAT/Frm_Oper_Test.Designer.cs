@@ -34,7 +34,9 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lbl_SWB = new System.Windows.Forms.Label();
             this.lbl_hlt_message = new System.Windows.Forms.Label();
-            this.lbl_PEV = new System.Windows.Forms.Label();
+            this.lbl_PEV_OK = new System.Windows.Forms.Label();
+            this.lbl_Centering_OK = new System.Windows.Forms.Label();
+            this.lbl_SWB_OK = new System.Windows.Forms.Label();
             this.GRP_RR_CAM = new RollTester.CGuage();
             this.GRP_RL_TOE = new RollTester.CGuage();
             this.GRP_FR_CAM = new RollTester.CGuage();
@@ -43,6 +45,8 @@
             this.GRP_RR_TOE = new RollTester.CGuage();
             this.GRP_FL_CAM = new RollTester.CGuage();
             this.GRP_FR_TOE = new RollTester.CGuage();
+            this.lbl_Screw_L_OK = new System.Windows.Forms.Label();
+            this.lbl_Screw_R_OK = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,17 +114,41 @@
             this.lbl_hlt_message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lbl_hlt_message.Visible = false;
             // 
-            // lbl_PEV
+            // lbl_PEV_OK
             // 
-            this.lbl_PEV.BackColor = System.Drawing.Color.Gray;
-            this.lbl_PEV.Font = new System.Drawing.Font("Arial", 30F);
-            this.lbl_PEV.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lbl_PEV.Location = new System.Drawing.Point(-8, 806);
-            this.lbl_PEV.Name = "lbl_PEV";
-            this.lbl_PEV.Size = new System.Drawing.Size(1876, 85);
-            this.lbl_PEV.TabIndex = 165;
-            this.lbl_PEV.Text = "PEV";
-            this.lbl_PEV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_PEV_OK.BackColor = System.Drawing.Color.Gray;
+            this.lbl_PEV_OK.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_PEV_OK.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_PEV_OK.Location = new System.Drawing.Point(-8, 815);
+            this.lbl_PEV_OK.Name = "lbl_PEV_OK";
+            this.lbl_PEV_OK.Size = new System.Drawing.Size(353, 76);
+            this.lbl_PEV_OK.TabIndex = 165;
+            this.lbl_PEV_OK.Text = "PEV";
+            this.lbl_PEV_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Centering_OK
+            // 
+            this.lbl_Centering_OK.BackColor = System.Drawing.Color.Gray;
+            this.lbl_Centering_OK.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_Centering_OK.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Centering_OK.Location = new System.Drawing.Point(734, 815);
+            this.lbl_Centering_OK.Name = "lbl_Centering_OK";
+            this.lbl_Centering_OK.Size = new System.Drawing.Size(353, 76);
+            this.lbl_Centering_OK.TabIndex = 166;
+            this.lbl_Centering_OK.Text = "CENERING OK";
+            this.lbl_Centering_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_SWB_OK
+            // 
+            this.lbl_SWB_OK.BackColor = System.Drawing.Color.Gray;
+            this.lbl_SWB_OK.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_SWB_OK.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_SWB_OK.Location = new System.Drawing.Point(363, 815);
+            this.lbl_SWB_OK.Name = "lbl_SWB_OK";
+            this.lbl_SWB_OK.Size = new System.Drawing.Size(353, 76);
+            this.lbl_SWB_OK.TabIndex = 167;
+            this.lbl_SWB_OK.Text = "SWB OK";
+            this.lbl_SWB_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GRP_RR_CAM
             // 
@@ -274,13 +302,41 @@
             this.GRP_FR_TOE.TitleColor = System.Drawing.Color.Black;
             this.GRP_FR_TOE.ValueColor = System.Drawing.Color.LightSteelBlue;
             // 
+            // lbl_Screw_L_OK
+            // 
+            this.lbl_Screw_L_OK.BackColor = System.Drawing.Color.Gray;
+            this.lbl_Screw_L_OK.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_Screw_L_OK.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Screw_L_OK.Location = new System.Drawing.Point(1105, 815);
+            this.lbl_Screw_L_OK.Name = "lbl_Screw_L_OK";
+            this.lbl_Screw_L_OK.Size = new System.Drawing.Size(370, 76);
+            this.lbl_Screw_L_OK.TabIndex = 168;
+            this.lbl_Screw_L_OK.Text = "SCREW LEFT";
+            this.lbl_Screw_L_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_Screw_R_OK
+            // 
+            this.lbl_Screw_R_OK.BackColor = System.Drawing.Color.Gray;
+            this.lbl_Screw_R_OK.Font = new System.Drawing.Font("Arial", 30F);
+            this.lbl_Screw_R_OK.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_Screw_R_OK.Location = new System.Drawing.Point(1493, 815);
+            this.lbl_Screw_R_OK.Name = "lbl_Screw_R_OK";
+            this.lbl_Screw_R_OK.Size = new System.Drawing.Size(370, 76);
+            this.lbl_Screw_R_OK.TabIndex = 169;
+            this.lbl_Screw_R_OK.Text = "SCREW RIGHT";
+            this.lbl_Screw_R_OK.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_Oper_Test
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1900, 900);
-            this.Controls.Add(this.lbl_PEV);
+            this.Controls.Add(this.lbl_Screw_R_OK);
+            this.Controls.Add(this.lbl_Screw_L_OK);
+            this.Controls.Add(this.lbl_SWB_OK);
+            this.Controls.Add(this.lbl_Centering_OK);
+            this.Controls.Add(this.lbl_PEV_OK);
             this.Controls.Add(this.lbl_hlt_message);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
@@ -323,6 +379,10 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lbl_SWB;
         private System.Windows.Forms.Label lbl_hlt_message;
-        private System.Windows.Forms.Label lbl_PEV;
+        private System.Windows.Forms.Label lbl_PEV_OK;
+        private System.Windows.Forms.Label lbl_Centering_OK;
+        private System.Windows.Forms.Label lbl_SWB_OK;
+        private System.Windows.Forms.Label lbl_Screw_L_OK;
+        private System.Windows.Forms.Label lbl_Screw_R_OK;
     }
 }

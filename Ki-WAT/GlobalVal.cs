@@ -225,8 +225,12 @@ namespace Ki_WAT
 
         public TblCarModel m_Cur_Model = new TblCarModel();
         public TblCarInfo  m_Cur_Info  = new TblCarInfo();
+        
+        public TblCarModel m_Model_Rolling = new TblCarModel();
+        public TblCarModel m_Model_Static = new TblCarModel();
+
         // 전역 변수
-        public  bool m_bTestRun = false;
+        public bool m_bTestRun = false;
         public double dHandle = 0.0f;
         //public bool g_Substitu_PEV = false;
         public bool m_bNextStep = false;

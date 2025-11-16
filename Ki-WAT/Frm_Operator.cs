@@ -58,28 +58,31 @@ namespace Ki_WAT
             InitializeSubForm(m_frm_Oper_Roll);
             InitializeSubForm(m_frm_Oper_Static);
             ShowFrm(2);
-
+            Broker.testBroker.Subscribe(Topics.Test.CycleTime, GetCycleTIme);
             // 1초 타이머 시작 (lbl_Time에 1,2,3... 표시)
-            m_TimeTimer = new Timer();
-            m_TimeTimer.Interval = 1000;
-            m_TimeTimer.Tick += TimeTimer_Tick;
+
 
         }
-        public void StartTimer()
+
+        private void GetCycleTIme(object obj)
         {
-            m_TimeCounter = 0;
-            if (lbl_Time != null && !lbl_Time.IsDisposed)
+            try
             {
-                lbl_Time.Text = m_TimeCounter.ToString();
-            }
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => GetCycleTIme(obj)));
+                    return;
+                }
 
-            m_TimeTimer.Start();
+                lbl_CycleTime.Text = obj.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"사이클 완료 처리 중 오류: {ex.Message}");
+            }
         }
-        public void StopTimer()
-        {
-            m_TimeCounter = 0;
-            m_TimeTimer.Stop();
-        }
+
+       
         public void SetPJIText(string strPJI)
         {
             if (lbl_PJI.InvokeRequired)
@@ -270,7 +273,7 @@ namespace Ki_WAT
 
         private void FinishCycleUI()
         {
-            lbl_Time.Text = "0";
+            lbl_CycleTime.Text = "0";
             lbl_Message.Text = "";
             lbl_NextPJI.Text = "";
             lbl_PJI.Text = "";
@@ -298,9 +301,9 @@ namespace Ki_WAT
             try
             {
                 m_TimeCounter++;
-                if (lbl_Time != null && !lbl_Time.IsDisposed)
+                if (lbl_CycleTime != null && !lbl_CycleTime.IsDisposed)
                 {
-                    lbl_Time.Text = m_TimeCounter.ToString();
+                    lbl_CycleTime.Text = m_TimeCounter.ToString();
                 }
                 //lbl_Hand.Text = _GV.dHandle.ToString("F1");
             }

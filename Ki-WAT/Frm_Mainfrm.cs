@@ -57,8 +57,8 @@ namespace Ki_WAT
         //public DB_LocalWat m_dbJob;
         private const int WM_COPYDATA = 0x004A;
 
-        public delegate void DppDataReceive(MeasureData pData);
-        public event DppDataReceive OnDppDataReceived;
+        //public delegate void DppDataReceive(MeasureData pData);
+        //public event DppDataReceive OnDppDataReceived;
 
         private Random _rand = new Random();  // 클래스 멤버로 선언 (중복 난수 방지)
         public Lib_TcpClient ScrewDriverL => m_ScrewDriverL;
@@ -164,11 +164,28 @@ namespace Ki_WAT
             stcLable.Hide();
             m_StartTimer.Stop();
             DeviceOpen();
+
+            _GV.m_Model_Static = _GV._dbJob.SelectCarModel("StaticMaster");
+            _GV.m_Model_Rolling = _GV._dbJob.SelectCarModel("RollingMaster");
+            Console.WriteLine("Model Loaded");
+
+            int nDist = Convert.ToInt32(_GV.m_Model_Rolling.WhelBase) - Convert.ToInt32(_GV.Config.Wheelbase.HOME_POS);
+
+            _GV.plcWrite.SetLeftRollingMaster(nDist);
+            _GV.plcWrite.SetRightRollingMaster(nDist);
+
+            nDist = Convert.ToInt32(_GV.m_Model_Static.WhelBase) - Convert.ToInt32(_GV.Config.Wheelbase.HOME_POS);
+
+            _GV.plcWrite.SetLeftStaticMaster(nDist);
+            _GV.plcWrite.SetRightStaticMaster(nDist);
+
+            _GV.plcWrite.WritePLCData();
         }
 
         private void UpdateSWBAngle(double dSWB)
         {
             _GV.dHandle = dSWB;
+            Broker.testBroker.Publish(Topics.Test.SWB_ANGLE, Topics.Test.SWB_ANGLE);
         }
         private void UpdateDisplayValues(string fnd, string sensorAd, string boardAngle, string pcAngle)
         {
@@ -217,15 +234,15 @@ namespace Ki_WAT
             string exePath = @"\Dpp\VisiconSampleVC.exe";
 
 
-            Process[] runningProcesses = Process.GetProcessesByName("VisiconSampleVC");
-            if (runningProcesses.Length == 0)
-            {
-                ProcessStartInfo psi = new ProcessStartInfo();
-                psi.FileName = Application.StartupPath + exePath;
-                psi.WindowStyle = ProcessWindowStyle.Minimized; // 최소화 실행
-                psi.UseShellExecute = true;
-                Process.Start(psi);
-            }
+            //Process[] runningProcesses = Process.GetProcessesByName("VisiconSampleVC");
+            //if (runningProcesses.Length == 0)
+            //{
+            //    ProcessStartInfo psi = new ProcessStartInfo();
+            //    psi.FileName = Application.StartupPath + exePath;
+            //    psi.WindowStyle = ProcessWindowStyle.Minimized; // 최소화 실행
+            //    psi.UseShellExecute = true;
+            //    Process.Start(psi);
+            //}
 
             _GV.LET_Controller = new CycleControl();
 
@@ -237,7 +254,8 @@ namespace Ki_WAT
             //m_ScrewDriverR.OnDataReceived += new DataReceiveClient(event_GetScrewL);
 
 			int nRet = _GV.vep.Create("172.25.213.11", 502);
-      
+            //int nRet = _GV.vep.Create("127.0.0.1", 502);
+
             m_SWBComm.Connect(_GV.Config.Device.SWB_PORT, Int32.Parse(_GV.Config.Device.SWB_BAUD));
             //StartBarcode();
             _GV.plcRead = new PLCReadWAT();
@@ -459,7 +477,9 @@ namespace Ki_WAT
                 
                 _GV.g_MeasureData.dTA = receivedData.dTA;
                 _GV.g_MeasureData.dSymm = receivedData.dSymm;
-                OnDppDataReceived?.Invoke(_GV.g_MeasureData);
+                Broker.NotifyBroker.Publish(Topics.Notify.GetDppData, _GV.g_MeasureData);
+
+               // OnDppDataReceived?.Invoke(_GV.g_MeasureData);
             }));
         }
         private void GetDppData(ref Message m)
@@ -474,6 +494,15 @@ namespace Ki_WAT
                     // UI 스레드에서 실행
                     this.Invoke(new Action(() => 
                     {
+                        
+                        double dRatio = Convert.ToDouble(_GV.m_Cur_Model.SWARatio);
+                        double dHandle = _GV.dHandle;
+                        if (dRatio == 0) dRatio = 17.5;
+                        if (dHandle > 1000) dHandle = 0;
+
+                        _GV.g_MeasureData.dToeFL = receivedData.dToeFL - (dHandle / dRatio);
+                        _GV.g_MeasureData.dToeFR = receivedData.dToeFR + (dHandle / dRatio);
+
                         _GV.g_MeasureData.dCamFL = receivedData.dCamFL;
                         _GV.g_MeasureData.dCamFR = receivedData.dCamFR;
                         _GV.g_MeasureData.dCamRL = receivedData.dCamRL;
@@ -486,7 +515,9 @@ namespace Ki_WAT
 
                         _GV.g_MeasureData.dTA = receivedData.dTA;
                         _GV.g_MeasureData.dSymm = receivedData.dSymm;
-                        OnDppDataReceived?.Invoke(_GV.g_MeasureData);
+
+                        Broker.NotifyBroker.Publish(Topics.Notify.GetDppData, _GV.g_MeasureData);
+                        //OnDppDataReceived?.Invoke(_GV.g_MeasureData);
 
                     }));
                 }

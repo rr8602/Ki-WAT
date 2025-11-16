@@ -36,8 +36,67 @@ namespace Ki_WAT
 
         private void Frm_Oper_Test_Load(object sender, EventArgs e)
         {
-            Broker.dsBroker.Subscribe(Topics.PEV.MDA_OK, SetMDA);
-            Broker.dsBroker.Subscribe(Topics.PEV.Message, SetPEVMessage);
+             Broker.dsBroker.Subscribe(Topics.PEV.Message, SetPEVMessage);
+            Broker.testBroker.Subscribe(Topics.Test.SWB_ANGLE, GetHandle);
+            Broker.NotifyBroker.Subscribe(Topics.Notify.GetDppData, GetDppData);
+
+            Broker.testBroker.Subscribe(Topics.Test.PEV_OK, GetPEVOK);
+            Broker.testBroker.Subscribe(Topics.Test.SCREW_L_OK, GetSCREW_L_OK);
+            Broker.testBroker.Subscribe(Topics.Test.SCREW_L_OK, GetSCREW_R_OK);
+            Broker.testBroker.Subscribe(Topics.Test.CENTERING_OK, GetCENTERING_OK);
+            Broker.testBroker.Subscribe(Topics.Test.SWB_OK, GetSWB_OK);
+
+
+            Broker.testBroker.Subscribe(Topics.Test.ALLOK_INIT, ALLOKINIT);
+
+
+        }
+
+        private void ALLOKINIT(object data)
+        {
+            lbl_PEV_OK.BackColor = Color.Gray;
+            lbl_Screw_L_OK.BackColor = Color.Gray;
+            lbl_Screw_R_OK.BackColor = Color.Gray;
+            lbl_Centering_OK.BackColor = Color.Gray;
+            lbl_SWB_OK.BackColor = Color.Gray;
+        }
+
+
+        private void GetPEVOK(object data)
+        {
+            lbl_PEV_OK.BackColor = Color.LimeGreen;
+        }
+        private void GetSCREW_L_OK(object data)
+        {
+            lbl_Screw_L_OK.BackColor = Color.LimeGreen;
+        }
+
+        private void GetSCREW_R_OK(object data)
+        {
+            lbl_Screw_R_OK.BackColor = Color.LimeGreen;
+        }
+        private void GetCENTERING_OK(object data)
+        {
+            lbl_Centering_OK.BackColor = Color.LimeGreen;
+        }
+        private void GetSWB_OK(object data)
+        {
+            lbl_SWB_OK.BackColor = Color.LimeGreen;
+        }
+
+
+
+
+        private void GetHandle(object data)
+        {
+
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => GetHandle(data)));
+                return;
+            }
+
+            lbl_SWB.Text = _GV.dHandle.ToString("F1");
         }
         private void SetPEVMessage(object data)
         {
@@ -47,14 +106,9 @@ namespace Ki_WAT
                 return;
             }
             string strMessage = data as string;
-            lbl_PEV.Text = strMessage;
+            lbl_PEV_OK.Text = strMessage;
         }
-        private void SetMDA(object data)
-        {
-            lbl_PEV.BackColor = Color.LimeGreen;
-            //SafeLoad(pic_lamp_io, strStatus == Topics.DS.Connect ? LAMP_GREEN : LAMP_RED);
-        }
-
+       
 
         public void SetOperator(Frm_Operator pOper)
         {
@@ -88,7 +142,6 @@ namespace Ki_WAT
         public void SetMainFrm(Frm_Mainfrm pMain)
         {
             m_Mainfrm = pMain;
-            m_Mainfrm.OnDppDataReceived += OnReceiveDpp;
             TestThread_HLT.OnStatusUpdate += OnStatusUpdate;
         }
         public void OnStatusUpdate(string strStatus)
@@ -101,13 +154,18 @@ namespace Ki_WAT
             lbl_hlt_message.Text = strStatus;
         }
 
-        public void OnReceiveDpp(MeasureData pData)
+
+        private void GetDppData(object obj)
         {
+
+            MeasureData pData = (MeasureData)obj;
+
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(() => OnReceiveDpp(pData)));
+                this.Invoke(new Action(() => GetDppData(obj)));
                 return;
             }
+
             RedrawGauge((float)pData.dToeFL, GRAPH_TYPE_TOE_FL);
             RedrawGauge((float)pData.dToeFR, GRAPH_TYPE_TOE_FR);
             RedrawGaugeNoMove((float)pData.dToeRL, GRAPH_TYPE_TOE_RL);
@@ -117,9 +175,13 @@ namespace Ki_WAT
             RedrawGaugeNoMove((float)pData.dCamFR, GRAPH_TYPE_CAM_FR);
             RedrawGaugeNoMove((float)pData.dCamRL, GRAPH_TYPE_CAM_RL);
             RedrawGaugeNoMove((float)pData.dCamRR, GRAPH_TYPE_CAM_RR);
-            
-            lbl_SWB.Text = _GV.dHandle.ToString("F1");
+
+            //lbl_SWB.Text = _GV.dHandle.ToString("F1");
+
         }
+
+        
+
         public void RedrawGauge(float fValue, int nType)
         {
             CGuage pGauge = null;

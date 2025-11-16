@@ -30,16 +30,18 @@ namespace Ki_WAT
         public void SetMainFrm(Frm_Mainfrm pMain)
         {
             m_Mainfrm = pMain;
-            m_Mainfrm.OnDppDataReceived += OnReceiveDpp;
+            Broker.NotifyBroker.Subscribe(Topics.Notify.GetDppData, GetDppData);
         }
-        public void OnReceiveDpp(MeasureData pData)
+        private void GetDppData(object obj)
         {
+
+            MeasureData pData = (MeasureData)obj ;
+
             if (this.InvokeRequired)
             {
-                this.Invoke(new Action(() => OnReceiveDpp(pData)));
+                this.Invoke(new Action(() => GetDppData(obj)));
                 return;
             }
-
             lbl_Cam_FL.Text = pData.dCamFL.ToString("F1");
             lbl_Cam_FR.Text = pData.dCamFR.ToString("F1");
             lbl_Cam_RL.Text = pData.dCamRL.ToString("F1");
@@ -50,6 +52,7 @@ namespace Ki_WAT
             lbl_Toe_RL.Text = pData.dToeRL.ToString("F1");
             lbl_Toe_RR.Text = pData.dToeRR.ToString("F1");
         }
+        
 
     }
 }

@@ -195,8 +195,13 @@ namespace HandleLeveler
                 boardAngle = pcAngle;
                 WriteRegister(5, writeAngle);
             }
+
+            
             _UpdateAngle?.Invoke(boardAngle);
             _updateDisplayValues?.Invoke(fndDisplay, sensorAdValue.ToString(), boardAngle.ToString("F2"), pcAngle.ToString("F2"));
+
+            
+
         }
 
         public double CalculatePcAngle(int sensorAdValue)

@@ -22,9 +22,11 @@ namespace Ki_WAT
 		{ 
 			public const string Data = "PLC.Data";
 			public const string Error = "PLC.Error";
+            public const string Write = "PLC.Write";
+
         }
 
-		public static class Barcode
+        public static class Barcode
 		{
 			public const string Data = "BC.Data";
 			public const string Error = "BC.Error";
@@ -54,6 +56,17 @@ namespace Ki_WAT
 			public const string VEPMsg = "Test.VEPMsg";
             public const string CycleTime = "Test.CycleTime";
 
+            public const string SWB_ANGLE = "Test.SWB_ANGLE";
+
+            public const string PEV_OK = "Test.PEV_OK";
+            public const string SWB_OK = "Test.SWB_OK";
+            public const string CENTERING_OK = "Test.CENTERING_OK";
+            public const string SCREW_L_OK = "Test.SCREW_LEFT_OK";
+            public const string SCREW_R_OK = "Test.CREW_RIGHT_OK";
+            public const string ALLOK_INIT = "Test.ALLOK_INIT";
+             
+
+
         }
 
         public static class DS
@@ -75,10 +88,16 @@ namespace Ki_WAT
 
 		public static class PEV
 		{
-			public const string MDA_OK = "PEV.MDA_OK";
-			public const string Message = "PEV.Message";
+			//public const string MDA_OK = "PEV.MDA_OK";
+   //         public const string MDA_NOK = "PEV.MDA_NOK";
+   //         public const string MDA_INIT = "PEV.INIT";
+
+            public const string Message = "PEV.Message";
+		}
+		public static class Notify
+		{
+			public const string GetDppData = "Notify.GetData";
         }
-		
 
 	}
 	public static class Broker
@@ -87,31 +106,13 @@ namespace Ki_WAT
 		public static MsgBroker caliBroker = new MsgBroker();
 		public static MsgBroker testBroker = new MsgBroker();
 		public static MsgBroker speedBroker = new MsgBroker();
-		public static MsgBroker noticeBroker = new MsgBroker();
+		//public static MsgBroker noticeBroker = new MsgBroker();
 		public static MsgBroker dsBroker = new MsgBroker();
         public static MsgBroker PEVBroker = new MsgBroker();
-        public static void NoticeShow(String strTop = "", String strBody = "", String strBottom = "")
-        {
-            //GWA.SendMessage(workerHwnd, Constants.HIDE_WINDOW, 0, 0);
-            //GWA.SendMessage(Hwnd.noticeHwnd, Constants.SHOW_WINDOW, 0, 0);
-            NOTICE_MSG msg = new NOTICE_MSG();
-            msg.Top = strTop;
-            msg.Body = strBody;
-            msg.Bottom = strBottom;
-            Broker.noticeBroker.Publish(Topics.Notice, msg);
+		public static MsgBroker NotifyBroker = new MsgBroker();
 
-        }
-        public static void NoticeHide(String strTop = "", String strBody = "", String strBottom = "")
-        {
-            //GWA.SendMessage(workerHwnd, Constants.SHOW_WINDOW, 0, 0);
-            //GWA.SendMessage(Hwnd.noticeHwnd, Constants.HIDE_WINDOW, 0, 0);
-            NOTICE_MSG msg = new NOTICE_MSG();
-            msg.Top = strTop;
-            msg.Body = strBody;
-            msg.Bottom = strBottom;
-            Broker.noticeBroker.Publish(Topics.Notice, msg);
+        public static MsgBroker PLCBroker = new MsgBroker();
 
-        }
 
     }
 

@@ -160,7 +160,6 @@
     <Compile Include="VEPController\VEPController.Simulate.cs" />
     <Compile Include="VEPController\VEPData.cs" />
     <Compile Include="VEP\IVEPBenchZone.cs" />
-    <Compile Include="PLCVal.cs" />
     <Compile Include="RestApi\CycleControl.cs" />
     <Compile Include="Database\DB_LocalWat.cs" />
     <Compile Include="Database\DB_TableDef.cs" />

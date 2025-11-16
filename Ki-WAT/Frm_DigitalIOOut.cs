@@ -27,8 +27,9 @@ namespace Ki_WAT
         private void Frm_DigitalIOOut_Load(object sender, EventArgs e)
         {
             SetLable();
-            RefreshData();
             ShowStatus();
+            Broker.PLCBroker.Subscribe(Topics.PLC.Write, RefreshData);
+            RefreshData("Write");
 
         }
 
@@ -250,6 +251,8 @@ namespace Ki_WAT
 
 
             if (row == 11 && col == 0) return "3D Camera sensor Enable";
+            if (row == 11 && col == 1) return "Roller brake lock";
+            if (row == 11 && col == 2) return "Roller brake free";
 
 
 
@@ -361,6 +364,7 @@ namespace Ki_WAT
                        // RefreshData();
                     }
                 }
+               // RefreshData("Write");
             }
         }
         private void CancelPollingToken()
@@ -371,7 +375,7 @@ namespace Ki_WAT
                 catch (ObjectDisposedException) { } // 이미 Dispose된 경우 무시
             }
         }
-        private void RefreshData()
+        private void RefreshData(object ojb)
         {
             CancelPollingToken();
             _cts = new CancellationTokenSource();
@@ -380,7 +384,7 @@ namespace Ki_WAT
         private void RefreshDataTask(CancellationToken token)
         {
             Thread.Sleep(100);
-            _GV.plcWrite.GetPLCOutData();
+            //_GV.plcWrite.GetPLCOutData();
             while (!token.IsCancellationRequested)
             {
                 Thread.Sleep(100);
@@ -400,7 +404,7 @@ namespace Ki_WAT
                 return;
             }
             //GWA.STM("SHOW PLC");
-            byte[] byData = _GV.plcWrite.rawDataOut;
+            byte[] byData = _GV.plcWrite.rawDataOutRead;
 
 
 
@@ -451,20 +455,20 @@ namespace Ki_WAT
             stcDiv.Text = _GV.plcRead.GetDiv().ToString();
 
 
-            lbl_dis_home.Text = _GV.plcWrite.GetWord(112).ToString() + "/" + _GV.plcWrite.GetWord(138).ToString();
-            lbl_dis_static.Text = _GV.plcWrite.GetWord(114).ToString() + "/" + _GV.plcWrite.GetWord(140).ToString();
-            lbl_dis_rolling.Text = _GV.plcWrite.GetWord(116).ToString() + "/" + _GV.plcWrite.GetWord(142).ToString();
+            lbl_dis_home.Text = _GV.plcWrite.GetWordRead(112).ToString() + "/" + _GV.plcWrite.GetWordRead(138).ToString();
+            lbl_dis_static.Text = _GV.plcWrite.GetWordRead(114).ToString() + "/" + _GV.plcWrite.GetWordRead(140).ToString();
+            lbl_dis_rolling.Text = _GV.plcWrite.GetWordRead(116).ToString() + "/" + _GV.plcWrite.GetWordRead(142).ToString();
 
-            lbl_dis_div1.Text = _GV.plcWrite.GetWord(118).ToString() + "/" + _GV.plcWrite.GetWord(144).ToString();
-            lbl_dis_div2.Text = _GV.plcWrite.GetWord(120).ToString() + "/" + _GV.plcWrite.GetWord(146).ToString();
-            lbl_dis_div3.Text = _GV.plcWrite.GetWord(122).ToString() + "/" + _GV.plcWrite.GetWord(148).ToString();
-            lbl_dis_div4.Text = _GV.plcWrite.GetWord(124).ToString() + "/" + _GV.plcWrite.GetWord(150).ToString();
-            lbl_dis_div5.Text = _GV.plcWrite.GetWord(126).ToString() + "/" + _GV.plcWrite.GetWord(152).ToString();
-            lbl_dis_div6.Text = _GV.plcWrite.GetWord(128).ToString() + "/" + _GV.plcWrite.GetWord(154).ToString();
-            lbl_dis_div7.Text = _GV.plcWrite.GetWord(130).ToString() + "/" + _GV.plcWrite.GetWord(156).ToString();
-            lbl_dis_div8.Text = _GV.plcWrite.GetWord(132).ToString() + "/" + _GV.plcWrite.GetWord(158).ToString();
-            lbl_dis_div9.Text = _GV.plcWrite.GetWord(134).ToString() + "/" + _GV.plcWrite.GetWord(160).ToString();
-            lbl_dis_div10.Text = _GV.plcWrite.GetWord(136).ToString() + "/" + _GV.plcWrite.GetWord(162).ToString();
+            lbl_dis_div1.Text = _GV.plcWrite.GetWordRead(118).ToString() + "/" + _GV.plcWrite.GetWordRead(144).ToString();
+            lbl_dis_div2.Text = _GV.plcWrite.GetWordRead(120).ToString() + "/" + _GV.plcWrite.GetWordRead(146).ToString();
+            lbl_dis_div3.Text = _GV.plcWrite.GetWordRead(122).ToString() + "/" + _GV.plcWrite.GetWordRead(148).ToString();
+            lbl_dis_div4.Text = _GV.plcWrite.GetWordRead(124).ToString() + "/" + _GV.plcWrite.GetWordRead(150).ToString();
+            lbl_dis_div5.Text = _GV.plcWrite.GetWordRead(126).ToString() + "/" + _GV.plcWrite.GetWordRead(152).ToString();
+            lbl_dis_div6.Text = _GV.plcWrite.GetWordRead(128).ToString() + "/" + _GV.plcWrite.GetWordRead(154).ToString();
+            lbl_dis_div7.Text = _GV.plcWrite.GetWordRead(130).ToString() + "/" + _GV.plcWrite.GetWordRead(156).ToString();
+            lbl_dis_div8.Text = _GV.plcWrite.GetWordRead(132).ToString() + "/" + _GV.plcWrite.GetWordRead(158).ToString();
+            lbl_dis_div9.Text = _GV.plcWrite.GetWordRead(134).ToString() + "/" + _GV.plcWrite.GetWordRead(160).ToString();
+            lbl_dis_div10.Text = _GV.plcWrite.GetWordRead(136).ToString() + "/" + _GV.plcWrite.GetWordRead(162).ToString();
 
 
         }
@@ -598,7 +602,7 @@ namespace Ki_WAT
             }
             _GV.plcWrite.WritePLCData();
        
-            //RefreshData();
+            //RefreshData("Write");
        
         }
 
@@ -606,9 +610,9 @@ namespace Ki_WAT
         {
             _GV.plcWrite.SetPJI(txx_PJI.Text);
             _GV.plcWrite.WritePLCData();
-            //RefreshData();
-            
-            
+            //RefreshData("Write");
+
+
         }
 
         private void btn_div_Click(object sender, EventArgs e)
@@ -616,8 +620,13 @@ namespace Ki_WAT
             _GV.plcWrite.SetDiv(ushort.Parse(txt_div.Text));
             _GV.plcWrite.WritePLCData();
 
-            //RefreshData();
-            
+            //RefreshData("Write");
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           // RefreshData("Write");
         }
     }
 }

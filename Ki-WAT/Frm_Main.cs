@@ -339,11 +339,11 @@ namespace Ki_WAT
             nMax = Int32.Parse(_GV.m_Cur_Model.ToeFR_ST) + Int32.Parse(_GV.m_Cur_Model.ToeFR_LT);
             ToeFR_LT_MAX.Text = nMax.ToString();
 
+
+
         }
         private void seqList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            return;
             try
             {
                 if (seqList.SelectedItems.Count > 0)
@@ -468,10 +468,61 @@ namespace Ki_WAT
             StartCycle();
         }
 
-    
+        private void StartCMD()
+        {
+            _GV.plcWrite.SetFloatingPlateLock(false);
+            _GV.plcWrite.SetFloatingPlateFree(true);
+
+            _GV.plcWrite.SetRollerBrakeLock(false);
+            _GV.plcWrite.SetRollerBrakeFree(true);
+
+            Thread.Sleep(500);
+            _GV.plcWrite.WritePLCData();
+
+            _GV.plcWrite.SetCenteringOn(true);
+            _GV.plcWrite.SetCenteringHome(false);
+
+            _GV.plcWrite.SetMotorRun(true);
+            _GV.plcWrite.SetMotorStop(false);
+
+            
+            _GV.plcWrite.WritePLCData();
+        }
+
+        private void StopCMD()
+        {
+            _GV.plcWrite.SetFloatingPlateLock(true);
+            _GV.plcWrite.SetFloatingPlateFree(false);
+
+            _GV.plcWrite.SetRollerBrakeLock(true);
+            _GV.plcWrite.SetRollerBrakeFree(false);
+
+            _GV.plcWrite.SetMotorRun(false);
+            _GV.plcWrite.SetMotorStop(true);
+
+            _GV.plcWrite.WritePLCData();
+            DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_STOP, 1);
+            Thread.Sleep(500);
+            
+            _GV.plcWrite.SetCenteringOn(false);
+            _GV.plcWrite.SetCenteringHome(true);
+            _GV.plcWrite.WritePLCData();
+        }
+
         private void button2_Click_1(object sender, EventArgs e)
         {
+            DppManager.SendToDpp(DppManager.MSG_DPP_MEASURING_START, 2);
 
+            return;
+            //StartCMD();
+            Console.WriteLine("Send Wheelbase 3200");
+
+            StopCMD();
+            return;
+
+            DppManager.SendToDpp(DppManager.MSG_DPP_WHEELBASE, 3200);
+            Console.WriteLine("Send Wheelbase 3200");
+            return;
             ZPrintController _PrintTicket = new ZPrintController();
             AlignmentReportData data = new AlignmentReportData();
 
@@ -528,7 +579,7 @@ namespace Ki_WAT
             Btn_Start.ForeColor = Color.Yellow;
             Btn_Start.Text = "STOP";
             lbl_NextPJI.Text = "-";
-            m_frmParent.User_Monitor.StartTimer();
+            
 
             m_frmParent.User_Monitor.SetPJIText(_GV.m_Cur_Info.CarPJINo);
             m_frmParent.ChangeOperMonitor(Def.FOM_IDX_TEST);
@@ -545,7 +596,7 @@ namespace Ki_WAT
             Btn_Start.BackColor = Color.Silver;
             Btn_Start.ForeColor = Color.Teal;
             Btn_Start.Text = "START";
-            m_frmParent.User_Monitor.StopTimer();
+            
             _GV.m_bTestRun = false;
             
         }

@@ -21,7 +21,7 @@ namespace Ki_WAT
         public void SetParent(Frm_Mainfrm pMain)
         {
             m_MainFrm = pMain;
-            m_MainFrm.OnDppDataReceived += OnReceiveDpp;
+            
         }
 
         public void OnReceiveDpp(MeasureData pData)

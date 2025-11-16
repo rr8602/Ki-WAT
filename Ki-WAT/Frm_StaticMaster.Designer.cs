@@ -47,6 +47,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label9
@@ -101,7 +102,7 @@
             // 
             this.lbl_Cam_RR.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_Cam_RR.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Cam_RR.Location = new System.Drawing.Point(1414, 503);
+            this.lbl_Cam_RR.Location = new System.Drawing.Point(1414, 504);
             this.lbl_Cam_RR.Name = "lbl_Cam_RR";
             this.lbl_Cam_RR.Size = new System.Drawing.Size(334, 137);
             this.lbl_Cam_RR.TabIndex = 58;
@@ -134,7 +135,7 @@
             // 
             this.lbl_Cam_RL.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lbl_Cam_RL.Font = new System.Drawing.Font("Arial", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Cam_RL.Location = new System.Drawing.Point(478, 503);
+            this.lbl_Cam_RL.Location = new System.Drawing.Point(478, 504);
             this.lbl_Cam_RL.Name = "lbl_Cam_RL";
             this.lbl_Cam_RL.Size = new System.Drawing.Size(334, 137);
             this.lbl_Cam_RL.TabIndex = 55;
@@ -226,7 +227,7 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Arial", 30F);
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label7.Location = new System.Drawing.Point(1414, 419);
+            this.label7.Location = new System.Drawing.Point(1414, 451);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(334, 53);
             this.label7.TabIndex = 71;
@@ -238,7 +239,7 @@
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Arial", 30F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.label8.Location = new System.Drawing.Point(478, 434);
+            this.label8.Location = new System.Drawing.Point(478, 451);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(334, 53);
             this.label8.TabIndex = 70;
@@ -250,7 +251,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial", 30F);
             this.label2.ForeColor = System.Drawing.Color.Green;
-            this.label2.Location = new System.Drawing.Point(1022, 419);
+            this.label2.Location = new System.Drawing.Point(1022, 451);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(334, 53);
             this.label2.TabIndex = 73;
@@ -269,11 +270,23 @@
             this.label3.Text = "PARA";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label10
+            // 
+            this.label10.BackColor = System.Drawing.Color.Moccasin;
+            this.label10.Font = new System.Drawing.Font("Arial", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(105, 377);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(334, 40);
+            this.label10.TabIndex = 74;
+            this.label10.Text = "0.0";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Frm_StaticMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1800, 900);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label7);
@@ -321,5 +334,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label10;
     }
 }

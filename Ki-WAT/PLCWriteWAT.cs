@@ -12,7 +12,9 @@ namespace Ki_WAT
 	{
 		uint m_nSize = 230;
 		public Byte[] rawDataOut = null;
-		S7Client client = new S7Client();
+        public Byte[] rawDataOutRead = null;
+
+        S7Client client = new S7Client();
 		private CancellationTokenSource _cts;
 		private String _strIP = "";
 		public void Create(String strIP)
@@ -23,11 +25,12 @@ namespace Ki_WAT
 
 			int result = client.ConnectTo(_strIP, 0, 1);
 
-			//if (client.Connected )
-			//{
-			//	Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
+			if (client.Connected)
+			{
+				//Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.Connect);
+				StartPolling();
 
-			//}
+            }
 			//else if (!client.Connected )
 			//{
 			//	Broker.dsBroker.Publish(Topics.DS.PLC, Topics.DS.NotConnect);
@@ -47,12 +50,12 @@ namespace Ki_WAT
 			}
 		}
 
-		public bool GetPLCOutData()
-		{
-			int result = client.ReadArea(S7Area.DB, 53001, 0, 230, S7WordLength.Byte, rawDataOut);
+		//public bool GetPLCOutData()
+		//{
+		//	int result = client.ReadArea(S7Area.DB, 53001, 0, 230, S7WordLength.Byte, rawDataOut);
 
-			return true;
-		}
+		//	return true;
+		//}
 		private void CancelPollingToken()
 		{
 			if (_cts != null && !_cts.IsCancellationRequested)
@@ -76,7 +79,7 @@ namespace Ki_WAT
 
 				if (client.Connected == true)
 				{
-					int result = client.ReadArea(S7Area.DB, 53001, 0, 230, S7WordLength.Byte, rawDataOut);
+					int result = client.ReadArea(S7Area.DB, 53001, 0, 230, S7WordLength.Byte, rawDataOutRead);
 					if (result != 0)
 					{
 						// 예: 로그 남기기, 재연결 시도 등
@@ -123,11 +126,14 @@ namespace Ki_WAT
 					rawDataOut      // 보낼 데이터 버퍼
 				);
 
-				if (nRet != 0)
+				//Broker.PLCBroker.Publish(Topics.PLC.Write, Topics.PLC.Write);
+
+                if (nRet != 0)
 				{
                     //_GV.Log_PGM.WriteFile(strLog);
                     //_GV.WriteLog($"WriteArea(PA) Error: {client.ErrorText(nRet)}");
                 }
+			
 			}
 			else
 			{
@@ -143,16 +149,20 @@ namespace Ki_WAT
 
 
 			rawDataOut = new Byte[m_nSize];
+            rawDataOutRead = new Byte[m_nSize];
 
-			for (int i = 0; i < m_nSize; i++)
+            for (int i = 0; i < m_nSize; i++)
 			{
 				rawDataOut[i] = 0;
-			}
+				rawDataOutRead[i] = 0;
+
+            }
+
 		}
         public void ClearData()
         {
-            for (int i = 0; i < m_nSize; i++) rawDataOut[i] = 0;
-			WritePLCData();   
+            //for (int i = 0; i < m_nSize; i++) rawDataOut[i] = 0;
+			//WritePLCData();   
         }
 
 
@@ -373,8 +383,10 @@ namespace Ki_WAT
 		public void Set3DCameraSensorEnable(bool bOn) { SetBit(91, 0, bOn); }
 
 
+        public void SetRollerBrakeLock(bool bOn) { SetBit(91, 1, bOn); }
+        public void SetRollerBrakeFree(bool bOn) { SetBit(91, 2, bOn); }
 
-		public void SetWheelbaseMoving(bool bOn) { SetBit(110, 0, bOn); }
+        public void SetWheelbaseMoving(bool bOn) { SetBit(110, 0, bOn); }
 		public void SetWheelbaseHomePosition(bool bOn) { SetBit(110, 1, bOn); }
 		public void SetWheelbaseInPosition(bool bOn) { SetBit(110, 2, bOn); }
 
@@ -544,6 +556,15 @@ namespace Ki_WAT
 		}
 
 
+        public UInt16 GetWordRead(int nPos)
+        {
+            if (nPos < 0) return 0;
+            if (nPos + 1 >= rawDataOutRead.Length) return 0;
+            byte low = rawDataOutRead[nPos + 1];
+            byte high = rawDataOutRead[nPos];
+            return (ushort)((high << 8) | low);
+        }
+
 
         public UInt16 GetWord(int nPos)
         {
@@ -553,10 +574,6 @@ namespace Ki_WAT
             byte high = rawDataOut[nPos];
             return (ushort)((high << 8) | low);
         }
-
-
-
-
 
         public void SetMotorRun(bool bOn) { SetBit(180, 0, bOn); }
 		public void SetMotorStop(bool bOn) { SetBit(180, 1, bOn); }

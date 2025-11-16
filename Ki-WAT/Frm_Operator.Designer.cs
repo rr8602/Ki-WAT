@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Operator));
             this.NavTop = new System.Windows.Forms.Panel();
+            this.NavBottom = new System.Windows.Forms.Panel();
             this.lbl_NextPJI = new KI_Controls.RoundLabel();
             this.analogClock1 = new Ki_WAT.AnalogClock();
             this.lbl_Hand = new KI_Controls.RoundLabel();
-            this.lbl_Time = new KI_Controls.RoundLabel();
+            this.lbl_CycleTime = new KI_Controls.RoundLabel();
             this.lbl_Message = new KI_Controls.RoundLabel();
             this.lbl_PJI = new KI_Controls.RoundLabel();
-            this.NavBottom = new System.Windows.Forms.Panel();
             this.NavTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +48,7 @@
             this.NavTop.Controls.Add(this.lbl_NextPJI);
             this.NavTop.Controls.Add(this.analogClock1);
             this.NavTop.Controls.Add(this.lbl_Hand);
-            this.NavTop.Controls.Add(this.lbl_Time);
+            this.NavTop.Controls.Add(this.lbl_CycleTime);
             this.NavTop.Controls.Add(this.lbl_Message);
             this.NavTop.Controls.Add(this.lbl_PJI);
             this.NavTop.Location = new System.Drawing.Point(0, 0);
@@ -57,6 +58,16 @@
             this.NavTop.TabIndex = 7;
             this.NavTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseDown);
             this.NavTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.NavTop_MouseMove);
+            // 
+            // NavBottom
+            // 
+            this.NavBottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.NavBottom.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.NavBottom.Location = new System.Drawing.Point(0, 1068);
+            this.NavBottom.Margin = new System.Windows.Forms.Padding(4);
+            this.NavBottom.Name = "NavBottom";
+            this.NavBottom.Size = new System.Drawing.Size(1920, 10);
+            this.NavBottom.TabIndex = 8;
             // 
             // lbl_NextPJI
             // 
@@ -111,24 +122,24 @@
             this.lbl_Hand.TextColor = System.Drawing.Color.White;
             this.lbl_Hand.UseVisualStyleBackColor = false;
             // 
-            // lbl_Time
+            // lbl_CycleTime
             // 
-            this.lbl_Time.BackColor = System.Drawing.Color.Black;
-            this.lbl_Time.BackgroundColor = System.Drawing.Color.Black;
-            this.lbl_Time.BorderColor = System.Drawing.Color.PaleVioletRed;
-            this.lbl_Time.BorderRadius = 20;
-            this.lbl_Time.BorderSize = 0;
-            this.lbl_Time.FlatAppearance.BorderSize = 0;
-            this.lbl_Time.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lbl_Time.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Time.ForeColor = System.Drawing.Color.White;
-            this.lbl_Time.Location = new System.Drawing.Point(1676, 12);
-            this.lbl_Time.Name = "lbl_Time";
-            this.lbl_Time.Size = new System.Drawing.Size(215, 114);
-            this.lbl_Time.TabIndex = 2;
-            this.lbl_Time.Text = "0";
-            this.lbl_Time.TextColor = System.Drawing.Color.White;
-            this.lbl_Time.UseVisualStyleBackColor = false;
+            this.lbl_CycleTime.BackColor = System.Drawing.Color.Black;
+            this.lbl_CycleTime.BackgroundColor = System.Drawing.Color.Black;
+            this.lbl_CycleTime.BorderColor = System.Drawing.Color.PaleVioletRed;
+            this.lbl_CycleTime.BorderRadius = 20;
+            this.lbl_CycleTime.BorderSize = 0;
+            this.lbl_CycleTime.FlatAppearance.BorderSize = 0;
+            this.lbl_CycleTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lbl_CycleTime.Font = new System.Drawing.Font("Arial", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_CycleTime.ForeColor = System.Drawing.Color.White;
+            this.lbl_CycleTime.Location = new System.Drawing.Point(1676, 12);
+            this.lbl_CycleTime.Name = "lbl_CycleTime";
+            this.lbl_CycleTime.Size = new System.Drawing.Size(215, 114);
+            this.lbl_CycleTime.TabIndex = 2;
+            this.lbl_CycleTime.Text = "0";
+            this.lbl_CycleTime.TextColor = System.Drawing.Color.White;
+            this.lbl_CycleTime.UseVisualStyleBackColor = false;
             // 
             // lbl_Message
             // 
@@ -168,16 +179,6 @@
             this.lbl_PJI.TextColor = System.Drawing.Color.White;
             this.lbl_PJI.UseVisualStyleBackColor = false;
             // 
-            // NavBottom
-            // 
-            this.NavBottom.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.NavBottom.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.NavBottom.Location = new System.Drawing.Point(0, 1068);
-            this.NavBottom.Margin = new System.Windows.Forms.Padding(4);
-            this.NavBottom.Name = "NavBottom";
-            this.NavBottom.Size = new System.Drawing.Size(1920, 10);
-            this.NavBottom.TabIndex = 8;
-            // 
             // Frm_Operator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -188,6 +189,7 @@
             this.Controls.Add(this.NavTop);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "Frm_Operator";
             this.Text = "Frm_Operator";
@@ -203,7 +205,7 @@
         private System.Windows.Forms.Panel NavTop;
         private System.Windows.Forms.Panel NavBottom;
         private KI_Controls.RoundLabel lbl_Hand;
-        private KI_Controls.RoundLabel lbl_Time;
+        private KI_Controls.RoundLabel lbl_CycleTime;
         private KI_Controls.RoundLabel lbl_Message;
         private KI_Controls.RoundLabel lbl_PJI;
         private AnalogClock analogClock1;

@@ -16,12 +16,16 @@ namespace Ki_WAT
             [MarshalAs(UnmanagedType.LPStr)]
             public string lpData;
         }
+        
         public const int MSG_DPP_VEHICLE_TYPE = 9000;
         public const int MSG_DPP_WHEELBASE = 9100;
         public const int MSG_DPP_MEASURING_START = 9200;
         public const int MSG_DPP_MEASURING_STOP = 9300;
         public const int MSG_DPP_CALIBRATION = 9400;
         public const int MSG_DPP_VERITY = 9500;
+        public const int MSG_DPP_MEASURING_STATIC = 9600;
+        public const int MSG_DPP_MEASURING_DYNAMIC = 9700;
+
         [DllImport("user32")]
         private static extern IntPtr FindWindow(String lpClassName, String lpWindowName);
         [DllImport("user32")]
@@ -29,14 +33,7 @@ namespace Ki_WAT
         public  static void SendToDpp(int nType, int nValue = 0)
         {
             string str;
-            if (nType == 0 || nType == 1)
-            {
-                str = $"<CMD/{nType}/{nValue}>";
-            }
-            else
-            {
-                str = $"<CMD/{nType}/>";
-            }
+            str = $"<CMD/{nType}/{nValue}>";
             Send(str);
         }
         public static void Send(string strMsg)
